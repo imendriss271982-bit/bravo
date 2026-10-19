@@ -293,10 +293,10 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 /* Nour avatar photo */
 .stage .mbox{overflow:hidden;border-radius:50%;width:168px;height:168px;background:#1D1042}
 .stage .mbox::before{display:none}
-.stage .mbox img.nour{width:100%;height:100%;object-fit:cover;display:block;transform-origin:50% 85%}
-.stage.talking .mbox img.nour{animation:speakbob .9s ease-in-out infinite}
+.mouth{position:absolute;inset:0}
+.mouth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.mouth img.on{opacity:1}
 @keyframes speakbob{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-2px) rotate(-1.2deg) scale(1.01)}50%{transform:translateY(1px) rotate(0) scale(1)}75%{transform:translateY(-2px) rotate(1.2deg) scale(1.01)}}
-.stage:not(.talking) .mbox img.nour{animation:idle 5s ease-in-out infinite}
 @keyframes idle{0%,100%{transform:scale(1)}50%{transform:scale(1.015) translateY(-1px)}}
 .wave{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:flex;gap:3px;align-items:flex-end;height:18px;padding:4px 7px;border-radius:99px;background:rgba(18,8,43,.75);opacity:0;transition:opacity .2s}
 .wave i{display:block;width:3px;height:4px;border-radius:2px;background:var(--cyan)}
@@ -309,7 +309,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .fab{overflow:hidden;padding:0}
 .fab img{width:100%;height:100%;object-fit:cover;display:block}
 .fab span{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);background:rgba(18,8,43,.8);padding:1px 6px;border-radius:99px;font-size:10px}
-@media (prefers-reduced-motion:reduce){.stage .mbox img.nour,.stage.talking .wave i{animation:none}}
+@media (prefers-reduced-motion:reduce){.stage.talking .wave i{animation:none}}
 </style>
 </head>
 <body>
@@ -407,7 +407,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   <!-- VIEW: coach -->
   <section id="v-coach" class="sec" hidden>
     <div class="stage" id="stage" aria-hidden="true">
-      <div class="mbox"><img class="nour" src="nour.jpg" alt="" width="240" height="240"><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="mbox"><span class="mouth" id="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div>
       <b>Nour</b><small id="stageSt">Your coach</small>
     </div>
     <button class="call" id="callBtn" type="button">
@@ -626,7 +626,17 @@ const alarmTone=()=>tone([880,660,880,660,880,660,1047],.22,.2,'square');
 let frVoice=null;
 function loadVoices(){try{const v=speechSynthesis.getVoices();frVoice=v.find(x=>/^en/i.test(x.lang)&&/samantha|female|zira|google us|aria|jenny/i.test(x.name))||v.find(x=>/^en-(US|GB)/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}catch(e){}}
 try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
-function talk(on){try{$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
+let mouthT=null,mouthF=3;
+function mouthSet(i){if(i===mouthF)return;const im=document.querySelectorAll('#mouth img');if(!im.length)return;im[mouthF].classList.remove('on');im[i].classList.add('on');mouthF=i}
+function mouthLoop(on){clearInterval(mouthT);mouthT=null;
+  if(!on){mouthSet(3);return}
+  let last=3;
+  mouthT=setInterval(()=>{let v=null;try{if(typeof conv!=='undefined'&&conv&&conv.getOutputVolume)v=conv.getOutputVolume()}catch(e){}
+    let f;
+    if(v!=null)f=v>.22?0:v>.11?1:v>.035?2:3;
+    else{const seq=[0,1,2,1,0,2,3,1,0,2];f=seq[Math.floor(Math.random()*seq.length)];if(f===last)f=(f+1)%3}
+    last=f;mouthSet(f)},95)}
+function talk(on){mouthLoop(!!on);try{$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
 function speak(text,excited){
   if(!S.voice||!text)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[*#_]/g,''));
