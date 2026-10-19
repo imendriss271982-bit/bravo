@@ -631,7 +631,6 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 <canvas id="confetti" hidden></canvas>
 
 <div class="splash" id="splash" hidden role="dialog" aria-modal="true" aria-labelledby="spTitle">
-  <div class="sun"><svg aria-hidden="true"><use href="#brainSym"/></svg></div>
   <div id="spName" hidden class="ob-wrap">
     <div class="stage ob-noor" id="obNoor" aria-hidden="true"><div class="nwrap nour" style="--u:2.3px;width:150px;height:150px"><div class="mbox"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span></div></div>
     <div class="ob-bub" id="obBub" role="status" aria-live="polite"><span id="spTitle"></span></div>
@@ -647,7 +646,8 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
       <button class="ob-skip" id="obSkip" type="button">Skip the tour</button>
     </div>
   </div>
-  <div id="spAff" hidden class="row2" style="gap:22px">
+  <div id="spAff" hidden class="row2" style="gap:18px">
+    <div class="stage ob-noor" id="affNoor" aria-hidden="true"><div class="nwrap nour" style="--u:2.3px;width:150px;height:150px"><div class="mbox"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span></div></div>
     <div class="kicker" id="affKicker"></div>
     <h1 id="affHi"></h1>
     <p class="aff" id="affText"></p>
@@ -801,7 +801,7 @@ function mouthLoop(on){mouthOn=!!on;cancelAnimationFrame(mouthR);
     mouthHold-=dt;if(want!==mouthF&&mouthHold<=0){mouthSet(want);mouthHold=60}
     mouthR=requestAnimationFrame(tick)};
   mouthR=requestAnimationFrame(tick)}
-function talk(on){mouthLoop(!!on);try{$('fab').classList.toggle('talking',!!on);$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('obNoor').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
+function talk(on){mouthLoop(!!on);try{$('fab').classList.toggle('talking',!!on);$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('obNoor').classList.toggle('talking',!!on);$('affNoor').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
 function speak(text,excited){
   if(!S.voice||!text)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[*#_]/g,''));
@@ -1368,11 +1368,11 @@ function obRetry(key,text){setTimeout(()=>{if(!obSpoken)$('spName').addEventList
 function obBubble(html){const b=$('obBub');$('spTitle').innerHTML=html;b.style.animation='none';void b.offsetWidth;b.style.animation=''}
 let obEdit=false;
 function showName(){
-  obEdit=!!S.name;obStep=-1;
+  obEdit=!!S.name&&!!S.onboarded;obStep=-1;
   $('splash').hidden=false;$('splash').classList.add('ob');$('spAff').hidden=true;$('spName').hidden=false;
   $('nameForm').hidden=false;$('obTour').hidden=true;
   const n=$('obNoor');n.style.animation='none';void n.offsetWidth;n.style.animation='';
-  $('nameInput').value=S.name||'';$('nameErr').textContent='';
+  $('nameInput').value=obEdit?S.name:'';$('nameErr').textContent='';
   if(obEdit){obBubble('Want me to call you <b>something else</b>?');setTimeout(()=>{try{$('nameInput').focus()}catch(e){}},80);return}
   obBubble("Hi! I'm <b>Noor</b>, your coach. What's your <b>name</b>?");
   const line="Hi! I'm Noor, your coach. What's your name?";
@@ -1407,6 +1407,7 @@ function showAff(){
   $('affPower').innerHTML='<em>You can do it, '+esc(S.name)+'.</em> You are strong. <em>Don\'t give up!</em>';
   $('affText').style.animation='none';void $('affText').offsetWidth;$('affText').style.animation='';
   $('splash').classList.remove('ob');$('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
+  {const n=$('affNoor');n.style.animation='none';void n.offsetWidth;n.style.animation='';setTimeout(()=>nour('wave',2200),700)}
   affSay();
 }
 // Noor says the greeting out loud with the person's first name.
@@ -1416,7 +1417,7 @@ let affSpoken=false;
 function affSay(){affSpoken=false;
   if(!S.voice&&S.voice!==undefined)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(affLine());u.lang='en-US';if(enVoice)u.voice=enVoice;u.rate=1.02;u.pitch=1.15;
-    u.onstart=()=>{affSpoken=true;try{talk(true)}catch(e){}};u.onend=u.onerror=()=>{try{talk(false)}catch(e){}};
+    u.onstart=()=>{affSpoken=true;try{talk(true);mouthKick(.5)}catch(e){}};u.onboundary=e=>{try{mouthKick(Math.min(.95,.35+(e.charLength||4)*.06))}catch(x){}};u.onend=u.onerror=()=>{try{talk(false)}catch(e){}};
     speechSynthesis.speak(u)}catch(e){}
   const retry=()=>{if(!affSpoken&&!$('splash').hidden&&!$('spAff').hidden)affSay()};
   setTimeout(()=>{if(!affSpoken)$('spAff').addEventListener('pointerdown',retry,{once:true})},700);
@@ -1429,9 +1430,9 @@ $('nameForm').addEventListener('submit',e=>{
   if(!obEdit)obMeet();else{obStop();$('splash').classList.remove('ob');$('splash').hidden=true}
 });
 $('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;nourSay('v-today');setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
-$('affListen').addEventListener('click',e=>{e.stopPropagation();speakEn(affLine())});
+$('affListen').addEventListener('click',e=>{e.stopPropagation();affSay()});$('affNoor').addEventListener('click',e=>{e.stopPropagation();affSay()});
 $('helloBtn').addEventListener('click',showName);
-if(!S.name)showName();else showAff();
+if(!S.name||!S.onboarded)showName();else showAff();
 
 render();drawT();
 })();
