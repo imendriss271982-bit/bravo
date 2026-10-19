@@ -558,6 +558,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
     <div class="sechead"><h3>My trophies</h3><span class="hint" id="badgeCount"></span></div>
     <div class="badges" id="badges"></div>
     <div class="note" id="totals"></div>
+    <p class="hint" style="text-align:center;margin:0">Bravo · version 20 Oct (Nour talks)</p>
     <button class="btn ghost" id="resetAll" type="button">Erase everything and start over</button>
     <div id="confirmReset" class="note" hidden>
       Erase your tasks, calendar, XP and trophies?
@@ -1016,7 +1017,7 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
   $('fab').hidden=b.dataset.view==='v-coach';
   const pv=$(b.dataset.view);pv.classList.remove('pturn');void pv.offsetWidth;pv.classList.add('pturn');
   nourForView(b.dataset.view);
-  clearTimeout(window._nsT);window._nsT=setTimeout(()=>nourSay(b.dataset.view),650);
+  nourSay(b.dataset.view); // speak right inside the tap: iPhone blocks delayed speech
   scrollTo(0,0);
 }));
 $('fab').addEventListener('click',()=>{document.querySelector('nav button[data-view="v-coach"]').click();setTimeout(()=>{try{$('coachInput').focus()}catch(e){}},50)});
@@ -1254,7 +1255,7 @@ $('nameForm').addEventListener('submit',e=>{
   const first=!S.name;S.name=v;save();render();
   if(first)showAff();else{$('splash').hidden=true}
 });
-$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;setTimeout(()=>{nour('wave',2000);nourSay('v-today')},400);if(S.sound)chime(false)});
+$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;nourSay('v-today');setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
 $('affListen').addEventListener('click',e=>{e.stopPropagation();speakEn(affLine())});
 $('helloBtn').addEventListener('click',showName);
 if(!S.name)showName();else showAff();
