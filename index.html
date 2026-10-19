@@ -23,8 +23,8 @@
   --mint:#7CFF4F; --mint-soft:#1B3A2C; --cyan:#22E5FF;
   --coral:#FF4D6D; --coral-soft:#3A1636; --shadow:0 6px 22px rgba(0,0,0,.45);
   --glow-pink:0 0 18px rgba(255,46,147,.55); --glow-gold:0 0 22px rgba(255,226,59,.55); --glow-cyan:0 0 16px rgba(34,229,255,.5);
-  --f-display:"Fredoka","Baloo 2","Trebuchet MS",system-ui,sans-serif;
-  --f-body:"Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-display:ui-rounded,"SF Pro Rounded","Fredoka","Baloo 2",system-ui,sans-serif;
+  --f-body:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -32,7 +32,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1
 button{font:inherit;color:inherit;cursor:pointer}
 button:disabled{opacity:.5;cursor:default}
 button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.wrap{max-width:520px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 110px;display:flex;flex-direction:column;gap:18px}
+.wrap{max-width:520px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 170px;display:flex;flex-direction:column;gap:18px}
 h1,h2,h3,h4{font-family:var(--f-display);margin:0;text-wrap:balance}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
@@ -150,7 +150,7 @@ span.check{cursor:default}
 /* coach */
 .coach{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
 .coachhead{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid var(--line)}
-.fab{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:68px;height:68px;border-radius:50%;border:2px solid var(--cyan);background:#1D1042;box-shadow:0 0 22px rgba(255,46,147,.55),0 0 10px rgba(34,229,255,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0;animation:breathe 3s ease-in-out infinite}
+.fab{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:58px;height:58px;border-radius:50%;border:2px solid var(--cyan);background:#1D1042;box-shadow:0 0 22px rgba(255,46,147,.55),0 0 10px rgba(34,229,255,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0;animation:breathe 3s ease-in-out infinite}
 .fab span{font-family:var(--f-display);font-weight:700;font-size:11px;color:var(--cyan);line-height:1;margin-top:-2px}
 .fab svg{filter:drop-shadow(0 0 5px rgba(255,46,147,.8))}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
@@ -227,6 +227,47 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 @keyframes pop{from{transform:scale(.4) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:21;width:100%;height:100%}
 @media (prefers-reduced-motion:reduce){.fab{animation:none}.pop{animation:none}.bar i{transition:none}.avatar.talking::after{animation:none}}
+
+/* tidy layout */
+.split{flex:none;width:36px;height:36px;border-radius:11px;border:0;background:var(--surface-2);color:var(--ink);display:grid;place-items:center;padding:0}
+.split svg{width:18px;height:18px}
+.split[disabled]{opacity:.6}
+.tmeta{display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap}
+.ttext b{display:block;font-weight:700}
+.chal{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:2px 14px;display:flex;flex-direction:column;gap:0}
+.chal .ch{background:none;border:0;border-top:1px solid var(--line);border-radius:0;box-shadow:none;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 0}
+.chal .ch:first-child{border-top:0}
+.chal .ch.full{background:none;box-shadow:none}
+.chal .ch.full h4{color:var(--mint)}
+.chal .ch .dot{width:12px;height:12px;border-radius:50%}
+.chal .ch .mid{display:flex;flex-direction:column;gap:6px;min-width:0}
+.chal .ch .right{display:flex;align-items:center;gap:12px}
+.chal .ch .cnt{font-size:15px;color:var(--muted)}
+.chal .ch .cnt small{font-size:13px}
+.cbtn{width:44px;height:44px;border-radius:50%;border:0;background:var(--sun);color:#fff;font-family:var(--f-display);font-weight:700;font-size:20px;display:grid;place-items:center;box-shadow:var(--glow-pink);padding:0}
+.cbtn svg{width:20px;height:20px}
+.ch.full .cbtn{background:var(--mint);color:#12082B;box-shadow:0 0 12px rgba(124,255,79,.55)}
+/* hello + welcome / affirmation screen */
+.hello{border:0;background:none;padding:0;font-family:var(--f-display);font-weight:600;font-size:16px;color:var(--ink);display:flex;align-items:center;gap:6px}
+.hello b{color:var(--cyan);text-shadow:var(--glow-cyan)}
+.hello svg{width:14px;height:14px;color:var(--muted)}
+.splash{position:fixed;inset:0;z-index:30;overflow-y:auto;background:radial-gradient(120% 80% at 50% 0%,#7209B7 0%,#3A0CA3 45%,#12082B 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:calc(32px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px))}
+.splash .sun{width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,#FFF6A8 0%,var(--gold) 55%,#FFB800 100%);box-shadow:0 0 50px rgba(255,226,59,.7),0 0 120px rgba(255,46,147,.4);display:grid;place-items:center;animation:breathe 3.5s ease-in-out infinite}
+.splash .sun svg{width:64px;height:56px}
+.splash .kicker{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.splash h1{font-size:clamp(30px,8vw,42px);line-height:1.1;letter-spacing:-.5px;max-width:460px}
+.splash h1 b{color:var(--gold);text-shadow:var(--glow-gold)}
+.splash .aff{font-family:var(--f-display);font-weight:600;font-size:clamp(20px,5.4vw,26px);line-height:1.35;max-width:440px;text-wrap:balance;margin:0;animation:rise .7s ease-out both}
+.splash .aff em{font-style:normal;color:var(--mint);text-shadow:0 0 14px rgba(124,255,79,.55)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.splash form{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px}
+.splash input[type=text]{width:100%;text-align:center;font-size:20px;padding:14px;background:rgba(18,8,43,.6);border-color:var(--cyan)}
+.splash .go{font-size:18px;padding:16px 28px;border-radius:18px;min-width:220px}
+.splash .row2{display:flex;flex-direction:column;align-items:center;gap:10px}
+.splash .listen{border:0;background:none;color:var(--muted);font-weight:800;font-size:14px;display:flex;align-items:center;gap:6px}
+.splash .listen svg{width:16px;height:16px}
+.splash .err{color:var(--coral);font-weight:700;font-size:13px;min-height:1em;margin:0}
+@media (prefers-reduced-motion:reduce){.splash .sun,.splash .aff{animation:none}}
 </style>
 </head>
 <body>
@@ -236,6 +277,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   <header class="top">
     <div>
       <div class="logo"><svg class="brain" width="46" height="40" viewBox="0 0 200 175" aria-hidden="true"><defs><filter id="lgp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="lgg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#lgp)" fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" filter="url(#lgg)"/></svg><span>Bravo<b>!</b></span></div>
+      <button class="hello" id="helloBtn" type="button" aria-label="Change your name">Hi, <b id="helloName"></b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button>
       <div class="date" id="today"></div>
     </div>
     <button class="iconbtn" id="soundBtn" aria-label="Mute sound" title="Sound and voice">
@@ -402,6 +444,28 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 <div class="overlay" id="overlay" hidden><div class="pop" id="pop" role="alertdialog" aria-live="assertive"></div></div>
 <canvas id="confetti" hidden></canvas>
 
+<div class="splash" id="splash" hidden role="dialog" aria-modal="true" aria-labelledby="spTitle">
+  <div class="sun"><svg aria-hidden="true"><use href="#brainSym"/></svg></div>
+  <div id="spName" hidden>
+    <div class="kicker">Welcome to Bravo</div>
+    <h1 id="spTitle" style="margin:10px 0 18px">What's your <b>name</b>?</h1>
+    <form id="nameForm" autocomplete="off">
+      <input id="nameInput" type="text" maxlength="24" placeholder="Your first name" aria-label="Your first name">
+      <p class="err" id="nameErr"></p>
+      <button class="btn go" type="submit">Continue</button>
+    </form>
+  </div>
+  <div id="spAff" hidden class="row2" style="gap:22px">
+    <div class="kicker" id="affKicker"></div>
+    <h1 id="affHi"></h1>
+    <p class="aff" id="affText"></p>
+    <div class="row2">
+      <button class="btn go" id="affGo" type="button">Let's go!</button>
+      <button class="listen" id="affListen" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Hear it</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
 const KEY='bravo-v1';
@@ -426,7 +490,7 @@ const freshChallenges=()=>[
 ];
 function defaults(){
   const t=new Date(),tm=addDays(t,1),d=ymd(t);
-  return{date:d,xp:0,wins:0,winsToday:0,focusTotal:0,streak:0,lastWinDate:null,jokerWeek:null,sound:true,voice:true,
+  return{name:'',affIdx:-1,date:d,xp:0,wins:0,winsToday:0,focusTotal:0,streak:0,lastWinDate:null,jokerWeek:null,sound:true,voice:true,
   badges:[],splits:0,hist:{},cc:{},weekClaimed:null,
   tasks:[
     {id:uid(),text:'Reply to 3 emails',done:false,ex:true,steps:[],date:d},
@@ -616,13 +680,14 @@ function renderDay(){
     const live=mode==='today';
     const chk=live?'<button class="check" data-act="task" data-id="'+t.id+'" aria-label="Task done">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>';
     const steps=t.steps.length?'<ul class="steps">'+t.steps.map((s,i)=>'<li class="step'+(s.done?' done':'')+'">'+(live?'<button class="check" data-act="step" data-id="'+t.id+'" data-i="'+i+'" aria-label="Step done">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>')+'<span>'+esc(s.t)+'</span></li>').join('')+'</ul>':'';
-    let tools='';
-    if(mode==='today'&&!t.done&&!t.steps.length)tools='<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Splitting…':'Split it')+'</button>';
+    let tools='',split='';
+    const SPL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg>';
+    if(mode==='today'&&!t.done&&!t.steps.length)split='<button class="split" data-act="split" data-id="'+t.id+'" aria-label="Split into small steps" title="Split it"'+(t.splitting?' disabled':'')+'>'+SPL+'</button>';
     if(mode==='future'){tools=(!t.steps.length?'<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Splitting…':'Split it')+'</button>':'')+'<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Do it today</button>'}
     if(mode==='past'&&!t.done)tools='<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Move to today</button>';
-    const right=mode==='today'?'<span class="xp">+10</span>':mode==='future'?'<span class="tag">planned</span>':t.done?'<span class="tag" style="color:var(--mint)">done</span>':'<span class="tag" style="color:var(--muted)">not done</span>';
+    const right=mode==='today'?'<span class="xp">+10 XP</span>':mode==='future'?'<span class="tag">planned</span>':t.done?'<span class="tag" style="color:var(--mint)">done</span>':'<span class="tag" style="color:var(--muted)">not done</span>';
     const cls='task'+(t.done?' done':'')+(mode==='future'?' plan':'')+(mode==='past'&&!t.done?' miss':'');
-    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext">'+esc(t.text)+'</span>'+(t.ex?'<span class="ex">example</span>':'')+right+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Delete">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
+    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext"><b>'+esc(t.text)+'</b><span class="tmeta">'+right+(t.ex?'<span class="ex">example</span>':'')+(t.splitting?'<span class="ex">splitting…</span>':'')+'</span></span>'+split+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Delete">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
   }).join('');
 
   // défis
@@ -633,8 +698,8 @@ function renderDay(){
   $('chal').innerHTML=S.challenges.map(c=>{
     const n=ccount(c,k),full=n>=c.target;
     const pips=c.target>1?'<div class="pips">'+Array.from({length:c.target},(_,i)=>'<i'+(i<n?' class="on"':'')+'></i>').join('')+'</div>':'';
-    const btn=mode!=='today'?'':full?'<div class="chbtns"><button class="btn small ghost" data-act="cminus" data-id="'+c.id+'">Undo</button></div>':'<div class="chbtns"><button class="btn small" data-act="cplus" data-id="'+c.id+'">'+(c.target>1?'+1':'Done!')+'</button></div>';
-    return '<div class="ch'+(full?' full':'')+'"><div class="dot" style="background:'+c.color+'">'+esc(c.name.charAt(0).toUpperCase())+'</div><h4>'+esc(c.name)+'</h4><div class="cnt">'+n+' <small>/ '+c.target+'</small></div>'+pips+btn+'</div>';
+    const btn=mode!=='today'?'':full?'<button class="cbtn" data-act="cminus" data-id="'+c.id+'" aria-label="Undo">'+CHECK+'</button>':'<button class="cbtn" data-act="cplus" data-id="'+c.id+'" aria-label="'+(c.target>1?'Add 1':'Done')+'">'+(c.target>1?'+1':CHECK)+'</button>';
+    return '<div class="ch'+(full?' full':'')+'"><span class="dot" style="background:'+c.color+'"></span><div class="mid"><h4>'+esc(c.name)+'</h4>'+pips+'</div><div class="right"><span class="cnt">'+n+'<small>/'+c.target+'</small></span>'+btn+'</div></div>';
   }).join('');
 
   // rendez-vous du jour
@@ -643,6 +708,7 @@ function renderDay(){
   $('dayEvents').innerHTML=evs.map(e=>'<li class="ev'+(new Date(e.date+'T'+e.time)<Date.now()?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+'<small>'+(e.alarm?'Alarm on':'No alarm')+'</small></span></li>').join('');
 }
 function render(){
+  $('helloName').textContent=S.name||'friend';
   $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
   const L=level();$('lvTitle').textContent='Level '+L.lv;$('lvBar').style.width=L.pct+'%';
   $('xpNow').textContent=S.xp;$('winsToday').textContent=S.winsToday;$('streak').textContent=S.streak;
@@ -775,7 +841,7 @@ function checkAlarms(){
   ringing=ev.id;const pop=$('pop');pop.className='pop alarm';
   pop.innerHTML='<h2>It\'s time!</h2><p>'+esc(ev.title)+' · '+ev.time+'</p><div class="abtns"><button class="btn" data-act="go" data-id="'+ev.id+'">Let\'s go (+10 XP)</button><button class="btn ghost" data-act="snooze" data-id="'+ev.id+'">In 5 min</button></div>';
   $('overlay').hidden=false;alarmTone();clearInterval(ringLoop);ringLoop=setInterval(alarmTone,4000);
-  speak("It's time: "+ev.title+". You can do it, let's go together.");
+  speak((S.name?S.name+', it':'It')+"'s time: "+ev.title+". You can do it, let's go together.");
 }
 function handleAlarm(id,act){
   clearInterval(ringLoop);ringing=null;const ev=S.events.find(x=>x.id===id);
@@ -795,9 +861,9 @@ function ctx(){
   const ch=S.challenges.map(c=>'- '+c.name+' : '+ccount(c,todayStr())+'/'+c.target).join('\n');
   const y=ymd(addDays(new Date(),-1)),yd=dayTasks(y);
   const t=todayStr();const evs=S.events.filter(e=>e.date>=t).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+e.time+' '+e.title).join('\n')||'(nothing)';
-  return 'Date and time: '+new Date().toLocaleString('en-US')+'\nLevel '+level().lv+', '+S.xp+' XP, streak '+S.streak+' days, '+S.winsToday+" wins today.\nTasks to do:\n"+open+'\nTasks done:\n'+done+'\nPlanned for tomorrow:\n'+tmr+'\nYesterday: '+yd.filter(t=>t.done).length+' tasks done out of '+yd.length+', '+(S.hist[y]||0)+' wins.\nChallenges:\n'+ch+'\nUpcoming calendar:\n'+evs;
+  return (S.name?'First name of the person: '+S.name+'\n':'')+'Date and time: '+new Date().toLocaleString('en-US')+'\nLevel '+level().lv+', '+S.xp+' XP, streak '+S.streak+' days, '+S.winsToday+" wins today.\nTasks to do:\n"+open+'\nTasks done:\n'+done+'\nPlanned for tomorrow:\n'+tmr+'\nYesterday: '+yd.filter(t=>t.done).length+' tasks done out of '+yd.length+', '+(S.hist[y]||0)+' wins.\nChallenges:\n'+ch+'\nUpcoming calendar:\n'+evs;
 }
-const RULES="You are Nour, the voice coach of the Bravo app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
+const RULES="Call the person by their first name now and then (not in every sentence). You are Nour, the voice coach of the Bravo app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
 function bubble(role,text){
   const d=document.createElement('div');d.className='msg '+(role==='user'?'me':'ai');
   const s=document.createElement('span');s.className='txt';s.textContent=text;d.appendChild(s);
@@ -808,7 +874,7 @@ function greet(){
   if(greeted)return;greeted=true;
   const open=dayTasks(todayStr()).filter(t=>!t.done).length;
   const h=new Date().getHours();const hi=h<12?'Good morning':h<18?'Hi':'Good evening';
-  const txt=hi+"! I'm Nour, your coach. You have "+open+' task'+(open===1?'':'s')+" on your list. Tell me what's blocking you, or tap a button below.";
+  const txt=hi+(S.name?' '+S.name:'')+"! I'm Nour, your coach. You have "+open+' task'+(open===1?'':'s')+" on your list. Tell me what's blocking you, or tap a button below.";
   const d=bubble('assistant',txt);d.querySelector('.say').hidden=false;
   turns.push({role:'assistant',content:txt});
 }
@@ -883,12 +949,56 @@ tStart.addEventListener('click',()=>{
   if(audio&&audio.state==='suspended')audio.resume();
   end=Date.now()+left*1000;tStart.textContent='Pause';
   tick=setInterval(()=>{left=Math.max(0,Math.round((end-Date.now())/1000));drawT();
-    if(left===0){stopT();S.focusTotal++;win(20,'focus');speak('Bravo, session done. Take a little break.');left=dur;drawT()}},250);
+    if(left===0){stopT();S.focusTotal++;win(20,'focus');speak('Bravo'+(S.name?' '+S.name:'')+', session done. Take a little break.');left=dur;drawT()}},250);
 });
 $('tReset').addEventListener('click',()=>{stopT();left=dur;drawT()});
 document.querySelectorAll('.durs button').forEach(b=>b.addEventListener('click',()=>{
   if(tick)return;document.querySelectorAll('.durs button').forEach(x=>x.setAttribute('aria-pressed','false'));
   b.setAttribute('aria-pressed','true');dur=+b.dataset.min*60;left=dur;drawT()}));
+
+
+// ---------- welcome + affirmation ----------
+const AFF=[
+  "Your day is going to be beautiful. I know you can really do it today. <em>You are the champion.</em> Don't give up.",
+  "One small step is still a win. <em>Start with just one</em> and Bravo will cheer for you.",
+  "Your brain is fast, creative and full of ideas. <em>Today it works for you.</em>",
+  "You don't have to be perfect today. <em>You just have to begin.</em>",
+  "Every task you finish today is a Bravo. <em>Go collect them!</em>",
+  "Yesterday is done. Today is a fresh start, and <em>you've got this.</em>",
+  "Progress, not perfection. <em>You are doing better than you think.</em>",
+  "Breathe in. Pick one thing. <em>You are stronger than the to-do list.</em>"
+];
+let enVoice=null;
+function loadEn(){try{const v=speechSynthesis.getVoices();enVoice=v.find(x=>/^en/i.test(x.lang)&&/female|samantha|karen|google us|zira|aria|jenny/i.test(x.name))||v.find(x=>/^en/i.test(x.lang))||null}catch(e){}}
+try{loadEn();speechSynthesis.addEventListener('voiceschanged',loadEn)}catch(e){}
+function speakEn(text){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';if(enVoice)u.voice=enVoice;u.rate=1.02;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
+function hiWord(){const h=new Date().getHours();return h<5?'Hi':h<12?'Good morning':h<18?'Hi':'Good evening'}
+function showName(){
+  $('splash').hidden=false;$('spAff').hidden=true;$('spName').hidden=false;
+  $('nameInput').value=S.name||'';$('nameErr').textContent='';
+  setTimeout(()=>{try{$('nameInput').focus()}catch(e){}},80);
+}
+function showAff(){
+  let i;
+  if(S.affIdx<0)i=0;else{do{i=Math.floor(Math.random()*AFF.length)}while(AFF.length>1&&i===S.affIdx)}
+  S.affIdx=i;save();
+  $('affKicker').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
+  $('affHi').innerHTML=esc(hiWord())+' <b>'+esc(S.name)+'</b>!';
+  $('affText').innerHTML=AFF[i];
+  $('affText').style.animation='none';void $('affText').offsetWidth;$('affText').style.animation='';
+  $('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
+}
+$('nameInput').addEventListener('input',()=>{$('nameErr').textContent=''});
+$('nameForm').addEventListener('submit',e=>{
+  e.preventDefault();const v=$('nameInput').value.trim().replace(/\s+/g,' ');
+  if(!v){$('nameErr').textContent='Type your name so your coach can call you by it.';return}
+  const first=!S.name;S.name=v;save();render();
+  if(first)showAff();else{$('splash').hidden=true}
+});
+$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;if(S.sound)chime(false)});
+$('affListen').addEventListener('click',()=>speakEn($('affHi').textContent+' '+$('affText').textContent));
+$('helloBtn').addEventListener('click',showName);
+if(!S.name)showName();else showAff();
 
 render();drawT();
 })();
