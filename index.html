@@ -104,6 +104,11 @@ input::placeholder{color:var(--muted);font-weight:500}
 .dtabs{flex:1;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px}
 .dtabs button{border:0;background:transparent;border-radius:10px;padding:9px 0;font-weight:800;font-size:13px;letter-spacing:-.2px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dtabs button[data-rel="0"]{color:var(--cyan)}
+.cats{display:flex;gap:8px;margin:2px 0 12px;overflow-x:auto;scrollbar-width:none}
+.cats button{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:8px 16px;font-weight:800;font-size:14px}
+.cats button[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#12082B}
+.catb{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:1px 9px;font-size:11px;font-weight:800}
+.catb.work{color:var(--cyan);border-color:var(--cyan)}.catb.personal{color:var(--sun);border-color:var(--sun)}
 .dtabs button[aria-pressed="true"]{background:var(--sun);color:#fff;box-shadow:var(--glow-pink)}
 .dlabel{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .dlabel b{font-family:var(--f-display);font-size:18px;font-weight:600}
@@ -362,6 +367,11 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
     </div>
     <div id="dSummary"></div>
     <div class="sec">
+      <div class="cats" role="group" aria-label="Filter tasks">
+        <button type="button" data-cat="all" aria-pressed="true">All</button>
+        <button type="button" data-cat="work" aria-pressed="false">💼 Work</button>
+        <button type="button" data-cat="personal" aria-pressed="false">🏠 Personal</button>
+      </div>
       <div class="sechead"><h3 id="listTitle">My list for today</h3><span class="hint" id="listHint">+10 XP per task</span></div>
       <form class="add" id="addForm">
         <input id="newTask" type="text" placeholder="Add a task…" autocomplete="off" maxlength="120" aria-label="New task">
@@ -571,6 +581,7 @@ S.challenges.forEach((c,i)=>{const f=D.challenges.find(x=>x.id===c.id);c.color=f
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 const ccount=(c,k)=>(S.cc[k]||{})[c.id]||0;
 const setCount=(c,k,n)=>{(S.cc[k]=S.cc[k]||{})[c.id]=Math.max(0,n)};
+let catF='all';try{catF=localStorage.getItem('bravoCat')||'all'}catch(e){}
 const dayTasks=k=>S.tasks.filter(t=>t.date===k);
 const pendingBefore=k=>S.tasks.filter(t=>!t.done&&t.date<k);
 
@@ -718,6 +729,7 @@ function goDay(k){viewDay=k;
 let keepDay=false;
 function renderDay(){
   const k=viewDay,mode=dayMode(k),t=todayStr(),rel=dayDiff(t,k);
+  document.querySelectorAll('.cats button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cat===catF)));
   document.querySelectorAll('.dtabs button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.rel===rel)));
   const rn=relName(k);
   $('dLabel').textContent=rn&&Math.abs(rel)<=1?longDate(k):(rn?rn+' · ':'')+longDate(k);
@@ -747,8 +759,10 @@ function renderDay(){
 
   // tâches
   const ul=$('tasks');
-  if(!list.length)ul.innerHTML='<li class="empty">'+(mode==='today'?'Your list is empty. Add just one small thing to get started.':mode==='past'?'No tasks that day.':'Nothing planned yet. Add 1 to 3 tasks, no more.')+'</li>';
-  else ul.innerHTML=[...list].sort((a,b)=>a.done-b.done).map(t=>{
+  const shown=catF==='all'?list:list.filter(x=>x.cat===catF);
+  if(!shown.length&&list.length&&catF!=='all')ul.innerHTML='<li class="empty">No '+(catF==='work'?'work':'personal')+' tasks here. Add one above!</li>';
+  else if(!list.length)ul.innerHTML='<li class="empty">'+(mode==='today'?'Your list is empty. Add just one small thing to get started.':mode==='past'?'No tasks that day.':'Nothing planned yet. Add 1 to 3 tasks, no more.')+'</li>';
+  else ul.innerHTML=[...shown].sort((a,b)=>a.done-b.done).map(t=>{
     const live=mode==='today';
     const chk=live?'<button class="check" data-act="task" data-id="'+t.id+'" aria-label="Task done">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>';
     const steps=t.steps.length?'<ul class="steps">'+t.steps.map((s,i)=>'<li class="step'+(s.done?' done':'')+'">'+(live?'<button class="check" data-act="step" data-id="'+t.id+'" data-i="'+i+'" aria-label="Step done">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>')+'<span>'+esc(s.t)+'</span></li>').join('')+'</ul>':'';
@@ -759,7 +773,7 @@ function renderDay(){
     if(mode==='past'&&!t.done)tools='<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Move to today</button>';
     const right=mode==='today'?'<span class="xp">+10 XP</span>':mode==='future'?'<span class="tag">planned</span>':t.done?'<span class="tag" style="color:var(--mint)">done</span>':'<span class="tag" style="color:var(--muted)">not done</span>';
     const cls='task'+(t.done?' done':'')+(mode==='future'?' plan':'')+(mode==='past'&&!t.done?' miss':'');
-    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext"><b>'+esc(t.text)+'</b><span class="tmeta">'+right+(t.ex?'<span class="ex">example</span>':'')+(t.splitting?'<span class="ex">splitting…</span>':'')+'</span></span>'+split+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Delete">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
+    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext"><b>'+esc(t.text)+'</b><span class="tmeta">'+right+'<button class="catb '+(t.cat||'')+'" data-act="cat" data-id="'+t.id+'" aria-label="Change category">'+(t.cat==='work'?'Work':t.cat==='personal'?'Personal':'+ Tag')+'</button>'+(t.ex?'<span class="ex">example</span>':'')+(t.splitting?'<span class="ex">splitting…</span>':'')+'</span></span>'+split+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Delete">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
   }).join('');
 
   // défis
@@ -845,6 +859,7 @@ document.addEventListener('click',e=>{
     if(s.done){s.done=false;save();render();return}
     s.done=true;if(t.steps.every(z=>z.done)){t.done=true;win(15)}else win(5)}
   if(act==='split')splitTask(id);
+  if(act==='cat'){const t=S.tasks.find(x=>x.id===id);if(!t)return;t.cat=!t.cat?'work':t.cat==='work'?'personal':undefined;save();render();return}
   if(act==='del'){S.tasks=S.tasks.filter(x=>x.id!==id);save();render()}
   if(act==='cplus'){const c=S.challenges.find(x=>x.id===id),k=todayStr(),n=ccount(c,k)+1;setCount(c,k,n);if(n===c.target)win(15);else{tone([659,880],.09,.3);save();render()}}
   if(act==='cminus'){const c=S.challenges.find(x=>x.id===id),k=todayStr();setCount(c,k,ccount(c,k)-1);save();render()}
@@ -867,7 +882,8 @@ async function splitTask(id){
   if(!steps)steps=['Get what you need ready (2 min)','Do just 5 minutes','Finish and tidy up'];
   t.steps=steps.map(s=>({t:s,done:false}));S.splits++;checkBadges();save();render();
 }
-$('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim();if(!v)return;if(dayMode(viewDay)==='past')return;S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:viewDay});i.value='';save();render()});
+document.querySelectorAll('.cats button').forEach(b=>b.addEventListener('click',()=>{catF=b.dataset.cat;try{localStorage.setItem('bravoCat',catF)}catch(e){};render()}));
+$('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim();if(!v)return;if(dayMode(viewDay)==='past')return;S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:viewDay,cat:catF==='all'?undefined:catF});i.value='';save();render()});
 // navigation entre les jours
 document.querySelectorAll('.dtabs button').forEach(b=>b.addEventListener('click',()=>{viewDay=ymd(addDays(new Date(),+b.dataset.rel));render()}));
 $('dPrev').addEventListener('click',()=>{viewDay=ymd(addDays(new Date(viewDay+'T12:00'),-1));render()});
