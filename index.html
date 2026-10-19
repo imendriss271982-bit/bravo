@@ -11,7 +11,7 @@
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
 <link rel="manifest" href="manifest.json">
 <style>html{color-scheme:dark}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-/* ===== Nour moves: gestures on every page ===== */
+/* ===== Noor moves: gestures on every page ===== */
 .nour{--u:1px;position:relative}
 .nwrap{--u:2.6px;width:168px;height:168px}
 .nfx{position:absolute;inset:0;pointer-events:none;z-index:2}
@@ -69,7 +69,7 @@
 @keyframes pTurn{from{opacity:0;transform:perspective(1100px) rotateY(-24deg) translateX(18px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.nour *,.nour,.pturn{animation:none!important;transition:none!important}.nfx{display:none}}
 
-/* ===== Nour dock: bigger face + speech bubble on every page ===== */
+/* ===== Noor dock: bigger face + speech bubble on every page ===== */
 .ndock{position:fixed;right:max(12px,calc(env(safe-area-inset-right,0px) + 10px));bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;align-items:flex-end;gap:8px;pointer-events:none}
 .ndock>*{pointer-events:auto}
 .ndock .fab{position:relative;right:auto;bottom:auto;width:84px;height:84px;flex:none;--u:1.5px;border-width:3px}
@@ -87,6 +87,29 @@
 .nx{position:absolute;top:4px;right:6px;border:0;background:none;font-size:20px;line-height:1;color:#8A7FB0;padding:4px}
 @keyframes nPop{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.nbubble{animation:none}.fab.talking .mouth{animation:none}}
+
+/* ===== onboarding: Noor welcomes you ===== */
+.splash.ob .sun{display:none}
+.ob-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;max-width:400px}
+.ob-noor{padding:0;animation:obIn .9s cubic-bezier(.2,1.4,.4,1) both}
+.ob-noor .mbox{width:150px;height:150px}
+.ob-noor.talking .mouth{animation:speakbob 1.1s ease-in-out infinite}
+.ob-noor.talking .wave{opacity:1}
+.ob-noor.talking .wave i{animation:eq .5s ease-in-out infinite}
+@keyframes obIn{0%{opacity:0;transform:translateY(90px) scale(.4)}60%{opacity:1}100%{opacity:1;transform:none}}
+.ob-bub{position:relative;background:#fff;color:#1B0E3D;border-radius:20px;padding:14px 18px;font-family:var(--f-display);font-weight:600;font-size:clamp(18px,5vw,21px);line-height:1.35;box-shadow:0 6px 24px rgba(0,0,0,.4),0 0 16px rgba(34,229,255,.45);animation:nPop .35s ease-out both;text-wrap:balance}
+.ob-bub::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);border:10px solid transparent;border-bottom-color:#fff;border-top:0}
+.ob-bub b{color:#7209B7}
+.ob-card{display:flex;gap:14px;align-items:center;text-align:left;width:100%;padding:14px 16px;border-radius:18px;background:rgba(18,8,43,.55);border:1.5px solid rgba(34,229,255,.5);animation:rise .5s ease-out both}
+.ob-card .ic{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#FF2E93,#7209B7);box-shadow:var(--glow-pink)}
+.ob-card .ic svg{width:26px;height:26px;color:#fff}
+.ob-card h4{margin:0 0 3px;font-family:var(--f-display);font-size:18px;color:var(--cyan)}
+.ob-card p{margin:0;font-size:14.5px;line-height:1.4;color:var(--ink)}
+.ob-dots{display:flex;gap:8px}
+.ob-dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25)}
+.ob-dots i.on{background:var(--gold);box-shadow:var(--glow-gold);width:22px;border-radius:99px}
+.ob-skip{border:0;background:none;color:var(--muted);font-weight:800;font-size:14px;padding:6px}
+@media (prefers-reduced-motion:reduce){.ob-noor,.ob-bub,.ob-card{animation:none}}
 </style>
 <title>ADHD Winner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -367,7 +390,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .splash .err{color:var(--coral);font-weight:700;font-size:13px;min-height:1em;margin:0}
 @media (prefers-reduced-motion:reduce){.splash .sun,.splash .aff{animation:none}}
 
-/* mascot Nour (arcade pixel style) */
+/* mascot Noor (arcade pixel style) */
 .mascot{shape-rendering:crispEdges;overflow:visible}
 .mascot .m-open{display:none}
 .mascot .bod{animation:bob 1.6s steps(2,end) infinite;transform-origin:center}
@@ -388,7 +411,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .avatar .mascot,.fab .mascot{filter:none}
 @media (prefers-reduced-motion:reduce){.mascot .bod,.mascot .m-eyes,.talking .mascot .bod{animation:none}}
 
-/* Nour avatar photo */
+/* Noor avatar photo */
 .stage .mbox{overflow:hidden;border-radius:50%;width:168px;height:168px;background:#1D1042}
 .stage .mbox::before{display:none}
 .mouth{position:absolute;inset:0}
@@ -507,7 +530,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
       <label class="toggle"><input id="evAlarm" type="checkbox" checked> Alarm at that time</label>
       <button class="btn" type="submit">Add to calendar</button>
     </form>
-    <div class="sechead"><h3>Gentle reminders</h3><span class="hint">Pop-up + Nour</span></div>
+    <div class="sechead"><h3>Gentle reminders</h3><span class="hint">Pop-up + Noor</span></div>
     <div class="nudges" id="nudges"></div>
     <form class="evform" id="nForm">
       <span class="label">New reminder</span>
@@ -524,16 +547,16 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   <section id="v-coach" class="sec" hidden>
     <div class="stage" id="stage" aria-hidden="true">
       <div class="nwrap nour"><div class="mbox"><span class="mouth" id="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span></div>
-      <b>Nour</b><small id="stageSt">Your coach</small>
+      <b>Noor</b><small id="stageSt">Your coach</small>
     </div>
     <button class="call" id="callBtn" type="button">
       <span class="callorb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
-      <span class="calltxt"><b id="callTitle">Talk to Nour</b><small id="callSt">Tap and talk: she answers out loud</small></span>
+      <span class="calltxt"><b id="callTitle">Talk to Noor</b><small id="callSt">Tap and talk: she answers out loud</small></span>
     </button>
     <div class="coach">
       <div class="coachhead">
         <div class="avatar" id="avatar"><img src="nour-face.jpg" alt="" width="42" height="42"></div>
-        <div><b>Nour, your coach</b><span class="hint" id="coachState">I'm listening, no judgment.</span></div>
+        <div><b>Noor, your coach</b><span class="hint" id="coachState">I'm listening, no judgment.</span></div>
         <button class="iconbtn" id="voiceBtn" aria-label="Mute the coach's voice" title="Coach voice">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="vwaves" d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
         </button>
@@ -550,7 +573,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
         <button class="btn" type="submit" id="coachSend">Send</button>
       </form>
     </div>
-    <p class="note" id="coachNote">Nour sees your list, challenges and calendar. By voice or text, she can add a task (even for tomorrow), an appointment with an alarm, or check off what you finished.</p>
+    <p class="note" id="coachNote">Noor sees your list, challenges and calendar. By voice or text, she can add a task (even for tomorrow), an appointment with an alarm, or check off what you finished.</p>
   </section>
 
   <!-- VIEW: focus -->
@@ -593,7 +616,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   </section>
 </div>
 
-<div class="ndock" id="ndock"><div class="nbubble" id="nBubble" hidden role="status" aria-live="polite"><button class="nx" id="nClose" type="button" aria-label="Close">×</button><p id="nText"></p><div class="nchips" id="nChips"></div></div><button class="fab nour" id="fab" type="button" aria-label="Talk to coach Nour"><span class="nface"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Nour</span></button></div>
+<div class="ndock" id="ndock"><div class="nbubble" id="nBubble" hidden role="status" aria-live="polite"><button class="nx" id="nClose" type="button" aria-label="Close">×</button><p id="nText"></p><div class="nchips" id="nChips"></div></div><button class="fab nour" id="fab" type="button" aria-label="Talk to coach Noor"><span class="nface"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Noor</span></button></div>
 <nav aria-label="Navigation">
   <div class="in">
     <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
@@ -609,14 +632,20 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 
 <div class="splash" id="splash" hidden role="dialog" aria-modal="true" aria-labelledby="spTitle">
   <div class="sun"><svg aria-hidden="true"><use href="#brainSym"/></svg></div>
-  <div id="spName" hidden>
-    <div class="kicker">Welcome to ADHD Winner</div>
-    <h1 id="spTitle" style="margin:10px 0 18px">What's your <b>name</b>?</h1>
+  <div id="spName" hidden class="ob-wrap">
+    <div class="stage ob-noor" id="obNoor" aria-hidden="true"><div class="nwrap nour" style="--u:2.3px;width:150px;height:150px"><div class="mbox"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span></div></div>
+    <div class="ob-bub" id="obBub" role="status" aria-live="polite"><span id="spTitle"></span></div>
     <form id="nameForm" autocomplete="off">
       <input id="nameInput" type="text" maxlength="24" placeholder="Your first name" aria-label="Your first name">
       <p class="err" id="nameErr"></p>
       <button class="btn go" type="submit">Continue</button>
     </form>
+    <div id="obTour" hidden class="row2" style="width:100%;gap:14px">
+      <div class="ob-card" id="obCard" hidden></div>
+      <div class="ob-dots" id="obDots"></div>
+      <button class="btn go" id="obNext" type="button">Show me</button>
+      <button class="ob-skip" id="obSkip" type="button">Skip the tour</button>
+    </div>
   </div>
   <div id="spAff" hidden class="row2" style="gap:22px">
     <div class="kicker" id="affKicker"></div>
@@ -772,7 +801,7 @@ function mouthLoop(on){mouthOn=!!on;cancelAnimationFrame(mouthR);
     mouthHold-=dt;if(want!==mouthF&&mouthHold<=0){mouthSet(want);mouthHold=60}
     mouthR=requestAnimationFrame(tick)};
   mouthR=requestAnimationFrame(tick)}
-function talk(on){mouthLoop(!!on);try{$('fab').classList.toggle('talking',!!on);$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
+function talk(on){mouthLoop(!!on);try{$('fab').classList.toggle('talking',!!on);$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('obNoor').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
 function speak(text,excited){
   if(!S.voice||!text)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[*#_]/g,''));
@@ -784,7 +813,7 @@ function speak(text,excited){
 }
 
 
-// ---------- Nour moves (gestures on every page) ----------
+// ---------- Noor moves (gestures on every page) ----------
 // Put real gesture videos here later (e.g. {think:'nour-think.mp4'}): they play inside her circle instead of the drawn hands.
 const NOUR_CLIPS={};
 const NMOODS=['n-wave','n-think','n-page','n-pointme','n-cheer','n-zen'];
@@ -1057,7 +1086,7 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
 }));
 $('fab').addEventListener('click',()=>{document.querySelector('nav button[data-view="v-coach"]').click();setTimeout(()=>{try{$('coachInput').focus()}catch(e){}},50)});
 
-// ---------- Nour talks when you change page ----------
+// ---------- Noor talks when you change page ----------
 const nb=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function goView(v){document.querySelector('nav button[data-view="'+v+'"]').click()}
 const NACT={
@@ -1194,7 +1223,7 @@ function ctx(){
   const t=todayStr();const evs=S.events.filter(e=>e.date>=t).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+e.time+' '+e.title).join('\n')||'(nothing)';
   return (S.name?'First name of the person: '+S.name+'\n':'')+'Date and time: '+new Date().toLocaleString('en-US')+'\nLevel '+level().lv+', '+S.xp+' XP, streak '+S.streak+' days, '+S.winsToday+" wins today.\nTasks to do:\n"+open+'\nTasks done:\n'+done+'\nPlanned for tomorrow:\n'+tmr+'\nYesterday: '+yd.filter(t=>t.done).length+' tasks done out of '+yd.length+', '+(S.hist[y]||0)+' wins.\nChallenges:\n'+ch+'\nUpcoming calendar:\n'+evs;
 }
-const RULES="Call the person by their first name now and then (not in every sentence). You are Nour, the voice coach of the ADHD Winner app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
+const RULES="Call the person by their first name now and then (not in every sentence). You are Noor, the voice coach of the ADHD Winner app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
 function bubble(role,text){
   const d=document.createElement('div');d.className='msg '+(role==='user'?'me':'ai');
   const s=document.createElement('span');s.className='txt';s.textContent=text;d.appendChild(s);
@@ -1205,7 +1234,7 @@ function greet(){
   if(greeted)return;greeted=true;
   const open=dayTasks(todayStr()).filter(t=>!t.done).length;
   const h=new Date().getHours();const hi=h<12?'Good morning':h<18?'Hi':'Good evening';
-  const txt=hi+(S.name?' '+S.name:'')+"! I'm Nour, your coach. You have "+open+' task'+(open===1?'':'s')+" on your list. Tell me what's blocking you, or tap a button below.";
+  const txt=hi+(S.name?' '+S.name:'')+"! I'm Noor, your coach. You have "+open+' task'+(open===1?'':'s')+" on your list. Tell me what's blocking you, or tap a button below.";
   const d=bubble('assistant',txt);d.querySelector('.say').hidden=false;
   turns.push({role:'assistant',content:txt});
 }
@@ -1227,9 +1256,9 @@ async function ask(q){
   if(busy||!q)return;
   busy=true;$('coachSend').disabled=true;S.talked=(S.talked||0)+1;checkBadges();save();
   bubble('user',q);turns.push({role:'user',content:q});
-  const d=bubble('assistant','…');const txt=d.querySelector('.txt');$('coachState').textContent='Nour is thinking…';nour('think');
-  const hist=turns.slice(-12).map(m=>(m.role==='user'?'Person: ':'Nour: ')+m.content).join('\n');
-  const prompt=RULES+"\n\nYou can also act in the app. Possible actions: ajouter_tache {texte, optional date YYYY-MM-DD}, ajouter_rendez_vous {titre, date YYYY-MM-DD, heure HH:MM}, cocher_tache {texte}. Only add an action if the person clearly asks. Tomorrow = "+ymd(addDays(new Date(),1))+". Write the task text in English.\n\nAnswer ONLY in JSON: {\"reponse\":\"what you say\",\"actions\":[{\"type\":\"ajouter_tache\",\"texte\":\"...\"}]} (empty actions if nothing to do).\n\nPerson's current state:\n"+ctx()+"\n\nConversation:\n"+hist+"\nNour:";
+  const d=bubble('assistant','…');const txt=d.querySelector('.txt');$('coachState').textContent='Noor is thinking…';nour('think');
+  const hist=turns.slice(-12).map(m=>(m.role==='user'?'Person: ':'Noor: ')+m.content).join('\n');
+  const prompt=RULES+"\n\nYou can also act in the app. Possible actions: ajouter_tache {texte, optional date YYYY-MM-DD}, ajouter_rendez_vous {titre, date YYYY-MM-DD, heure HH:MM}, cocher_tache {texte}. Only add an action if the person clearly asks. Tomorrow = "+ymd(addDays(new Date(),1))+". Write the task text in English.\n\nAnswer ONLY in JSON: {\"reponse\":\"what you say\",\"actions\":[{\"type\":\"ajouter_tache\",\"texte\":\"...\"}]} (empty actions if nothing to do).\n\nPerson's current state:\n"+ctx()+"\n\nConversation:\n"+hist+"\nNoor:";
   try{const r=await askAI(prompt);
     const acts=Array.isArray(r.actions)?r.actions.slice(0,5):[];acts.forEach(doAction);
     const rep=String(r.reponse||r.text||'').trim()||'Got it!';
@@ -1243,7 +1272,7 @@ async function ask(q){
 // ---------- appel vocal (ElevenLabs) ----------
 let conv=null,callBusy=false;
 const callSt=t=>{$('callSt').textContent=t};
-function callLive(on){$('callBtn').classList.toggle('live',on);$('callTitle').textContent=on?'Hang up':'Talk to Nour';talk(false)}
+function callLive(on){$('callBtn').classList.toggle('live',on);$('callTitle').textContent=on?'Hang up':'Talk to Noor';talk(false)}
 $('callBtn').addEventListener('click',async()=>{
   if(callBusy)return;callBusy=true;
   if(conv){try{await conv.endSession()}catch(_){}conv=null;callLive(false);callSt('Tap and talk: she answers out loud');callBusy=false;return}
@@ -1257,7 +1286,7 @@ $('callBtn').addEventListener('click',async()=>{
     conv=await Conversation.startSession({agentId:AGENT_ID,connectionType:'websocket',
       dynamicVariables:{prenom:'',maintenant:new Date().toLocaleString('en-US',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}),demain:ymd(addDays(new Date(),1)),etat:ctx()},
       clientTools:{ajouter_tache:tool('ajouter_tache'),ajouter_rendez_vous:tool('ajouter_rendez_vous'),cocher_tache:tool('cocher_tache')},
-      onModeChange:({mode})=>{callSt(mode==='speaking'?'Nour is talking…':"I'm listening, talk to me");talk(mode==='speaking')},
+      onModeChange:({mode})=>{callSt(mode==='speaking'?'Noor is talking…':"I'm listening, talk to me");talk(mode==='speaking')},
       onDisconnect:()=>{conv=null;callLive(false);callSt('Call ended. Tap to talk again.')},
       onError:m=>callSt('Small problem: '+m)});
     S.talked=(S.talked||0)+1;checkBadges();save();
@@ -1291,7 +1320,7 @@ document.querySelectorAll('.durs button').forEach(b=>b.addEventListener('click',
 // ---------- welcome + affirmation ----------
 const AFF=[
   "Your day is going to be beautiful. I know you can really do it today. <em>You are the champion.</em>",
-  "One small step is still a win. <em>Start with just one</em> and Nour will cheer for you.",
+  "One small step is still a win. <em>Start with just one</em> and Noor will cheer for you.",
   "Your brain is fast, creative and full of ideas. <em>Today it works for you.</em>",
   "You don't have to be perfect today. <em>You just have to begin.</em>",
   "Every task you finish today is a Bravo. <em>Go collect them!</em>",
@@ -1304,11 +1333,70 @@ function loadEn(){try{const v=speechSynthesis.getVoices();enVoice=v.find(x=>/^en
 try{loadEn();speechSynthesis.addEventListener('voiceschanged',loadEn)}catch(e){}
 function speakEn(text){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';if(enVoice)u.voice=enVoice;u.rate=1.02;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
 function hiWord(){const h=new Date().getHours();return h<5?'Hi':h<12?'Good morning':h<18?'Hi':'Good evening'}
-function showName(){
-  $('splash').hidden=false;$('spAff').hidden=true;$('spName').hidden=false;
-  $('nameInput').value=S.name||'';$('nameErr').textContent='';
-  setTimeout(()=>{try{$('nameInput').focus()}catch(e){}},80);
+// ---------- onboarding: Noor welcomes you, asks your name, shows the app ----------
+// Recorded lines in Noor's ElevenLabs voice (no first name inside, so they work for everyone).
+// To use recorded clips, drop them in sons/ and list them here, e.g. {hello:'sons/noor-hello.mp3',meet:'sons/noor-meet.mp3',tasks:…,agenda:…,coach:…}
+const OB_AUDIO={};
+const IC={tasks:'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>',
+  agenda:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  coach:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>'};
+const TOUR=[
+  {k:'tasks',mood:'pointme',t:'Your tasks',p:'Write them in <b>Work</b> or <b>Personal</b>. Every task you finish = a <b>Bravo</b> and XP.',
+    say:"Here you write your tasks, for work or personal. Every task you finish gives you a Bravo and points. Small steps, big wins!"},
+  {k:'agenda',mood:'pointme',t:'Calendar & reminders',p:'Add your appointments: I ring the <b>alarm</b>. I also remind you to drink water or take a break.',
+    say:"Put your appointments in the calendar, and I'll ring the alarm for you. I'll also remind you to drink water and take little breaks."},
+  {k:'coach',mood:'wave',t:'Talk to me',p:'Tap my face anytime. Tell me what blocks you and we find <b>one small step</b> together.',
+    say:"And if you feel stuck, just tap my face and talk to me. We'll find one small step together. I'm always here for you!"}
+];
+let obAudio=null,obStep=-1,obSpoken=false;
+function obStop(){try{speechSynthesis.cancel()}catch(e){};if(obAudio){try{obAudio.pause()}catch(e){};obAudio=null};talk(false)}
+// Noor speaks: her recorded ElevenLabs voice when there is a clip, the device voice otherwise.
+function obSay(key,text){obStop();obSpoken=false;if(S.voice===false)return;
+  const src=key&&OB_AUDIO[key];
+  const fallback=()=>{obAudio=null;try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';if(enVoice)u.voice=enVoice;u.rate=1.02;u.pitch=1.15;
+    u.onstart=()=>{obSpoken=true;talk(true);mouthKick(.5)};u.onboundary=e=>mouthKick(Math.min(.95,.35+(e.charLength||4)*.06));
+    u.onend=u.onerror=()=>talk(false);speechSynthesis.speak(u)}catch(e){}};
+  if(!src){fallback();return}
+  const a=new Audio(src);obAudio=a;let iv=0;
+  a.onplay=()=>{obSpoken=true;talk(true);iv=setInterval(()=>mouthKick(.35+Math.random()*.55),140)};
+  a.onended=a.onpause=()=>{clearInterval(iv);talk(false)};
+  a.onerror=()=>{clearInterval(iv);if(obAudio===a)fallback()};
+  a.play().catch(err=>{clearInterval(iv);if(err&&err.name==='NotAllowedError'){obAudio=null}else if(obAudio===a)fallback()});
 }
+// Phones block sound until the first touch: if Noor could not speak, she speaks at the first tap.
+function obRetry(key,text){setTimeout(()=>{if(!obSpoken)$('spName').addEventListener('pointerdown',()=>{if(!obSpoken&&!$('splash').hidden)obSay(key,text)},{once:true})},700)}
+function obBubble(html){const b=$('obBub');$('spTitle').innerHTML=html;b.style.animation='none';void b.offsetWidth;b.style.animation=''}
+let obEdit=false;
+function showName(){
+  obEdit=!!S.name;obStep=-1;
+  $('splash').hidden=false;$('splash').classList.add('ob');$('spAff').hidden=true;$('spName').hidden=false;
+  $('nameForm').hidden=false;$('obTour').hidden=true;
+  const n=$('obNoor');n.style.animation='none';void n.offsetWidth;n.style.animation='';
+  $('nameInput').value=S.name||'';$('nameErr').textContent='';
+  if(obEdit){obBubble('Want me to call you <b>something else</b>?');setTimeout(()=>{try{$('nameInput').focus()}catch(e){}},80);return}
+  obBubble("Hi! I'm <b>Noor</b>, your coach. What's your <b>name</b>?");
+  const line="Hi! I'm Noor, your coach. What's your name?";
+  setTimeout(()=>{nour('wave',2200);obSay('hello',line);obRetry('hello',line)},700);
+}
+function obMeet(){
+  $('nameForm').hidden=true;$('obTour').hidden=false;$('obCard').hidden=true;$('obDots').innerHTML='';
+  $('obNext').textContent='Show me';$('obSkip').hidden=false;
+  obBubble('Nice to meet you, <b>'+esc(S.name)+'</b>! I\'ll be with you on your journey today, to make your day a <b>success</b>.');
+  nour('cheer',2000);
+  obSay('meet',"Nice to meet you! I'll be with you on your journey today, to make your day a success. Let me show you around.");
+}
+function obTour(i){
+  obStep=i;const T=TOUR[i];
+  obBubble(i===0?'Let me show you <b>around</b>!':i===TOUR.length-1?'Last thing, '+esc(S.name)+'!':'And here…');
+  const c=$('obCard');c.hidden=false;c.innerHTML='<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+IC[T.k]+'</svg></span><div><h4>'+T.t+'</h4><p>'+T.p+'</p></div>';
+  c.style.animation='none';void c.offsetWidth;c.style.animation='';
+  $('obDots').innerHTML=TOUR.map((_,j)=>'<i'+(j===i?' class="on"':'')+'></i>').join('');
+  $('obNext').textContent=i===TOUR.length-1?"I'm ready!":'Next';
+  nour(T.mood,2000);obSay(T.k,T.say);
+}
+function obDone(){obStop();S.onboarded=true;save();$('splash').classList.remove('ob');showAff()}
+$('obNext').addEventListener('click',()=>{if(obStep<TOUR.length-1)obTour(obStep+1);else obDone()});
+$('obSkip').addEventListener('click',obDone);
 function showAff(){
   let i;
   if(S.affIdx<0)i=0;else{do{i=Math.floor(Math.random()*AFF.length)}while(AFF.length>1&&i===S.affIdx)}
@@ -1318,10 +1406,10 @@ function showAff(){
   $('affText').innerHTML=AFF[i];
   $('affPower').innerHTML='<em>You can do it, '+esc(S.name)+'.</em> You are strong. <em>Don\'t give up!</em>';
   $('affText').style.animation='none';void $('affText').offsetWidth;$('affText').style.animation='';
-  $('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
+  $('splash').classList.remove('ob');$('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
   affSay();
 }
-// Nour says the greeting out loud with the person's first name.
+// Noor says the greeting out loud with the person's first name.
 // Browsers only allow sound after a touch: we try right away, and if it's blocked we speak at the first touch.
 function affLine(){return hiWord()+' '+S.name+'! '+$('affText').textContent+' '+$('affPower').textContent}
 let affSpoken=false;
@@ -1337,8 +1425,8 @@ $('nameInput').addEventListener('input',()=>{$('nameErr').textContent=''});
 $('nameForm').addEventListener('submit',e=>{
   e.preventDefault();const v=$('nameInput').value.trim().replace(/\s+/g,' ');
   if(!v){$('nameErr').textContent='Type your name so your coach can call you by it.';return}
-  const first=!S.name;S.name=v;save();render();
-  if(first)showAff();else{$('splash').hidden=true}
+  S.name=v;save();render();try{$('nameInput').blur()}catch(e){}
+  if(!obEdit)obMeet();else{obStop();$('splash').classList.remove('ob');$('splash').hidden=true}
 });
 $('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;nourSay('v-today');setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
 $('affListen').addEventListener('click',e=>{e.stopPropagation();speakEn(affLine())});
