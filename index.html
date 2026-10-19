@@ -1058,6 +1058,19 @@ function showAff(){
   $('affText').innerHTML=AFF[i];
   $('affText').style.animation='none';void $('affText').offsetWidth;$('affText').style.animation='';
   $('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
+  affSay();
+}
+// Nour says the greeting out loud with the person's first name.
+// Browsers only allow sound after a touch: we try right away, and if it's blocked we speak at the first touch.
+function affLine(){return hiWord()+' '+S.name+'! '+$('affText').textContent+' You are strong, '+S.name+'. You can do it!'}
+let affSpoken=false;
+function affSay(){affSpoken=false;
+  if(!S.voice&&S.voice!==undefined)return;
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(affLine());u.lang='en-US';if(enVoice)u.voice=enVoice;u.rate=1.02;u.pitch=1.15;
+    u.onstart=()=>{affSpoken=true;try{talk(true)}catch(e){}};u.onend=u.onerror=()=>{try{talk(false)}catch(e){}};
+    speechSynthesis.speak(u)}catch(e){}
+  const retry=()=>{if(!affSpoken&&!$('splash').hidden&&!$('spAff').hidden)affSay()};
+  setTimeout(()=>{if(!affSpoken)$('spAff').addEventListener('pointerdown',retry,{once:true})},700);
 }
 $('nameInput').addEventListener('input',()=>{$('nameErr').textContent=''});
 $('nameForm').addEventListener('submit',e=>{
@@ -1067,7 +1080,7 @@ $('nameForm').addEventListener('submit',e=>{
   if(first)showAff();else{$('splash').hidden=true}
 });
 $('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;if(S.sound)chime(false)});
-$('affListen').addEventListener('click',()=>speakEn($('affHi').textContent+' '+$('affText').textContent));
+$('affListen').addEventListener('click',e=>{e.stopPropagation();speakEn(affLine())});
 $('helloBtn').addEventListener('click',showName);
 if(!S.name)showName();else showAff();
 
