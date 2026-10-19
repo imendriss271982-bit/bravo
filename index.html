@@ -10,7 +10,65 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
 <link rel="manifest" href="manifest.json">
-<style>html{color-scheme:dark}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>html{color-scheme:dark}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* ===== Nour moves: gestures on every page ===== */
+.nour{--u:1px;position:relative}
+.nwrap{--u:2.6px;width:168px;height:168px}
+.nfx{position:absolute;inset:0;pointer-events:none;z-index:2}
+.nfx>*{position:absolute;opacity:0}
+.nh{width:calc(var(--u)*26);height:calc(var(--u)*34);filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
+.nface img,.nwrap .mouth{transition:transform .35s ease}
+/* idle: soft breathing only (calm for ADHD focus) */
+.nour .nface,.nwrap .mbox{animation:nIdle 4.5s ease-in-out infinite}
+@keyframes nIdle{0%,100%{transform:scale(1)}50%{transform:scale(1.03) translateY(-1px)}}
+/* wave hello */
+.n-wave .n-open{opacity:1;right:calc(var(--u)*-16);bottom:calc(var(--u)*-6);transform-origin:50% 95%;animation:nWave .5s ease-in-out 3 alternate,nIn .2s ease-out}
+@keyframes nWave{from{transform:rotate(-22deg)}to{transform:rotate(18deg)}}
+@keyframes nIn{from{opacity:0;translate:0 calc(var(--u)*12)}to{opacity:1;translate:0 0}}
+.n-wave .nface,.n-wave .mbox{animation:nNod .7s ease-in-out 2}
+@keyframes nNod{0%,100%{transform:rotate(0)}50%{transform:rotate(5deg) translateY(-2px)}}
+/* think: finger on chin, head tilt, thought bubble */
+.n-think .n-point{opacity:1;left:calc(var(--u)*30);bottom:calc(var(--u)*-12);transform:rotate(-14deg);transform-origin:50% 100%;animation:nIn .25s ease-out,nTap 1.2s ease-in-out .25s infinite}
+@keyframes nTap{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(-8deg) translateY(calc(var(--u)*-2))}}
+.n-think .nface img,.n-think .mouth{transform:rotate(-7deg) scale(1.1)}
+.nbub{top:calc(var(--u)*-20);left:calc(var(--u)*-16);display:flex;gap:calc(var(--u)*2.5);align-items:center;padding:calc(var(--u)*4) calc(var(--u)*6);border-radius:99px;background:#fff;box-shadow:0 0 10px rgba(34,229,255,.6)}
+.nbub::after{content:"";position:absolute;right:calc(var(--u)*2);bottom:calc(var(--u)*-5);width:calc(var(--u)*6);height:calc(var(--u)*6);border-radius:50%;background:#fff}
+.nbub i{width:calc(var(--u)*4);height:calc(var(--u)*4);border-radius:50%;background:#7209B7;animation:nDot 1s ease-in-out infinite}
+.nbub i:nth-child(2){animation-delay:.15s}.nbub i:nth-child(3){animation-delay:.3s}
+@keyframes nDot{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(calc(var(--u)*-3));opacity:1}}
+.n-think .nbub{opacity:1;animation:nIn .3s ease-out}
+.nwrap.n-think .n-point{left:calc(var(--u)*40);bottom:calc(var(--u)*-8);transform:rotate(-38deg);animation:nIn .25s ease-out}
+.nwrap .nbub{top:calc(var(--u)*-4);left:calc(var(--u)*-14)}
+/* page: she turns a page */
+.nsheet{width:calc(var(--u)*22);height:calc(var(--u)*28);left:calc(var(--u)*-18);bottom:calc(var(--u)*-4);border-radius:calc(var(--u)*3);background:linear-gradient(90deg,#fff,#E8E2FF);box-shadow:0 0 8px rgba(34,229,255,.7);transform-origin:100% 50%}
+.nsheet::before{content:"";position:absolute;inset:calc(var(--u)*5) calc(var(--u)*4) auto;height:calc(var(--u)*12);background:repeating-linear-gradient(#C9BCFF 0 calc(var(--u)*1.5),transparent 0 calc(var(--u)*4))}
+.n-page .nsheet{animation:nFlip .9s ease-in-out}
+@keyframes nFlip{0%{opacity:1;transform:perspective(200px) rotateY(0)}60%{opacity:1;transform:perspective(200px) rotateY(-170deg)}100%{opacity:0;transform:perspective(200px) rotateY(-180deg)}}
+.n-page .n-open{opacity:1;bottom:calc(var(--u)*-8);right:calc(var(--u)*-12);animation:nSwipe .9s ease-in-out}
+@keyframes nSwipe{0%{transform:translateX(0) rotate(10deg)}60%{transform:translateX(calc(var(--u)*-44)) rotate(-25deg)}100%{transform:translateX(calc(var(--u)*-44)) rotate(-25deg);opacity:0}}
+.n-page .nface img,.n-page .mouth{transform:rotate(-5deg) translateX(-2px)}
+/* point: shows the calendar */
+.n-point.n-pointing,.n-pointme .n-point{opacity:1;left:calc(var(--u)*-18);top:calc(var(--u)*-2);transform:rotate(-55deg);animation:nIn .2s ease-out,nPoke .45s ease-in-out .2s 3 alternate}
+@keyframes nPoke{from{translate:0 0}to{translate:calc(var(--u)*-4) calc(var(--u)*-2)}}
+/* cheer: fist pump, jump, stars */
+.n-cheer .n-open{opacity:1;right:calc(var(--u)*-14);top:calc(var(--u)*-16);animation:nPump .32s ease-in-out 5 alternate}
+@keyframes nPump{from{transform:rotate(-10deg) translateY(0)}to{transform:rotate(10deg) translateY(calc(var(--u)*-6))}}
+.fab.n-cheer,.nwrap.n-cheer .mbox{animation:nJump .45s ease-out 3}
+@keyframes nJump{0%,100%{transform:translateY(0)}40%{transform:translateY(calc(var(--u)*-10)) scale(1.05)}}
+.nstar{color:var(--gold);font-size:calc(var(--u)*12);text-shadow:0 0 8px rgba(255,226,59,.9)}
+.n-cheer .nstar{animation:nStar 1s ease-out 2}
+.nstar.s1{left:calc(var(--u)*-6);top:calc(var(--u)*-8)}.nstar.s2{left:45%;top:calc(var(--u)*-18);animation-delay:.15s!important}.nstar.s3{right:calc(var(--u)*-10);top:40%;animation-delay:.3s!important}
+@keyframes nStar{0%{opacity:0;transform:scale(.3)}40%{opacity:1;transform:scale(1.2) rotate(30deg)}100%{opacity:0;transform:scale(.6) rotate(70deg) translateY(calc(var(--u)*-8))}}
+/* zen (focus page): slow calm breathing */
+.n-zen .nface,.n-zen .mbox{animation:nIdle 6s ease-in-out infinite}
+.n-zen .nface img,.n-zen .mouth{transform:scale(1.04)}
+/* real gesture clips (optional, dropped in later) */
+.nclip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;border-radius:50%}
+/* the page itself turns when you change tab */
+.pturn{animation:pTurn .45s ease-out both;transform-origin:left center}
+@keyframes pTurn{from{opacity:0;transform:perspective(1100px) rotateY(-24deg) translateX(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.nour *,.nour,.pturn{animation:none!important;transition:none!important}.nfx{display:none}}
+</style>
 <title>Bravo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
@@ -156,7 +214,7 @@ span.check{cursor:default}
 .coach{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
 .coachhead{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid var(--line)}
 .fab{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:6;width:58px;height:58px;border-radius:50%;border:2px solid var(--cyan);background:#1D1042;box-shadow:0 0 22px rgba(255,46,147,.55),0 0 10px rgba(34,229,255,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0;animation:breathe 3s ease-in-out infinite}
-.fab span{font-family:var(--f-display);font-weight:700;font-size:11px;color:var(--cyan);line-height:1;margin-top:-2px}
+.fab .nlabel{font-family:var(--f-display);font-weight:700;font-size:11px;color:var(--cyan);line-height:1;margin-top:-2px}
 .fab svg{filter:drop-shadow(0 0 5px rgba(255,46,147,.8))}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 .avatar svg{filter:drop-shadow(0 0 4px rgba(255,46,147,.8))}
@@ -313,15 +371,16 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 @keyframes eq{0%,100%{height:3px}50%{height:12px}}
 .avatar{overflow:hidden;padding:0}
 .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
-.fab{overflow:hidden;padding:0}
+.fab{overflow:visible;padding:0}
+.fab .nface{position:absolute;inset:0;border-radius:50%;overflow:hidden}
 .fab img{width:100%;height:100%;object-fit:cover;display:block}
-.fab span{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);background:rgba(18,8,43,.8);padding:1px 6px;border-radius:99px;font-size:10px}
+.fab .nlabel{position:absolute;z-index:3;bottom:3px;left:50%;transform:translateX(-50%);background:rgba(18,8,43,.8);padding:1px 6px;border-radius:99px;font-size:10px}
 @media (prefers-reduced-motion:reduce){.stage.talking .wave i{animation:none}}
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="mascotSym" viewBox="0 0 160 160"><rect x="70" y="0" width="20" height="10" fill="#FFE23B"/><rect x="70" y="10" width="20" height="10" fill="#FFE23B"/><rect x="80" y="20" width="10" height="10" fill="#B30F62"/><rect x="30" y="30" width="100" height="10" fill="#FF2E93"/><rect x="20" y="40" width="120" height="90" fill="#FF2E93"/><rect x="30" y="130" width="100" height="10" fill="#FF2E93"/><rect x="30" y="40" width="20" height="10" fill="#FF7AB8"/><rect x="30" y="50" width="10" height="20" fill="#FF7AB8"/><rect x="20" y="120" width="120" height="10" fill="#B30F62"/><rect x="30" y="130" width="100" height="10" fill="#B30F62"/><rect x="10" y="80" width="10" height="30" fill="#B30F62"/><rect x="140" y="80" width="10" height="30" fill="#B30F62"/><rect x="40" y="140" width="20" height="10" fill="#B30F62"/><rect x="100" y="140" width="20" height="10" fill="#B30F62"/><rect x="40" y="50" width="80" height="60" fill="#12082B"/><rect x="50" y="60" width="20" height="20" fill="#22E5FF"/><rect x="90" y="60" width="20" height="20" fill="#22E5FF"/><rect x="40" y="90" width="10" height="10" fill="#FF7AB8"/><rect x="110" y="90" width="10" height="10" fill="#FF7AB8"/><rect x="60" y="90" width="40" height="10" fill="#22E5FF"/></symbol><filter id="sbp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><symbol id="brainSym" viewBox="0 0 200 175"><g fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="nSkin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7D3B4"/><stop offset=".6" stop-color="#E8AD86"/><stop offset="1" stop-color="#C98763"/></linearGradient><symbol id="nHandOpen" viewBox="0 0 40 52"><g stroke="#A8664A" stroke-width=".8"><rect x="7" y="5" width="7" height="20" rx="3.5" fill="url(#nSkin)" transform="rotate(-8 10 25)"/><rect x="14" y="1" width="7" height="22" rx="3.5" fill="url(#nSkin)"/><rect x="21.5" y="2" width="7" height="21" rx="3.5" fill="url(#nSkin)"/><rect x="28.5" y="6" width="6.5" height="18" rx="3.25" fill="url(#nSkin)" transform="rotate(8 31 24)"/><rect x="1" y="18" width="7" height="15" rx="3.5" fill="url(#nSkin)" transform="rotate(-38 5 30)"/><rect x="6" y="16" width="29" height="21" rx="10" fill="url(#nSkin)"/></g><rect x="9" y="33" width="23" height="18" rx="4" fill="#1B1B22"/><rect x="9" y="33" width="23" height="4" rx="2" fill="#2E2E38"/></symbol><symbol id="nHandPoint" viewBox="0 0 40 52"><g stroke="#A8664A" stroke-width=".8"><rect x="16" y="0" width="7.5" height="24" rx="3.75" fill="url(#nSkin)"/><rect x="5" y="15" width="30" height="21" rx="10" fill="url(#nSkin)"/><path d="M10 22h20M10 27h19" fill="none" stroke="#B9765A" stroke-width="1" stroke-linecap="round"/><rect x="2" y="20" width="7" height="13" rx="3.5" fill="url(#nSkin)" transform="rotate(-25 5 27)"/></g><rect x="9" y="33" width="23" height="18" rx="4" fill="#1B1B22"/><rect x="9" y="33" width="23" height="4" rx="2" fill="#2E2E38"/></symbol><symbol id="mascotSym" viewBox="0 0 160 160"><rect x="70" y="0" width="20" height="10" fill="#FFE23B"/><rect x="70" y="10" width="20" height="10" fill="#FFE23B"/><rect x="80" y="20" width="10" height="10" fill="#B30F62"/><rect x="30" y="30" width="100" height="10" fill="#FF2E93"/><rect x="20" y="40" width="120" height="90" fill="#FF2E93"/><rect x="30" y="130" width="100" height="10" fill="#FF2E93"/><rect x="30" y="40" width="20" height="10" fill="#FF7AB8"/><rect x="30" y="50" width="10" height="20" fill="#FF7AB8"/><rect x="20" y="120" width="120" height="10" fill="#B30F62"/><rect x="30" y="130" width="100" height="10" fill="#B30F62"/><rect x="10" y="80" width="10" height="30" fill="#B30F62"/><rect x="140" y="80" width="10" height="30" fill="#B30F62"/><rect x="40" y="140" width="20" height="10" fill="#B30F62"/><rect x="100" y="140" width="20" height="10" fill="#B30F62"/><rect x="40" y="50" width="80" height="60" fill="#12082B"/><rect x="50" y="60" width="20" height="20" fill="#22E5FF"/><rect x="90" y="60" width="20" height="20" fill="#22E5FF"/><rect x="40" y="90" width="10" height="10" fill="#FF7AB8"/><rect x="110" y="90" width="10" height="10" fill="#FF7AB8"/><rect x="60" y="90" width="40" height="10" fill="#22E5FF"/></symbol><filter id="sbp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><symbol id="brainSym" viewBox="0 0 200 175"><g fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
 <div class="wrap">
   <header class="top">
     <div>
@@ -419,7 +478,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   <!-- VIEW: coach -->
   <section id="v-coach" class="sec" hidden>
     <div class="stage" id="stage" aria-hidden="true">
-      <div class="mbox"><span class="mouth" id="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div>
+      <div class="nwrap nour"><div class="mbox"><span class="mouth" id="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span></div>
       <b>Nour</b><small id="stageSt">Your coach</small>
     </div>
     <button class="call" id="callBtn" type="button">
@@ -488,7 +547,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   </section>
 </div>
 
-<button class="fab" id="fab" type="button" aria-label="Talk to coach Nour"><img src="nour-face.jpg" alt="" width="54" height="54"><span>Nour</span></button>
+<button class="fab nour" id="fab" type="button" aria-label="Talk to coach Nour"><span class="nface"><img src="nour-face.jpg" alt="" width="54" height="54"></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Nour</span></button>
 <nav aria-label="Navigation">
   <div class="in">
     <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
@@ -672,6 +731,28 @@ function speak(text,excited){
     speechSynthesis.speak(u)}catch(e){}
 }
 
+
+// ---------- Nour moves (gestures on every page) ----------
+// Put real gesture videos here later (e.g. {think:'nour-think.mp4'}): they play inside her circle instead of the drawn hands.
+const NOUR_CLIPS={};
+const NMOODS=['n-wave','n-think','n-page','n-pointme','n-cheer','n-zen'];
+let nourT=0,nourBase=null;
+function nourClip(mood){const src=NOUR_CLIPS[mood];if(!src)return;
+  document.querySelectorAll('.nour').forEach(n=>{const box=n.querySelector('.nface,.mbox');if(!box)return;
+    box.querySelectorAll('.nclip').forEach(v=>v.remove());
+    const v=document.createElement('video');v.className='nclip';v.src=src;v.muted=true;v.playsInline=true;v.autoplay=true;
+    v.onended=v.onerror=()=>v.remove();box.appendChild(v)})}
+// nour('wave',1800) = gesture for 1.8 s then back to the page's calm mood; nour('think') = stays until changed
+function nour(mood,ms){
+  clearTimeout(nourT);
+  document.querySelectorAll('.nour').forEach(n=>{n.classList.remove(...NMOODS);void n.offsetWidth;if(mood)n.classList.add('n-'+mood)});
+  if(mood)nourClip(mood);
+  if(mood&&ms)nourT=setTimeout(()=>nour(nourBase),ms);
+}
+const VIEW_MOOD={'v-today':'wave','v-agenda':'pointme','v-coach':'wave','v-focus':'zen','v-troph':'cheer'};
+function nourForView(v){nourBase=v==='v-focus'?'zen':null;
+  nour('page',900);clearTimeout(nourT);
+  nourT=setTimeout(()=>{const m=VIEW_MOOD[v];if(m==='zen')nour('zen');else nour(m,m==='cheer'?1800:1600)},950)}
 // ---------- rewards ----------
 function win(xp,kind){
   const before=level().lv;let bonus=0;
@@ -681,6 +762,7 @@ function win(xp,kind){
   if(S.lastWinDate!==t){S.streak=(S.lastWinDate&&dayDiff(S.lastWinDate,t)<=2)?S.streak+1:1;S.lastWinDate=t}
   const newB=checkBadges();const lvUp=level().lv>before;
   save();render();showBravo({xp,bonus,newB,lvUp,kind});
+  nour('cheer',2200);
 }
 function checkBadges(){const nb=BADGES.filter(b=>!S.badges.includes(b.id)&&b.test());nb.forEach(b=>S.badges.push(b.id));return nb}
 let hideT;
@@ -913,6 +995,8 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
   if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
   $('fab').hidden=b.dataset.view==='v-coach';
+  const pv=$(b.dataset.view);pv.classList.remove('pturn');void pv.offsetWidth;pv.classList.add('pturn');
+  nourForView(b.dataset.view);
   scrollTo(0,0);
 }));
 $('fab').addEventListener('click',()=>{document.querySelector('nav button[data-view="v-coach"]').click();setTimeout(()=>{try{$('coachInput').focus()}catch(e){}},50)});
@@ -984,7 +1068,7 @@ async function ask(q){
   if(busy||!q)return;
   busy=true;$('coachSend').disabled=true;S.talked=(S.talked||0)+1;checkBadges();save();
   bubble('user',q);turns.push({role:'user',content:q});
-  const d=bubble('assistant','…');const txt=d.querySelector('.txt');$('coachState').textContent='Nour is thinking…';
+  const d=bubble('assistant','…');const txt=d.querySelector('.txt');$('coachState').textContent='Nour is thinking…';nour('think');
   const hist=turns.slice(-12).map(m=>(m.role==='user'?'Person: ':'Nour: ')+m.content).join('\n');
   const prompt=RULES+"\n\nYou can also act in the app. Possible actions: ajouter_tache {texte, optional date YYYY-MM-DD}, ajouter_rendez_vous {titre, date YYYY-MM-DD, heure HH:MM}, cocher_tache {texte}. Only add an action if the person clearly asks. Tomorrow = "+ymd(addDays(new Date(),1))+". Write the task text in English.\n\nAnswer ONLY in JSON: {\"reponse\":\"what you say\",\"actions\":[{\"type\":\"ajouter_tache\",\"texte\":\"...\"}]} (empty actions if nothing to do).\n\nPerson's current state:\n"+ctx()+"\n\nConversation:\n"+hist+"\nNour:";
   try{const r=await askAI(prompt);
@@ -995,7 +1079,7 @@ async function ask(q){
   catch(e){
     txt.textContent=e&&e.code==='rate_limited'?"I need a little break. Try again in a moment.":"Oops, I couldn't answer. Check your connection and try again.";
     turns.pop();
-  }finally{busy=false;$('coachSend').disabled=false;$('coachState').textContent="I'm listening, no judgment.";$('chat').scrollTop=$('chat').scrollHeight}
+  }finally{busy=false;nour(nourBase);$('coachSend').disabled=false;$('coachState').textContent="I'm listening, no judgment.";$('chat').scrollTop=$('chat').scrollHeight}
 }
 // ---------- appel vocal (ElevenLabs) ----------
 let conv=null,callBusy=false;
@@ -1097,7 +1181,7 @@ $('nameForm').addEventListener('submit',e=>{
   const first=!S.name;S.name=v;save();render();
   if(first)showAff();else{$('splash').hidden=true}
 });
-$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;if(S.sound)chime(false)});
+$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
 $('affListen').addEventListener('click',e=>{e.stopPropagation();speakEn(affLine())});
 $('helloBtn').addEventListener('click',showName);
 if(!S.name)showName();else showAff();
