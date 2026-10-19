@@ -137,7 +137,7 @@ h1,h2,h3,h4{font-family:var(--f-display);margin:0;text-wrap:balance}
 .label{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
 .add{display:flex;gap:8px;flex-wrap:wrap}
 .add input[type=text]{flex:1 1 180px;min-width:0}
-input[type=text],input[type=date],input[type=time]{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 12px;font:inherit;font-weight:600}
+select,input[type=text],input[type=date],input[type=time]{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 12px;font:inherit;font-weight:600}
 input::placeholder{color:var(--muted);font-weight:500}
 .btn{border:0;border-radius:14px;padding:12px 16px;font-weight:800;background:var(--sun);color:var(--sun-ink);box-shadow:var(--glow-pink)}
 .btn.ghost,.btn.small.ghost{box-shadow:none}
@@ -230,6 +230,21 @@ span.check{cursor:default}
 .evform input{width:100%}
 .toggle{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
 .toggle input{width:20px;height:20px;accent-color:var(--coral)}
+.nudges{display:flex;flex-direction:column;gap:8px}
+.nudge{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);padding:10px 12px;display:flex;align-items:center;gap:10px}
+.nudge .ni{font-size:22px;flex:none}
+.nudge .nt{flex:1;min-width:0;font-weight:800;font-size:15px}
+.nudge .nt small{display:block;font-weight:700;font-size:12px;color:var(--muted)}
+.nudge select{flex:none;width:auto;padding:6px 8px;font-size:13px;border-radius:11px}
+select{-webkit-appearance:none;appearance:none}
+.nudge .sw{flex:none;width:46px;height:28px;border-radius:99px;border:0;background:var(--line);position:relative}
+.nudge .sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s}
+.nudge .sw[aria-pressed="true"]{background:var(--sun)}
+.nudge .sw[aria-pressed="true"]::after{left:21px}
+.nudge .nx{flex:none;border:0;background:none;color:var(--muted);font-size:20px;padding:0 4px}
+.pop.nudgepop{background:linear-gradient(135deg,#22E5FF,#7209B7);color:#fff;box-shadow:0 0 60px rgba(34,229,255,.5)}
+.pop.nudgepop h2{font-size:30px}
+.pop .nemo{font-size:52px;line-height:1;margin-bottom:6px}
 /* coach */
 .coach{background:var(--surface);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
 .coachhead{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid var(--line)}
@@ -492,6 +507,16 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
       <label class="toggle"><input id="evAlarm" type="checkbox" checked> Alarm at that time</label>
       <button class="btn" type="submit">Add to calendar</button>
     </form>
+    <div class="sechead"><h3>Gentle reminders</h3><span class="hint">Pop-up + Nour</span></div>
+    <div class="nudges" id="nudges"></div>
+    <form class="evform" id="nForm">
+      <span class="label">New reminder</span>
+      <input id="nText" type="text" placeholder="e.g. Take a break, call mom" maxlength="60" aria-label="Reminder">
+      <select id="nEvery" aria-label="How often"><option value="30">Every 30 min</option><option value="60" selected>Every hour</option><option value="90">Every 1 h 30</option><option value="120">Every 2 hours</option><option value="180">Every 3 hours</option></select>
+      <button class="btn" type="submit">Add reminder</button>
+      <button class="btn ghost" type="button" id="nPerm">Also show on my lock screen</button>
+    </form>
+    <p class="note">Reminders only come between 8 am and 10 pm, so they never wake you up.</p>
     <p class="note">The alarm rings and your coach talks to you when the time comes, as long as ADHD Winner is open. In the phone app version, it will ring even when the app is closed.</p>
   </section>
 
@@ -559,7 +584,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
     <div class="sechead"><h3>My trophies</h3><span class="hint" id="badgeCount"></span></div>
     <div class="badges" id="badges"></div>
     <div class="note" id="totals"></div>
-    <p class="hint" style="text-align:center;margin:0">ADHD Winner · version 20 Oct (new name)</p>
+    <p class="hint" style="text-align:center;margin:0">ADHD Winner · version 20 Oct (reminders)</p>
     <button class="btn ghost" id="resetAll" type="button">Erase everything and start over</button>
     <div id="confirmReset" class="note" hidden>
       Erase your tasks, calendar, XP and trophies?
@@ -627,6 +652,11 @@ const freshChallenges=()=>[
   {id:'air',name:'Get some fresh air',target:1,color:COLORS[0]},
   {id:'dodo',name:'In bed before 11 pm',target:1,color:COLORS[4]}
 ];
+const freshNudges=()=>[
+  {id:'water',emo:'💧',text:'Drink a glass of water',every:60,on:true,next:0},
+  {id:'task',emo:'✅',text:'Look at your next task',every:90,on:true,next:0},
+  {id:'move',emo:'🧘',text:'Stand up and stretch',every:120,on:false,next:0}
+];
 function defaults(){
   const t=new Date(),tm=addDays(t,1),d=ymd(t);
   return{name:'',affIdx:-1,date:d,xp:0,wins:0,winsToday:0,focusTotal:0,streak:0,lastWinDate:null,jokerWeek:null,sound:true,voice:true,
@@ -637,6 +667,7 @@ function defaults(){
     {id:uid(),text:'Pack the gym bag',done:false,ex:true,steps:[],date:d}
   ],
   challenges:freshChallenges(),
+  nudges:freshNudges(),
   events:[
     {id:uid(),title:'Gym',date:ymd(t),time:'18:30',alarm:false,fired:false,ex:true},
     {id:uid(),title:'Call mom',date:ymd(tm),time:'12:00',alarm:false,fired:false,ex:true}
@@ -800,7 +831,7 @@ function showBravo(o){
   confetti(o.lvUp||o.newB.length||o.kind==='week'?160:70);
   clearTimeout(hideT);hideT=setTimeout(hideOverlay,(o.newB.length||o.bonus||o.lvUp)?2800:1600);
 }
-function hideOverlay(){if($('pop').classList.contains('alarm'))return;$('overlay').hidden=true}
+function hideOverlay(){if($('pop').classList.contains('alarm')||$('pop').classList.contains('nudgepop'))return;$('overlay').hidden=true}
 $('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))hideOverlay()});
 
 function confetti(n){
@@ -971,6 +1002,9 @@ document.addEventListener('click',e=>{
   if(act==='evdel'){S.events=S.events.filter(x=>x.id!==id);save();render()}
   if(act==='claim'){S.weekClaimed=weekKey(new Date());save();win(50,'week')}
   if(act==='go'||act==='snooze'){handleAlarm(id,act)}
+  if(act==='ndone'||act==='nlater'){handleNudge(id,act);return}
+  if(act==='ntoggle'){const n=S.nudges.find(x=>x.id===id);if(!n)return;n.on=!n.on;if(n.on)schedule(n);save();renderNudges();return}
+  if(act==='ndel'){S.nudges=S.nudges.filter(x=>x.id!==id);save();renderNudges();return}
   if(act==='say'){const m=b.closest('.msg');speakForce(m.querySelector('.txt').textContent)}
 });
 function speakForce(t){const v=S.voice;S.voice=true;speak(t);S.voice=v}
@@ -1097,6 +1131,56 @@ function handleAlarm(id,act){
   if(act==='snooze'){const d=new Date(Date.now()+5*60e3);ev.date=ymd(d);ev.time=pad(d.getHours())+':'+pad(d.getMinutes());save();renderAgenda();return}
   ev.fired=true;S.ontime=(S.ontime||0)+1;win(10,'ontime');
 }
+// ---------- gentle reminders (water, next task...) ----------
+const N_FROM=8,N_TO=22;
+const EVERY_TXT={30:'every 30 min',60:'every hour',90:'every 1 h 30',120:'every 2 hours',180:'every 3 hours'};
+let nudging=null;
+function awake(d){const h=d.getHours();return h>=N_FROM&&h<N_TO}
+function nextOpenTask(){return dayTasks(todayStr()).find(t=>!t.done)}
+function nudgeText(n){
+  if(n.id==='task'){const t=nextOpenTask();return t?'Your next task: '+t.text:null}
+  return n.text}
+function renderNudges(){
+  $('nudges').innerHTML=S.nudges.map(n=>{
+    const sel='<select data-nact="every" data-id="'+n.id+'" aria-label="How often">'+[30,60,90,120,180].map(v=>'<option value="'+v+'"'+(v===n.every?' selected':'')+'>'+EVERY_TXT[v]+'</option>').join('')+'</select>';
+    return '<div class="nudge"><span class="ni" aria-hidden="true">'+n.emo+'</span><span class="nt">'+esc(n.text)+'<small>'+(n.on?'On':'Off')+'</small></span>'+sel+
+      '<button class="sw" data-act="ntoggle" data-id="'+n.id+'" aria-pressed="'+n.on+'" aria-label="Turn on or off"></button>'+
+      (n.id.startsWith('c')?'<button class="nx" data-act="ndel" data-id="'+n.id+'" aria-label="Delete">×</button>':'')+'</div>'}).join('');
+}
+function schedule(n,mins){n.next=Date.now()+(mins||n.every)*60e3}
+function checkNudges(){
+  if(nudging||ringing||!$('overlay').hidden)return;const now=new Date();if(!awake(now))return;
+  let changed=false;
+  S.nudges.forEach(n=>{if(n.on&&!n.next){schedule(n);changed=true}});
+  const n=S.nudges.find(x=>x.on&&x.next&&x.next<=now.getTime());
+  if(changed)save();if(!n)return;
+  const txt=nudgeText(n);if(!txt){schedule(n);save();return}
+  nudging=n.id;const pop=$('pop');pop.className='pop nudgepop';
+  pop.innerHTML='<div class="nemo" aria-hidden="true">'+n.emo+'</div><h2>Little reminder</h2><p>'+esc(txt)+'</p><div class="abtns"><button class="btn" data-act="ndone" data-id="'+n.id+'">Done (+5 XP)</button><button class="btn ghost" data-act="nlater" data-id="'+n.id+'">In 15 min</button></div>';
+  $('overlay').hidden=false;tone([784,988,1175],.12,.25);nour('pointme',2000);
+  speak((S.name?S.name+', ':'')+'little reminder: '+txt+'. You can do it!');
+  if(document.hidden&&'Notification' in window&&Notification.permission==='granted'){
+    try{navigator.serviceWorker.ready.then(r=>r.showNotification('ADHD Winner',{body:n.emo+' '+txt,icon:'icon-192.png',tag:'nudge'})).catch(()=>{new Notification('ADHD Winner',{body:n.emo+' '+txt,icon:'icon-192.png'})})}catch(e){}}
+}
+function handleNudge(id,act){
+  nudging=null;$('pop').className='pop';$('overlay').hidden=true;try{speechSynthesis.cancel()}catch(e){}
+  const n=S.nudges.find(x=>x.id===id);if(!n)return;
+  if(act==='nlater'){schedule(n,15);save();return}
+  schedule(n);
+  if(n.id==='water'){const c=S.challenges.find(x=>x.id==='eau');if(c){const k=todayStr(),v=ccount(c,k)+1;setCount(c,k,v);if(v===c.target){win(15);return}}}
+  win(5);
+}
+document.addEventListener('change',e=>{const el=e.target.closest('[data-nact="every"]');if(!el)return;
+  const n=S.nudges.find(x=>x.id===el.dataset.id);if(!n)return;n.every=+el.value;schedule(n);save();renderNudges()});
+$('nForm').addEventListener('submit',e=>{e.preventDefault();const t=$('nText').value.trim();if(!t)return;
+  const n={id:'c'+uid(),emo:'🔔',text:t,every:+$('nEvery').value,on:true,next:0};schedule(n);S.nudges.push(n);
+  $('nText').value='';save();renderNudges();tone([659,880],.09,.25)});
+function permLabel(){const b=$('nPerm');if(!('Notification' in window)){b.hidden=true;return}
+  if(Notification.permission==='granted'){b.textContent='Lock screen notifications: on';b.disabled=true}}
+$('nPerm').addEventListener('click',()=>{try{Notification.requestPermission().then(permLabel)}catch(e){}});
+permLabel();renderNudges();
+setInterval(checkNudges,20000);setTimeout(checkNudges,4000);
+
 setInterval(()=>{const was=viewDay===S.date;if(rollDay()){if(was)viewDay=todayStr();render()}checkAlarms()},10000);setTimeout(checkAlarms,1500);
 
 // ---------- coach ----------
