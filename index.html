@@ -169,6 +169,16 @@ span.check{cursor:default}
 .chip{border:2px solid var(--line);background:transparent;border-radius:99px;padding:6px 11px;font-size:13px;font-weight:700}
 .coachin{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
 .coachin input{flex:1;min-width:0}
+/* appel vocal */
+.call{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:2px solid var(--cyan);background:linear-gradient(135deg,#3A0CA3,#7209B7 60%,#F72585);color:#fff;border-radius:22px;padding:14px 16px;box-shadow:var(--glow-cyan)}
+.callorb{flex:none;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.callorb svg{width:28px;height:28px}
+.calltxt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.calltxt b{font-family:var(--f-display);font-size:20px}
+.calltxt small{font-size:13px;font-weight:600;opacity:.9}
+.call.live{border-color:var(--mint);box-shadow:0 0 22px rgba(124,255,79,.5)}
+.call.live .callorb{background:var(--mint);color:#12082B;animation:breathe 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.call.live .callorb{animation:none}}
 /* focus */
 .focus{background:var(--surface);border-radius:24px;box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;align-items:center;gap:16px}
 .timer{position:relative;width:min(240px,70vw);aspect-ratio:1;max-width:100%}
@@ -312,6 +322,10 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 
   <!-- VIEW: coach -->
   <section id="v-coach" class="sec" hidden>
+    <button class="call" id="callBtn" type="button">
+      <span class="callorb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+      <span class="calltxt"><b id="callTitle">Parler à Nour</b><small id="callSt">Appuie et parle : elle te répond à voix haute</small></span>
+    </button>
     <div class="coach">
       <div class="coachhead">
         <div class="avatar" id="avatar"><svg width="34" height="30" aria-hidden="true"><use href="#brainSym"/></svg></div>
@@ -332,7 +346,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
         <button class="btn" type="submit" id="coachSend">Envoyer</button>
       </form>
     </div>
-    <p class="note" id="coachNote">Le coach voit ta liste, tes défis et ton agenda. Il peut ajouter une tâche ou un rendez-vous si tu lui demandes.</p>
+    <p class="note" id="coachNote">Nour voit ta liste, tes défis et ton agenda. À l'oral ou par écrit, elle peut ajouter une tâche (même pour demain), un rendez-vous avec alarme, ou cocher ce que tu as fini.</p>
   </section>
 
   <!-- VIEW: focus -->
@@ -665,7 +679,14 @@ function renderWeek(){
 }
 
 // ---------- actions ----------
-let sample=null,canTools=false;
+const AI_URL='https://mon-style.imendriss271982.workers.dev';
+const AGENT_ID='agent_0001m5apq852esmar2hh3wnrx96r';
+async function askAI(prompt){
+  const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+  let d={};try{d=await r.json()}catch(e){}
+  if(!r.ok||d.erreur){const e=new Error(d.erreur||('Erreur '+r.status));e.code=d.code||(r.status===429?'rate_limited':'ai_error');throw e}
+  return d;
+}
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b)return;
   const id=b.dataset.id,act=b.dataset.act;
@@ -696,10 +717,10 @@ function speakForce(t){const v=S.voice;S.voice=true;speak(t);S.voice=v}
 async function splitTask(id){
   const t=S.tasks.find(x=>x.id===id);if(!t||t.splitting)return;
   let steps=null;
-  if(sample){t.splitting=true;render();
-    try{const r=await sample.json('Tu aides une personne avec un TDAH. Découpe cette tâche en 3 à 5 micro-étapes très concrètes, chacune faisable en moins de 10 minutes, la première doit prendre moins de 2 minutes pour démarrer facilement. Réponds uniquement avec un tableau JSON de chaînes courtes en français (max 8 mots chacune). Exemple : ["Ouvrir la boîte mail","Répondre au premier email"]\n\nTâche : '+t.text,{modelTier:'quick'});
-      if(Array.isArray(r)&&r.length)steps=r.slice(0,6).map(s=>String(s).slice(0,80))}catch(e){}
-    t.splitting=false}
+  t.splitting=true;render();
+  try{const r=await askAI('Tu aides une personne avec un TDAH. Découpe cette tâche en 3 à 5 micro-étapes très concrètes, chacune faisable en moins de 10 minutes ; la première doit prendre moins de 2 minutes pour démarrer facilement. Réponds uniquement en JSON : {"etapes":["...","..."]}, étapes courtes en français (8 mots max chacune).\n\nTâche : '+t.text);
+    const arr=Array.isArray(r)?r:r.etapes;if(Array.isArray(arr)&&arr.length)steps=arr.slice(0,6).map(x=>String(x).slice(0,80))}catch(e){}
+  t.splitting=false;
   if(!steps)steps=["Préparer ce qu'il faut (2 min)",'Faire juste 5 minutes','Terminer et ranger'];
   t.steps=steps.map(s=>({t:s,done:false}));S.splits++;checkBadges();save();render();
 }
@@ -771,7 +792,7 @@ function ctx(){
   const t=todayStr();const evs=S.events.filter(e=>e.date>=t).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+e.time+' '+e.title).join('\n')||'(rien)';
   return 'Date et heure : '+new Date().toLocaleString('fr-FR')+'\nNiveau '+level().lv+', '+S.xp+' XP, série '+S.streak+' jours, '+S.winsToday+" victoires aujourd'hui.\nTâches à faire :\n"+open+'\nTâches faites :\n'+done+'\nPrévu pour demain :\n'+tmr+'\nHier : '+yd.filter(t=>t.done).length+' tâches faites sur '+yd.length+', '+(S.hist[y]||0)+' victoires.\nDéfis :\n'+ch+'\nAgenda à venir :\n'+evs;
 }
-const RULES="Tu es Nour, le coach vocal de l'application Bravo, pour des personnes qui ont un TDAH. Tes réponses sont LUES À VOIX HAUTE : écris comme on parle, en français, 2 à 4 phrases courtes maximum, pas de listes, pas de markdown, pas d'emoji. Sois chaleureux, énergique, jamais culpabilisant. Base-toi sur le fonctionnement du TDAH : récompense immédiate, micro-étapes, démarrer par une action de moins de 2 minutes, minuteur de 5 ou 15 minutes. Termine souvent par UNE seule action concrète à faire maintenant. Tu n'es pas médecin : pas de diagnostic ni de conseil sur les médicaments ; si la personne parle de détresse grave, encourage-la avec douceur à contacter un proche ou un professionnel. Si la personne te demande d'ajouter une tâche ou un rendez-vous, utilise les outils.";
+const RULES="Tu es Nour, le coach vocal de l'application Bravo, pour des personnes qui ont un TDAH. Tes réponses sont LUES À VOIX HAUTE : écris comme on parle, en français, 2 à 4 phrases courtes maximum, pas de listes, pas de markdown, pas d'emoji. Sois chaleureux, énergique, jamais culpabilisant. Base-toi sur le fonctionnement du TDAH : récompense immédiate, micro-étapes, démarrer par une action de moins de 2 minutes, minuteur de 5 ou 15 minutes. Termine souvent par UNE seule action concrète à faire maintenant. Tu n'es pas médecin : pas de diagnostic ni de conseil sur les médicaments ; si la personne parle de détresse grave, encourage-la avec douceur à contacter un proche ou un professionnel. ";
 function bubble(role,text){
   const d=document.createElement('div');d.className='msg '+(role==='user'?'me':'ai');
   const s=document.createElement('span');s.className='txt';s.textContent=text;d.appendChild(s);
@@ -786,43 +807,66 @@ function greet(){
   const d=bubble('assistant',txt);d.querySelector('.say').hidden=false;
   turns.push({role:'assistant',content:txt});
 }
+function doAction(a){
+  if(!a||!a.type)return '';
+  if(a.type==='ajouter_tache'){const v=String(a.texte||'').trim().slice(0,120);if(!v)return 'texte vide';
+    let da=String(a.date||'');if(!/^\d{4}-\d{2}-\d{2}$/.test(da)||da<todayStr())da=todayStr();
+    S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:da});save();render();return 'ok, tâche ajoutée pour le '+da}
+  if(a.type==='ajouter_rendez_vous'){const ti=String(a.titre||'').trim().slice(0,80),da=String(a.date||''),he=String(a.heure||'');
+    if(!ti||!/^\d{4}-\d{2}-\d{2}$/.test(da)||!/^\d{1,2}:\d{2}$/.test(he))return 'format invalide';
+    addEvent(ti,da,he.padStart(5,'0'),true);render();return 'ok, rendez-vous ajouté avec alarme'}
+  if(a.type==='cocher_tache'){const q=String(a.texte||'').toLowerCase().trim();
+    const t=dayTasks(todayStr()).find(x=>!x.done&&(x.text.toLowerCase().includes(q)||q.includes(x.text.toLowerCase())));
+    if(!t)return "tâche introuvable dans la liste d'aujourd'hui";
+    t.done=true;t.steps.forEach(z=>z.done=true);win(10);return 'ok, cochée : '+t.text}
+  return 'action inconnue';
+}
 async function ask(q){
   if(busy||!q)return;
-  if(!sample){bubble('assistant',"Le coach n'est pas disponible ici. Ouvre Bravo depuis ton compte Claude pour lui parler.");return}
   busy=true;$('coachSend').disabled=true;S.talked=(S.talked||0)+1;checkBadges();save();
   bubble('user',q);turns.push({role:'user',content:q});
   const d=bubble('assistant','…');const txt=d.querySelector('.txt');$('coachState').textContent='Nour réfléchit…';
-  const input=[{role:'user',content:RULES+'\n\nÉtat actuel de la personne :\n'+ctx()},...turns.slice(-12)];
-  if(input[1]&&input[1].role==='assistant')input.splice(1,0,{role:'user',content:'Bonjour'});
-  const opts={modelTier:'quick',onText:({text})=>{txt.textContent=text;$('chat').scrollTop=$('chat').scrollHeight}};
-  ctl=new AbortController();opts.signal=ctl.signal;
-  if(canTools)opts.tools=[
-    {name:'ajouter_tache',description:"Ajoute une tâche à la liste de la personne, pour aujourd'hui par défaut ou pour un autre jour (date AAAA-MM-JJ, ex. demain). Renvoie 'ok'.",inputSchema:{type:'object',properties:{texte:{type:'string',description:'La tâche, courte'},date:{type:'string',description:"Jour AAAA-MM-JJ, facultatif (aujourd'hui par défaut)"}},required:['texte']},
-      execute:i=>{const v=String(i.texte||'').trim().slice(0,120);if(!v)throw new Error('texte vide');let da=String(i.date||'');if(!/^\d{4}-\d{2}-\d{2}$/.test(da)||da<todayStr())da=todayStr();S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:da});save();render();return 'ok'}},
-    {name:'ajouter_rendez_vous',description:"Ajoute un rendez-vous à l'agenda avec une alarme. date au format AAAA-MM-JJ, heure au format HH:MM. Renvoie 'ok'.",inputSchema:{type:'object',properties:{titre:{type:'string'},date:{type:'string'},heure:{type:'string'},alarme:{type:'boolean'}},required:['titre','date','heure']},
-      execute:i=>{const ti=String(i.titre||'').trim().slice(0,80),da=String(i.date||''),he=String(i.heure||'');
-        if(!ti||!/^\d{4}-\d{2}-\d{2}$/.test(da)||!/^\d{2}:\d{2}$/.test(he))throw new Error('format invalide');
-        addEvent(ti,da,he,i.alarme!==false);render();return 'ok'}}
-  ];
-  else opts.cache=false;
-  try{const r=await sample(input,opts);txt.textContent=r.text;turns.push({role:'assistant',content:r.text});
-    d.querySelector('.say').hidden=false;speak(r.text)}
+  const hist=turns.slice(-12).map(m=>(m.role==='user'?'Personne : ':'Nour : ')+m.content).join('\n');
+  const prompt=RULES+"\n\nTu peux aussi agir dans l'application. Actions possibles : ajouter_tache {texte, date AAAA-MM-JJ facultative}, ajouter_rendez_vous {titre, date AAAA-MM-JJ, heure HH:MM}, cocher_tache {texte}. N'ajoute une action que si la personne le demande clairement. Demain = "+ymd(addDays(new Date(),1))+".\n\nRéponds UNIQUEMENT en JSON : {\"reponse\":\"ce que tu dis\",\"actions\":[{\"type\":\"ajouter_tache\",\"texte\":\"...\"}]} (actions vide si rien à faire).\n\nÉtat actuel de la personne :\n"+ctx()+"\n\nConversation :\n"+hist+"\nNour :";
+  try{const r=await askAI(prompt);
+    const acts=Array.isArray(r.actions)?r.actions.slice(0,5):[];acts.forEach(doAction);
+    const rep=String(r.reponse||r.text||'').trim()||"C'est noté !";
+    txt.textContent=rep;turns.push({role:'assistant',content:rep});
+    d.querySelector('.say').hidden=false;speak(rep)}
   catch(e){
-    if(e&&e.text)txt.textContent=e.text;
-    else if(e&&(e.code==='not_granted'||e.code==='sampling_disabled')){txt.textContent="Je ne peux pas te répondre sans ton autorisation. Tu pourras l'accorder la prochaine fois que tu ouvres Bravo.";sample=null}
-    else if(e&&e.code==='rate_limited')txt.textContent="J'ai besoin d'une petite pause. Réessaie dans quelques minutes.";
-    else txt.textContent="Oups, je n'ai pas pu répondre. Réessaie.";
+    txt.textContent=e&&e.code==='rate_limited'?"J'ai besoin d'une petite pause. Réessaie dans un instant.":"Oups, je n'ai pas pu répondre. Vérifie ta connexion et réessaie.";
     turns.pop();
   }finally{busy=false;$('coachSend').disabled=false;$('coachState').textContent="Je t'écoute, sans jugement.";$('chat').scrollTop=$('chat').scrollHeight}
 }
+// ---------- appel vocal (ElevenLabs) ----------
+let conv=null,callBusy=false;
+const callSt=t=>{$('callSt').textContent=t};
+function callLive(on){$('callBtn').classList.toggle('live',on);$('callTitle').textContent=on?'Raccrocher':'Parler à Nour';$('avatar').classList.toggle('talking',false)}
+$('callBtn').addEventListener('click',async()=>{
+  if(callBusy)return;callBusy=true;
+  if(conv){try{await conv.endSession()}catch(_){}conv=null;callLive(false);callSt('Appuie et parle : elle te répond à voix haute');callBusy=false;return}
+  callSt('Connexion…');
+  try{
+    try{speechSynthesis.cancel()}catch(_){}
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("cette fenêtre bloque le micro. Ouvre Bravo dans Safari ou Chrome.");
+    await navigator.mediaDevices.getUserMedia({audio:true});
+    const {Conversation}=await import('https://esm.sh/@elevenlabs/client');
+    const tool=type=>p=>doAction(Object.assign({type},p||{}));
+    conv=await Conversation.startSession({agentId:AGENT_ID,connectionType:'websocket',
+      dynamicVariables:{prenom:'',maintenant:new Date().toLocaleString('fr-FR',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}),demain:ymd(addDays(new Date(),1)),etat:ctx()},
+      clientTools:{ajouter_tache:tool('ajouter_tache'),ajouter_rendez_vous:tool('ajouter_rendez_vous'),cocher_tache:tool('cocher_tache')},
+      onModeChange:({mode})=>{callSt(mode==='speaking'?'Nour te parle…':'Je t\'écoute, parle-moi');$('avatar').classList.toggle('talking',mode==='speaking')},
+      onDisconnect:()=>{conv=null;callLive(false);callSt('Appel terminé. Appuie pour reparler.')},
+      onError:m=>callSt('Petit souci : '+m)});
+    S.talked=(S.talked||0)+1;checkBadges();save();
+    callLive(true);callSt("Je t'écoute, parle-moi");
+  }catch(err){conv=null;callLive(false);callSt(err&&err.name==='NotAllowedError'?'Autorise le micro dans les réglages du navigateur.':"Impossible de lancer l'appel : "+(err&&err.message||err))}
+  callBusy=false;
+});
 $('coachForm').addEventListener('submit',e=>{e.preventDefault();const v=$('coachInput').value.trim();$('coachInput').value='';ask(v)});
 $('chips').addEventListener('click',e=>{const c=e.target.closest('[data-q]');if(c)ask(c.dataset.q)});
 
-(async()=>{
-  try{if(window.claude&&claude.use){sample=await claude.use('sample');
-    if(sample){const lim=await sample.limits().catch(()=>null);canTools=!!(lim&&lim.tools)}}}catch(e){sample=null}
-  if(!sample)$('coachNote').textContent="Le coach a besoin de ton compte Claude pour parler. Ouvre Bravo depuis Claude pour l'activer.";
-})();
+
 
 // ---------- focus timer ----------
 let dur=15*60,left=dur,end=null,tick=null;
