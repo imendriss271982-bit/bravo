@@ -98,6 +98,31 @@ input::placeholder{color:var(--muted);font-weight:500}
 .pips i{flex:1;height:6px;border-radius:9px;background:var(--surface-2)}
 .pips i.on{background:var(--cyan);box-shadow:0 0 6px rgba(34,229,255,.7)}
 .chbtns{display:flex;gap:6px}.chbtns button{flex:1}
+/* jours : hier / aujourd'hui / demain */
+.daynav{display:flex;align-items:center;gap:8px}
+.dnarrow{flex:none;width:34px;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:24px;font-weight:800;line-height:1;padding:0}
+.dtabs{flex:1;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px}
+.dtabs button{border:0;background:transparent;border-radius:10px;padding:9px 0;font-weight:800;font-size:13px;letter-spacing:-.2px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dtabs button[data-rel="0"]{color:var(--cyan)}
+.dtabs button[aria-pressed="true"]{background:var(--sun);color:#fff;box-shadow:var(--glow-pink)}
+.dlabel{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dlabel b{font-family:var(--f-display);font-size:18px;font-weight:600}
+.dlabel b::first-letter{text-transform:uppercase}
+.dpick{position:relative;overflow:hidden}
+.dpick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;padding:0;border:0;cursor:pointer}
+.recapday{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:12px}
+.recapday p{margin:0;font-weight:700}
+.rstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.rstats div{background:var(--surface-2);border-radius:12px;padding:10px 4px;text-align:center}
+.rstats b{display:block;font-family:var(--f-display);font-size:24px;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1.1}
+.rstats small{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.carry{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--surface);border:2px solid var(--cyan);box-shadow:var(--glow-cyan);border-radius:16px;padding:12px}
+.carry p{margin:0;flex:1 1 180px;font-weight:700;font-size:14px}
+span.check{cursor:default}
+.task.plan .check{border-style:dashed}
+.task.miss .ttext{color:var(--muted)}
+.tag{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:6px;background:var(--surface-2);color:var(--cyan);white-space:nowrap}
+.bars div[data-act]{cursor:pointer}
 /* agenda */
 .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
 .day{border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:8px 2px;display:flex;flex-direction:column;align-items:center;gap:2px}
@@ -226,21 +251,39 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 
   <!-- VIEW: today -->
   <main id="v-today" class="sec">
+    <div class="daynav">
+      <button class="dnarrow" id="dPrev" type="button" aria-label="Jour précédent">‹</button>
+      <div class="dtabs" role="group" aria-label="Choisir le jour">
+        <button type="button" data-rel="-1" aria-pressed="false">Hier</button>
+        <button type="button" data-rel="0" aria-pressed="true">Aujourd'hui</button>
+        <button type="button" data-rel="1" aria-pressed="false">Demain</button>
+      </div>
+      <button class="dnarrow" id="dNext" type="button" aria-label="Jour suivant">›</button>
+    </div>
+    <div class="dlabel">
+      <b id="dLabel"></b>
+      <label class="iconbtn dpick" title="Choisir une date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><input id="dPick" type="date" aria-label="Aller à une date"></label>
+    </div>
+    <div id="dSummary"></div>
     <div class="sec">
-      <div class="sechead"><h3>Ma liste du jour</h3><span class="hint">+10 XP par tâche</span></div>
+      <div class="sechead"><h3 id="listTitle">Ma liste du jour</h3><span class="hint" id="listHint">+10 XP par tâche</span></div>
       <form class="add" id="addForm">
         <input id="newTask" type="text" placeholder="Ajouter une tâche…" autocomplete="off" maxlength="120" aria-label="Nouvelle tâche">
         <button class="btn" type="submit">Ajouter</button>
       </form>
       <ul class="list" id="tasks"></ul>
     </div>
-    <div class="sec">
-      <div class="sechead"><h3>Défis du jour</h3><span class="hint">+15 XP par défi</span></div>
+    <div class="sec" id="chalSec">
+      <div class="sechead"><h3 id="chalTitle">Défis du jour</h3><span class="hint" id="chalHint">+15 XP par défi</span></div>
       <div class="chal" id="chal"></div>
       <form class="add" id="addChal">
         <input id="newChal" type="text" placeholder="Nouveau défi (ex. lire 10 pages)" maxlength="40" aria-label="Nouveau défi">
         <button class="btn ghost" type="submit">Créer</button>
       </form>
+    </div>
+    <div class="sec" id="dayEvSec" hidden>
+      <div class="sechead"><h3>Rendez-vous</h3></div>
+      <ul class="list" id="dayEvents"></ul>
     </div>
   </main>
 
@@ -362,19 +405,19 @@ const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 
 const COLORS=['#2BC94A','#FF2E93','#00B8D9','#E0A800','#9B3DFF','#FF5A36'];
 const freshChallenges=()=>[
-  {id:'sport',name:'Sport 20 min',target:1,count:0,color:COLORS[1]},
-  {id:'eau',name:"Verres d'eau",target:8,count:0,color:COLORS[2]},
-  {id:'air',name:"Sortir prendre l'air",target:1,count:0,color:COLORS[0]},
-  {id:'dodo',name:'Au lit avant 23 h',target:1,count:0,color:COLORS[4]}
+  {id:'sport',name:'Sport 20 min',target:1,color:COLORS[1]},
+  {id:'eau',name:"Verres d'eau",target:8,color:COLORS[2]},
+  {id:'air',name:"Sortir prendre l'air",target:1,color:COLORS[0]},
+  {id:'dodo',name:'Au lit avant 23 h',target:1,color:COLORS[4]}
 ];
 function defaults(){
-  const t=new Date(),tm=addDays(t,1);
-  return{date:todayStr(),xp:0,wins:0,winsToday:0,focusTotal:0,streak:0,lastWinDate:null,jokerWeek:null,sound:true,voice:true,
-  badges:[],splits:0,hist:{},weekClaimed:null,
+  const t=new Date(),tm=addDays(t,1),d=ymd(t);
+  return{date:d,xp:0,wins:0,winsToday:0,focusTotal:0,streak:0,lastWinDate:null,jokerWeek:null,sound:true,voice:true,
+  badges:[],splits:0,hist:{},cc:{},weekClaimed:null,
   tasks:[
-    {id:uid(),text:'Répondre à 3 emails',done:false,ex:true,steps:[]},
-    {id:uid(),text:'Ranger le salon',done:false,ex:true,steps:[]},
-    {id:uid(),text:'Préparer le sac de sport',done:false,ex:true,steps:[]}
+    {id:uid(),text:'Répondre à 3 emails',done:false,ex:true,steps:[],date:d},
+    {id:uid(),text:'Ranger le salon',done:false,ex:true,steps:[],date:d},
+    {id:uid(),text:'Préparer le sac de sport',done:false,ex:true,steps:[],date:d}
   ],
   challenges:freshChallenges(),
   events:[
@@ -388,16 +431,27 @@ if(!S||!S.tasks)S=defaults();
 const D=defaults();
 for(const k in D)if(S[k]===undefined)S[k]=D[k];
 S.challenges.forEach((c,i)=>{const f=D.challenges.find(x=>x.id===c.id);c.color=f?f.color:COLORS[i%COLORS.length]});
+// migration : anciennes tâches sans date → jour enregistré ; compteurs de défis → historique par jour
+(function(){const base=S.date||todayStr();
+  S.tasks.forEach(t=>{if(!t.date)t.date=base});
+  S.challenges.forEach(c=>{if(c.count!==undefined){if(c.count)(S.cc[base]=S.cc[base]||{})[c.id]=c.count;delete c.count}});
+})();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const ccount=(c,k)=>(S.cc[k]||{})[c.id]||0;
+const setCount=(c,k,n)=>{(S.cc[k]=S.cc[k]||{})[c.id]=Math.max(0,n)};
+const dayTasks=k=>S.tasks.filter(t=>t.date===k);
+const pendingBefore=k=>S.tasks.filter(t=>!t.done&&t.date<k);
 
 function rollDay(){
-  const t=todayStr();if(S.date===t)return;
-  S.tasks=S.tasks.filter(x=>!x.done);
-  S.challenges.forEach(c=>c.count=0);
+  const t=todayStr();if(S.date===t)return false;
   S.winsToday=0;S.date=t;
   if(S.lastWinDate){const gap=dayDiff(S.lastWinDate,t),wk=weekKey(new Date());
     if(gap===2&&S.jokerWeek!==wk){S.jokerWeek=wk}else if(gap>1){S.streak=0}}
-  save();
+  // garder 120 jours d'historique
+  const lim=ymd(addDays(new Date(),-120));
+  S.tasks=S.tasks.filter(x=>x.date>=lim);
+  for(const k in S.cc)if(k<lim)delete S.cc[k];
+  save();return true;
 }
 rollDay();
 
@@ -411,8 +465,8 @@ const BADGES=[
   {id:'five',l:'5',n:'En feu',d:'5 victoires en un jour',test:()=>S.winsToday>=5},
   {id:'split',l:'÷',n:'Découpeuse',d:'Découper une tâche',test:()=>S.splits>=1},
   {id:'focus',l:'F',n:'Concentrée',d:'Finir une session focus',test:()=>S.focusTotal>=1},
-  {id:'eau',l:'8',n:'Hydratée',d:"8 verres d'eau",test:()=>S.challenges.some(c=>c.id==='eau'&&c.count>=8)},
-  {id:'chal',l:'4',n:'Journée parfaite',d:'4 défis réussis',test:()=>S.challenges.filter(c=>c.count>=c.target).length>=4},
+  {id:'eau',l:'8',n:'Hydratée',d:"8 verres d'eau",test:()=>S.challenges.some(c=>c.id==='eau'&&ccount(c,todayStr())>=8)},
+  {id:'chal',l:'4',n:'Journée parfaite',d:'4 défis réussis',test:()=>S.challenges.filter(c=>ccount(c,todayStr())>=c.target).length>=4},
   {id:'ontime',l:'⏰',n:"À l'heure",d:'Répondre à une alarme',test:()=>S.ontime>=1},
   {id:'str3',l:'3j',n:'Régulière',d:'Série de 3 jours',test:()=>S.streak>=3},
   {id:'week',l:'S',n:'Semaine gagnée',d:'5 jours actifs dans la semaine',test:()=>weekStats().days>=5},
@@ -496,28 +550,86 @@ const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 const BELL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>';
 const DOW=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 let selDay=todayStr(),wkStart=monday(new Date());
-function dayProgress(){let tot=0,done=0;S.tasks.forEach(t=>{tot++;if(t.done)done++});S.challenges.forEach(c=>{tot++;if(c.count>=c.target)done++});return tot?Math.round(done/tot*100):0}
+let viewDay=todayStr();
+function dayProgress(k){k=k||todayStr();let tot=0,done=0;dayTasks(k).forEach(t=>{tot++;if(t.done)done++});S.challenges.forEach(c=>{tot++;if(ccount(c,k)>=c.target)done++});return tot?Math.round(done/tot*100):0}
+const dayMode=k=>{const t=todayStr();return k===t?'today':k<t?'past':'future'};
+function relName(k){const r=dayDiff(todayStr(),k);
+  return r===0?"Aujourd'hui":r===-1?'Hier':r===1?'Demain':r===-2?'Avant-hier':r===2?'Après-demain':null}
+const longDate=k=>new Date(k+'T12:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+function goDay(k){viewDay=k;
+  const nb=document.querySelector('nav button[data-view="v-today"]');
+  if(nb.getAttribute('aria-current')!=='page'){keepDay=true;nb.click();keepDay=false}
+  render();scrollTo(0,0)}
+let keepDay=false;
+function renderDay(){
+  const k=viewDay,mode=dayMode(k),t=todayStr(),rel=dayDiff(t,k);
+  document.querySelectorAll('.dtabs button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.rel===rel)));
+  const rn=relName(k);
+  $('dLabel').textContent=rn&&Math.abs(rel)<=1?longDate(k):(rn?rn+' · ':'')+longDate(k);
+  $('dPick').value=k;
+  // en-tête de section
+  $('listTitle').textContent=mode==='today'?'Ma liste du jour':mode==='past'?"Ce que j'avais prévu":'Je prépare ma liste';
+  $('listHint').textContent=mode==='today'?'+10 XP par tâche':mode==='past'?'':'Elle sera prête le matin';
+  $('addForm').hidden=mode==='past';
+  $('newTask').placeholder=mode==='future'?'Prévoir une tâche pour '+(rel===1?'demain':'ce jour')+'…':'Ajouter une tâche…';
+
+  // résumé / récap / report
+  const list=dayTasks(k),done=list.filter(x=>x.done).length,miss=list.length-done;
+  const chDone=S.challenges.filter(c=>ccount(c,k)>=c.target).length;
+  let sum='';
+  if(mode==='past'){
+    const w=S.hist[k]||0;
+    const msg=w>=5?'Grosse journée ! Tu peux être fière de toi.':w>0?'Tu as avancé ce jour-là. Chaque victoire compte.':"Journée calme. Pas grave : aujourd'hui est un nouveau départ.";
+    sum='<div class="recapday"><span class="label">Récap de la journée</span><div class="rstats"><div><b>'+done+'</b><small>tâches faites</small></div><div><b>'+chDone+'</b><small>défis réussis</small></div><div><b>'+w+'</b><small>Bravo gagnés</small></div></div><p>'+msg+'</p>'+
+      (miss?'<button class="btn small ghost" data-act="moveday" data-k="'+k+'">'+(miss>1?'Ramener les '+miss+' tâches pas finies':'Ramener la tâche pas finie')+" à aujourd'hui</button>":'')+'</div>';
+  }else if(mode==='today'){
+    const pend=pendingBefore(t).length;
+    if(pend)sum='<div class="carry"><p>Tu as '+pend+' tâche'+(pend>1?'s':'')+" pas finie"+(pend>1?'s':'')+" des jours d'avant. Pas de stress, on "+(pend>1?'les':'la')+" reprend ?</p><button class=\"btn small\" data-act=\"moveall\">"+(pend>1?'Les':'La')+" ramener ici</button></div>";
+  }else{
+    sum='<div class="carry"><p>'+(rel===1?'Prépare demain ce soir : ':'Tu planifies à l\'avance : ')+'ton cerveau aura moins à décider le matin. Tu pourras cocher le jour venu.</p></div>';
+  }
+  $('dSummary').innerHTML=sum;
+
+  // tâches
+  const ul=$('tasks');
+  if(!list.length)ul.innerHTML='<li class="empty">'+(mode==='today'?'Ta liste est vide. Ajoute une seule petite chose pour commencer.':mode==='past'?'Aucune tâche ce jour-là.':'Rien de prévu pour l\'instant. Ajoute 1 à 3 tâches, pas plus.')+'</li>';
+  else ul.innerHTML=[...list].sort((a,b)=>a.done-b.done).map(t=>{
+    const live=mode==='today';
+    const chk=live?'<button class="check" data-act="task" data-id="'+t.id+'" aria-label="Tâche faite">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>';
+    const steps=t.steps.length?'<ul class="steps">'+t.steps.map((s,i)=>'<li class="step'+(s.done?' done':'')+'">'+(live?'<button class="check" data-act="step" data-id="'+t.id+'" data-i="'+i+'" aria-label="Étape faite">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>')+'<span>'+esc(s.t)+'</span></li>').join('')+'</ul>':'';
+    let tools='';
+    if(mode==='today'&&!t.done&&!t.steps.length)tools='<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Je découpe…':'Découper')+'</button>';
+    if(mode==='future'){tools=(!t.steps.length?'<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Je découpe…':'Découper')+'</button>':'')+'<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Faire aujourd\'hui</button>'}
+    if(mode==='past'&&!t.done)tools='<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Reporter à aujourd\'hui</button>';
+    const right=mode==='today'?'<span class="xp">+10</span>':mode==='future'?'<span class="tag">prévu</span>':t.done?'<span class="tag" style="color:var(--mint)">fait</span>':'<span class="tag" style="color:var(--muted)">pas fait</span>';
+    const cls='task'+(t.done?' done':'')+(mode==='future'?' plan':'')+(mode==='past'&&!t.done?' miss':'');
+    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext">'+esc(t.text)+'</span>'+(t.ex?'<span class="ex">exemple</span>':'')+right+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Supprimer">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
+  }).join('');
+
+  // défis
+  $('chalSec').hidden=mode==='future';
+  $('addChal').hidden=mode!=='today';
+  $('chalTitle').textContent=mode==='today'?'Défis du jour':'Défis de ce jour';
+  $('chalHint').textContent=mode==='today'?'+15 XP par défi':chDone+' / '+S.challenges.length+' réussis';
+  $('chal').innerHTML=S.challenges.map(c=>{
+    const n=ccount(c,k),full=n>=c.target;
+    const pips=c.target>1?'<div class="pips">'+Array.from({length:c.target},(_,i)=>'<i'+(i<n?' class="on"':'')+'></i>').join('')+'</div>':'';
+    const btn=mode!=='today'?'':full?'<div class="chbtns"><button class="btn small ghost" data-act="cminus" data-id="'+c.id+'">Annuler</button></div>':'<div class="chbtns"><button class="btn small" data-act="cplus" data-id="'+c.id+'">'+(c.target>1?'+1':'Fait !')+'</button></div>';
+    return '<div class="ch'+(full?' full':'')+'"><div class="dot" style="background:'+c.color+'">'+esc(c.name.charAt(0).toUpperCase())+'</div><h4>'+esc(c.name)+'</h4><div class="cnt">'+n+' <small>/ '+c.target+'</small></div>'+pips+btn+'</div>';
+  }).join('');
+
+  // rendez-vous du jour
+  const evs=S.events.filter(e=>e.date===k).sort((a,b)=>a.time.localeCompare(b.time));
+  $('dayEvSec').hidden=!evs.length;
+  $('dayEvents').innerHTML=evs.map(e=>'<li class="ev'+(new Date(e.date+'T'+e.time)<Date.now()?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+'<small>'+(e.alarm?'Alarme activée':'Sans alarme')+'</small></span></li>').join('');
+}
 function render(){
   $('today').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
   const L=level();$('lvTitle').textContent='Niveau '+L.lv;$('lvBar').style.width=L.pct+'%';
   $('xpNow').textContent=S.xp;$('winsToday').textContent=S.winsToday;$('streak').textContent=S.streak;
-  const p=dayProgress();$('dayPct').textContent=p+'%';$('dayRing').style.strokeDashoffset=226.2*(1-p/100);
+  const p=dayProgress(todayStr());$('dayPct').textContent=p+'%';$('dayRing').style.strokeDashoffset=226.2*(1-p/100);
 
-  const ul=$('tasks');
-  if(!S.tasks.length)ul.innerHTML='<li class="empty">Ta liste est vide. Ajoute une seule petite chose pour commencer.</li>';
-  else ul.innerHTML=[...S.tasks].sort((a,b)=>a.done-b.done).map(t=>{
-    const steps=t.steps.length?'<ul class="steps">'+t.steps.map((s,i)=>'<li class="step'+(s.done?' done':'')+'"><button class="check" data-act="step" data-id="'+t.id+'" data-i="'+i+'" aria-label="Étape faite">'+CHECK+'</button><span>'+esc(s.t)+'</span></li>').join('')+'</ul>':'';
-    const tools=(!t.done&&!t.steps.length)?'<div class="tools"><button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Je découpe…':'Découper')+'</button></div>':'';
-    return '<li class="task'+(t.done?' done':'')+'"><div class="row"><button class="check" data-act="task" data-id="'+t.id+'" aria-label="Tâche faite">'+CHECK+'</button><span class="ttext">'+esc(t.text)+'</span>'+(t.ex?'<span class="ex">exemple</span>':'')+'<span class="xp">+10</span><button class="x" data-act="del" data-id="'+t.id+'" aria-label="Supprimer">×</button></div>'+steps+tools+'</li>';
-  }).join('');
-
-  $('chal').innerHTML=S.challenges.map(c=>{
-    const full=c.count>=c.target;
-    const pips=c.target>1?'<div class="pips">'+Array.from({length:c.target},(_,i)=>'<i'+(i<c.count?' class="on"':'')+'></i>').join('')+'</div>':'';
-    const btn=full?'<button class="btn small ghost" data-act="cminus" data-id="'+c.id+'">Annuler</button>':'<button class="btn small" data-act="cplus" data-id="'+c.id+'">'+(c.target>1?'+1':'Fait !')+'</button>';
-    return '<div class="ch'+(full?' full':'')+'"><div class="dot" style="background:'+c.color+'">'+esc(c.name.charAt(0).toUpperCase())+'</div><h4>'+esc(c.name)+'</h4><div class="cnt">'+c.count+' <small>/ '+c.target+'</small></div>'+pips+'<div class="chbtns">'+btn+'</div></div>';
-  }).join('');
-
+  renderDay();
   renderAgenda();renderWeek();
 
   $('badges').innerHTML=BADGES.map(b=>'<div class="badge'+(S.badges.includes(b.id)?'':' locked')+'"><div class="medal">'+b.l+'</div><b>'+b.n+'</b><small>'+b.d+'</small></div>').join('');
@@ -544,7 +656,7 @@ function renderAgenda(){
 }
 function renderWeek(){
   const w=weekStats(),max=Math.max(3,...w.arr.map(a=>a.n)),t=todayStr();
-  $('bars').innerHTML=w.arr.map((a,i)=>'<div><em>'+(a.n||'')+'</em><span class="'+(a.n?'on':'')+(a.k===t?' now':'')+'" style="height:'+Math.max(6,a.n/max*80)+'px"></span><small>'+DOW[i].charAt(0)+'</small></div>').join('');
+  $('bars').innerHTML=w.arr.map((a,i)=>'<div data-act="goday" data-k="'+a.k+'" role="button" aria-label="Voir '+longDate(a.k)+'"><em>'+(a.n||'')+'</em><span class="'+(a.n?'on':'')+(a.k===t?' now':'')+'" style="height:'+Math.max(6,a.n/max*80)+'px"></span><small>'+DOW[i].charAt(0)+'</small></div>').join('');
   $('wkDays').textContent=w.days+' / 7 jours actifs';
   const wk=weekKey(new Date()),c=$('chest');
   if(S.weekClaimed===wk){c.className='chest ok';c.innerHTML='<p>Coffre de la semaine ouvert. Nouvelle semaine lundi, nouveau coffre.</p>'}
@@ -557,16 +669,21 @@ let sample=null,canTools=false;
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b)return;
   const id=b.dataset.id,act=b.dataset.act;
-  if(act==='task'){const t=S.tasks.find(x=>x.id===id);if(!t)return;
+  if(act==='goday'){goDay(b.dataset.k);return}
+  if(act==='move'){const t=S.tasks.find(x=>x.id===id);if(!t)return;t.date=todayStr();save();tone([659,880],.09,.25);render();return}
+  if(act==='moveday'||act==='moveall'){const t=todayStr();
+    S.tasks.forEach(x=>{if(!x.done&&(act==='moveall'?x.date<t:x.date===b.dataset.k))x.date=t});
+    save();tone([523,659,880],.08,.25);if(act==='moveday')viewDay=t;render();return}
+  if(act==='task'){const t=S.tasks.find(x=>x.id===id);if(!t||t.date!==todayStr())return;
     if(t.done){t.done=false;S.xp=Math.max(0,S.xp-10);save();render();return}
     t.done=true;t.steps.forEach(s=>s.done=true);win(10)}
-  if(act==='step'){const t=S.tasks.find(x=>x.id===id),s=t.steps[+b.dataset.i];
+  if(act==='step'){const t=S.tasks.find(x=>x.id===id);if(!t||t.date!==todayStr())return;const s=t.steps[+b.dataset.i];
     if(s.done){s.done=false;save();render();return}
     s.done=true;if(t.steps.every(z=>z.done)){t.done=true;win(15)}else win(5)}
   if(act==='split')splitTask(id);
   if(act==='del'){S.tasks=S.tasks.filter(x=>x.id!==id);save();render()}
-  if(act==='cplus'){const c=S.challenges.find(x=>x.id===id);c.count++;if(c.count>=c.target)win(15);else{tone([659,880],.09,.3);save();render()}}
-  if(act==='cminus'){const c=S.challenges.find(x=>x.id===id);c.count=Math.max(0,c.count-1);save();render()}
+  if(act==='cplus'){const c=S.challenges.find(x=>x.id===id),k=todayStr(),n=ccount(c,k)+1;setCount(c,k,n);if(n===c.target)win(15);else{tone([659,880],.09,.3);save();render()}}
+  if(act==='cminus'){const c=S.challenges.find(x=>x.id===id),k=todayStr();setCount(c,k,ccount(c,k)-1);save();render()}
   if(act==='day'){selDay=b.dataset.k;$('evDate').value=selDay;$('evDate').dataset.auto='1';renderAgenda()}
   if(act==='bell'){const ev=S.events.find(x=>x.id===id);ev.alarm=!ev.alarm;ev.fired=false;save();renderAgenda()}
   if(act==='evdel'){S.events=S.events.filter(x=>x.id!==id);save();render()}
@@ -586,8 +703,18 @@ async function splitTask(id){
   if(!steps)steps=["Préparer ce qu'il faut (2 min)",'Faire juste 5 minutes','Terminer et ranger'];
   t.steps=steps.map(s=>({t:s,done:false}));S.splits++;checkBadges();save();render();
 }
-$('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim();if(!v)return;S.tasks.unshift({id:uid(),text:v,done:false,steps:[]});i.value='';save();render()});
-$('addChal').addEventListener('submit',e=>{e.preventDefault();const i=$('newChal'),v=i.value.trim();if(!v)return;S.challenges.push({id:uid(),name:v,target:1,count:0,color:COLORS[S.challenges.length%COLORS.length]});i.value='';save();render()});
+$('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim();if(!v)return;if(dayMode(viewDay)==='past')return;S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:viewDay});i.value='';save();render()});
+// navigation entre les jours
+document.querySelectorAll('.dtabs button').forEach(b=>b.addEventListener('click',()=>{viewDay=ymd(addDays(new Date(),+b.dataset.rel));render()}));
+$('dPrev').addEventListener('click',()=>{viewDay=ymd(addDays(new Date(viewDay+'T12:00'),-1));render()});
+$('dNext').addEventListener('click',()=>{viewDay=ymd(addDays(new Date(viewDay+'T12:00'),1));render()});
+$('dPick').addEventListener('change',e=>{if(/^\d{4}-\d{2}-\d{2}$/.test(e.target.value)){viewDay=e.target.value;render()}});
+(function(){let x0=null,y0=0;const v=$('v-today');
+  v.addEventListener('touchstart',e=>{if(e.target.closest('input,.chal'))return x0=null;x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  v.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
+    if(Math.abs(dx)>70&&Math.abs(dy)<45){viewDay=ymd(addDays(new Date(viewDay+'T12:00'),dx<0?1:-1));render()}},{passive:true});
+})();
+$('addChal').addEventListener('submit',e=>{e.preventDefault();const i=$('newChal'),v=i.value.trim();if(!v)return;S.challenges.push({id:uid(),name:v,target:1,color:COLORS[S.challenges.length%COLORS.length]});i.value='';save();render()});
 $('evDate').addEventListener('input',()=>{delete $('evDate').dataset.auto});
 $('evForm').addEventListener('submit',e=>{e.preventDefault();
   const title=$('evTitle').value.trim(),date=$('evDate').value,time=$('evTime').value;
@@ -603,6 +730,7 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
   document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));
   b.setAttribute('aria-current','page');
   ['v-today','v-agenda','v-coach','v-focus','v-troph'].forEach(v=>$(v).hidden=v!==b.dataset.view);
+  if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
   $('fab').hidden=b.dataset.view==='v-coach';
   scrollTo(0,0);
@@ -630,16 +758,18 @@ function handleAlarm(id,act){
   if(act==='snooze'){const d=new Date(Date.now()+5*60e3);ev.date=ymd(d);ev.time=pad(d.getHours())+':'+pad(d.getMinutes());save();renderAgenda();return}
   ev.fired=true;S.ontime=(S.ontime||0)+1;win(10,'ontime');
 }
-setInterval(checkAlarms,10000);setTimeout(checkAlarms,1500);
+setInterval(()=>{const was=viewDay===S.date;if(rollDay()){if(was)viewDay=todayStr();render()}checkAlarms()},10000);setTimeout(checkAlarms,1500);
 
 // ---------- coach ----------
 let turns=[],busy=false,ctl=null,greeted=false;
 function ctx(){
-  const open=S.tasks.filter(t=>!t.done).map(t=>'- '+t.text).join('\n')||'(aucune)';
-  const done=S.tasks.filter(t=>t.done).map(t=>'- '+t.text).join('\n')||'(aucune)';
-  const ch=S.challenges.map(c=>'- '+c.name+' : '+c.count+'/'+c.target).join('\n');
+  const td=dayTasks(todayStr()),tmr=dayTasks(ymd(addDays(new Date(),1))).map(t=>'- '+t.text).join('\n')||'(rien)';
+  const open=td.filter(t=>!t.done).map(t=>'- '+t.text).join('\n')||'(aucune)';
+  const done=td.filter(t=>t.done).map(t=>'- '+t.text).join('\n')||'(aucune)';
+  const ch=S.challenges.map(c=>'- '+c.name+' : '+ccount(c,todayStr())+'/'+c.target).join('\n');
+  const y=ymd(addDays(new Date(),-1)),yd=dayTasks(y);
   const t=todayStr();const evs=S.events.filter(e=>e.date>=t).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+e.time+' '+e.title).join('\n')||'(rien)';
-  return 'Date et heure : '+new Date().toLocaleString('fr-FR')+'\nNiveau '+level().lv+', '+S.xp+' XP, série '+S.streak+' jours, '+S.winsToday+" victoires aujourd'hui.\nTâches à faire :\n"+open+'\nTâches faites :\n'+done+'\nDéfis :\n'+ch+'\nAgenda à venir :\n'+evs;
+  return 'Date et heure : '+new Date().toLocaleString('fr-FR')+'\nNiveau '+level().lv+', '+S.xp+' XP, série '+S.streak+' jours, '+S.winsToday+" victoires aujourd'hui.\nTâches à faire :\n"+open+'\nTâches faites :\n'+done+'\nPrévu pour demain :\n'+tmr+'\nHier : '+yd.filter(t=>t.done).length+' tâches faites sur '+yd.length+', '+(S.hist[y]||0)+' victoires.\nDéfis :\n'+ch+'\nAgenda à venir :\n'+evs;
 }
 const RULES="Tu es Nour, le coach vocal de l'application Bravo, pour des personnes qui ont un TDAH. Tes réponses sont LUES À VOIX HAUTE : écris comme on parle, en français, 2 à 4 phrases courtes maximum, pas de listes, pas de markdown, pas d'emoji. Sois chaleureux, énergique, jamais culpabilisant. Base-toi sur le fonctionnement du TDAH : récompense immédiate, micro-étapes, démarrer par une action de moins de 2 minutes, minuteur de 5 ou 15 minutes. Termine souvent par UNE seule action concrète à faire maintenant. Tu n'es pas médecin : pas de diagnostic ni de conseil sur les médicaments ; si la personne parle de détresse grave, encourage-la avec douceur à contacter un proche ou un professionnel. Si la personne te demande d'ajouter une tâche ou un rendez-vous, utilise les outils.";
 function bubble(role,text){
@@ -650,7 +780,7 @@ function bubble(role,text){
 }
 function greet(){
   if(greeted)return;greeted=true;
-  const open=S.tasks.filter(t=>!t.done).length;
+  const open=dayTasks(todayStr()).filter(t=>!t.done).length;
   const h=new Date().getHours();const hi=h<12?'Bonjour':h<18?'Coucou':'Bonsoir';
   const txt=hi+' ! Je suis Nour, ton coach. Tu as '+open+' tâche'+(open>1?'s':'')+' sur ta liste. Dis-moi ce qui te bloque, ou touche un bouton en dessous.';
   const d=bubble('assistant',txt);d.querySelector('.say').hidden=false;
@@ -667,8 +797,8 @@ async function ask(q){
   const opts={modelTier:'quick',onText:({text})=>{txt.textContent=text;$('chat').scrollTop=$('chat').scrollHeight}};
   ctl=new AbortController();opts.signal=ctl.signal;
   if(canTools)opts.tools=[
-    {name:'ajouter_tache',description:"Ajoute une tâche à la liste du jour de la personne. Renvoie 'ok'.",inputSchema:{type:'object',properties:{texte:{type:'string',description:'La tâche, courte'}},required:['texte']},
-      execute:i=>{const v=String(i.texte||'').trim().slice(0,120);if(!v)throw new Error('texte vide');S.tasks.unshift({id:uid(),text:v,done:false,steps:[]});save();render();return 'ok'}},
+    {name:'ajouter_tache',description:"Ajoute une tâche à la liste de la personne, pour aujourd'hui par défaut ou pour un autre jour (date AAAA-MM-JJ, ex. demain). Renvoie 'ok'.",inputSchema:{type:'object',properties:{texte:{type:'string',description:'La tâche, courte'},date:{type:'string',description:"Jour AAAA-MM-JJ, facultatif (aujourd'hui par défaut)"}},required:['texte']},
+      execute:i=>{const v=String(i.texte||'').trim().slice(0,120);if(!v)throw new Error('texte vide');let da=String(i.date||'');if(!/^\d{4}-\d{2}-\d{2}$/.test(da)||da<todayStr())da=todayStr();S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:da});save();render();return 'ok'}},
     {name:'ajouter_rendez_vous',description:"Ajoute un rendez-vous à l'agenda avec une alarme. date au format AAAA-MM-JJ, heure au format HH:MM. Renvoie 'ok'.",inputSchema:{type:'object',properties:{titre:{type:'string'},date:{type:'string'},heure:{type:'string'},alarme:{type:'boolean'}},required:['titre','date','heure']},
       execute:i=>{const ti=String(i.titre||'').trim().slice(0,80),da=String(i.date||''),he=String(i.heure||'');
         if(!ti||!/^\d{4}-\d{2}-\d{2}$/.test(da)||!/^\d{2}:\d{2}$/.test(he))throw new Error('format invalide');
