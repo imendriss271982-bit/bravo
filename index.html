@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#12082B">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Bravo">
+<meta name="apple-mobile-web-app-title" content="ADHD Winner">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -88,7 +88,7 @@
 @keyframes nPop{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.nbubble{animation:none}.fab.talking .mouth{animation:none}}
 </style>
-<title>Bravo</title>
+<title>ADHD Winner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
 <style>
@@ -115,6 +115,7 @@ h1,h2,h3,h4{font-family:var(--f-display);margin:0;text-wrap:balance}
 .logo{font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
 .logo .brain{flex:none;overflow:visible}
 .logo b{color:var(--gold);text-shadow:var(--glow-gold);font-size:36px;line-height:0}
+.logo b.w{font-size:inherit;line-height:inherit}
 .date{color:var(--muted);font-size:13px;font-weight:600}
 .iconbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
 .iconbtn svg{width:20px;height:20px}
@@ -403,7 +404,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 <div class="wrap">
   <header class="top">
     <div>
-      <div class="logo"><svg class="brain" width="46" height="40" viewBox="0 0 200 175" aria-hidden="true"><defs><filter id="lgp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="lgg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#lgp)" fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" filter="url(#lgg)"/></svg><span>Bravo<b>!</b></span></div>
+      <div class="logo"><svg class="brain" width="46" height="40" viewBox="0 0 200 175" aria-hidden="true"><defs><filter id="lgp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="lgg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#lgp)" fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" filter="url(#lgg)"/></svg><span>ADHD <b class="w">Winner</b></span></div>
       <button class="hello" id="helloBtn" type="button" aria-label="Change your name">Hi, <b id="helloName"></b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button>
       <div class="date" id="today"></div>
     </div>
@@ -491,7 +492,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
       <label class="toggle"><input id="evAlarm" type="checkbox" checked> Alarm at that time</label>
       <button class="btn" type="submit">Add to calendar</button>
     </form>
-    <p class="note">The alarm rings and your coach talks to you when the time comes, as long as Bravo is open. In the phone app version, it will ring even when the app is closed.</p>
+    <p class="note">The alarm rings and your coach talks to you when the time comes, as long as ADHD Winner is open. In the phone app version, it will ring even when the app is closed.</p>
   </section>
 
   <!-- VIEW: coach -->
@@ -558,7 +559,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
     <div class="sechead"><h3>My trophies</h3><span class="hint" id="badgeCount"></span></div>
     <div class="badges" id="badges"></div>
     <div class="note" id="totals"></div>
-    <p class="hint" style="text-align:center;margin:0">Bravo · version 20 Oct (Nour talks)</p>
+    <p class="hint" style="text-align:center;margin:0">ADHD Winner · version 20 Oct (new name)</p>
     <button class="btn ghost" id="resetAll" type="button">Erase everything and start over</button>
     <div id="confirmReset" class="note" hidden>
       Erase your tasks, calendar, XP and trophies?
@@ -584,7 +585,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 <div class="splash" id="splash" hidden role="dialog" aria-modal="true" aria-labelledby="spTitle">
   <div class="sun"><svg aria-hidden="true"><use href="#brainSym"/></svg></div>
   <div id="spName" hidden>
-    <div class="kicker">Welcome to Bravo</div>
+    <div class="kicker">Welcome to ADHD Winner</div>
     <h1 id="spTitle" style="margin:10px 0 18px">What's your <b>name</b>?</h1>
     <form id="nameForm" autocomplete="off">
       <input id="nameInput" type="text" maxlength="24" placeholder="Your first name" aria-label="Your first name">
@@ -1109,7 +1110,7 @@ function ctx(){
   const t=todayStr();const evs=S.events.filter(e=>e.date>=t).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+e.time+' '+e.title).join('\n')||'(nothing)';
   return (S.name?'First name of the person: '+S.name+'\n':'')+'Date and time: '+new Date().toLocaleString('en-US')+'\nLevel '+level().lv+', '+S.xp+' XP, streak '+S.streak+' days, '+S.winsToday+" wins today.\nTasks to do:\n"+open+'\nTasks done:\n'+done+'\nPlanned for tomorrow:\n'+tmr+'\nYesterday: '+yd.filter(t=>t.done).length+' tasks done out of '+yd.length+', '+(S.hist[y]||0)+' wins.\nChallenges:\n'+ch+'\nUpcoming calendar:\n'+evs;
 }
-const RULES="Call the person by their first name now and then (not in every sentence). You are Nour, the voice coach of the Bravo app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
+const RULES="Call the person by their first name now and then (not in every sentence). You are Nour, the voice coach of the ADHD Winner app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
 function bubble(role,text){
   const d=document.createElement('div');d.className='msg '+(role==='user'?'me':'ai');
   const s=document.createElement('span');s.className='txt';s.textContent=text;d.appendChild(s);
@@ -1165,7 +1166,7 @@ $('callBtn').addEventListener('click',async()=>{
   callSt('Connecting…');
   try{
     try{speechSynthesis.cancel()}catch(_){}
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("this window blocks the microphone. Open Bravo in Safari or Chrome.");
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("this window blocks the microphone. Open ADHD Winner in Safari or Chrome.");
     await navigator.mediaDevices.getUserMedia({audio:true});
     const {Conversation}=await import('https://esm.sh/@elevenlabs/client');
     const tool=type=>p=>doAction(Object.assign({type},p||{}));
@@ -1206,7 +1207,7 @@ document.querySelectorAll('.durs button').forEach(b=>b.addEventListener('click',
 // ---------- welcome + affirmation ----------
 const AFF=[
   "Your day is going to be beautiful. I know you can really do it today. <em>You are the champion.</em>",
-  "One small step is still a win. <em>Start with just one</em> and Bravo will cheer for you.",
+  "One small step is still a win. <em>Start with just one</em> and Nour will cheer for you.",
   "Your brain is fast, creative and full of ideas. <em>Today it works for you.</em>",
   "You don't have to be perfect today. <em>You just have to begin.</em>",
   "Every task you finish today is a Bravo. <em>Go collect them!</em>",
