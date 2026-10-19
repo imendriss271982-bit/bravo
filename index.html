@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -238,23 +238,23 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
       <div class="logo"><svg class="brain" width="46" height="40" viewBox="0 0 200 175" aria-hidden="true"><defs><filter id="lgp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="lgg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#lgp)" fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" filter="url(#lgg)"/></svg><span>Bravo<b>!</b></span></div>
       <div class="date" id="today"></div>
     </div>
-    <button class="iconbtn" id="soundBtn" aria-label="Couper le son" title="Son et voix">
+    <button class="iconbtn" id="soundBtn" aria-label="Mute sound" title="Sound and voice">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="waves" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
     </button>
   </header>
 
-  <section class="level" aria-label="Ta journée">
+  <section class="level" aria-label="Your day">
     <div class="ring">
       <svg width="86" height="86" viewBox="0 0 86 86"><circle cx="43" cy="43" r="36" fill="none" stroke="rgba(127,127,127,.3)" stroke-width="9"/><circle id="dayRing" cx="43" cy="43" r="36" fill="none" stroke="var(--mint)" stroke-width="9" style="filter:drop-shadow(0 0 4px rgba(124,255,79,.8))" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="226.2" style="transition:stroke-dashoffset .6s"/></svg>
-      <div class="num"><span id="dayPct">0%</span><small>aujourd'hui</small></div>
+      <div class="num"><span id="dayPct">0%</span><small>today</small></div>
     </div>
     <div class="lvinfo">
-      <h2 id="lvTitle">Niveau 1</h2>
+      <h2 id="lvTitle">Level 1</h2>
       <div class="bar"><i id="lvBar" style="width:0"></i></div>
       <div class="stats">
         <span><em id="xpNow">0</em> XP</span>
-        <span><em id="winsToday">0</em> victoires</span>
-        <span>Série <em id="streak">0</em> j</span>
+        <span><em id="winsToday">0</em> wins</span>
+        <span>Streak <em id="streak">0</em> d</span>
       </div>
     </div>
   </section>
@@ -262,37 +262,37 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   <!-- VIEW: today -->
   <main id="v-today" class="sec">
     <div class="daynav">
-      <button class="dnarrow" id="dPrev" type="button" aria-label="Jour précédent">‹</button>
-      <div class="dtabs" role="group" aria-label="Choisir le jour">
-        <button type="button" data-rel="-1" aria-pressed="false">Hier</button>
-        <button type="button" data-rel="0" aria-pressed="true">Aujourd'hui</button>
-        <button type="button" data-rel="1" aria-pressed="false">Demain</button>
+      <button class="dnarrow" id="dPrev" type="button" aria-label="Previous day">‹</button>
+      <div class="dtabs" role="group" aria-label="Choose the day">
+        <button type="button" data-rel="-1" aria-pressed="false">Yesterday</button>
+        <button type="button" data-rel="0" aria-pressed="true">Today</button>
+        <button type="button" data-rel="1" aria-pressed="false">Tomorrow</button>
       </div>
-      <button class="dnarrow" id="dNext" type="button" aria-label="Jour suivant">›</button>
+      <button class="dnarrow" id="dNext" type="button" aria-label="Next day">›</button>
     </div>
     <div class="dlabel">
       <b id="dLabel"></b>
-      <label class="iconbtn dpick" title="Choisir une date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><input id="dPick" type="date" aria-label="Aller à une date"></label>
+      <label class="iconbtn dpick" title="Pick a date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><input id="dPick" type="date" aria-label="Go to a date"></label>
     </div>
     <div id="dSummary"></div>
     <div class="sec">
-      <div class="sechead"><h3 id="listTitle">Ma liste du jour</h3><span class="hint" id="listHint">+10 XP par tâche</span></div>
+      <div class="sechead"><h3 id="listTitle">My list for today</h3><span class="hint" id="listHint">+10 XP per task</span></div>
       <form class="add" id="addForm">
-        <input id="newTask" type="text" placeholder="Ajouter une tâche…" autocomplete="off" maxlength="120" aria-label="Nouvelle tâche">
-        <button class="btn" type="submit">Ajouter</button>
+        <input id="newTask" type="text" placeholder="Add a task…" autocomplete="off" maxlength="120" aria-label="New task">
+        <button class="btn" type="submit">Add</button>
       </form>
       <ul class="list" id="tasks"></ul>
     </div>
     <div class="sec" id="chalSec">
-      <div class="sechead"><h3 id="chalTitle">Défis du jour</h3><span class="hint" id="chalHint">+15 XP par défi</span></div>
+      <div class="sechead"><h3 id="chalTitle">Today's challenges</h3><span class="hint" id="chalHint">+15 XP per challenge</span></div>
       <div class="chal" id="chal"></div>
       <form class="add" id="addChal">
-        <input id="newChal" type="text" placeholder="Nouveau défi (ex. lire 10 pages)" maxlength="40" aria-label="Nouveau défi">
-        <button class="btn ghost" type="submit">Créer</button>
+        <input id="newChal" type="text" placeholder="New challenge (e.g. read 10 pages)" maxlength="40" aria-label="New challenge">
+        <button class="btn ghost" type="submit">Create</button>
       </form>
     </div>
     <div class="sec" id="dayEvSec" hidden>
-      <div class="sechead"><h3>Rendez-vous</h3></div>
+      <div class="sechead"><h3>Appointments</h3></div>
       <ul class="list" id="dayEvents"></ul>
     </div>
   </main>
@@ -300,60 +300,60 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   <!-- VIEW: agenda -->
   <section id="v-agenda" class="sec" hidden>
     <div class="weeknav">
-      <button class="btn small ghost" id="wkPrev" aria-label="Semaine précédente">‹</button>
+      <button class="btn small ghost" id="wkPrev" aria-label="Previous week">‹</button>
       <h3 id="wkTitle" style="font-size:17px;text-align:center"></h3>
-      <button class="btn small ghost" id="wkNext" aria-label="Semaine suivante">›</button>
+      <button class="btn small ghost" id="wkNext" aria-label="Next week">›</button>
     </div>
     <div class="week" id="week"></div>
-    <div class="sechead"><h3 id="dayTitle"></h3><span class="hint">Cloche rouge = alarme</span></div>
+    <div class="sechead"><h3 id="dayTitle"></h3><span class="hint">Red bell = alarm</span></div>
     <ul class="list" id="events"></ul>
     <form class="evform" id="evForm">
-      <span class="label">Nouveau rendez-vous</span>
-      <input id="evTitle" type="text" placeholder="Quoi ? (ex. médecin, appel, sport)" maxlength="80" aria-label="Titre">
+      <span class="label">New appointment</span>
+      <input id="evTitle" type="text" placeholder="What? (e.g. doctor, call, gym)" maxlength="80" aria-label="Title">
       <div class="two">
         <input id="evDate" type="date" aria-label="Date">
-        <input id="evTime" type="time" value="09:00" aria-label="Heure">
+        <input id="evTime" type="time" value="09:00" aria-label="Time">
       </div>
-      <label class="toggle"><input id="evAlarm" type="checkbox" checked> Alarme à l'heure</label>
-      <button class="btn" type="submit">Ajouter au calendrier</button>
+      <label class="toggle"><input id="evAlarm" type="checkbox" checked> Alarm at that time</label>
+      <button class="btn" type="submit">Add to calendar</button>
     </form>
-    <p class="note">L'alarme sonne et le coach te parle quand l'heure arrive, tant que Bravo est ouvert. Dans la version téléphone, elle sonnera même app fermée.</p>
+    <p class="note">The alarm rings and your coach talks to you when the time comes, as long as Bravo is open. In the phone app version, it will ring even when the app is closed.</p>
   </section>
 
   <!-- VIEW: coach -->
   <section id="v-coach" class="sec" hidden>
     <button class="call" id="callBtn" type="button">
       <span class="callorb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
-      <span class="calltxt"><b id="callTitle">Parler à Nour</b><small id="callSt">Appuie et parle : elle te répond à voix haute</small></span>
+      <span class="calltxt"><b id="callTitle">Talk to Nour</b><small id="callSt">Tap and talk: she answers out loud</small></span>
     </button>
     <div class="coach">
       <div class="coachhead">
         <div class="avatar" id="avatar"><svg width="34" height="30" aria-hidden="true"><use href="#brainSym"/></svg></div>
-        <div><b>Nour, ton coach</b><span class="hint" id="coachState">Je t'écoute, sans jugement.</span></div>
-        <button class="iconbtn" id="voiceBtn" aria-label="Couper la voix du coach" title="Voix du coach">
+        <div><b>Nour, your coach</b><span class="hint" id="coachState">I'm listening, no judgment.</span></div>
+        <button class="iconbtn" id="voiceBtn" aria-label="Mute the coach's voice" title="Coach voice">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="vwaves" d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
         </button>
       </div>
       <div class="chat" id="chat" aria-live="polite"></div>
       <div class="chips" id="chips">
-        <button class="chip" data-q="Je n'arrive pas à commencer.">Je bloque</button>
-        <button class="chip" data-q="Aide-moi à organiser ma journée avec ma liste.">Organise ma journée</button>
-        <button class="chip" data-q="Motive-moi, j'en ai besoin.">Motive-moi</button>
-        <button class="chip" data-q="Je me sens dépassée, trop de choses.">Je suis dépassée</button>
+        <button class="chip" data-q="I can't get started.">I'm stuck</button>
+        <button class="chip" data-q="Help me plan my day with my list.">Plan my day</button>
+        <button class="chip" data-q="Motivate me, I need it.">Motivate me</button>
+        <button class="chip" data-q="I feel overwhelmed, too many things.">I'm overwhelmed</button>
       </div>
       <form class="coachin" id="coachForm">
-        <input id="coachInput" type="text" placeholder="Écris au coach…" autocomplete="off" maxlength="400" aria-label="Message au coach">
-        <button class="btn" type="submit" id="coachSend">Envoyer</button>
+        <input id="coachInput" type="text" placeholder="Write to your coach…" autocomplete="off" maxlength="400" aria-label="Message to coach">
+        <button class="btn" type="submit" id="coachSend">Send</button>
       </form>
     </div>
-    <p class="note" id="coachNote">Nour voit ta liste, tes défis et ton agenda. À l'oral ou par écrit, elle peut ajouter une tâche (même pour demain), un rendez-vous avec alarme, ou cocher ce que tu as fini.</p>
+    <p class="note" id="coachNote">Nour sees your list, challenges and calendar. By voice or text, she can add a task (even for tomorrow), an appointment with an alarm, or check off what you finished.</p>
   </section>
 
   <!-- VIEW: focus -->
   <section id="v-focus" class="sec" hidden>
-    <div class="sechead"><h3>Minuteur focus</h3><span class="hint">+20 XP par session</span></div>
+    <div class="sechead"><h3>Focus timer</h3><span class="hint">+20 XP per session</span></div>
     <div class="focus">
-      <div class="durs" role="group" aria-label="Durée">
+      <div class="durs" role="group" aria-label="Duration">
         <button data-min="5" aria-pressed="false">5 min</button>
         <button data-min="15" aria-pressed="true">15 min</button>
         <button data-min="25" aria-pressed="false">25 min</button>
@@ -363,39 +363,39 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
         <div class="t" id="tTxt">15:00</div>
       </div>
       <div class="fbtns">
-        <button class="btn" id="tStart">Démarrer</button>
-        <button class="btn ghost" id="tReset">Remettre</button>
+        <button class="btn" id="tStart">Start</button>
+        <button class="btn ghost" id="tReset">Reset</button>
       </div>
-      <p class="hint" style="text-align:center;margin:0">Le cercle fond pendant que tu travailles : tu vois le temps passer.</p>
+      <p class="hint" style="text-align:center;margin:0">The circle shrinks while you work, so you can see time passing.</p>
     </div>
   </section>
 
   <!-- VIEW: trophies + week -->
   <section id="v-troph" class="sec" hidden>
-    <div class="sechead"><h3>Ma semaine</h3><span class="hint" id="wkDays"></span></div>
+    <div class="sechead"><h3>My week</h3><span class="hint" id="wkDays"></span></div>
     <div class="recap">
       <div class="bars" id="bars"></div>
       <div class="chest" id="chest"></div>
     </div>
-    <div class="sechead"><h3>Mes trophées</h3><span class="hint" id="badgeCount"></span></div>
+    <div class="sechead"><h3>My trophies</h3><span class="hint" id="badgeCount"></span></div>
     <div class="badges" id="badges"></div>
     <div class="note" id="totals"></div>
-    <button class="btn ghost" id="resetAll" type="button">Tout effacer et recommencer</button>
+    <button class="btn ghost" id="resetAll" type="button">Erase everything and start over</button>
     <div id="confirmReset" class="note" hidden>
-      Effacer tes tâches, agenda, XP et trophées ?
-      <div style="display:flex;gap:8px;margin-top:8px"><button class="btn small" id="yesReset">Oui, effacer</button><button class="btn small ghost" id="noReset">Annuler</button></div>
+      Erase your tasks, calendar, XP and trophies?
+      <div style="display:flex;gap:8px;margin-top:8px"><button class="btn small" id="yesReset">Yes, erase</button><button class="btn small ghost" id="noReset">Cancel</button></div>
     </div>
   </section>
 </div>
 
-<button class="fab" id="fab" type="button" aria-label="Parler au coach Nour"><svg width="38" height="34" aria-hidden="true"><use href="#brainSym"/></svg><span>Nour</span></button>
+<button class="fab" id="fab" type="button" aria-label="Talk to coach Nour"><svg width="38" height="34" aria-hidden="true"><use href="#brainSym"/></svg><span>Nour</span></button>
 <nav aria-label="Navigation">
   <div class="in">
-    <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Aujourd'hui</button>
-    <button data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda</button>
+    <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
+    <button data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
     <button data-view="v-coach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Coach</button>
     <button data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
-    <button data-view="v-troph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Semaine</button>
+    <button data-view="v-troph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Week</button>
   </div>
 </nav>
 
@@ -419,24 +419,24 @@ const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 
 const COLORS=['#2BC94A','#FF2E93','#00B8D9','#E0A800','#9B3DFF','#FF5A36'];
 const freshChallenges=()=>[
-  {id:'sport',name:'Sport 20 min',target:1,color:COLORS[1]},
-  {id:'eau',name:"Verres d'eau",target:8,color:COLORS[2]},
-  {id:'air',name:"Sortir prendre l'air",target:1,color:COLORS[0]},
-  {id:'dodo',name:'Au lit avant 23 h',target:1,color:COLORS[4]}
+  {id:'sport',name:'Exercise 20 min',target:1,color:COLORS[1]},
+  {id:'eau',name:'Glasses of water',target:8,color:COLORS[2]},
+  {id:'air',name:'Get some fresh air',target:1,color:COLORS[0]},
+  {id:'dodo',name:'In bed before 11 pm',target:1,color:COLORS[4]}
 ];
 function defaults(){
   const t=new Date(),tm=addDays(t,1),d=ymd(t);
   return{date:d,xp:0,wins:0,winsToday:0,focusTotal:0,streak:0,lastWinDate:null,jokerWeek:null,sound:true,voice:true,
   badges:[],splits:0,hist:{},cc:{},weekClaimed:null,
   tasks:[
-    {id:uid(),text:'Répondre à 3 emails',done:false,ex:true,steps:[],date:d},
-    {id:uid(),text:'Ranger le salon',done:false,ex:true,steps:[],date:d},
-    {id:uid(),text:'Préparer le sac de sport',done:false,ex:true,steps:[],date:d}
+    {id:uid(),text:'Reply to 3 emails',done:false,ex:true,steps:[],date:d},
+    {id:uid(),text:'Tidy the living room',done:false,ex:true,steps:[],date:d},
+    {id:uid(),text:'Pack the gym bag',done:false,ex:true,steps:[],date:d}
   ],
   challenges:freshChallenges(),
   events:[
-    {id:uid(),title:'Salle de sport',date:ymd(t),time:'18:30',alarm:false,fired:false,ex:true},
-    {id:uid(),title:'Appeler maman',date:ymd(tm),time:'12:00',alarm:false,fired:false,ex:true}
+    {id:uid(),title:'Gym',date:ymd(t),time:'18:30',alarm:false,fired:false,ex:true},
+    {id:uid(),title:'Call mom',date:ymd(tm),time:'12:00',alarm:false,fired:false,ex:true}
   ]}
 }
 let S;
@@ -449,6 +449,11 @@ S.challenges.forEach((c,i)=>{const f=D.challenges.find(x=>x.id===c.id);c.color=f
 (function(){const base=S.date||todayStr();
   S.tasks.forEach(t=>{if(!t.date)t.date=base});
   S.challenges.forEach(c=>{if(c.count!==undefined){if(c.count)(S.cc[base]=S.cc[base]||{})[c.id]=c.count;delete c.count}});
+})();
+(function(){const N={sport:['Sport 20 min','Exercise 20 min'],eau:["Verres d'eau",'Glasses of water'],air:["Sortir prendre l'air",'Get some fresh air'],dodo:['Au lit avant 23 h','In bed before 11 pm']};
+  S.challenges.forEach(c=>{const n=N[c.id];if(n&&c.name===n[0])c.name=n[1]});
+  const T={'Répondre à 3 emails':'Reply to 3 emails','Ranger le salon':'Tidy the living room','Préparer le sac de sport':'Pack the gym bag','Salle de sport':'Gym','Appeler maman':'Call mom'};
+  S.tasks.forEach(t=>{if(t.ex&&T[t.text])t.text=T[t.text]});S.events.forEach(e=>{if(e.ex&&T[e.title])e.title=T[e.title]});
 })();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 const ccount=(c,k)=>(S.cc[k]||{})[c.id]||0;
@@ -475,24 +480,24 @@ function weekStats(){
   return{arr,days};
 }
 const BADGES=[
-  {id:'first',l:'1',n:'Premier pas',d:'Première victoire',test:()=>S.wins>=1},
-  {id:'five',l:'5',n:'En feu',d:'5 victoires en un jour',test:()=>S.winsToday>=5},
-  {id:'split',l:'÷',n:'Découpeuse',d:'Découper une tâche',test:()=>S.splits>=1},
-  {id:'focus',l:'F',n:'Concentrée',d:'Finir une session focus',test:()=>S.focusTotal>=1},
-  {id:'eau',l:'8',n:'Hydratée',d:"8 verres d'eau",test:()=>S.challenges.some(c=>c.id==='eau'&&ccount(c,todayStr())>=8)},
-  {id:'chal',l:'4',n:'Journée parfaite',d:'4 défis réussis',test:()=>S.challenges.filter(c=>ccount(c,todayStr())>=c.target).length>=4},
-  {id:'ontime',l:'⏰',n:"À l'heure",d:'Répondre à une alarme',test:()=>S.ontime>=1},
-  {id:'str3',l:'3j',n:'Régulière',d:'Série de 3 jours',test:()=>S.streak>=3},
-  {id:'week',l:'S',n:'Semaine gagnée',d:'5 jours actifs dans la semaine',test:()=>weekStats().days>=5},
-  {id:'lv3',l:'N3',n:'Niveau 3',d:'Atteindre le niveau 3',test:()=>level().lv>=3},
-  {id:'fifty',l:'50',n:'Championne',d:'50 victoires au total',test:()=>S.wins>=50},
-  {id:'talk',l:'N',n:'Bien entourée',d:'Parler au coach',test:()=>S.talked>=1}
+  {id:'first',l:'1',n:'First step',d:'First win',test:()=>S.wins>=1},
+  {id:'five',l:'5',n:'On fire',d:'5 wins in one day',test:()=>S.winsToday>=5},
+  {id:'split',l:'÷',n:'Splitter',d:'Split a task',test:()=>S.splits>=1},
+  {id:'focus',l:'F',n:'Focused',d:'Finish a focus session',test:()=>S.focusTotal>=1},
+  {id:'eau',l:'8',n:'Hydrated',d:'8 glasses of water',test:()=>S.challenges.some(c=>c.id==='eau'&&ccount(c,todayStr())>=8)},
+  {id:'chal',l:'4',n:'Perfect day',d:'4 challenges done',test:()=>S.challenges.filter(c=>ccount(c,todayStr())>=c.target).length>=4},
+  {id:'ontime',l:'⏰',n:'On time',d:'Answer an alarm',test:()=>S.ontime>=1},
+  {id:'str3',l:'3d',n:'Consistent',d:'3-day streak',test:()=>S.streak>=3},
+  {id:'week',l:'W',n:'Week won',d:'5 active days in a week',test:()=>weekStats().days>=5},
+  {id:'lv3',l:'L3',n:'Level 3',d:'Reach level 3',test:()=>level().lv>=3},
+  {id:'fifty',l:'50',n:'Champion',d:'50 wins in total',test:()=>S.wins>=50},
+  {id:'talk',l:'N',n:'Supported',d:'Talk to the coach',test:()=>S.talked>=1}
 ];
 function level(){return{lv:Math.floor(S.xp/100)+1,pct:S.xp%100}}
 
-const MSGS=['Une de moins, bien joué !','Ton cerveau te dit merci.','Petit pas, grande victoire.',"Tu avances, c'est ça qui compte.",'Coche après coche, tu y arrives.','Regarde-toi aller !',"C'est fait. Savoure.",'Énergie validée !','Mission accomplie.','Tu viens de prouver que tu peux.'];
-const TITLES=['Bravo !','Yay !','Waouh !','Youpi !','Bravo !','Yes !'];
-const CHEERS=['Je savais que tu pouvais le faire !','Tu assures !','Une victoire de plus !','Continue comme ça !','Trop fort !','Tu es en feu !'];
+const MSGS=['One down, well done!','Your brain says thank you.','Small step, big win.',"You're moving forward, that's what counts.",'Check by check, you\'re getting there.','Look at you go!',"Done. Enjoy it.",'Energy unlocked!','Mission accomplished.','You just proved you can.'];
+const TITLES=['Bravo!','Yay!','Wow!','Woohoo!','Bravo!','Yes!'];
+const CHEERS=['I knew you could do it!','You rock!','One more win!','Keep it up!','So good!','You\'re on fire!'];
 
 // ---------- sound + voice ----------
 let audio;
@@ -509,12 +514,12 @@ let winAudio=null;
 const chime=big=>{if(!S.sound)return;try{winAudio=winAudio||new Audio(WIN_SRC);winAudio.currentTime=0;winAudio.volume=.9;const pr=winAudio.play();if(pr&&pr.catch)pr.catch(()=>synthChime(big))}catch(e){synthChime(big)}};
 const alarmTone=()=>tone([880,660,880,660,880,660,1047],.22,.2,'square');
 let frVoice=null;
-function loadVoices(){try{const v=speechSynthesis.getVoices();frVoice=v.find(x=>/^fr/i.test(x.lang)&&/female|amelie|audrey|marie|google/i.test(x.name))||v.find(x=>/^fr/i.test(x.lang))||null}catch(e){}}
+function loadVoices(){try{const v=speechSynthesis.getVoices();frVoice=v.find(x=>/^en/i.test(x.lang)&&/samantha|female|zira|google us|aria|jenny/i.test(x.name))||v.find(x=>/^en-(US|GB)/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}catch(e){}}
 try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
 function speak(text,excited){
   if(!S.voice||!text)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[*#_]/g,''));
-    u.lang='fr-FR';if(frVoice)u.voice=frVoice;u.rate=excited?1.12:1.02;u.pitch=excited?1.35:1.05;
+    u.lang='en-US';if(frVoice)u.voice=frVoice;u.rate=excited?1.12:1.02;u.pitch=excited?1.35:1.05;
     u.onstart=()=>$('avatar').classList.add('talking');
     u.onend=u.onerror=()=>$('avatar').classList.remove('talking');
     speechSynthesis.speak(u)}catch(e){}
@@ -534,14 +539,14 @@ function checkBadges(){const nb=BADGES.filter(b=>!S.badges.includes(b.id)&&b.tes
 let hideT;
 function showBravo(o){
   const pop=$('pop');pop.className='pop';
-  const ttl=o.lvUp?'Niveau '+level().lv+' !':o.kind==='week'?'Semaine gagnée !':pick(TITLES);
+  const ttl=o.lvUp?'Level '+level().lv+'!':o.kind==='week'?'Week won!':pick(TITLES);
   let h='<h2>'+ttl+'</h2><p>'+
-    (o.kind==='focus'?"Session focus terminée. Respire, tu l'as fait.":o.kind==='week'?'Tu as été présente au moins 5 jours. Ton coffre est ouvert.':o.kind==='ontime'?"Tu as répondu présente à l'heure. Bravo !":pick(MSGS))+'</p><span class="gain">+'+o.xp+' XP</span>';
-  if(o.bonus)h+='<div class="bonus">Coffre surprise : +'+o.bonus+' XP bonus</div>';
-  o.newB.forEach(b=>{h+='<div class="bonus" style="background:var(--ink);color:var(--gold)">Nouveau trophée : '+esc(b.n)+'</div>'});
+    (o.kind==='focus'?"Focus session done. Breathe, you did it.":o.kind==='week'?'You showed up at least 5 days. Your chest is open.':o.kind==='ontime'?"You showed up right on time. Bravo!":pick(MSGS))+'</p><span class="gain">+'+o.xp+' XP</span>';
+  if(o.bonus)h+='<div class="bonus">Surprise chest: +'+o.bonus+' bonus XP</div>';
+  o.newB.forEach(b=>{h+='<div class="bonus" style="background:var(--ink);color:var(--gold)">New trophy: '+esc(b.n)+'</div>'});
   pop.innerHTML=h;$('overlay').hidden=false;
   chime(o.lvUp||o.bonus||o.newB.length);
-  if(o.kind!=='focus')setTimeout(()=>speak(ttl+' '+(o.lvUp?'Tu passes au niveau supérieur !':o.bonus?'Coffre surprise !':pick(CHEERS)),true),1300);
+  if(o.kind!=='focus')setTimeout(()=>speak(ttl+' '+(o.lvUp?'You leveled up!':o.bonus?'Surprise chest!':pick(CHEERS)),true),1300);
   confetti(o.lvUp||o.newB.length||o.kind==='week'?160:70);
   clearTimeout(hideT);hideT=setTimeout(hideOverlay,(o.newB.length||o.bonus||o.lvUp)?2800:1600);
 }
@@ -562,14 +567,14 @@ function confetti(n){
 // ---------- render ----------
 const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>';
 const BELL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>';
-const DOW=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const DOW=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 let selDay=todayStr(),wkStart=monday(new Date());
 let viewDay=todayStr();
 function dayProgress(k){k=k||todayStr();let tot=0,done=0;dayTasks(k).forEach(t=>{tot++;if(t.done)done++});S.challenges.forEach(c=>{tot++;if(ccount(c,k)>=c.target)done++});return tot?Math.round(done/tot*100):0}
 const dayMode=k=>{const t=todayStr();return k===t?'today':k<t?'past':'future'};
 function relName(k){const r=dayDiff(todayStr(),k);
-  return r===0?"Aujourd'hui":r===-1?'Hier':r===1?'Demain':r===-2?'Avant-hier':r===2?'Après-demain':null}
-const longDate=k=>new Date(k+'T12:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+  return r===0?'Today':r===-1?'Yesterday':r===1?'Tomorrow':r===-2?'2 days ago':r===2?'In 2 days':null}
+const longDate=k=>new Date(k+'T12:00').toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
 function goDay(k){viewDay=k;
   const nb=document.querySelector('nav button[data-view="v-today"]');
   if(nb.getAttribute('aria-current')!=='page'){keepDay=true;nb.click();keepDay=false}
@@ -582,10 +587,10 @@ function renderDay(){
   $('dLabel').textContent=rn&&Math.abs(rel)<=1?longDate(k):(rn?rn+' · ':'')+longDate(k);
   $('dPick').value=k;
   // en-tête de section
-  $('listTitle').textContent=mode==='today'?'Ma liste du jour':mode==='past'?"Ce que j'avais prévu":'Je prépare ma liste';
-  $('listHint').textContent=mode==='today'?'+10 XP par tâche':mode==='past'?'':'Elle sera prête le matin';
+  $('listTitle').textContent=mode==='today'?'My list for today':mode==='past'?'What I had planned':'Planning my list';
+  $('listHint').textContent=mode==='today'?'+10 XP per task':mode==='past'?'':'Ready for the morning';
   $('addForm').hidden=mode==='past';
-  $('newTask').placeholder=mode==='future'?'Prévoir une tâche pour '+(rel===1?'demain':'ce jour')+'…':'Ajouter une tâche…';
+  $('newTask').placeholder=mode==='future'?'Plan a task for '+(rel===1?'tomorrow':'this day')+'…':'Add a task…';
 
   // résumé / récap / report
   const list=dayTasks(k),done=list.filter(x=>x.done).length,miss=list.length-done;
@@ -593,53 +598,53 @@ function renderDay(){
   let sum='';
   if(mode==='past'){
     const w=S.hist[k]||0;
-    const msg=w>=5?'Grosse journée ! Tu peux être fière de toi.':w>0?'Tu as avancé ce jour-là. Chaque victoire compte.':"Journée calme. Pas grave : aujourd'hui est un nouveau départ.";
-    sum='<div class="recapday"><span class="label">Récap de la journée</span><div class="rstats"><div><b>'+done+'</b><small>tâches faites</small></div><div><b>'+chDone+'</b><small>défis réussis</small></div><div><b>'+w+'</b><small>Bravo gagnés</small></div></div><p>'+msg+'</p>'+
-      (miss?'<button class="btn small ghost" data-act="moveday" data-k="'+k+'">'+(miss>1?'Ramener les '+miss+' tâches pas finies':'Ramener la tâche pas finie')+" à aujourd'hui</button>":'')+'</div>';
+    const msg=w>=5?'Big day! You can be proud of yourself.':w>0?'You made progress that day. Every win counts.':"Quiet day. That's okay: today is a fresh start.";
+    sum='<div class="recapday"><span class="label">Day recap</span><div class="rstats"><div><b>'+done+'</b><small>tasks done</small></div><div><b>'+chDone+'</b><small>challenges</small></div><div><b>'+w+'</b><small>Bravos won</small></div></div><p>'+msg+'</p>'+
+      (miss?'<button class="btn small ghost" data-act="moveday" data-k="'+k+'">'+(miss>1?'Move the '+miss+' unfinished tasks':'Move the unfinished task')+" to today</button>":'')+'</div>';
   }else if(mode==='today'){
     const pend=pendingBefore(t).length;
-    if(pend)sum='<div class="carry"><p>Tu as '+pend+' tâche'+(pend>1?'s':'')+" pas finie"+(pend>1?'s':'')+" des jours d'avant. Pas de stress, on "+(pend>1?'les':'la')+" reprend ?</p><button class=\"btn small\" data-act=\"moveall\">"+(pend>1?'Les':'La')+" ramener ici</button></div>";
+    if(pend)sum='<div class="carry"><p>You have '+pend+' unfinished task'+(pend>1?'s':'')+" from earlier days. No stress, shall we pick "+(pend>1?'them':'it')+" up?</p><button class=\"btn small\" data-act=\"moveall\">Bring "+(pend>1?'them':'it')+" here</button></div>";
   }else{
-    sum='<div class="carry"><p>'+(rel===1?'Prépare demain ce soir : ':'Tu planifies à l\'avance : ')+'ton cerveau aura moins à décider le matin. Tu pourras cocher le jour venu.</p></div>';
+    sum='<div class="carry"><p>'+(rel===1?'Plan tomorrow tonight: ':'Planning ahead: ')+'your brain will have less to decide in the morning. You can check things off when the day comes.</p></div>';
   }
   $('dSummary').innerHTML=sum;
 
   // tâches
   const ul=$('tasks');
-  if(!list.length)ul.innerHTML='<li class="empty">'+(mode==='today'?'Ta liste est vide. Ajoute une seule petite chose pour commencer.':mode==='past'?'Aucune tâche ce jour-là.':'Rien de prévu pour l\'instant. Ajoute 1 à 3 tâches, pas plus.')+'</li>';
+  if(!list.length)ul.innerHTML='<li class="empty">'+(mode==='today'?'Your list is empty. Add just one small thing to get started.':mode==='past'?'No tasks that day.':'Nothing planned yet. Add 1 to 3 tasks, no more.')+'</li>';
   else ul.innerHTML=[...list].sort((a,b)=>a.done-b.done).map(t=>{
     const live=mode==='today';
-    const chk=live?'<button class="check" data-act="task" data-id="'+t.id+'" aria-label="Tâche faite">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>';
-    const steps=t.steps.length?'<ul class="steps">'+t.steps.map((s,i)=>'<li class="step'+(s.done?' done':'')+'">'+(live?'<button class="check" data-act="step" data-id="'+t.id+'" data-i="'+i+'" aria-label="Étape faite">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>')+'<span>'+esc(s.t)+'</span></li>').join('')+'</ul>':'';
+    const chk=live?'<button class="check" data-act="task" data-id="'+t.id+'" aria-label="Task done">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>';
+    const steps=t.steps.length?'<ul class="steps">'+t.steps.map((s,i)=>'<li class="step'+(s.done?' done':'')+'">'+(live?'<button class="check" data-act="step" data-id="'+t.id+'" data-i="'+i+'" aria-label="Step done">'+CHECK+'</button>':'<span class="check" aria-hidden="true">'+CHECK+'</span>')+'<span>'+esc(s.t)+'</span></li>').join('')+'</ul>':'';
     let tools='';
-    if(mode==='today'&&!t.done&&!t.steps.length)tools='<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Je découpe…':'Découper')+'</button>';
-    if(mode==='future'){tools=(!t.steps.length?'<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Je découpe…':'Découper')+'</button>':'')+'<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Faire aujourd\'hui</button>'}
-    if(mode==='past'&&!t.done)tools='<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Reporter à aujourd\'hui</button>';
-    const right=mode==='today'?'<span class="xp">+10</span>':mode==='future'?'<span class="tag">prévu</span>':t.done?'<span class="tag" style="color:var(--mint)">fait</span>':'<span class="tag" style="color:var(--muted)">pas fait</span>';
+    if(mode==='today'&&!t.done&&!t.steps.length)tools='<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Splitting…':'Split it')+'</button>';
+    if(mode==='future'){tools=(!t.steps.length?'<button class="btn small ghost" data-act="split" data-id="'+t.id+'">'+(t.splitting?'Splitting…':'Split it')+'</button>':'')+'<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Do it today</button>'}
+    if(mode==='past'&&!t.done)tools='<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Move to today</button>';
+    const right=mode==='today'?'<span class="xp">+10</span>':mode==='future'?'<span class="tag">planned</span>':t.done?'<span class="tag" style="color:var(--mint)">done</span>':'<span class="tag" style="color:var(--muted)">not done</span>';
     const cls='task'+(t.done?' done':'')+(mode==='future'?' plan':'')+(mode==='past'&&!t.done?' miss':'');
-    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext">'+esc(t.text)+'</span>'+(t.ex?'<span class="ex">exemple</span>':'')+right+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Supprimer">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
+    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext">'+esc(t.text)+'</span>'+(t.ex?'<span class="ex">example</span>':'')+right+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Delete">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
   }).join('');
 
   // défis
   $('chalSec').hidden=mode==='future';
   $('addChal').hidden=mode!=='today';
-  $('chalTitle').textContent=mode==='today'?'Défis du jour':'Défis de ce jour';
-  $('chalHint').textContent=mode==='today'?'+15 XP par défi':chDone+' / '+S.challenges.length+' réussis';
+  $('chalTitle').textContent=mode==='today'?"Today's challenges":"That day's challenges";
+  $('chalHint').textContent=mode==='today'?'+15 XP per challenge':chDone+' / '+S.challenges.length+' done';
   $('chal').innerHTML=S.challenges.map(c=>{
     const n=ccount(c,k),full=n>=c.target;
     const pips=c.target>1?'<div class="pips">'+Array.from({length:c.target},(_,i)=>'<i'+(i<n?' class="on"':'')+'></i>').join('')+'</div>':'';
-    const btn=mode!=='today'?'':full?'<div class="chbtns"><button class="btn small ghost" data-act="cminus" data-id="'+c.id+'">Annuler</button></div>':'<div class="chbtns"><button class="btn small" data-act="cplus" data-id="'+c.id+'">'+(c.target>1?'+1':'Fait !')+'</button></div>';
+    const btn=mode!=='today'?'':full?'<div class="chbtns"><button class="btn small ghost" data-act="cminus" data-id="'+c.id+'">Undo</button></div>':'<div class="chbtns"><button class="btn small" data-act="cplus" data-id="'+c.id+'">'+(c.target>1?'+1':'Done!')+'</button></div>';
     return '<div class="ch'+(full?' full':'')+'"><div class="dot" style="background:'+c.color+'">'+esc(c.name.charAt(0).toUpperCase())+'</div><h4>'+esc(c.name)+'</h4><div class="cnt">'+n+' <small>/ '+c.target+'</small></div>'+pips+btn+'</div>';
   }).join('');
 
   // rendez-vous du jour
   const evs=S.events.filter(e=>e.date===k).sort((a,b)=>a.time.localeCompare(b.time));
   $('dayEvSec').hidden=!evs.length;
-  $('dayEvents').innerHTML=evs.map(e=>'<li class="ev'+(new Date(e.date+'T'+e.time)<Date.now()?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+'<small>'+(e.alarm?'Alarme activée':'Sans alarme')+'</small></span></li>').join('');
+  $('dayEvents').innerHTML=evs.map(e=>'<li class="ev'+(new Date(e.date+'T'+e.time)<Date.now()?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+'<small>'+(e.alarm?'Alarm on':'No alarm')+'</small></span></li>').join('');
 }
 function render(){
-  $('today').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
-  const L=level();$('lvTitle').textContent='Niveau '+L.lv;$('lvBar').style.width=L.pct+'%';
+  $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
+  const L=level();$('lvTitle').textContent='Level '+L.lv;$('lvBar').style.width=L.pct+'%';
   $('xpNow').textContent=S.xp;$('winsToday').textContent=S.winsToday;$('streak').textContent=S.streak;
   const p=dayProgress(todayStr());$('dayPct').textContent=p+'%';$('dayRing').style.strokeDashoffset=226.2*(1-p/100);
 
@@ -647,35 +652,35 @@ function render(){
   renderAgenda();renderWeek();
 
   $('badges').innerHTML=BADGES.map(b=>'<div class="badge'+(S.badges.includes(b.id)?'':' locked')+'"><div class="medal">'+b.l+'</div><b>'+b.n+'</b><small>'+b.d+'</small></div>').join('');
-  $('badgeCount').textContent=S.badges.length+' / '+BADGES.length+' trophées';
-  $('totals').textContent=S.wins+' victoires au total · '+S.focusTotal+' sessions focus · '+S.xp+' XP';
+  $('badgeCount').textContent=S.badges.length+' / '+BADGES.length+' trophies';
+  $('totals').textContent=S.wins+' wins in total · '+S.focusTotal+' focus sessions · '+S.xp+' XP';
   $('waves').style.display=S.sound?'':'none';$('vwaves').style.display=S.voice?'':'none';
-  $('soundBtn').setAttribute('aria-label',S.sound?'Couper le son':'Activer le son');
-  $('voiceBtn').setAttribute('aria-label',S.voice?'Couper la voix du coach':'Activer la voix du coach');
+  $('soundBtn').setAttribute('aria-label',S.sound?'Mute sound':'Turn sound on');
+  $('voiceBtn').setAttribute('aria-label',S.voice?"Mute the coach's voice":"Turn on the coach's voice");
 }
 function renderAgenda(){
   const end=addDays(wkStart,6);
-  $('wkTitle').textContent=wkStart.toLocaleDateString('fr-FR',{day:'numeric',month:'short'})+' – '+end.toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+  $('wkTitle').textContent=wkStart.toLocaleDateString('en-US',{day:'numeric',month:'short'})+' – '+end.toLocaleDateString('en-US',{day:'numeric',month:'short'});
   const t=todayStr();
   $('week').innerHTML=Array.from({length:7},(_,i)=>{const d=addDays(wkStart,i),k=ymd(d),has=S.events.some(e=>e.date===k);
     return '<button class="day'+(k===t?' today':'')+'" data-act="day" data-k="'+k+'" aria-pressed="'+(k===selDay)+'"><small>'+DOW[i]+'</small><b>'+d.getDate()+'</b><i class="'+(has?'has':'')+'"></i></button>'}).join('');
   const sd=new Date(selDay+'T12:00');
-  $('dayTitle').textContent=selDay===t?"Aujourd'hui":sd.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+  $('dayTitle').textContent=selDay===t?'Today':sd.toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
   const evs=S.events.filter(e=>e.date===selDay).sort((a,b)=>a.time.localeCompare(b.time));
   const now=Date.now();
   $('events').innerHTML=evs.length?evs.map(e=>{const past=new Date(e.date+'T'+e.time)<now;
-    return '<li class="ev'+(past?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+(e.ex?' <span class="ex">exemple</span>':'')+'<small>'+(e.alarm?(past?'Alarme passée':'Alarme activée'):'Sans alarme')+'</small></span><button class="bell" data-act="bell" data-id="'+e.id+'" aria-pressed="'+!!e.alarm+'" aria-label="Alarme">'+BELL+'</button><button class="x" data-act="evdel" data-id="'+e.id+'" aria-label="Supprimer">×</button></li>'}).join('')
-    :'<li class="empty">Rien de prévu. Profite, ou ajoute un rendez-vous ci-dessous.</li>';
+    return '<li class="ev'+(past?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+(e.ex?' <span class="ex">example</span>':'')+'<small>'+(e.alarm?(past?'Alarm passed':'Alarm on'):'No alarm')+'</small></span><button class="bell" data-act="bell" data-id="'+e.id+'" aria-pressed="'+!!e.alarm+'" aria-label="Alarm">'+BELL+'</button><button class="x" data-act="evdel" data-id="'+e.id+'" aria-label="Delete">×</button></li>'}).join('')
+    :'<li class="empty">Nothing planned. Enjoy, or add an appointment below.</li>';
   if(!$('evDate').value||$('evDate').dataset.auto)($('evDate').value=selDay,$('evDate').dataset.auto='1');
 }
 function renderWeek(){
   const w=weekStats(),max=Math.max(3,...w.arr.map(a=>a.n)),t=todayStr();
-  $('bars').innerHTML=w.arr.map((a,i)=>'<div data-act="goday" data-k="'+a.k+'" role="button" aria-label="Voir '+longDate(a.k)+'"><em>'+(a.n||'')+'</em><span class="'+(a.n?'on':'')+(a.k===t?' now':'')+'" style="height:'+Math.max(6,a.n/max*80)+'px"></span><small>'+DOW[i].charAt(0)+'</small></div>').join('');
-  $('wkDays').textContent=w.days+' / 7 jours actifs';
+  $('bars').innerHTML=w.arr.map((a,i)=>'<div data-act="goday" data-k="'+a.k+'" role="button" aria-label="See '+longDate(a.k)+'"><em>'+(a.n||'')+'</em><span class="'+(a.n?'on':'')+(a.k===t?' now':'')+'" style="height:'+Math.max(6,a.n/max*80)+'px"></span><small>'+DOW[i].charAt(0)+'</small></div>').join('');
+  $('wkDays').textContent=w.days+' / 7 active days';
   const wk=weekKey(new Date()),c=$('chest');
-  if(S.weekClaimed===wk){c.className='chest ok';c.innerHTML='<p>Coffre de la semaine ouvert. Nouvelle semaine lundi, nouveau coffre.</p>'}
-  else if(w.days>=5){c.className='chest ok';c.innerHTML='<p>Semaine gagnée ! Ton coffre de la semaine t\'attend.</p><button class="btn small" data-act="claim">Ouvrir +50 XP</button>'}
-  else{c.className='chest';c.innerHTML='<p>Encore '+(5-w.days)+' jour'+(5-w.days>1?'s':'')+' actif'+(5-w.days>1?'s':'')+' pour ouvrir le coffre de la semaine (+50 XP). Une seule victoire par jour suffit.</p>'}
+  if(S.weekClaimed===wk){c.className='chest ok';c.innerHTML='<p>Weekly chest opened. New week on Monday, new chest.</p>'}
+  else if(w.days>=5){c.className='chest ok';c.innerHTML='<p>Week won! Your weekly chest is waiting.</p><button class="btn small" data-act="claim">Open +50 XP</button>'}
+  else{c.className='chest';c.innerHTML='<p>'+(5-w.days)+' more active day'+(5-w.days>1?'s':'')+' to open the weekly chest (+50 XP). Just one win a day is enough.</p>'}
 }
 
 // ---------- actions ----------
@@ -684,7 +689,7 @@ const AGENT_ID='agent_0001m5apq852esmar2hh3wnrx96r';
 async function askAI(prompt){
   const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
   let d={};try{d=await r.json()}catch(e){}
-  if(!r.ok||d.erreur){const e=new Error(d.erreur||('Erreur '+r.status));e.code=d.code||(r.status===429?'rate_limited':'ai_error');throw e}
+  if(!r.ok||d.erreur){const e=new Error(d.erreur||('Error '+r.status));e.code=d.code||(r.status===429?'rate_limited':'ai_error');throw e}
   return d;
 }
 document.addEventListener('click',e=>{
@@ -718,10 +723,10 @@ async function splitTask(id){
   const t=S.tasks.find(x=>x.id===id);if(!t||t.splitting)return;
   let steps=null;
   t.splitting=true;render();
-  try{const r=await askAI('Tu aides une personne avec un TDAH. Découpe cette tâche en 3 à 5 micro-étapes très concrètes, chacune faisable en moins de 10 minutes ; la première doit prendre moins de 2 minutes pour démarrer facilement. Réponds uniquement en JSON : {"etapes":["...","..."]}, étapes courtes en français (8 mots max chacune).\n\nTâche : '+t.text);
+  try{const r=await askAI('You help a person with ADHD. Break this task into 3 to 5 very concrete micro-steps, each doable in under 10 minutes; the first must take under 2 minutes so it is easy to start. Answer only in JSON: {"etapes":["...","..."]}, short steps in English (8 words max each).\n\nTask: '+t.text);
     const arr=Array.isArray(r)?r:r.etapes;if(Array.isArray(arr)&&arr.length)steps=arr.slice(0,6).map(x=>String(x).slice(0,80))}catch(e){}
   t.splitting=false;
-  if(!steps)steps=["Préparer ce qu'il faut (2 min)",'Faire juste 5 minutes','Terminer et ranger'];
+  if(!steps)steps=['Get what you need ready (2 min)','Do just 5 minutes','Finish and tidy up'];
   t.steps=steps.map(s=>({t:s,done:false}));S.splits++;checkBadges();save();render();
 }
 $('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim();if(!v)return;if(dayMode(viewDay)==='past')return;S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:viewDay});i.value='';save();render()});
@@ -768,9 +773,9 @@ function checkAlarms(){
   const ev=S.events.find(e=>e.alarm&&!e.fired&&new Date(e.date+'T'+e.time).getTime()<=now&&now-new Date(e.date+'T'+e.time).getTime()<30*60e3);
   if(!ev)return;
   ringing=ev.id;const pop=$('pop');pop.className='pop alarm';
-  pop.innerHTML='<h2>C\'est l\'heure !</h2><p>'+esc(ev.title)+' · '+ev.time+'</p><div class="abtns"><button class="btn" data-act="go" data-id="'+ev.id+'">C\'est parti (+10 XP)</button><button class="btn ghost" data-act="snooze" data-id="'+ev.id+'">Dans 5 min</button></div>';
+  pop.innerHTML='<h2>It\'s time!</h2><p>'+esc(ev.title)+' · '+ev.time+'</p><div class="abtns"><button class="btn" data-act="go" data-id="'+ev.id+'">Let\'s go (+10 XP)</button><button class="btn ghost" data-act="snooze" data-id="'+ev.id+'">In 5 min</button></div>';
   $('overlay').hidden=false;alarmTone();clearInterval(ringLoop);ringLoop=setInterval(alarmTone,4000);
-  speak("C'est l'heure : "+ev.title+". Tu peux le faire, on y va ensemble.");
+  speak("It's time: "+ev.title+". You can do it, let's go together.");
 }
 function handleAlarm(id,act){
   clearInterval(ringLoop);ringing=null;const ev=S.events.find(x=>x.id===id);
@@ -784,26 +789,26 @@ setInterval(()=>{const was=viewDay===S.date;if(rollDay()){if(was)viewDay=todaySt
 // ---------- coach ----------
 let turns=[],busy=false,ctl=null,greeted=false;
 function ctx(){
-  const td=dayTasks(todayStr()),tmr=dayTasks(ymd(addDays(new Date(),1))).map(t=>'- '+t.text).join('\n')||'(rien)';
-  const open=td.filter(t=>!t.done).map(t=>'- '+t.text).join('\n')||'(aucune)';
-  const done=td.filter(t=>t.done).map(t=>'- '+t.text).join('\n')||'(aucune)';
+  const td=dayTasks(todayStr()),tmr=dayTasks(ymd(addDays(new Date(),1))).map(t=>'- '+t.text).join('\n')||'(nothing)';
+  const open=td.filter(t=>!t.done).map(t=>'- '+t.text).join('\n')||'(none)';
+  const done=td.filter(t=>t.done).map(t=>'- '+t.text).join('\n')||'(none)';
   const ch=S.challenges.map(c=>'- '+c.name+' : '+ccount(c,todayStr())+'/'+c.target).join('\n');
   const y=ymd(addDays(new Date(),-1)),yd=dayTasks(y);
-  const t=todayStr();const evs=S.events.filter(e=>e.date>=t).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+e.time+' '+e.title).join('\n')||'(rien)';
-  return 'Date et heure : '+new Date().toLocaleString('fr-FR')+'\nNiveau '+level().lv+', '+S.xp+' XP, série '+S.streak+' jours, '+S.winsToday+" victoires aujourd'hui.\nTâches à faire :\n"+open+'\nTâches faites :\n'+done+'\nPrévu pour demain :\n'+tmr+'\nHier : '+yd.filter(t=>t.done).length+' tâches faites sur '+yd.length+', '+(S.hist[y]||0)+' victoires.\nDéfis :\n'+ch+'\nAgenda à venir :\n'+evs;
+  const t=todayStr();const evs=S.events.filter(e=>e.date>=t).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+e.time+' '+e.title).join('\n')||'(nothing)';
+  return 'Date and time: '+new Date().toLocaleString('en-US')+'\nLevel '+level().lv+', '+S.xp+' XP, streak '+S.streak+' days, '+S.winsToday+" wins today.\nTasks to do:\n"+open+'\nTasks done:\n'+done+'\nPlanned for tomorrow:\n'+tmr+'\nYesterday: '+yd.filter(t=>t.done).length+' tasks done out of '+yd.length+', '+(S.hist[y]||0)+' wins.\nChallenges:\n'+ch+'\nUpcoming calendar:\n'+evs;
 }
-const RULES="Tu es Nour, le coach vocal de l'application Bravo, pour des personnes qui ont un TDAH. Tes réponses sont LUES À VOIX HAUTE : écris comme on parle, en français, 2 à 4 phrases courtes maximum, pas de listes, pas de markdown, pas d'emoji. Sois chaleureux, énergique, jamais culpabilisant. Base-toi sur le fonctionnement du TDAH : récompense immédiate, micro-étapes, démarrer par une action de moins de 2 minutes, minuteur de 5 ou 15 minutes. Termine souvent par UNE seule action concrète à faire maintenant. Tu n'es pas médecin : pas de diagnostic ni de conseil sur les médicaments ; si la personne parle de détresse grave, encourage-la avec douceur à contacter un proche ou un professionnel. ";
+const RULES="You are Nour, the voice coach of the Bravo app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
 function bubble(role,text){
   const d=document.createElement('div');d.className='msg '+(role==='user'?'me':'ai');
   const s=document.createElement('span');s.className='txt';s.textContent=text;d.appendChild(s);
-  if(role!=='user'){const b=document.createElement('button');b.className='say';b.dataset.act='say';b.textContent='▶ Réécouter';b.hidden=true;d.appendChild(document.createElement('br'));d.appendChild(b)}
+  if(role!=='user'){const b=document.createElement('button');b.className='say';b.dataset.act='say';b.textContent='▶ Play again';b.hidden=true;d.appendChild(document.createElement('br'));d.appendChild(b)}
   $('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight;return d;
 }
 function greet(){
   if(greeted)return;greeted=true;
   const open=dayTasks(todayStr()).filter(t=>!t.done).length;
-  const h=new Date().getHours();const hi=h<12?'Bonjour':h<18?'Coucou':'Bonsoir';
-  const txt=hi+' ! Je suis Nour, ton coach. Tu as '+open+' tâche'+(open>1?'s':'')+' sur ta liste. Dis-moi ce qui te bloque, ou touche un bouton en dessous.';
+  const h=new Date().getHours();const hi=h<12?'Good morning':h<18?'Hi':'Good evening';
+  const txt=hi+"! I'm Nour, your coach. You have "+open+' task'+(open===1?'':'s')+" on your list. Tell me what's blocking you, or tap a button below.";
   const d=bubble('assistant',txt);d.querySelector('.say').hidden=false;
   turns.push({role:'assistant',content:txt});
 }
@@ -811,56 +816,56 @@ function doAction(a){
   if(!a||!a.type)return '';
   if(a.type==='ajouter_tache'){const v=String(a.texte||'').trim().slice(0,120);if(!v)return 'texte vide';
     let da=String(a.date||'');if(!/^\d{4}-\d{2}-\d{2}$/.test(da)||da<todayStr())da=todayStr();
-    S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:da});save();render();return 'ok, tâche ajoutée pour le '+da}
+    S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:da});save();render();return 'ok, task added for '+da}
   if(a.type==='ajouter_rendez_vous'){const ti=String(a.titre||'').trim().slice(0,80),da=String(a.date||''),he=String(a.heure||'');
     if(!ti||!/^\d{4}-\d{2}-\d{2}$/.test(da)||!/^\d{1,2}:\d{2}$/.test(he))return 'format invalide';
-    addEvent(ti,da,he.padStart(5,'0'),true);render();return 'ok, rendez-vous ajouté avec alarme'}
+    addEvent(ti,da,he.padStart(5,'0'),true);render();return 'ok, appointment added with alarm'}
   if(a.type==='cocher_tache'){const q=String(a.texte||'').toLowerCase().trim();
     const t=dayTasks(todayStr()).find(x=>!x.done&&(x.text.toLowerCase().includes(q)||q.includes(x.text.toLowerCase())));
-    if(!t)return "tâche introuvable dans la liste d'aujourd'hui";
-    t.done=true;t.steps.forEach(z=>z.done=true);win(10);return 'ok, cochée : '+t.text}
+    if(!t)return "task not found in today's list";
+    t.done=true;t.steps.forEach(z=>z.done=true);win(10);return 'ok, checked off: '+t.text}
   return 'action inconnue';
 }
 async function ask(q){
   if(busy||!q)return;
   busy=true;$('coachSend').disabled=true;S.talked=(S.talked||0)+1;checkBadges();save();
   bubble('user',q);turns.push({role:'user',content:q});
-  const d=bubble('assistant','…');const txt=d.querySelector('.txt');$('coachState').textContent='Nour réfléchit…';
-  const hist=turns.slice(-12).map(m=>(m.role==='user'?'Personne : ':'Nour : ')+m.content).join('\n');
-  const prompt=RULES+"\n\nTu peux aussi agir dans l'application. Actions possibles : ajouter_tache {texte, date AAAA-MM-JJ facultative}, ajouter_rendez_vous {titre, date AAAA-MM-JJ, heure HH:MM}, cocher_tache {texte}. N'ajoute une action que si la personne le demande clairement. Demain = "+ymd(addDays(new Date(),1))+".\n\nRéponds UNIQUEMENT en JSON : {\"reponse\":\"ce que tu dis\",\"actions\":[{\"type\":\"ajouter_tache\",\"texte\":\"...\"}]} (actions vide si rien à faire).\n\nÉtat actuel de la personne :\n"+ctx()+"\n\nConversation :\n"+hist+"\nNour :";
+  const d=bubble('assistant','…');const txt=d.querySelector('.txt');$('coachState').textContent='Nour is thinking…';
+  const hist=turns.slice(-12).map(m=>(m.role==='user'?'Person: ':'Nour: ')+m.content).join('\n');
+  const prompt=RULES+"\n\nYou can also act in the app. Possible actions: ajouter_tache {texte, optional date YYYY-MM-DD}, ajouter_rendez_vous {titre, date YYYY-MM-DD, heure HH:MM}, cocher_tache {texte}. Only add an action if the person clearly asks. Tomorrow = "+ymd(addDays(new Date(),1))+". Write the task text in English.\n\nAnswer ONLY in JSON: {\"reponse\":\"what you say\",\"actions\":[{\"type\":\"ajouter_tache\",\"texte\":\"...\"}]} (empty actions if nothing to do).\n\nPerson's current state:\n"+ctx()+"\n\nConversation:\n"+hist+"\nNour:";
   try{const r=await askAI(prompt);
     const acts=Array.isArray(r.actions)?r.actions.slice(0,5):[];acts.forEach(doAction);
-    const rep=String(r.reponse||r.text||'').trim()||"C'est noté !";
+    const rep=String(r.reponse||r.text||'').trim()||'Got it!';
     txt.textContent=rep;turns.push({role:'assistant',content:rep});
     d.querySelector('.say').hidden=false;speak(rep)}
   catch(e){
-    txt.textContent=e&&e.code==='rate_limited'?"J'ai besoin d'une petite pause. Réessaie dans un instant.":"Oups, je n'ai pas pu répondre. Vérifie ta connexion et réessaie.";
+    txt.textContent=e&&e.code==='rate_limited'?"I need a little break. Try again in a moment.":"Oops, I couldn't answer. Check your connection and try again.";
     turns.pop();
-  }finally{busy=false;$('coachSend').disabled=false;$('coachState').textContent="Je t'écoute, sans jugement.";$('chat').scrollTop=$('chat').scrollHeight}
+  }finally{busy=false;$('coachSend').disabled=false;$('coachState').textContent="I'm listening, no judgment.";$('chat').scrollTop=$('chat').scrollHeight}
 }
 // ---------- appel vocal (ElevenLabs) ----------
 let conv=null,callBusy=false;
 const callSt=t=>{$('callSt').textContent=t};
-function callLive(on){$('callBtn').classList.toggle('live',on);$('callTitle').textContent=on?'Raccrocher':'Parler à Nour';$('avatar').classList.toggle('talking',false)}
+function callLive(on){$('callBtn').classList.toggle('live',on);$('callTitle').textContent=on?'Hang up':'Talk to Nour';$('avatar').classList.toggle('talking',false)}
 $('callBtn').addEventListener('click',async()=>{
   if(callBusy)return;callBusy=true;
-  if(conv){try{await conv.endSession()}catch(_){}conv=null;callLive(false);callSt('Appuie et parle : elle te répond à voix haute');callBusy=false;return}
-  callSt('Connexion…');
+  if(conv){try{await conv.endSession()}catch(_){}conv=null;callLive(false);callSt('Tap and talk: she answers out loud');callBusy=false;return}
+  callSt('Connecting…');
   try{
     try{speechSynthesis.cancel()}catch(_){}
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("cette fenêtre bloque le micro. Ouvre Bravo dans Safari ou Chrome.");
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("this window blocks the microphone. Open Bravo in Safari or Chrome.");
     await navigator.mediaDevices.getUserMedia({audio:true});
     const {Conversation}=await import('https://esm.sh/@elevenlabs/client');
     const tool=type=>p=>doAction(Object.assign({type},p||{}));
     conv=await Conversation.startSession({agentId:AGENT_ID,connectionType:'websocket',
-      dynamicVariables:{prenom:'',maintenant:new Date().toLocaleString('fr-FR',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}),demain:ymd(addDays(new Date(),1)),etat:ctx()},
+      dynamicVariables:{prenom:'',maintenant:new Date().toLocaleString('en-US',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}),demain:ymd(addDays(new Date(),1)),etat:ctx()},
       clientTools:{ajouter_tache:tool('ajouter_tache'),ajouter_rendez_vous:tool('ajouter_rendez_vous'),cocher_tache:tool('cocher_tache')},
-      onModeChange:({mode})=>{callSt(mode==='speaking'?'Nour te parle…':'Je t\'écoute, parle-moi');$('avatar').classList.toggle('talking',mode==='speaking')},
-      onDisconnect:()=>{conv=null;callLive(false);callSt('Appel terminé. Appuie pour reparler.')},
-      onError:m=>callSt('Petit souci : '+m)});
+      onModeChange:({mode})=>{callSt(mode==='speaking'?'Nour is talking…':"I'm listening, talk to me");$('avatar').classList.toggle('talking',mode==='speaking')},
+      onDisconnect:()=>{conv=null;callLive(false);callSt('Call ended. Tap to talk again.')},
+      onError:m=>callSt('Small problem: '+m)});
     S.talked=(S.talked||0)+1;checkBadges();save();
-    callLive(true);callSt("Je t'écoute, parle-moi");
-  }catch(err){conv=null;callLive(false);callSt(err&&err.name==='NotAllowedError'?'Autorise le micro dans les réglages du navigateur.':"Impossible de lancer l'appel : "+(err&&err.message||err))}
+    callLive(true);callSt("I'm listening, talk to me");
+  }catch(err){conv=null;callLive(false);callSt(err&&err.name==='NotAllowedError'?'Allow the microphone in your browser settings.':"Couldn't start the call: "+(err&&err.message||err))}
   callBusy=false;
 });
 $('coachForm').addEventListener('submit',e=>{e.preventDefault();const v=$('coachInput').value.trim();$('coachInput').value='';ask(v)});
@@ -872,13 +877,13 @@ $('chips').addEventListener('click',e=>{const c=e.target.closest('[data-q]');if(
 let dur=15*60,left=dur,end=null,tick=null;
 const tTxt=$('tTxt'),tRing=$('tRing'),tStart=$('tStart');
 function drawT(){tTxt.textContent=Math.floor(left/60)+':'+pad(left%60);tRing.style.strokeDashoffset=552.9*(1-left/dur)}
-function stopT(){clearInterval(tick);tick=null;end=null;tStart.textContent='Démarrer'}
+function stopT(){clearInterval(tick);tick=null;end=null;tStart.textContent='Start'}
 tStart.addEventListener('click',()=>{
-  if(tick){stopT();tStart.textContent='Reprendre';return}
+  if(tick){stopT();tStart.textContent='Resume';return}
   if(audio&&audio.state==='suspended')audio.resume();
   end=Date.now()+left*1000;tStart.textContent='Pause';
   tick=setInterval(()=>{left=Math.max(0,Math.round((end-Date.now())/1000));drawT();
-    if(left===0){stopT();S.focusTotal++;win(20,'focus');speak('Bravo, session terminée. Prends une petite pause.');left=dur;drawT()}},250);
+    if(left===0){stopT();S.focusTotal++;win(20,'focus');speak('Bravo, session done. Take a little break.');left=dur;drawT()}},250);
 });
 $('tReset').addEventListener('click',()=>{stopT();left=dur;drawT()});
 document.querySelectorAll('.durs button').forEach(b=>b.addEventListener('click',()=>{
