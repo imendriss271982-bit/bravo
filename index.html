@@ -1326,9 +1326,8 @@ document.querySelectorAll('.durs button').forEach(b=>b.addEventListener('click',
 // ---------- welcome + affirmation ----------
 // Daily greeting: Noor says one of these every time the app opens (recorded in her energetic ElevenLabs voice).
 const AFF=[
-  {t:"I'm Noor, your coach! Today is going to be a <em>success</em>, I promise.",a:'sons/noor-day1.mp3',say:"I'm Noor, your coach! Today is going to be a success, I promise. You can do it, you are strong. Don't give up! Let's go!"},
-  {t:"I'm Noor, your coach! Today we win together, <em>one small step at a time.</em>",a:'sons/noor-day2.mp3',say:"I'm Noor, your coach! Today we win together, one small step at a time. You are strong, don't give up! Let's go!"},
-  {t:"It's Noor, your coach! Your day is going to be <em>amazing</em>, and I'm with you all the way.",a:'sons/noor-day3.mp3',say:"It's Noor, your coach! Your day is going to be amazing. You can do it, you are strong, and I'm with you all the way. Let's go, champion!"}
+  {t:"One small step, and <em>you win!</em>",a:'sons/noor-short1.mp3',say:"One small step, and you win! Let's go!"},
+  {t:"Small step, <em>big win!</em>",a:'sons/noor-short2.mp3',say:"Small step, big win! Go on!"}
 ];
 // Recorded "Hi <name>!" clips (lowercase first name → file)
 const NAME_AUDIO={imen:'sons/noor-hi-imen.mp3'};
@@ -1410,7 +1409,7 @@ function showAff(){
   $('affKicker').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
   $('affHi').innerHTML='Hi <b>'+esc(S.name)+'</b>!';
   $('affText').innerHTML=AFF[i].t;
-  $('affPower').innerHTML='<em>You can do it, '+esc(S.name)+'.</em> You are strong. <em>Don\'t give up!</em>';
+  $('affPower').innerHTML='';$('affPower').hidden=true;
   $('affText').style.animation='none';void $('affText').offsetWidth;$('affText').style.animation='';
   $('splash').classList.remove('ob');$('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
   {const n=$('affNoor');n.style.animation='none';void n.offsetWidth;n.style.animation='';setTimeout(()=>nour('wave',2200),700)}
