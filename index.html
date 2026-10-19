@@ -1324,16 +1324,14 @@ document.querySelectorAll('.durs button').forEach(b=>b.addEventListener('click',
 
 
 // ---------- welcome + affirmation ----------
+// Daily greeting: Noor says one of these every time the app opens (recorded in her energetic ElevenLabs voice).
 const AFF=[
-  "Your day is going to be beautiful. I know you can really do it today. <em>You are the champion.</em>",
-  "One small step is still a win. <em>Start with just one</em> and Noor will cheer for you.",
-  "Your brain is fast, creative and full of ideas. <em>Today it works for you.</em>",
-  "You don't have to be perfect today. <em>You just have to begin.</em>",
-  "Every task you finish today is a Bravo. <em>Go collect them!</em>",
-  "Yesterday is done. Today is a fresh start, and <em>you've got this.</em>",
-  "Progress, not perfection. <em>You are doing better than you think.</em>",
-  "Breathe in. Pick one thing. <em>You are stronger than the to-do list.</em>"
+  {t:"I'm Noor, your coach! Today is going to be a <em>success</em>, I promise.",a:'sons/noor-day1.mp3',say:"I'm Noor, your coach! Today is going to be a success, I promise. You can do it, you are strong. Don't give up! Let's go!"},
+  {t:"I'm Noor, your coach! Today we win together, <em>one small step at a time.</em>",a:'sons/noor-day2.mp3',say:"I'm Noor, your coach! Today we win together, one small step at a time. You are strong, don't give up! Let's go!"},
+  {t:"It's Noor, your coach! Your day is going to be <em>amazing</em>, and I'm with you all the way.",a:'sons/noor-day3.mp3',say:"It's Noor, your coach! Your day is going to be amazing. You can do it, you are strong, and I'm with you all the way. Let's go, champion!"}
 ];
+// Recorded "Hi <name>!" clips (lowercase first name → file)
+const NAME_AUDIO={imen:'sons/noor-hi-imen.mp3'};
 let enVoice=null;
 function loadEn(){try{const v=speechSynthesis.getVoices();enVoice=v.find(x=>/^en/i.test(x.lang)&&/female|samantha|karen|google us|zira|aria|jenny/i.test(x.name))||v.find(x=>/^en/i.test(x.lang))||null}catch(e){}}
 try{loadEn();speechSynthesis.addEventListener('voiceschanged',loadEn)}catch(e){}
@@ -1342,7 +1340,7 @@ function hiWord(){const h=new Date().getHours();return h<5?'Hi':h<12?'Good morni
 // ---------- onboarding: Noor welcomes you, asks your name, shows the app ----------
 // Recorded lines in Noor's ElevenLabs voice (no first name inside, so they work for everyone).
 // To use recorded clips, drop them in sons/ and list them here, e.g. {hello:'sons/noor-hello.mp3',meet:'sons/noor-meet.mp3',tasks:…,agenda:…,coach:…}
-const OB_AUDIO={};
+const OB_AUDIO={hello:'sons/noor-hello.mp3',meet:'sons/noor-meet.mp3',tasks:'sons/noor-tasks.mp3',agenda:'sons/noor-agenda.mp3',coach:'sons/noor-coach.mp3'};
 const IC={tasks:'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>',
   agenda:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
   coach:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>'};
@@ -1407,11 +1405,11 @@ $('obNext').addEventListener('click',()=>{if(obStep<TOUR.length-1)obTour(obStep+
 $('obSkip').addEventListener('click',obDone);
 function showAff(){
   let i;
-  if(S.affIdx<0)i=0;else{do{i=Math.floor(Math.random()*AFF.length)}while(AFF.length>1&&i===S.affIdx)}
+  if(S.affIdx<0||S.affIdx>=AFF.length)i=0;else{do{i=Math.floor(Math.random()*AFF.length)}while(AFF.length>1&&i===S.affIdx)}
   S.affIdx=i;save();
   $('affKicker').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
-  $('affHi').innerHTML=esc(hiWord())+' <b>'+esc(S.name)+'</b>!';
-  $('affText').innerHTML=AFF[i];
+  $('affHi').innerHTML='Hi <b>'+esc(S.name)+'</b>!';
+  $('affText').innerHTML=AFF[i].t;
   $('affPower').innerHTML='<em>You can do it, '+esc(S.name)+'.</em> You are strong. <em>Don\'t give up!</em>';
   $('affText').style.animation='none';void $('affText').offsetWidth;$('affText').style.animation='';
   $('splash').classList.remove('ob');$('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
@@ -1420,16 +1418,29 @@ function showAff(){
 }
 // Noor says the greeting out loud with the person's first name.
 // Browsers only allow sound after a touch: we try right away, and if it's blocked we speak at the first touch.
-function affLine(){return hiWord()+' '+S.name+'! '+$('affText').textContent+' '+$('affPower').textContent}
-let affSpoken=false;
+function affLine(){const A=AFF[S.affIdx]||AFF[0];return hiWord()+' '+S.name+'! '+A.say}
+let affSpoken=false,affAud=null;
+function affPlay(srcs,onfail){
+  if(affAud){try{affAud.pause()}catch(e){}}
+  let k=0,iv=0;const next=()=>{clearInterval(iv);if(k>=srcs.length){talk(false);return}
+    const a=new Audio(srcs[k++]);affAud=a;
+    a.onplay=()=>{affSpoken=true;talk(true);clearInterval(iv);iv=setInterval(()=>mouthKick(.35+Math.random()*.55),140)};
+    a.onended=next;a.onerror=()=>{clearInterval(iv);if(!affSpoken)onfail();else next()};
+    a.play().catch(err=>{clearInterval(iv);talk(false);if(!(err&&err.name==='NotAllowedError'))onfail()})};
+  next();
+}
 function affSay(){affSpoken=false;
-  if(!S.voice&&S.voice!==undefined)return;
-  try{const u=new SpeechSynthesisUtterance(affLine());u.lang='en-US';if(enVoice)u.voice=enVoice;u.rate=1.02;u.pitch=1.15;
-    u.onstart=()=>{affSpoken=true;try{talk(true);mouthKick(.5)}catch(e){}};u.onboundary=e=>{try{mouthKick(Math.min(.95,.35+(e.charLength||4)*.06))}catch(x){}};u.onend=u.onerror=()=>{try{talk(false)}catch(e){}};
-    ssSpeak(u)}catch(e){}
+  if(S.voice===false)return;
+  ssStop();
+  const A=AFF[S.affIdx]||AFF[0],nm=NAME_AUDIO[String(S.name||'').trim().toLowerCase()];
+  const device=()=>{try{const u=new SpeechSynthesisUtterance(affLine());u.lang='en-US';if(enVoice)u.voice=enVoice;u.rate=1.08;u.pitch=1.25;
+    u.onstart=()=>{affSpoken=true;talk(true);mouthKick(.5)};u.onboundary=e=>mouthKick(Math.min(.95,.35+(e.charLength||4)*.06));
+    u.onend=u.onerror=()=>talk(false);ssSpeak(u)}catch(e){}};
+  affPlay((nm?[nm]:[]).concat(A.a),device);
   const retry=e=>{tapHint(false);if(!affSpoken&&!$('splash').hidden&&!$('spAff').hidden&&!(e&&e.target&&e.target.closest&&e.target.closest('#affGo')))affSay()};
   setTimeout(()=>{if(!affSpoken){tapHint(true);document.addEventListener('click',retry,{once:true,capture:true});document.addEventListener('touchend',retry,{once:true,capture:true})}},900);
 }
+function affHush(){if(affAud){try{affAud.pause()}catch(e){}affAud=null}ssStop();talk(false)}
 $('nameInput').addEventListener('input',()=>{$('nameErr').textContent=''});
 $('nameForm').addEventListener('submit',e=>{
   e.preventDefault();const v=$('nameInput').value.trim().replace(/\s+/g,' ');
@@ -1437,7 +1448,7 @@ $('nameForm').addEventListener('submit',e=>{
   S.name=v;save();render();try{$('nameInput').blur()}catch(e){}
   if(!obEdit)obMeet();else{obStop();$('splash').classList.remove('ob');$('splash').hidden=true}
 });
-$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;nourSay('v-today');setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
+$('affGo').addEventListener('click',()=>{affHush();$('splash').hidden=true;nourSay('v-today');setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
 $('affListen').addEventListener('click',e=>{e.stopPropagation();affSay()});$('affNoor').addEventListener('click',e=>{e.stopPropagation();affSay()});
 $('helloBtn').addEventListener('click',showName);
 if(!S.name||!S.onboarded)showName();else showAff();

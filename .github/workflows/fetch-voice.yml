@@ -1,0 +1,28 @@
+# Downloads Noor's recorded voice clips listed in sons/fetch.txt into sons/, then removes the list.
+name: Fetch Noor voice clips
+on:
+  push:
+    paths: ['sons/fetch.txt']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download clips
+        run: |
+          while read -r name url; do
+            [ -z "$name" ] && continue
+            curl -fsSL -o "sons/$name" "$url"
+            echo "$name: $(stat -c%s "sons/$name") bytes"
+          done < sons/fetch.txt
+          git rm -q sons/fetch.txt
+      - name: Commit
+        run: |
+          git config user.name "Imen Driss"
+          git config user.email "imendriss271982@gmail.com"
+          git add sons
+          git commit -m "Add Noor's recorded voice clips"
+          git push
