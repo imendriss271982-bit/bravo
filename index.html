@@ -507,6 +507,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
     <div class="kicker" id="affKicker"></div>
     <h1 id="affHi"></h1>
     <p class="aff" id="affText"></p>
+    <p class="aff" id="affPower" style="margin-top:-8px"></p>
     <div class="row2">
       <button class="btn go" id="affGo" type="button">Let's go!</button>
       <button class="listen" id="affListen" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>Hear it</button>
@@ -1030,7 +1031,7 @@ document.querySelectorAll('.durs button').forEach(b=>b.addEventListener('click',
 
 // ---------- welcome + affirmation ----------
 const AFF=[
-  "Your day is going to be beautiful. I know you can really do it today. <em>You are the champion.</em> Don't give up.",
+  "Your day is going to be beautiful. I know you can really do it today. <em>You are the champion.</em>",
   "One small step is still a win. <em>Start with just one</em> and Bravo will cheer for you.",
   "Your brain is fast, creative and full of ideas. <em>Today it works for you.</em>",
   "You don't have to be perfect today. <em>You just have to begin.</em>",
@@ -1056,13 +1057,14 @@ function showAff(){
   $('affKicker').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
   $('affHi').innerHTML=esc(hiWord())+' <b>'+esc(S.name)+'</b>!';
   $('affText').innerHTML=AFF[i];
+  $('affPower').innerHTML='<em>You can do it, '+esc(S.name)+'.</em> You are strong. <em>Don\'t give up!</em>';
   $('affText').style.animation='none';void $('affText').offsetWidth;$('affText').style.animation='';
   $('spName').hidden=true;$('spAff').hidden=false;$('splash').hidden=false;
   affSay();
 }
 // Nour says the greeting out loud with the person's first name.
 // Browsers only allow sound after a touch: we try right away, and if it's blocked we speak at the first touch.
-function affLine(){return hiWord()+' '+S.name+'! '+$('affText').textContent+' You are strong, '+S.name+'. You can do it!'}
+function affLine(){return hiWord()+' '+S.name+'! '+$('affText').textContent+' '+$('affPower').textContent}
 let affSpoken=false;
 function affSay(){affSpoken=false;
   if(!S.voice&&S.voice!==undefined)return;
