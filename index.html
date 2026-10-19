@@ -68,6 +68,25 @@
 .pturn{animation:pTurn .45s ease-out both;transform-origin:left center}
 @keyframes pTurn{from{opacity:0;transform:perspective(1100px) rotateY(-24deg) translateX(18px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.nour *,.nour,.pturn{animation:none!important;transition:none!important}.nfx{display:none}}
+
+/* ===== Nour dock: bigger face + speech bubble on every page ===== */
+.ndock{position:fixed;right:max(12px,calc(env(safe-area-inset-right,0px) + 10px));bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;align-items:flex-end;gap:8px;pointer-events:none}
+.ndock>*{pointer-events:auto}
+.ndock .fab{position:relative;right:auto;bottom:auto;width:84px;height:84px;flex:none;--u:1.5px;border-width:3px}
+.ndock .fab .nlabel{bottom:-4px;font-size:11px;padding:2px 8px}
+.fab.talking{border-color:var(--sun);box-shadow:0 0 26px rgba(255,46,147,.8),0 0 12px rgba(34,229,255,.6)}
+.fab.talking .mouth,.stage.talking .mouth{animation:speakbob 1.1s ease-in-out infinite}
+.nbubble{position:relative;max-width:min(270px,calc(100vw - 130px));margin-bottom:22px;padding:12px 14px 10px;border-radius:18px 18px 4px 18px;background:#fff;color:#1B0E3D;box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 14px rgba(34,229,255,.45);animation:nPop .3s ease-out}
+.nbubble::after{content:"";position:absolute;right:-7px;bottom:10px;border:8px solid transparent;border-left-color:#fff;border-right:0}
+.nbubble[hidden]{display:none}
+.nbubble p{margin:0 18px 8px 0;font-weight:700;font-size:14.5px;line-height:1.35}
+.nbubble p b{color:#7209B7}
+.nchips{display:flex;flex-wrap:wrap;gap:6px}
+.nchips button{border:0;border-radius:99px;padding:7px 11px;font-weight:800;font-size:12.5px;background:linear-gradient(135deg,#FF2E93,#7209B7);color:#fff}
+.nchips button.ghost{background:#EEE8FF;color:#3A0CA3}
+.nx{position:absolute;top:4px;right:6px;border:0;background:none;font-size:20px;line-height:1;color:#8A7FB0;padding:4px}
+@keyframes nPop{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.nbubble{animation:none}.fab.talking .mouth{animation:none}}
 </style>
 <title>Bravo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -547,7 +566,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   </section>
 </div>
 
-<button class="fab nour" id="fab" type="button" aria-label="Talk to coach Nour"><span class="nface"><img src="nour-face.jpg" alt="" width="54" height="54"></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Nour</span></button>
+<div class="ndock" id="ndock"><div class="nbubble" id="nBubble" hidden role="status" aria-live="polite"><button class="nx" id="nClose" type="button" aria-label="Close">×</button><p id="nText"></p><div class="nchips" id="nChips"></div></div><button class="fab nour" id="fab" type="button" aria-label="Talk to coach Nour"><span class="nface"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Nour</span></button></div>
 <nav aria-label="Navigation">
   <div class="in">
     <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
@@ -700,7 +719,7 @@ let frVoice=null;
 function loadVoices(){try{const v=speechSynthesis.getVoices();frVoice=v.find(x=>/^en/i.test(x.lang)&&/samantha|female|zira|google us|aria|jenny/i.test(x.name))||v.find(x=>/^en-(US|GB)/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}catch(e){}}
 try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
 let mouthR=0,mouthF=3,mouthLvl=0,mouthPulse=0,mouthOn=false,mouthLast=0,mouthHold=0;
-function mouthSet(i){if(i===mouthF)return;const im=document.querySelectorAll('#mouth img');if(!im.length)return;im[mouthF].classList.remove('on');im[i].classList.add('on');mouthF=i}
+function mouthSet(i){if(i===mouthF)return;document.querySelectorAll('.mouth').forEach(m=>{const im=m.querySelectorAll('img');if(im[mouthF])im[mouthF].classList.remove('on');if(im[i])im[i].classList.add('on')});mouthF=i}
 // pulse = one syllable/word "kick" for the browser voice (no volume data there)
 function mouthKick(strength){mouthPulse=Math.max(mouthPulse,strength||.32)}
 function mouthLoop(on){mouthOn=!!on;cancelAnimationFrame(mouthR);
@@ -720,7 +739,7 @@ function mouthLoop(on){mouthOn=!!on;cancelAnimationFrame(mouthR);
     mouthHold-=dt;if(want!==mouthF&&mouthHold<=0){mouthSet(want);mouthHold=60}
     mouthR=requestAnimationFrame(tick)};
   mouthR=requestAnimationFrame(tick)}
-function talk(on){mouthLoop(!!on);try{$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
+function talk(on){mouthLoop(!!on);try{$('fab').classList.toggle('talking',!!on);$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
 function speak(text,excited){
   if(!S.voice||!text)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[*#_]/g,''));
@@ -997,9 +1016,63 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
   $('fab').hidden=b.dataset.view==='v-coach';
   const pv=$(b.dataset.view);pv.classList.remove('pturn');void pv.offsetWidth;pv.classList.add('pturn');
   nourForView(b.dataset.view);
+  clearTimeout(window._nsT);window._nsT=setTimeout(()=>nourSay(b.dataset.view),650);
   scrollTo(0,0);
 }));
 $('fab').addEventListener('click',()=>{document.querySelector('nav button[data-view="v-coach"]').click();setTimeout(()=>{try{$('coachInput').focus()}catch(e){}},50)});
+
+// ---------- Nour talks when you change page ----------
+const nb=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function goView(v){document.querySelector('nav button[data-view="'+v+'"]').click()}
+const NACT={
+  addTask:()=>{goView('v-today');setTimeout(()=>{try{$('newTask').focus()}catch(e){}},400)},
+  addEv:()=>{setTimeout(()=>{try{$('evTitle').focus();$('evTitle').scrollIntoView({block:'center',behavior:'smooth'})}catch(e){}},100)},
+  focus:()=>goView('v-focus'),
+  start:()=>{try{if(!$('tStart').textContent.match(/pause/i))$('tStart').click()}catch(e){}},
+  coach:()=>goView('v-coach'),
+  today:()=>goView('v-today'),
+  close:()=>nourHush()
+};
+function nourLine(v){
+  const t=todayStr(),hi=S.name?S.name+', ':'';
+  if(v==='v-today'){
+    const ts=dayTasks(t),done=ts.filter(x=>x.done).length,open=ts.filter(x=>!x.done),late=pendingBefore(t).length;
+    if(!ts.length)return{say:hi+"your list is empty today. What's one small thing you want to do? Do you want to add a task?",html:hi+"your list is empty today. <b>One small thing</b> you want to do?",chips:[['Add a task','addTask'],['Plan with me','coach']]};
+    if(!open.length)return{say:'Wow, '+hi+'all '+ts.length+' tasks are done! You are a champion. Do you want to add something else?',html:'Wow! <b>All '+ts.length+' tasks done.</b> You are a champion! Add something else?',chips:[['Add a task','addTask'],['Not now','close','ghost']]};
+    const nx=open[0].text;
+    const head=done?hi+'you finished '+done+' task'+(done>1?'s':'')+', bravo! '+open.length+' left. ':hi+'you have '+open.length+' task'+(open.length>1?'s':'')+' today. ';
+    return{say:head+'Next one: '+nx+'. You can do it! Do you want to start a focus timer, or add something else?',
+      html:(done?'<b>'+done+' done</b>, bravo! '+open.length+' left.':'<b>'+open.length+' task'+(open.length>1?'s':'')+'</b> today.')+' Next: <b>'+nb(nx)+'</b>. You can do it!'+(late?' ('+late+' from before too)':''),
+      chips:[['Start focus','focus'],['Add a task','addTask'],['Not now','close','ghost']]};
+  }
+  if(v==='v-agenda'){
+    const now=t+' '+new Date().toTimeString().slice(0,5);
+    const nx=S.events.filter(e=>(e.date+' '+e.time)>=now).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time))[0];
+    const when=e=>e.date===t?'today at '+e.time:e.date===ymd(addDays(new Date(),1))?'tomorrow at '+e.time:e.date+' at '+e.time;
+    if(!nx)return{say:"Your calendar is empty. Don't forget to put your appointments here, and I'll ring the alarm for you. Do you want to add one?",html:"Your calendar is empty. <b>Don't forget</b> to add your appointments, I'll ring the alarm for you!",chips:[['Add appointment','addEv'],['Not now','close','ghost']]};
+    return{say:'Your next appointment: '+nx.title+', '+when(nx)+". Don't forget to put your new appointments in the calendar. Do you want to add one?",html:'Next: <b>'+nb(nx.title)+'</b>, '+when(nx)+". Don't forget to add new ones here!",chips:[['Add appointment','addEv'],['Not now','close','ghost']]};
+  }
+  if(v==='v-focus')return{say:'Pick a time and press start. I will stay quiet so you can focus. Just one step at a time.',html:'Pick a time and press <b>Start</b>. I stay quiet while you focus.',chips:[['Start now','start'],['Not now','close','ghost']]};
+  if(v==='v-troph'){
+    const st=S.streak||0;
+    return{say:(hi?hi:'')+'you have '+S.xp+' XP'+(st?' and a '+st+' day streak':'')+'. Bravo! Do you want to win more today?',html:'<b>'+S.xp+' XP</b>'+(st?' · <b>'+st+'-day</b> streak':'')+'. Bravo! Win more today?',chips:[['My tasks','today'],['Not now','close','ghost']]};
+  }
+  return null;
+}
+let nHideT=0;
+function nourHush(){clearTimeout(nHideT);$('nBubble').hidden=true;try{speechSynthesis.cancel()}catch(e){};talk(false)}
+function nourSay(v){
+  clearTimeout(nHideT);
+  if(v==='v-coach'){$('nBubble').hidden=true;return}
+  const L=nourLine(v);if(!L)return;
+  $('nText').innerHTML=L.html;
+  $('nChips').innerHTML=L.chips.map(c=>'<button type="button" data-na="'+c[1]+'"'+(c[2]?' class="'+c[2]+'"':'')+'>'+c[0]+'</button>').join('');
+  const b=$('nBubble');b.hidden=false;b.style.animation='none';void b.offsetWidth;b.style.animation='';
+  speak(L.say);
+  nHideT=setTimeout(()=>{$('nBubble').hidden=true},Math.max(9000,L.say.length*85));
+}
+$('nChips').addEventListener('click',e=>{const a=e.target.closest('[data-na]');if(!a)return;const f=NACT[a.dataset.na];$('nBubble').hidden=true;try{speechSynthesis.cancel()}catch(x){};talk(false);if(f)f()});
+$('nClose').addEventListener('click',nourHush);
 $('resetAll').addEventListener('click',()=>{$('confirmReset').hidden=false});
 $('noReset').addEventListener('click',()=>{$('confirmReset').hidden=true});
 $('yesReset').addEventListener('click',()=>{const s=S.sound,v=S.voice;S=defaults();S.tasks=[];S.events=[];S.sound=s;S.voice=v;save();render();$('confirmReset').hidden=true});
@@ -1181,7 +1254,7 @@ $('nameForm').addEventListener('submit',e=>{
   const first=!S.name;S.name=v;save();render();
   if(first)showAff();else{$('splash').hidden=true}
 });
-$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
+$('affGo').addEventListener('click',()=>{try{speechSynthesis.cancel()}catch(e){};$('splash').hidden=true;setTimeout(()=>{nour('wave',2000);nourSay('v-today')},400);if(S.sound)chime(false)});
 $('affListen').addEventListener('click',e=>{e.stopPropagation();speakEn(affLine())});
 $('helloBtn').addEventListener('click',showName);
 if(!S.name)showName();else showAff();
