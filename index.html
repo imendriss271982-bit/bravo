@@ -294,7 +294,9 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .stage .mbox{overflow:hidden;border-radius:50%;width:168px;height:168px;background:#1D1042}
 .stage .mbox::before{display:none}
 .mouth{position:absolute;inset:0}
-.mouth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.mouth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 70ms linear;will-change:opacity}
+.mouth img{z-index:1}
+.mouth img:last-child{z-index:0;opacity:1}
 .mouth img.on{opacity:1}
 @keyframes speakbob{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-2px) rotate(-1.2deg) scale(1.01)}50%{transform:translateY(1px) rotate(0) scale(1)}75%{transform:translateY(-2px) rotate(1.2deg) scale(1.01)}}
 @keyframes idle{0%,100%{transform:scale(1)}50%{transform:scale(1.015) translateY(-1px)}}
@@ -626,22 +628,34 @@ const alarmTone=()=>tone([880,660,880,660,880,660,1047],.22,.2,'square');
 let frVoice=null;
 function loadVoices(){try{const v=speechSynthesis.getVoices();frVoice=v.find(x=>/^en/i.test(x.lang)&&/samantha|female|zira|google us|aria|jenny/i.test(x.name))||v.find(x=>/^en-(US|GB)/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}catch(e){}}
 try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
-let mouthT=null,mouthF=3;
+let mouthR=0,mouthF=3,mouthLvl=0,mouthPulse=0,mouthOn=false,mouthLast=0,mouthHold=0;
 function mouthSet(i){if(i===mouthF)return;const im=document.querySelectorAll('#mouth img');if(!im.length)return;im[mouthF].classList.remove('on');im[i].classList.add('on');mouthF=i}
-function mouthLoop(on){clearInterval(mouthT);mouthT=null;
-  if(!on){mouthSet(3);return}
-  let last=3;
-  mouthT=setInterval(()=>{let v=null;try{if(typeof conv!=='undefined'&&conv&&conv.getOutputVolume)v=conv.getOutputVolume()}catch(e){}
-    let f;
-    if(v!=null)f=v>.22?0:v>.11?1:v>.035?2:3;
-    else{const seq=[0,1,2,1,0,2,3,1,0,2];f=seq[Math.floor(Math.random()*seq.length)];if(f===last)f=(f+1)%3}
-    last=f;mouthSet(f)},95)}
+// pulse = one syllable/word "kick" for the browser voice (no volume data there)
+function mouthKick(strength){mouthPulse=Math.max(mouthPulse,strength||.32)}
+function mouthLoop(on){mouthOn=!!on;cancelAnimationFrame(mouthR);
+  if(!on){mouthLvl=0;mouthPulse=0;mouthSet(3);return}
+  mouthLast=performance.now();mouthHold=0;
+  const tick=now=>{if(!mouthOn)return;
+    const dt=Math.min(64,now-mouthLast);mouthLast=now;
+    let v=null;try{if(typeof conv!=='undefined'&&conv&&conv.getOutputVolume)v=conv.getOutputVolume()}catch(e){}
+    let target;
+    if(v!=null)target=Math.min(1,v*3.2);           // ElevenLabs: real voice volume
+    else{mouthPulse*=Math.pow(.86,dt/16);          // browser voice: decaying word kicks + natural wobble
+      target=mouthPulse+.06*(1+Math.sin(now/55))*(mouthPulse>.05?1:0)}
+    // envelope: open fast, close a bit slower -> smooth, not jittery
+    const k=target>mouthLvl?.55:.28;mouthLvl+=(target-mouthLvl)*(1-Math.pow(1-k,dt/16));
+    const want=mouthLvl>.62?0:mouthLvl>.36?1:mouthLvl>.14?2:3;
+    // hold each shape ≥ ~60 ms so it never flickers between two frames
+    mouthHold-=dt;if(want!==mouthF&&mouthHold<=0){mouthSet(want);mouthHold=60}
+    mouthR=requestAnimationFrame(tick)};
+  mouthR=requestAnimationFrame(tick)}
 function talk(on){mouthLoop(!!on);try{$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
 function speak(text,excited){
   if(!S.voice||!text)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[*#_]/g,''));
     u.lang='en-US';if(frVoice)u.voice=frVoice;u.rate=excited?1.12:1.02;u.pitch=excited?1.35:1.05;
-    u.onstart=()=>talk(true);
+    u.onstart=()=>{talk(true);mouthKick(.5)};
+    u.onboundary=e=>{const w=(e.charLength||4);mouthKick(Math.min(.95,.35+w*.06));if(w>5)setTimeout(()=>mouthKick(.45),140)};
     u.onend=u.onerror=()=>talk(false);
     speechSynthesis.speak(u)}catch(e){}
 }
