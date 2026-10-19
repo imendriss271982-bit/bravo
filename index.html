@@ -268,11 +268,32 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .splash .listen svg{width:16px;height:16px}
 .splash .err{color:var(--coral);font-weight:700;font-size:13px;min-height:1em;margin:0}
 @media (prefers-reduced-motion:reduce){.splash .sun,.splash .aff{animation:none}}
+
+/* mascot Nour (arcade pixel style) */
+.mascot{shape-rendering:crispEdges;overflow:visible}
+.mascot .m-open{display:none}
+.mascot .bod{animation:bob 1.6s steps(2,end) infinite;transform-origin:center}
+.mascot .m-eyes{animation:blink 4.2s steps(1,end) infinite;transform-box:fill-box;transform-origin:center}
+.talking .mascot .bod{animation:bob .36s steps(2,end) infinite}
+.talking .mascot .m-open{display:inline;animation:flap .26s steps(1,end) infinite}
+.talking .mascot .m-closed{animation:flap .26s steps(1,end) infinite reverse}
+@keyframes bob{0%{transform:translateY(0)}100%{transform:translateY(-8px)}}
+@keyframes flap{0%{opacity:1}50%{opacity:0}}
+@keyframes blink{0%,94%{transform:scaleY(1)}95%,100%{transform:scaleY(.15)}}
+.stage{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 0 2px}
+.stage .mbox{width:150px;height:150px;border-radius:28px;background:radial-gradient(circle at 50% 60%,#3A1A7A 0%,#1D1042 70%);border:2px solid var(--cyan);box-shadow:var(--glow-cyan),inset 0 0 30px rgba(255,46,147,.25);display:grid;place-items:center;position:relative}
+.stage .mbox svg{width:118px;height:118px;filter:drop-shadow(0 0 8px rgba(255,46,147,.55))}
+.stage .mbox::before{content:"";position:absolute;inset:6px;border-radius:22px;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 4px);pointer-events:none}
+.stage.talking .mbox{border-color:var(--sun);box-shadow:var(--glow-pink),inset 0 0 30px rgba(255,46,147,.35)}
+.stage b{font-family:var(--f-display);font-size:22px}
+.stage small{color:var(--muted);font-weight:700;font-size:13px}
+.avatar .mascot,.fab .mascot{filter:none}
+@media (prefers-reduced-motion:reduce){.mascot .bod,.mascot .m-eyes,.talking .mascot .bod{animation:none}}
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="sbp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><symbol id="brainSym" viewBox="0 0 200 175"><g fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="mascotSym" viewBox="0 0 160 160"><rect x="70" y="0" width="20" height="10" fill="#FFE23B"/><rect x="70" y="10" width="20" height="10" fill="#FFE23B"/><rect x="80" y="20" width="10" height="10" fill="#B30F62"/><rect x="30" y="30" width="100" height="10" fill="#FF2E93"/><rect x="20" y="40" width="120" height="90" fill="#FF2E93"/><rect x="30" y="130" width="100" height="10" fill="#FF2E93"/><rect x="30" y="40" width="20" height="10" fill="#FF7AB8"/><rect x="30" y="50" width="10" height="20" fill="#FF7AB8"/><rect x="20" y="120" width="120" height="10" fill="#B30F62"/><rect x="30" y="130" width="100" height="10" fill="#B30F62"/><rect x="10" y="80" width="10" height="30" fill="#B30F62"/><rect x="140" y="80" width="10" height="30" fill="#B30F62"/><rect x="40" y="140" width="20" height="10" fill="#B30F62"/><rect x="100" y="140" width="20" height="10" fill="#B30F62"/><rect x="40" y="50" width="80" height="60" fill="#12082B"/><rect x="50" y="60" width="20" height="20" fill="#22E5FF"/><rect x="90" y="60" width="20" height="20" fill="#22E5FF"/><rect x="40" y="90" width="10" height="10" fill="#FF7AB8"/><rect x="110" y="90" width="10" height="10" fill="#FF7AB8"/><rect x="60" y="90" width="40" height="10" fill="#22E5FF"/></symbol><filter id="sbp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><symbol id="brainSym" viewBox="0 0 200 175"><g fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
 <div class="wrap">
   <header class="top">
     <div>
@@ -364,13 +385,17 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 
   <!-- VIEW: coach -->
   <section id="v-coach" class="sec" hidden>
+    <div class="stage" id="stage" aria-hidden="true">
+      <div class="mbox"><svg class="mascot" viewBox="0 0 160 160"><g class="bod"><rect x="70" y="0" width="20" height="10" fill="#FFE23B"/><rect x="70" y="10" width="20" height="10" fill="#FFE23B"/><rect x="80" y="20" width="10" height="10" fill="#B30F62"/><rect x="30" y="30" width="100" height="10" fill="#FF2E93"/><rect x="20" y="40" width="120" height="90" fill="#FF2E93"/><rect x="30" y="130" width="100" height="10" fill="#FF2E93"/><rect x="30" y="40" width="20" height="10" fill="#FF7AB8"/><rect x="30" y="50" width="10" height="20" fill="#FF7AB8"/><rect x="20" y="120" width="120" height="10" fill="#B30F62"/><rect x="30" y="130" width="100" height="10" fill="#B30F62"/><rect x="10" y="80" width="10" height="30" fill="#B30F62"/><rect x="140" y="80" width="10" height="30" fill="#B30F62"/><rect x="40" y="140" width="20" height="10" fill="#B30F62"/><rect x="100" y="140" width="20" height="10" fill="#B30F62"/><rect x="40" y="50" width="80" height="60" fill="#12082B"/><g class="m-eyes"><rect x="50" y="60" width="20" height="20" fill="#22E5FF"/><rect x="90" y="60" width="20" height="20" fill="#22E5FF"/></g><rect x="40" y="90" width="10" height="10" fill="#FF7AB8"/><rect x="110" y="90" width="10" height="10" fill="#FF7AB8"/><g class="m-closed"><rect x="60" y="90" width="40" height="10" fill="#22E5FF"/></g><g class="m-open"><rect x="60" y="90" width="40" height="20" fill="#22E5FF"/><rect x="70" y="100" width="20" height="10" fill="#FF4D6D"/></g></g></svg></div>
+      <b>Nour</b><small id="stageSt">Your coach</small>
+    </div>
     <button class="call" id="callBtn" type="button">
       <span class="callorb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
       <span class="calltxt"><b id="callTitle">Talk to Nour</b><small id="callSt">Tap and talk: she answers out loud</small></span>
     </button>
     <div class="coach">
       <div class="coachhead">
-        <div class="avatar" id="avatar"><svg width="34" height="30" aria-hidden="true"><use href="#brainSym"/></svg></div>
+        <div class="avatar" id="avatar"><svg class="mascot" width="34" height="34" viewBox="0 0 160 160" aria-hidden="true"><use href="#mascotSym"/></svg></div>
         <div><b>Nour, your coach</b><span class="hint" id="coachState">I'm listening, no judgment.</span></div>
         <button class="iconbtn" id="voiceBtn" aria-label="Mute the coach's voice" title="Coach voice">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="vwaves" d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
@@ -430,7 +455,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
   </section>
 </div>
 
-<button class="fab" id="fab" type="button" aria-label="Talk to coach Nour"><svg width="38" height="34" aria-hidden="true"><use href="#brainSym"/></svg><span>Nour</span></button>
+<button class="fab" id="fab" type="button" aria-label="Talk to coach Nour"><svg class="mascot" width="34" height="34" viewBox="0 0 160 160" aria-hidden="true"><use href="#mascotSym"/></svg><span>Nour</span></button>
 <nav aria-label="Navigation">
   <div class="in">
     <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
@@ -580,12 +605,13 @@ const alarmTone=()=>tone([880,660,880,660,880,660,1047],.22,.2,'square');
 let frVoice=null;
 function loadVoices(){try{const v=speechSynthesis.getVoices();frVoice=v.find(x=>/^en/i.test(x.lang)&&/samantha|female|zira|google us|aria|jenny/i.test(x.name))||v.find(x=>/^en-(US|GB)/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null}catch(e){}}
 try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function talk(on){try{$('avatar').classList.toggle('talking',!!on);$('stage').classList.toggle('talking',!!on);$('stageSt').textContent=on?'Talking…':'Your coach'}catch(e){}}
 function speak(text,excited){
   if(!S.voice||!text)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[*#_]/g,''));
     u.lang='en-US';if(frVoice)u.voice=frVoice;u.rate=excited?1.12:1.02;u.pitch=excited?1.35:1.05;
-    u.onstart=()=>$('avatar').classList.add('talking');
-    u.onend=u.onerror=()=>$('avatar').classList.remove('talking');
+    u.onstart=()=>talk(true);
+    u.onend=u.onerror=()=>talk(false);
     speechSynthesis.speak(u)}catch(e){}
 }
 
@@ -912,7 +938,7 @@ async function ask(q){
 // ---------- appel vocal (ElevenLabs) ----------
 let conv=null,callBusy=false;
 const callSt=t=>{$('callSt').textContent=t};
-function callLive(on){$('callBtn').classList.toggle('live',on);$('callTitle').textContent=on?'Hang up':'Talk to Nour';$('avatar').classList.toggle('talking',false)}
+function callLive(on){$('callBtn').classList.toggle('live',on);$('callTitle').textContent=on?'Hang up':'Talk to Nour';talk(false)}
 $('callBtn').addEventListener('click',async()=>{
   if(callBusy)return;callBusy=true;
   if(conv){try{await conv.endSession()}catch(_){}conv=null;callLive(false);callSt('Tap and talk: she answers out loud');callBusy=false;return}
@@ -926,7 +952,7 @@ $('callBtn').addEventListener('click',async()=>{
     conv=await Conversation.startSession({agentId:AGENT_ID,connectionType:'websocket',
       dynamicVariables:{prenom:'',maintenant:new Date().toLocaleString('en-US',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}),demain:ymd(addDays(new Date(),1)),etat:ctx()},
       clientTools:{ajouter_tache:tool('ajouter_tache'),ajouter_rendez_vous:tool('ajouter_rendez_vous'),cocher_tache:tool('cocher_tache')},
-      onModeChange:({mode})=>{callSt(mode==='speaking'?'Nour is talking…':"I'm listening, talk to me");$('avatar').classList.toggle('talking',mode==='speaking')},
+      onModeChange:({mode})=>{callSt(mode==='speaking'?'Nour is talking…':"I'm listening, talk to me");talk(mode==='speaking')},
       onDisconnect:()=>{conv=null;callLive(false);callSt('Call ended. Tap to talk again.')},
       onError:m=>callSt('Small problem: '+m)});
     S.talked=(S.talked||0)+1;checkBadges();save();
