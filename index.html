@@ -343,7 +343,7 @@ select{-webkit-appearance:none;appearance:none}
 .badge small{font-size:11px;color:var(--muted);line-height:1.25}
 .note{background:var(--surface-2);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--muted)}
 nav{position:fixed;left:0;right:0;bottom:0;background:rgba(18,8,43,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(4px,env(safe-area-inset-left,0px));padding-right:max(4px,env(safe-area-inset-right,0px));z-index:5}
-nav .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end}
+nav .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end}
 nav button{border:0;background:none;padding:10px 2px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:800;color:var(--muted)}
 nav button svg{width:24px;height:24px}
 nav button[aria-current="page"]{color:var(--ink)}
@@ -448,6 +448,30 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .fab img{width:100%;height:100%;object-fit:cover;display:block}
 .fab .nlabel{position:absolute;z-index:3;bottom:3px;left:50%;transform:translateX(-50%);background:rgba(18,8,43,.8);padding:1px 6px;border-radius:99px;font-size:10px}
 @media (prefers-reduced-motion:reduce){.stage.talking .wave i{animation:none}}
+/* ===== Header menu (☰): Calendar, Focus, Pro (Business / Premium), Profile ===== */
+.topbtns{display:flex;gap:10px;align-items:center}
+.menubtn[aria-expanded="true"]{border-color:var(--sun);box-shadow:var(--glow-pink)}
+.menu{position:fixed;inset:0;z-index:30}
+.mback{position:absolute;inset:0;background:rgba(10,4,26,.6);backdrop-filter:blur(3px)}
+.mpanel{position:absolute;top:0;right:0;bottom:0;width:min(300px,84vw);background:var(--surface);border-left:1px solid var(--line);box-shadow:-10px 0 30px rgba(0,0,0,.5);padding:calc(18px + env(safe-area-inset-top,0px)) 16px 24px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;animation:mIn .22s ease-out}
+@keyframes mIn{from{transform:translateX(100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.mpanel{animation:none}}
+.mx{align-self:flex-end;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);font-size:24px;line-height:1;margin-bottom:12px}
+.mitem{display:flex;align-items:center;gap:14px;width:100%;border:0;background:none;padding:16px 14px;border-radius:16px;font-family:var(--f-display);font-weight:600;font-size:18px;text-align:left}
+.mitem svg{width:24px;height:24px;flex:none;color:var(--muted)}
+.mitem[aria-current="page"]{background:var(--surface-2)}
+.mitem[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px rgba(255,46,147,.8))}
+.mitem .chev{margin-left:auto;color:var(--muted);transition:transform .2s}
+.mitem[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.msub{display:flex;flex-direction:column;gap:6px;padding-left:22px}
+.msub .mitem{font-family:var(--f-body);font-size:15px;font-weight:700;padding:12px 14px;gap:10px;flex-wrap:wrap}
+#v-pro .tier{gap:16px}
+#v-pro[data-tier="premium"] .tier[data-tier="business"],#v-pro[data-tier="business"] .tier[data-tier="premium"]{display:none}
+.profrow{display:flex;align-items:center;gap:12px}
+.profrow .grow{flex:1;min-width:0}
+.profrow small{display:block;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.profrow b{font-family:var(--f-display);font-size:20px}
+
 /* ===== Pro page: plans, notes, expenses, shopping, projects ===== */
 .plans{display:flex;flex-direction:column;gap:12px}
 .plan{border-radius:20px;padding:16px 18px;background:var(--surface);border:2px solid var(--line);display:flex;flex-direction:column;gap:8px}
@@ -502,7 +526,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .done>.row .pic,.ch.full .pic{filter:saturate(.55);opacity:.7}
 .ch .mid h4{font-size:16px}
 
-/* nav: 7 even tabs, centred, raised Note button */
+/* nav: 4 even tabs, centred, raised Note button */
 nav{padding-bottom:max(6px,calc(env(safe-area-inset-bottom,0px) - 10px))}
 nav button{padding:10px 0 8px;gap:4px;font-size:10.5px;letter-spacing:-.1px;justify-content:flex-end;min-width:0;white-space:nowrap}
 nav button svg{width:23px;height:23px;flex:none}
@@ -560,12 +584,11 @@ p{line-height:1.5}
   <header class="top">
     <div>
       <div class="logo"><svg class="brain" width="46" height="40" viewBox="0 0 200 175" aria-hidden="true"><defs><filter id="lgp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="lgg" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#lgp)" fill="#FF2E93"><circle cx="68" cy="68" r="36"/><circle cx="104" cy="52" r="38"/><circle cx="142" cy="74" r="34"/><circle cx="56" cy="104" r="30"/><circle cx="98" cy="104" r="38"/><circle cx="142" cy="110" r="30"/><ellipse cx="124" cy="140" rx="14" ry="18"/></g><g fill="none" stroke="#B30F62" stroke-width="5" stroke-linecap="round"><path d="M58 62 q14 -14 30 -2"/><path d="M112 34 q-8 18 10 26"/><path d="M148 70 q-14 6 -10 22"/><path d="M46 108 q14 -8 22 6"/><path d="M152 118 q-10 -4 -18 8"/></g><path d="M62 98 L90 124 L150 58" fill="none" stroke="#FFE23B" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" filter="url(#lgg)"/></svg><span>ADHD <b class="w">Winner</b></span></div>
-      <button class="hello" id="helloBtn" type="button" aria-label="Change your name">Hi, <b id="helloName"></b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button>
-      <div class="date" id="today"></div>
     </div>
-    <button class="iconbtn" id="soundBtn" aria-label="Mute sound" title="Sound and voice">
+    <div class="topbtns"><button class="iconbtn" id="soundBtn" aria-label="Mute sound" title="Sound and voice">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="waves" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
     </button>
+    <button class="iconbtn menubtn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
   </header>
 
   <section class="wkpts" aria-label="Points this week">
@@ -734,10 +757,11 @@ p{line-height:1.5}
   </section>
 
   <!-- VIEW: pro (paid plans) -->
-  <section id="v-pro" class="sec" hidden>
-    <div class="sechead"><h3>Your plan</h3><span class="hint" id="planNow"></span></div>
+  <section id="v-pro" class="sec" hidden data-tier="premium">
+    <div class="sechead"><h3 id="proTitle">Premium</h3><span class="hint" id="planNow"></span></div>
     <div class="plans" id="plans"></div>
 
+    <div class="tier sec" data-tier="premium">
     <div class="sechead"><h3>Expenses</h3><span class="pbadge">Premium</span></div>
     <div class="locked" data-need="premium"><div class="lockbody pcard">
       <div class="total"><span>This month</span><b id="expTotal">0</b></div>
@@ -752,25 +776,49 @@ p{line-height:1.5}
       <div id="shop"></div>
       <button class="btn small ghost" id="shopClear" type="button" hidden>Remove checked items</button>
     </div></div>
+    </div>
 
+    <div class="tier sec" data-tier="business">
     <div class="sechead"><h3>Projects</h3><span class="pbadge biz">Business</span></div>
     <div class="locked" data-need="business"><div class="lockbody pcard">
       <form class="prow" id="projForm" autocomplete="off"><input type="text" id="projName" placeholder="New project (e.g. Open an online shop)" aria-label="Project name"><button class="btn" type="submit">Create</button></form>
       <div class="list" id="projs"></div>
     </div></div>
+    </div>
   </section>
+
+  <!-- VIEW: profile -->
+  <section id="v-profile" class="sec" hidden>
+    <div class="sechead"><h3>Profile</h3></div>
+    <div class="pcard">
+      <div class="profrow"><div class="grow"><small>Name</small><b id="profName"></b></div><button class="btn small ghost" id="helloBtn" type="button">Edit</button></div>
+      <div class="profrow"><div class="grow"><small>Plan</small><b id="profPlan"></b></div><button class="btn small ghost" type="button" data-view="v-pro" data-tier="premium">See plans</button></div>
+    </div>
+  </section>
+</div>
+
+<div class="menu" id="menu" hidden>
+  <div class="mback" data-mclose></div>
+  <div class="mpanel" role="dialog" aria-modal="true" aria-label="Menu">
+    <button class="mx" type="button" data-mclose aria-label="Close menu">×</button>
+    <button class="mitem" type="button" data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
+    <button class="mitem" type="button" data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
+    <button class="mitem" type="button" id="mPro" aria-expanded="false" aria-controls="mProSub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Pro<span class="chev" aria-hidden="true">▾</span></button>
+    <div class="msub" id="mProSub" hidden>
+      <button class="mitem" type="button" data-view="v-pro" data-tier="business"><span class="pbadge biz">Business</span>Projects &amp; milestones</button>
+      <button class="mitem" type="button" data-view="v-pro" data-tier="premium"><span class="pbadge">Premium</span>Notes, expenses, shopping</button>
+    </div>
+    <button class="mitem" type="button" data-view="v-profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button>
+  </div>
 </div>
 
 <div class="ndock" id="ndock"><div class="nbubble" id="nBubble" hidden role="status" aria-live="polite"><button class="nx" id="nClose" type="button" aria-label="Close">×</button><p id="nText"></p><div class="nchips" id="nChips"></div></div><button class="fab nour" id="fab" type="button" aria-label="Talk to coach Noor"><span class="nface"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Noor</span></button></div>
 <nav aria-label="Navigation">
   <div class="in">
     <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
-    <button data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
     <button data-view="v-coach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Coach</button>
     <button data-view="v-notes" class="navnote"><span class="nn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>Note</button>
-    <button data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
     <button data-view="v-troph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Week</button>
-    <button data-view="v-pro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Pro</button>
   </div>
 </nav>
 
@@ -1126,8 +1174,8 @@ function renderWkPts(){const m=monday(new Date()),t=todayStr();let tot=0,h='';
     h+='<button type="button" class="wkd'+(p?' has':'')+(k===t?' now':'')+'" data-k="'+k+'" aria-label="'+longDate(k)+': '+p+' points"><small>'+d.toLocaleDateString('en-US',{weekday:'short'}).slice(0,2)+'</small><b>'+p+'</b></button>'}
   $('wkPts').innerHTML=h;$('wkTotal').textContent=tot}
 function render(){
-  $('helloName').textContent=S.name||'friend';
-  $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
+  $('profName').textContent=S.name||'—';
+  $('profPlan').textContent=({free:'Free',premium:'Premium',business:'Business'})[S.plan||'free']||'Free';
   renderWkPts();
 
   renderDay();
@@ -1240,10 +1288,20 @@ $('wkNext').addEventListener('click',()=>{wkStart=addDays(wkStart,7);renderAgend
 $('soundBtn').addEventListener('click',()=>{S.sound=!S.sound;save();render()});
 $('voiceBtn').addEventListener('click',()=>{S.voice=!S.voice;if(!S.voice)try{speechSynthesis.cancel()}catch(e){};save();render()});
 
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));
-  b.setAttribute('aria-current','page');
-  ['v-today','v-agenda','v-coach','v-notes','v-focus','v-troph','v-pro'].forEach(v=>$(v).hidden=v!==b.dataset.view);
+const VIEWS=['v-today','v-agenda','v-coach','v-notes','v-focus','v-troph','v-pro','v-profile'];
+function openMenu(on){$('menu').hidden=!on;$('menuBtn').setAttribute('aria-expanded',String(on));
+  if(on){const pro=$('v-pro').hidden?null:$('v-pro').dataset.tier;const sub=!!pro;$('mProSub').hidden=!sub;$('mPro').setAttribute('aria-expanded',String(sub))}}
+$('menuBtn').addEventListener('click',()=>openMenu(true));
+document.querySelectorAll('[data-mclose]').forEach(x=>x.addEventListener('click',()=>openMenu(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('menu').hidden)openMenu(false)});
+$('mPro').addEventListener('click',()=>{const on=$('mProSub').hidden;$('mProSub').hidden=!on;$('mPro').setAttribute('aria-expanded',String(on))});
+document.querySelectorAll('nav button,[data-view]:not(nav button)').forEach(b=>b.addEventListener('click',()=>{
+  const v=b.dataset.view,tier=b.dataset.tier;
+  document.querySelectorAll('nav button,.mitem').forEach(x=>x.removeAttribute('aria-current'));
+  document.querySelectorAll('nav button[data-view="'+v+'"],.mitem[data-view="'+v+'"]'+(tier?'[data-tier="'+tier+'"]':'')).forEach(x=>x.setAttribute('aria-current','page'));
+  if(v==='v-pro'){const t=tier||$('v-pro').dataset.tier||'premium';$('v-pro').dataset.tier=t;$('proTitle').textContent=t==='business'?'Business':'Premium'}
+  openMenu(false);
+  VIEWS.forEach(x=>$(x).hidden=x!==v);
   if(b.dataset.view==='v-pro'||b.dataset.view==='v-notes')renderPro();
   if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
@@ -1257,7 +1315,7 @@ $('fab').addEventListener('click',()=>{document.querySelector('nav button[data-v
 
 // ---------- Noor talks when you change page ----------
 const nb=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function goView(v){document.querySelector('nav button[data-view="'+v+'"]').click()}
+function goView(v){document.querySelector('[data-view="'+v+'"]').click()}
 const NACT={
   addTask:()=>{goView('v-today');setTimeout(()=>{try{$('newTask').focus()}catch(e){}},400)},
   addEv:()=>{setTimeout(()=>{try{$('evTitle').focus();$('evTitle').scrollIntoView({block:'center',behavior:'smooth'})}catch(e){}},100)},
@@ -1625,9 +1683,10 @@ const RANK={free:0,premium:1,business:2};
 const hasPlan=need=>RANK[S.plan||'free']>=RANK[need];
 function renderPlans(){
   $('planNow').textContent='Now: '+PLANS.find(p=>p.id===(S.plan||'free')).name;
-  $('plans').innerHTML=PLANS.map(p=>{const on=(S.plan||'free')===p.id;
+  const tier=$('v-pro').dataset.tier||'premium';
+  $('plans').innerHTML=PLANS.filter(p=>p.id===tier).map(p=>{const on=(S.plan||'free')===p.id;
     return '<div class="plan '+(p.cls||'')+(on?' on':'')+'"><h4>'+p.name+(p.price?' <small>'+p.price+'</small>':'')+'</h4><ul>'+p.feat.map(f=>'<li>'+f+'</li>').join('')+'</ul>'+
-      (on?'<span class="hint">✓ Your plan</span>':'<button class="btn small'+(p.id==='free'?' ghost':'')+'" data-plan="'+p.id+'">'+(p.id==='free'?'Switch to Free':'Try '+p.name+' free')+'</button>')+'</div>'}).join('')+
+      (on?'<span class="hint">✓ Your plan</span>':hasPlan(p.id)?'<span class="hint">✓ Included in your plan</span>':'<button class="btn small'+(p.id==='free'?' ghost':'')+'" data-plan="'+p.id+'">'+(p.id==='free'?'Switch to Free':'Try '+p.name+' free')+'</button>')+'</div>'}).join('')+
     '<p class="note" style="margin:0">Payment is not open yet: during this early version, Premium and Business are a free trial.</p>';
 }
 function renderLocks(){
