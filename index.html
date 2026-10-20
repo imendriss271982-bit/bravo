@@ -332,7 +332,7 @@ select{-webkit-appearance:none;appearance:none}
 .badge small{font-size:11px;color:var(--muted);line-height:1.25}
 .note{background:var(--surface-2);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--muted)}
 nav{position:fixed;left:0;right:0;bottom:0;background:rgba(18,8,43,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(4px,env(safe-area-inset-left,0px));padding-right:max(4px,env(safe-area-inset-right,0px));z-index:5}
-nav .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+nav .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
 nav button{border:0;background:none;padding:10px 2px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:800;color:var(--muted)}
 nav button svg{width:24px;height:24px}
 nav button[aria-current="page"]{color:var(--ink)}
@@ -437,6 +437,54 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .fab img{width:100%;height:100%;object-fit:cover;display:block}
 .fab .nlabel{position:absolute;z-index:3;bottom:3px;left:50%;transform:translateX(-50%);background:rgba(18,8,43,.8);padding:1px 6px;border-radius:99px;font-size:10px}
 @media (prefers-reduced-motion:reduce){.stage.talking .wave i{animation:none}}
+/* ===== Pro page: plans, notes, expenses, shopping, projects ===== */
+.plans{display:flex;flex-direction:column;gap:12px}
+.plan{border-radius:20px;padding:16px 18px;background:var(--surface);border:2px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.plan.on{border-color:var(--cyan);box-shadow:var(--glow-cyan)}
+.plan.prem{background:linear-gradient(135deg,rgba(114,9,183,.55),rgba(247,37,133,.35))}
+.plan.biz{background:linear-gradient(135deg,rgba(58,12,163,.6),rgba(34,229,255,.25))}
+.plan h4{margin:0;font-size:19px;display:flex;align-items:center;gap:8px;justify-content:space-between}
+.plan h4 small{font-family:var(--f-body);font-size:12px;font-weight:800;color:var(--gold)}
+.plan ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6;color:var(--ink)}
+.plan .btn{align-self:flex-start;margin-top:4px}
+.pbadge{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--gold);color:#12082B}
+.pbadge.biz{background:var(--cyan)}
+.locked{position:relative}
+.locked>.lockbody{filter:blur(3px);opacity:.35;pointer-events:none;user-select:none}
+.lockcard{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px}
+.lockcard p{margin:0;font-weight:800}
+.pcard{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:14px}
+.rec{display:flex;align-items:center;gap:14px}
+.recbtn{flex:none;width:64px;height:64px;border-radius:50%;border:0;background:var(--sun);color:#fff;box-shadow:var(--glow-pink);display:grid;place-items:center}
+.recbtn svg{width:28px;height:28px}
+.recbtn.live{background:#E0115F;animation:breathe 1s ease-in-out infinite}
+.rec b{display:block;font-family:var(--f-display);font-size:17px}
+.rec small{color:var(--muted);font-weight:700}
+.item{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:0}
+.item .grow{flex:1;min-width:0;overflow-wrap:anywhere}
+.item .grow small{display:block;color:var(--muted);font-size:12px;font-weight:700;margin-top:2px}
+.item audio{width:100%;height:36px;margin-top:6px}
+.item.done .grow{text-decoration:line-through;opacity:.55}
+.chk{flex:none;width:30px;height:30px;border-radius:9px;border:2px solid var(--line);background:transparent;color:#12082B;font-weight:900;padding:0}
+.chk[aria-pressed="true"]{background:var(--mint);border-color:var(--mint)}
+.amt{font-family:var(--f-display);font-weight:700;white-space:nowrap}
+.total{display:flex;justify-content:space-between;align-items:baseline;font-weight:800}
+.total b{font-family:var(--f-display);font-size:26px;color:var(--gold)}
+.proj{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:0;overflow:hidden}
+.proj>summary{list-style:none;padding:18px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.proj>summary::-webkit-details-marker{display:none}
+.proj>summary .grow{flex:1;min-width:0}
+.proj>summary h4{margin:0;font-size:18px}
+.proj>summary small{color:var(--muted);font-weight:700}
+.pbar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-top:8px}
+.pbar i{display:block;height:100%;background:var(--mint)}
+.pbody{padding:0 18px 18px;display:flex;flex-direction:column;gap:14px}
+.pbody label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--cyan)}
+.pbody textarea{border:2px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:14px;padding:11px 12px;font:inherit;font-weight:600;font-size:14px;line-height:1.5;resize:vertical;min-height:64px;text-transform:none;letter-spacing:0}
+.prow{display:flex;gap:10px;flex-wrap:wrap}
+.prow input[type=text]{flex:1 1 160px;min-width:0}
+
 /* ===== airy spacing: more room between everything, easier on ADHD eyes ===== */
 .wrap{gap:34px;padding-block:20px 190px}
 .top{margin-bottom:-6px}
@@ -646,12 +694,46 @@ p{line-height:1.5}
     <div class="sechead"><h3>My trophies</h3><span class="hint" id="badgeCount"></span></div>
     <div class="badges" id="badges"></div>
     <div class="note" id="totals"></div>
-    <p class="hint" style="text-align:center;margin:0">ADHD Winner · version 20 Oct (reminders)</p>
+    <p class="hint" style="text-align:center;margin:0">ADHD Winner · version 20 Oct (Pro)</p>
     <button class="btn ghost" id="resetAll" type="button">Erase everything and start over</button>
     <div id="confirmReset" class="note" hidden>
       Erase your tasks, calendar, XP and trophies?
       <div style="display:flex;gap:8px;margin-top:8px"><button class="btn small" id="yesReset">Yes, erase</button><button class="btn small ghost" id="noReset">Cancel</button></div>
     </div>
+  </section>
+
+  <!-- VIEW: pro (paid plans) -->
+  <section id="v-pro" class="sec" hidden>
+    <div class="sechead"><h3>Your plan</h3><span class="hint" id="planNow"></span></div>
+    <div class="plans" id="plans"></div>
+
+    <div class="sechead"><h3>Quick notes</h3><span class="pbadge">Premium</span></div>
+    <div class="locked" data-need="premium"><div class="lockbody pcard">
+      <div class="rec"><button class="recbtn" id="recBtn" type="button" aria-label="Record a voice note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><div><b id="recTitle">Tap to record</b><small id="recSt">Say your idea, Noor keeps it for you</small></div></div>
+      <form class="prow" id="noteForm" autocomplete="off"><input type="text" id="noteText" placeholder="…or type a quick note" aria-label="Quick note"><button class="btn" type="submit">Save</button></form>
+      <div id="notes"></div>
+    </div></div>
+
+    <div class="sechead"><h3>Expenses</h3><span class="pbadge">Premium</span></div>
+    <div class="locked" data-need="premium"><div class="lockbody pcard">
+      <div class="total"><span>This month</span><b id="expTotal">0</b></div>
+      <form class="prow" id="expForm" autocomplete="off"><input type="text" id="expWhat" placeholder="What? (e.g. coffee)" aria-label="What"><input type="text" id="expAmt" inputmode="decimal" placeholder="Amount" aria-label="Amount" style="flex:0 1 110px"><button class="btn" type="submit">Add</button></form>
+      <div class="toggle"><button class="chk" id="expRemind" type="button" aria-pressed="false" aria-label="Remind me">✓</button>Remind me to note my expenses (every 3 hours)</div>
+      <div id="exps"></div>
+    </div></div>
+
+    <div class="sechead"><h3>Shopping list</h3><span class="pbadge">Premium</span></div>
+    <div class="locked" data-need="premium"><div class="lockbody pcard">
+      <form class="prow" id="shopForm" autocomplete="off"><input type="text" id="shopText" placeholder="Add an item (e.g. milk)" aria-label="Item"><button class="btn" type="submit">Add</button></form>
+      <div id="shop"></div>
+      <button class="btn small ghost" id="shopClear" type="button" hidden>Remove checked items</button>
+    </div></div>
+
+    <div class="sechead"><h3>Projects</h3><span class="pbadge biz">Business</span></div>
+    <div class="locked" data-need="business"><div class="lockbody pcard">
+      <form class="prow" id="projForm" autocomplete="off"><input type="text" id="projName" placeholder="New project (e.g. Open an online shop)" aria-label="Project name"><button class="btn" type="submit">Create</button></form>
+      <div class="list" id="projs"></div>
+    </div></div>
   </section>
 </div>
 
@@ -663,6 +745,7 @@ p{line-height:1.5}
     <button data-view="v-coach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Coach</button>
     <button data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
     <button data-view="v-troph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Week</button>
+    <button data-view="v-pro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Pro</button>
   </div>
 </nav>
 
@@ -1117,7 +1200,8 @@ $('voiceBtn').addEventListener('click',()=>{S.voice=!S.voice;if(!S.voice)try{spe
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));
   b.setAttribute('aria-current','page');
-  ['v-today','v-agenda','v-coach','v-focus','v-troph'].forEach(v=>$(v).hidden=v!==b.dataset.view);
+  ['v-today','v-agenda','v-coach','v-focus','v-troph','v-pro'].forEach(v=>$(v).hidden=v!==b.dataset.view);
+  if(b.dataset.view==='v-pro')renderPro();
   if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
   $('fab').hidden=b.dataset.view==='v-coach';
@@ -1486,6 +1570,125 @@ $('nameForm').addEventListener('submit',e=>{
 $('affGo').addEventListener('click',()=>{affHush();$('splash').hidden=true;nourSay('v-today');setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
 $('affListen').addEventListener('click',e=>{e.stopPropagation();affSay()});$('affNoor').addEventListener('click',e=>{e.stopPropagation();affSay()});
 $('helloBtn').addEventListener('click',showName);
+
+// ---------- Pro page: plans (Free / Premium / Business) + paid tools ----------
+const PLANS=[
+  {id:'free',name:'Free',price:'',feat:['Tasks & challenges','Noor, your talking coach','Calendar with alarms','Gentle reminders']},
+  {id:'premium',name:'Premium',price:'Personal',cls:'prem',feat:['Everything in Free','Quick notes with voice','Expenses + reminder','Shopping list']},
+  {id:'business',name:'Business',price:'Work & company',cls:'biz',feat:['Everything in Premium','Business plan for each project','Milestones with reminders']}
+];
+const RANK={free:0,premium:1,business:2};
+['plan','notes','exps','shop','projs'].forEach(k=>{if(S[k]===undefined)S[k]=k==='plan'?'free':[]});
+const hasPlan=need=>RANK[S.plan||'free']>=RANK[need];
+function renderPlans(){
+  $('planNow').textContent='Now: '+PLANS.find(p=>p.id===(S.plan||'free')).name;
+  $('plans').innerHTML=PLANS.map(p=>{const on=(S.plan||'free')===p.id;
+    return '<div class="plan '+(p.cls||'')+(on?' on':'')+'"><h4>'+p.name+(p.price?' <small>'+p.price+'</small>':'')+'</h4><ul>'+p.feat.map(f=>'<li>'+f+'</li>').join('')+'</ul>'+
+      (on?'<span class="hint">✓ Your plan</span>':'<button class="btn small'+(p.id==='free'?' ghost':'')+'" data-plan="'+p.id+'">'+(p.id==='free'?'Switch to Free':'Try '+p.name+' free')+'</button>')+'</div>'}).join('')+
+    '<p class="note" style="margin:0">Payment is not open yet: during this early version, Premium and Business are a free trial.</p>';
+}
+function renderLocks(){
+  document.querySelectorAll('#v-pro [data-need]').forEach(box=>{const need=box.dataset.need,ok=hasPlan(need);
+    box.classList.toggle('locked',!ok);box.querySelector('.lockbody').setAttribute('aria-hidden',ok?'false':'true');
+    let lc=box.querySelector('.lockcard');
+    if(ok){if(lc)lc.remove();return}
+    if(!lc){lc=document.createElement('div');lc.className='lockcard';box.appendChild(lc)}
+    const nm=need==='business'?'Business':'Premium';
+    lc.innerHTML='<p>🔒 '+nm+' feature</p><button class="btn small" data-plan="'+need+'">Unlock '+nm+'</button>';
+  });
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-plan]');if(!b)return;
+  S.plan=b.dataset.plan;save();renderPro();
+  if(S.plan!=='free'){tone([523,659,784,1047],.09,.3);nour('cheer',2000);confetti(80)}});
+function money(n){return (Math.round(n*100)/100).toLocaleString('en-US')}
+function renderPro(){
+  renderPlans();renderLocks();
+  // notes
+  $('notes').innerHTML=S.notes.slice().reverse().map(n=>'<div class="item"><div class="grow">'+(n.text?esc(n.text):'🎙️ Voice note')+'<small>'+new Date(n.at).toLocaleString('en-US',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+(n.dur?' · '+n.dur+' s':'')+'</small>'+(n.audio?'<audio controls preload="none" data-aud="'+n.id+'"></audio>':'')+'</div><button class="x" data-pro="ndel" data-id="'+n.id+'" aria-label="Delete">×</button></div>').join('')||'<p class="hint" style="margin:0">No notes yet.</p>';
+  document.querySelectorAll('[data-aud]').forEach(a=>audGet(a.dataset.aud).then(b=>{if(b)a.src=URL.createObjectURL(b)}));
+  // expenses
+  const m=todayStr().slice(0,7),mine=S.exps.filter(x=>x.date.slice(0,7)===m);
+  $('expTotal').textContent=money(mine.reduce((a,x)=>a+x.amt,0));
+  $('exps').innerHTML=mine.slice().reverse().map(x=>'<div class="item"><div class="grow">'+esc(x.what)+'<small>'+x.date+'</small></div><span class="amt">'+money(x.amt)+'</span><button class="x" data-pro="edel" data-id="'+x.id+'" aria-label="Delete">×</button></div>').join('')||'<p class="hint" style="margin:0">No expenses this month.</p>';
+  const en=S.nudges.find(n=>n.id==='expense');$('expRemind').setAttribute('aria-pressed',!!(en&&en.on));
+  // shopping
+  $('shop').innerHTML=S.shop.map(x=>'<div class="item'+(x.done?' done':'')+'"><button class="chk" data-pro="stog" data-id="'+x.id+'" aria-pressed="'+!!x.done+'" aria-label="Bought">✓</button><div class="grow">'+esc(x.text)+'</div><button class="x" data-pro="sdel" data-id="'+x.id+'" aria-label="Delete">×</button></div>').join('')||'<p class="hint" style="margin:0">Your list is empty.</p>';
+  $('shopClear').hidden=!S.shop.some(x=>x.done);
+  // projects
+  const open=new Set([...document.querySelectorAll('#projs details[open]')].map(d=>d.dataset.id));
+  $('projs').innerHTML=S.projs.map(p=>{const ms=p.ms||[],dn=ms.filter(x=>x.done).length,pct=ms.length?Math.round(dn/ms.length*100):0;
+    const f=(k,lab,ph)=>'<label>'+lab+'<textarea data-pf="'+k+'" data-id="'+p.id+'" placeholder="'+ph+'">'+esc(p.plan[k]||'')+'</textarea></label>';
+    return '<details class="proj" data-id="'+p.id+'"'+(open.has(p.id)?' open':'')+'><summary><div class="grow"><h4>'+esc(p.name)+'</h4><small>'+dn+' / '+ms.length+' milestones</small><div class="pbar"><i style="width:'+pct+'%"></i></div></div><span aria-hidden="true">▾</span></summary><div class="pbody">'+
+      '<button class="btn ghost" data-pro="draft" data-id="'+p.id+'" type="button">✨ Draft my business plan with Noor</button>'+
+      f('goal','Goal','What do you want to achieve?')+f('problem','Problem','What problem does it solve?')+f('customers','Customers','Who will buy?')+f('offer','Offer & price','What do you sell, at what price?')+f('money','Budget','What does it cost to start?')+f('market','Marketing','How will people find you?')+
+      '<div class="sechead" style="margin:4px 0 0"><h3 style="font-size:17px">Milestones</h3><span class="hint">Alarm on the day</span></div>'+
+      (ms.map(x=>'<div class="item'+(x.done?' done':'')+'"><button class="chk" data-pro="mtog" data-id="'+p.id+'" data-m="'+x.id+'" aria-pressed="'+!!x.done+'" aria-label="Done">✓</button><div class="grow">'+esc(x.title)+'<small>'+x.date+'</small></div><button class="x" data-pro="mdel" data-id="'+p.id+'" data-m="'+x.id+'" aria-label="Delete">×</button></div>').join('')||'<p class="hint" style="margin:0">Add your first milestone.</p>')+
+      '<form class="prow" data-mform="'+p.id+'" autocomplete="off"><input type="text" placeholder="Milestone (e.g. Logo ready)" aria-label="Milestone"><input type="date" value="'+ymd(addDays(new Date(),7))+'" aria-label="Date" style="flex:0 1 150px"><button class="btn" type="submit">Add</button></form>'+
+      '<button class="btn small ghost" data-pro="pdel" data-id="'+p.id+'" type="button">Delete project</button></div></details>'}).join('')||'<p class="hint" style="margin:0">Create your first project: Noor helps you write the plan.</p>';
+}
+// voice notes: audio kept on this phone (IndexedDB)
+let idb=null;
+function db(){if(idb)return idb;idb=new Promise((ok,ko)=>{try{const r=indexedDB.open('adhdw-notes',1);r.onupgradeneeded=()=>r.result.createObjectStore('audio');r.onsuccess=()=>ok(r.result);r.onerror=()=>ko(r.error)}catch(e){ko(e)}});return idb}
+function audPut(id,blob){return db().then(d=>new Promise(ok=>{const t=d.transaction('audio','readwrite');t.objectStore('audio').put(blob,id);t.oncomplete=()=>ok()}))}
+function audGet(id){return db().then(d=>new Promise(ok=>{const r=d.transaction('audio').objectStore('audio').get(id);r.onsuccess=()=>ok(r.result);r.onerror=()=>ok(null)})).catch(()=>null)}
+function audDel(id){return db().then(d=>{d.transaction('audio','readwrite').objectStore('audio').delete(id)}).catch(()=>{})}
+let rec=null,recT0=0,recIv=0;
+$('recBtn').addEventListener('click',async()=>{
+  if(rec){rec.stop();return}
+  try{
+    if(!window.MediaRecorder||!navigator.mediaDevices)throw new Error('Voice notes need Safari or Chrome.');
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    const chunks=[];rec=new MediaRecorder(stream);recT0=Date.now();
+    rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+    rec.onstop=async()=>{clearInterval(recIv);stream.getTracks().forEach(t=>t.stop());
+      const blob=new Blob(chunks,{type:rec.mimeType||'audio/mp4'});const dur=Math.round((Date.now()-recT0)/1000);rec=null;
+      $('recBtn').classList.remove('live');$('recTitle').textContent='Tap to record';$('recSt').textContent='Say your idea, Noor keeps it for you';
+      if(blob.size<500)return;const id=uid();await audPut(id,blob);
+      S.notes.push({id,text:'',audio:true,dur,at:Date.now()});save();renderPro();tone([659,880],.09,.25)};
+    rec.start();$('recBtn').classList.add('live');$('recTitle').textContent='Recording… tap to stop';
+    recIv=setInterval(()=>{$('recSt').textContent=Math.round((Date.now()-recT0)/1000)+' s'},500);
+  }catch(err){rec=null;$('recSt').textContent=err&&err.name==='NotAllowedError'?'Allow the microphone in your settings.':(err.message||'Recording is not possible here.')}
+});
+$('noteForm').addEventListener('submit',e=>{e.preventDefault();const v=$('noteText').value.trim();if(!v)return;
+  S.notes.push({id:uid(),text:v,audio:false,at:Date.now()});$('noteText').value='';save();renderPro();tone([659,880],.09,.25)});
+$('expForm').addEventListener('submit',e=>{e.preventDefault();const w=$('expWhat').value.trim(),a=parseFloat(String($('expAmt').value).replace(',','.'));
+  if(!w||!(a>0)){$('expAmt').focus();return}
+  S.exps.push({id:uid(),what:w,amt:a,date:todayStr()});$('expWhat').value='';$('expAmt').value='';save();renderPro();tone([659,880],.09,.25)});
+$('expRemind').addEventListener('click',()=>{let n=S.nudges.find(x=>x.id==='expense');
+  if(!n){n={id:'expense',emo:'💸',text:'Note your expenses',every:180,on:false,next:0};S.nudges.push(n)}
+  n.on=!n.on;if(n.on)schedule(n);save();renderPro();try{renderNudges()}catch(e){}});
+$('shopForm').addEventListener('submit',e=>{e.preventDefault();const v=$('shopText').value.trim();if(!v)return;
+  S.shop.push({id:uid(),text:v,done:false});$('shopText').value='';save();renderPro()});
+$('shopClear').addEventListener('click',()=>{S.shop=S.shop.filter(x=>!x.done);save();renderPro()});
+$('projForm').addEventListener('submit',e=>{e.preventDefault();const v=$('projName').value.trim();if(!v)return;
+  const p={id:uid(),name:v,plan:{},ms:[]};S.projs.push(p);$('projName').value='';save();renderPro();
+  setTimeout(()=>{const d=document.querySelector('#projs details[data-id="'+p.id+'"]');if(d){d.open=true;d.scrollIntoView({block:'start',behavior:'smooth'})}},50)});
+document.addEventListener('input',e=>{const t=e.target.closest('[data-pf]');if(!t)return;const p=S.projs.find(x=>x.id===t.dataset.id);if(!p)return;p.plan[t.dataset.pf]=t.value;save()});
+document.addEventListener('submit',e=>{const f=e.target.closest('[data-mform]');if(!f)return;e.preventDefault();
+  const p=S.projs.find(x=>x.id===f.dataset.mform);const [ti,da]=f.querySelectorAll('input');const t=ti.value.trim(),d=da.value;if(!p||!t||!d)return;
+  addMilestone(p,t,d);save();renderPro();renderAgenda();tone([659,880],.09,.25)});
+function addMilestone(p,t,d){const ev={id:uid(),title:'🏁 '+p.name+': '+t,date:d,time:'09:00',alarm:true,fired:false};S.events.push(ev);
+  p.ms.push({id:uid(),title:t,date:d,done:false,ev:ev.id});p.ms.sort((a,b)=>a.date.localeCompare(b.date))}
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]');if(!b)return;const a=b.dataset.pro,id=b.dataset.id;
+  if(a==='ndel'){S.notes=S.notes.filter(x=>x.id!==id);audDel(id)}
+  if(a==='edel')S.exps=S.exps.filter(x=>x.id!==id);
+  if(a==='stog'){const x=S.shop.find(y=>y.id===id);if(x)x.done=!x.done}
+  if(a==='sdel')S.shop=S.shop.filter(x=>x.id!==id);
+  if(a==='pdel'){const p=S.projs.find(x=>x.id===id);if(p){const evs=new Set(p.ms.map(m=>m.ev));S.events=S.events.filter(ev=>!evs.has(ev.id))}S.projs=S.projs.filter(x=>x.id!==id)}
+  const p=S.projs.find(x=>x.id===id);
+  if(a==='mtog'&&p){const m=p.ms.find(x=>x.id===b.dataset.m);if(m){m.done=!m.done;const ev=S.events.find(x=>x.id===m.ev);if(ev)ev.alarm=!m.done;if(m.done){save();renderPro();renderAgenda();win(25);return}}}
+  if(a==='mdel'&&p){const m=p.ms.find(x=>x.id===b.dataset.m);if(m)S.events=S.events.filter(ev=>ev.id!==m.ev);p.ms=p.ms.filter(x=>x.id!==b.dataset.m)}
+  if(a==='draft'&&p){b.disabled=true;b.textContent='Noor is writing your plan…';nour('think');
+    try{const today=todayStr();
+      const r=await askAI('You are Noor, a business coach for people with ADHD. Write a short, simple business plan in English for this project: "'+p.name+'". '+(p.plan.goal?'Goal: '+p.plan.goal+'. ':'')+'Keep each field to 1-3 short sentences, concrete and encouraging. Also give 4 to 6 small, realistic milestones with how many days from today each should be done. Answer ONLY in JSON: {"goal":"","problem":"","customers":"","offer":"","money":"","market":"","milestones":[{"title":"","days":7}]}');
+      ['goal','problem','customers','offer','money','market'].forEach(k=>{if(r[k]&&!(p.plan[k]||'').trim())p.plan[k]=String(r[k])});
+      if(!p.ms.length&&Array.isArray(r.milestones))r.milestones.slice(0,6).forEach(m=>{if(m&&m.title)addMilestone(p,String(m.title),ymd(addDays(new Date(),Math.max(1,Math.min(365,+m.days||7)))))});
+      save();renderPro();renderAgenda();nour('cheer',1800);speak('Here is your plan'+(S.name?', '+S.name:'')+'! Small steps, big win.');
+    }catch(err){b.disabled=false;b.textContent="Couldn't reach Noor, try again";nour(null)}
+    return}
+  save();renderPro();renderAgenda();
+});
+
 if(!S.name||!S.onboarded)showName();else showAff();
 
 render();drawT();
