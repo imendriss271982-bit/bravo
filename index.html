@@ -448,7 +448,7 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .fab img{width:100%;height:100%;object-fit:cover;display:block}
 .fab .nlabel{position:absolute;z-index:3;bottom:3px;left:50%;transform:translateX(-50%);background:rgba(18,8,43,.8);padding:1px 6px;border-radius:99px;font-size:10px}
 @media (prefers-reduced-motion:reduce){.stage.talking .wave i{animation:none}}
-/* ===== Header menu (☰): Calendar, Focus, Pro (Business / Premium), Profile ===== */
+/* ===== Header menu (☰): Profile, Calendar, Focus, Pro (Premium / Business) ===== */
 .topbtns{display:flex;gap:10px;align-items:center}
 .menubtn[aria-expanded="true"]{border-color:var(--sun);box-shadow:var(--glow-pink)}
 .menu{position:fixed;inset:0;z-index:30}
@@ -801,14 +801,14 @@ p{line-height:1.5}
   <div class="mback" data-mclose></div>
   <div class="mpanel" role="dialog" aria-modal="true" aria-label="Menu">
     <button class="mx" type="button" data-mclose aria-label="Close menu">×</button>
+    <button class="mitem" type="button" data-view="v-profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button>
     <button class="mitem" type="button" data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
     <button class="mitem" type="button" data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
     <button class="mitem" type="button" id="mPro" aria-expanded="false" aria-controls="mProSub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Pro<span class="chev" aria-hidden="true">▾</span></button>
     <div class="msub" id="mProSub" hidden>
-      <button class="mitem" type="button" data-view="v-pro" data-tier="business"><span class="pbadge biz">Business</span>Projects &amp; milestones</button>
       <button class="mitem" type="button" data-view="v-pro" data-tier="premium"><span class="pbadge">Premium</span>Notes, expenses, shopping</button>
+      <button class="mitem" type="button" data-view="v-pro" data-tier="business"><span class="pbadge biz">Business</span>Projects &amp; milestones</button>
     </div>
-    <button class="mitem" type="button" data-view="v-profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button>
   </div>
 </div>
 
