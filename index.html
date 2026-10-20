@@ -332,7 +332,7 @@ select{-webkit-appearance:none;appearance:none}
 .badge small{font-size:11px;color:var(--muted);line-height:1.25}
 .note{background:var(--surface-2);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--muted)}
 nav{position:fixed;left:0;right:0;bottom:0;background:rgba(18,8,43,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(4px,env(safe-area-inset-left,0px));padding-right:max(4px,env(safe-area-inset-right,0px));z-index:5}
-nav .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
+nav .in{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end}
 nav button{border:0;background:none;padding:10px 2px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:800;color:var(--muted)}
 nav button svg{width:24px;height:24px}
 nav button[aria-current="page"]{color:var(--ink)}
@@ -490,6 +490,19 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .pic.big{width:60px;height:60px;border-radius:18px;font-size:34px}
 .done>.row .pic,.ch.full .pic{filter:saturate(.55);opacity:.7}
 .ch .mid h4{font-size:16px}
+
+/* nav: 7 even tabs, centred, raised Note button */
+nav{padding-bottom:max(6px,calc(env(safe-area-inset-bottom,0px) - 10px))}
+nav button{padding:10px 0 8px;gap:4px;font-size:10.5px;letter-spacing:-.1px;justify-content:flex-end;min-width:0;white-space:nowrap}
+nav button svg{width:23px;height:23px;flex:none}
+nav button[aria-current="page"]{color:var(--ink)}
+.navnote{color:var(--ink)}
+.navnote .nn{display:grid;place-items:center;width:46px;height:46px;margin-top:-20px;border-radius:50%;background:linear-gradient(135deg,#FF2E93,#7209B7);box-shadow:0 0 18px rgba(255,46,147,.6),0 0 0 4px rgba(18,8,43,.94)}
+.navnote .nn svg{width:22px;height:22px;color:#fff}
+nav .navnote[aria-current="page"] svg{color:#fff;filter:none}
+nav .navnote[aria-current="page"] .nn{box-shadow:0 0 24px rgba(255,46,147,.9),0 0 0 4px rgba(18,8,43,.94),0 0 0 6px var(--cyan)}
+#v-notes .recbtn{width:84px;height:84px}
+#v-notes .recbtn svg{width:36px;height:36px}
 
 /* ===== airy spacing: more room between everything, easier on ADHD eyes ===== */
 .wrap{gap:34px;padding-block:20px 190px}
@@ -708,17 +721,22 @@ p{line-height:1.5}
     </div>
   </section>
 
-  <!-- VIEW: pro (paid plans) -->
-  <section id="v-pro" class="sec" hidden>
-    <div class="sechead"><h3>Your plan</h3><span class="hint" id="planNow"></span></div>
-    <div class="plans" id="plans"></div>
-
+  <!-- VIEW: quick notes -->
+  <section id="v-notes" class="sec" hidden>
     <div class="sechead"><h3>Quick notes</h3><span class="pbadge">Premium</span></div>
     <div class="locked" data-need="premium"><div class="lockbody pcard">
       <div class="rec"><button class="recbtn" id="recBtn" type="button" aria-label="Record a voice note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><div><b id="recTitle">Tap to record</b><small id="recSt">Say your idea, Noor keeps it for you</small></div></div>
       <form class="prow" id="noteForm" autocomplete="off"><input type="text" id="noteText" placeholder="…or type a quick note" aria-label="Quick note"><button class="btn" type="submit">Save</button></form>
       <div id="notes"></div>
     </div></div>
+
+    <p class="note" style="margin:0">Say an idea in 5 seconds, so your brain can let it go. Your notes stay on this phone.</p>
+  </section>
+
+  <!-- VIEW: pro (paid plans) -->
+  <section id="v-pro" class="sec" hidden>
+    <div class="sechead"><h3>Your plan</h3><span class="hint" id="planNow"></span></div>
+    <div class="plans" id="plans"></div>
 
     <div class="sechead"><h3>Expenses</h3><span class="pbadge">Premium</span></div>
     <div class="locked" data-need="premium"><div class="lockbody pcard">
@@ -749,6 +767,7 @@ p{line-height:1.5}
     <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
     <button data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
     <button data-view="v-coach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Coach</button>
+    <button data-view="v-notes" class="navnote"><span class="nn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>Note</button>
     <button data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
     <button data-view="v-troph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Week</button>
     <button data-view="v-pro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Pro</button>
@@ -1220,8 +1239,8 @@ $('voiceBtn').addEventListener('click',()=>{S.voice=!S.voice;if(!S.voice)try{spe
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));
   b.setAttribute('aria-current','page');
-  ['v-today','v-agenda','v-coach','v-focus','v-troph','v-pro'].forEach(v=>$(v).hidden=v!==b.dataset.view);
-  if(b.dataset.view==='v-pro')renderPro();
+  ['v-today','v-agenda','v-coach','v-notes','v-focus','v-troph','v-pro'].forEach(v=>$(v).hidden=v!==b.dataset.view);
+  if(b.dataset.view==='v-pro'||b.dataset.view==='v-notes')renderPro();
   if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
   $('fab').hidden=b.dataset.view==='v-coach';
@@ -1608,7 +1627,7 @@ function renderPlans(){
     '<p class="note" style="margin:0">Payment is not open yet: during this early version, Premium and Business are a free trial.</p>';
 }
 function renderLocks(){
-  document.querySelectorAll('#v-pro [data-need]').forEach(box=>{const need=box.dataset.need,ok=hasPlan(need);
+  document.querySelectorAll('#v-pro [data-need],#v-notes [data-need]').forEach(box=>{const need=box.dataset.need,ok=hasPlan(need);
     box.classList.toggle('locked',!ok);box.querySelector('.lockbody').setAttribute('aria-hidden',ok?'false':'true');
     let lc=box.querySelector('.lockcard');
     if(ok){if(lc)lc.remove();return}
