@@ -1,5 +1,5 @@
 // ADHD Winner service worker: makes the app installable and lets it open offline.
-const C='bravo-v13';
+const C='bravo-v14';
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(['./','index.html','manifest.json','icon-192.png','icon-512.png','nour-m0.jpg','nour-m1.jpg','nour-m2.jpg','nour-m3.jpg']).catch(()=>{})))});
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
 // network first (always newest version), cache as backup when offline

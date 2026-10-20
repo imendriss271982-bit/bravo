@@ -485,6 +485,12 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .prow{display:flex;gap:10px;flex-wrap:wrap}
 .prow input[type=text]{flex:1 1 160px;min-width:0}
 
+/* pictures on tasks, challenges, appointments */
+.pic{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:14px;font-size:26px;line-height:1;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.28),transparent 60%),var(--pc);box-shadow:0 4px 14px rgba(0,0,0,.35),inset 0 0 0 1.5px rgba(255,255,255,.18)}
+.pic.big{width:60px;height:60px;border-radius:18px;font-size:34px}
+.done>.row .pic,.ch.full .pic{filter:saturate(.55);opacity:.7}
+.ch .mid h4{font-size:16px}
+
 /* ===== airy spacing: more room between everything, easier on ADHD eyes ===== */
 .wrap{gap:34px;padding-block:20px 190px}
 .top{margin-bottom:-6px}
@@ -792,6 +798,20 @@ const dayDiff=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
 const uid=()=>Math.random().toString(36).slice(2,9);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+// ---------- pictures: every task, challenge and appointment gets a picture ----------
+const PICS=[
+  [/water|drink|hydrat|eau/i,'💧'],[/exercis|sport|gym|workout|run|walk|jog|fitness|yoga/i,'🏃‍♀️'],[/fresh air|outside|park|garden|nature/i,'🌳'],
+  [/bed|sleep|nap|dodo/i,'😴'],[/email|mail|inbox|reply/i,'📧'],[/call|phone|mom|dad|mum/i,'📞'],[/meet|meeting|zoom|teams/i,'👥'],
+  [/clean|tidy|wash|laundry|dishes|vacuum|room/i,'🧹'],[/shop|buy|grocer|market|course/i,'🛒'],[/cook|dinner|lunch|breakfast|meal|recipe|eat/i,'🍳'],
+  [/read|book|page|study|learn|course|lesson/i,'📚'],[/write|report|doc|note|plan/i,'📝'],[/pay|bill|bank|money|budget|invoice|expense/i,'💳'],
+  [/doctor|dentist|clinic|hospital|medic|pharma/i,'🩺'],[/bag|pack|travel|trip|flight/i,'🎒'],[/car|drive|fuel|garage/i,'🚗'],
+  [/kid|child|school|son|daughter/i,'🧒'],[/pray|quran|mosque/i,'🤲'],[/meditat|breath|relax|calm/i,'🧘‍♀️'],[/music|guitar|piano|sing/i,'🎵'],
+  [/code|app|computer|website|design/i,'💻'],[/video|tiktok|youtube|film|post|instagram/i,'🎬'],[/birthday|party|gift/i,'🎁'],
+  [/dog|cat|pet/i,'🐾'],[/plant|flower/i,'🪴'],[/hair|nail|beauty|makeup|skin/i,'💅'],[/stretch|move|stand/i,'🤸‍♀️'],[/work|office|project|client|task/i,'💼']
+];
+function picFor(t){t=String(t||'');for(const [re,e] of PICS)if(re.test(t))return e;return '⭐'}
+function picTile(t,color,cls){return '<span class="pic'+(cls?' '+cls:'')+'" aria-hidden="true" style="--pc:'+(color||'#7209B7')+'">'+picFor(t)+'</span>'}
+
 function monday(d){const x=new Date(d);x.setHours(0,0,0,0);const w=(x.getDay()+6)%7;x.setDate(x.getDate()-w);return x}
 const weekKey=d=>ymd(monday(d));
 const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
@@ -1061,7 +1081,7 @@ function renderDay(){
     if(mode==='past'&&!t.done)tools='<button class="btn small ghost" data-act="move" data-id="'+t.id+'">Move to today</button>';
     const right=mode==='today'?'<span class="xp">+10 XP</span>':mode==='future'?'<span class="tag">planned</span>':t.done?'<span class="tag" style="color:var(--mint)">done</span>':'<span class="tag" style="color:var(--muted)">not done</span>';
     const cls='task'+(t.done?' done':'')+(mode==='future'?' plan':'')+(mode==='past'&&!t.done?' miss':'');
-    return '<li class="'+cls+'"><div class="row">'+chk+'<span class="ttext"><b>'+esc(t.text)+'</b><span class="tmeta">'+right+'<button class="catb '+(t.cat||'')+'" data-act="cat" data-id="'+t.id+'" aria-label="Change category">'+(t.cat==='work'?'Work':t.cat==='personal'?'Personal':'+ Tag')+'</button>'+(t.ex?'<span class="ex">example</span>':'')+(t.splitting?'<span class="ex">splitting…</span>':'')+'</span></span>'+split+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Delete">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
+    return '<li class="'+cls+'"><div class="row">'+chk+picTile(t.text,t.cat==='work'?'#3A0CA3':t.cat==='personal'?'#F72585':'#7209B7')+'<span class="ttext"><b>'+esc(t.text)+'</b><span class="tmeta">'+right+'<button class="catb '+(t.cat||'')+'" data-act="cat" data-id="'+t.id+'" aria-label="Change category">'+(t.cat==='work'?'Work':t.cat==='personal'?'Personal':'+ Tag')+'</button>'+(t.ex?'<span class="ex">example</span>':'')+(t.splitting?'<span class="ex">splitting…</span>':'')+'</span></span>'+split+'<button class="x" data-act="del" data-id="'+t.id+'" aria-label="Delete">×</button></div>'+steps+(tools?'<div class="tools">'+tools+'</div>':'')+'</li>';
   }).join('');
 
   // défis
@@ -1073,13 +1093,13 @@ function renderDay(){
     const n=ccount(c,k),full=n>=c.target;
     const pips=c.target>1?'<div class="pips">'+Array.from({length:c.target},(_,i)=>'<i'+(i<n?' class="on"':'')+'></i>').join('')+'</div>':'';
     const btn=mode!=='today'?'':full?'<button class="cbtn" data-act="cminus" data-id="'+c.id+'" aria-label="Undo">'+CHECK+'</button>':'<button class="cbtn" data-act="cplus" data-id="'+c.id+'" aria-label="'+(c.target>1?'Add 1':'Done')+'">'+(c.target>1?'+1':CHECK)+'</button>';
-    return '<div class="ch'+(full?' full':'')+'"><span class="dot" style="background:'+c.color+'"></span><div class="mid"><h4>'+esc(c.name)+'</h4>'+pips+'</div><div class="right"><span class="cnt">'+n+'<small>/'+c.target+'</small></span>'+btn+'</div></div>';
+    return '<div class="ch'+(full?' full':'')+'">'+picTile(c.name,c.color,'big')+'<div class="mid"><h4>'+esc(c.name)+'</h4>'+pips+'</div><div class="right"><span class="cnt">'+n+'<small>/'+c.target+'</small></span>'+btn+'</div></div>';
   }).join('');
 
   // rendez-vous du jour
   const evs=S.events.filter(e=>e.date===k).sort((a,b)=>a.time.localeCompare(b.time));
   $('dayEvSec').hidden=!evs.length;
-  $('dayEvents').innerHTML=evs.map(e=>'<li class="ev'+(new Date(e.date+'T'+e.time)<Date.now()?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+'<small>'+(e.alarm?'Alarm on':'No alarm')+'</small></span></li>').join('');
+  $('dayEvents').innerHTML=evs.map(e=>'<li class="ev'+(new Date(e.date+'T'+e.time)<Date.now()?' past':'')+'"><span class="time">'+e.time+'</span>'+picTile(e.title,'#3A0CA3')+'<span class="what">'+esc(e.title)+'<small>'+(e.alarm?'Alarm on':'No alarm')+'</small></span></li>').join('');
 }
 function render(){
   $('helloName').textContent=S.name||'friend';
@@ -1109,7 +1129,7 @@ function renderAgenda(){
   const evs=S.events.filter(e=>e.date===selDay).sort((a,b)=>a.time.localeCompare(b.time));
   const now=Date.now();
   $('events').innerHTML=evs.length?evs.map(e=>{const past=new Date(e.date+'T'+e.time)<now;
-    return '<li class="ev'+(past?' past':'')+'"><span class="time">'+e.time+'</span><span class="what">'+esc(e.title)+(e.ex?' <span class="ex">example</span>':'')+'<small>'+(e.alarm?(past?'Alarm passed':'Alarm on'):'No alarm')+'</small></span><button class="bell" data-act="bell" data-id="'+e.id+'" aria-pressed="'+!!e.alarm+'" aria-label="Alarm">'+BELL+'</button><button class="x" data-act="evdel" data-id="'+e.id+'" aria-label="Delete">×</button></li>'}).join('')
+    return '<li class="ev'+(past?' past':'')+'"><span class="time">'+e.time+'</span>'+picTile(e.title,'#3A0CA3')+'<span class="what">'+esc(e.title)+(e.ex?' <span class="ex">example</span>':'')+'<small>'+(e.alarm?(past?'Alarm passed':'Alarm on'):'No alarm')+'</small></span><button class="bell" data-act="bell" data-id="'+e.id+'" aria-pressed="'+!!e.alarm+'" aria-label="Alarm">'+BELL+'</button><button class="x" data-act="evdel" data-id="'+e.id+'" aria-label="Delete">×</button></li>'}).join('')
     :'<li class="empty">Nothing planned. Enjoy, or add an appointment below.</li>';
   if(!$('evDate').value||$('evDate').dataset.auto)($('evDate').value=selDay,$('evDate').dataset.auto='1');
 }
