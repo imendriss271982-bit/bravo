@@ -146,6 +146,17 @@ h1,h2,h3,h4{font-family:var(--f-display);margin:0;text-wrap:balance}
 .iconbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
 .iconbtn svg{width:20px;height:20px}
 .level{background:linear-gradient(135deg,#3A0CA3,#7209B7 55%,#F72585);color:#FFFFFF;box-shadow:0 8px 30px rgba(247,37,133,.35);border-radius:22px;padding:18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.wkpts{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px}
+.wkhead{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.wkhead b{font-size:13px;color:inherit;letter-spacing:.02em}
+.wkhead em{font-style:normal;color:var(--gold);font-variant-numeric:tabular-nums}
+.wkrow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.wkd{border:0;background:transparent;color:inherit;font:inherit;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;border-radius:12px}
+.wkd small{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.wkd b{font-family:var(--f-display);font-size:17px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.wkd.has b{color:var(--gold);text-shadow:var(--glow-gold)}
+.wkd.now{background:var(--surface-2);box-shadow:inset 0 0 0 2px var(--cyan)}
+.wkd.now small{color:var(--cyan)}
 .ring{position:relative;width:86px;height:86px}
 .ring svg{transform:rotate(-90deg)}
 .ring .num{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--f-display);font-weight:700;font-size:22px;line-height:1}
@@ -557,20 +568,9 @@ p{line-height:1.5}
     </button>
   </header>
 
-  <section class="level" aria-label="Your day">
-    <div class="ring">
-      <svg width="86" height="86" viewBox="0 0 86 86"><circle cx="43" cy="43" r="36" fill="none" stroke="rgba(127,127,127,.3)" stroke-width="9"/><circle id="dayRing" cx="43" cy="43" r="36" fill="none" stroke="var(--mint)" stroke-width="9" style="filter:drop-shadow(0 0 4px rgba(124,255,79,.8))" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="226.2" style="transition:stroke-dashoffset .6s"/></svg>
-      <div class="num"><span id="dayPct">0%</span><small>today</small></div>
-    </div>
-    <div class="lvinfo">
-      <h2 id="lvTitle">Level 1</h2>
-      <div class="bar"><i id="lvBar" style="width:0"></i></div>
-      <div class="stats">
-        <span><em id="xpNow">0</em> XP</span>
-        <span><em id="winsToday">0</em> wins</span>
-        <span>Streak <em id="streak">0</em> d</span>
-      </div>
-    </div>
+  <section class="wkpts" aria-label="Points this week">
+    <div class="wkhead"><span>This week</span><b><em id="wkTotal">0</em> pts</b></div>
+    <div class="wkrow" id="wkPts"></div>
   </section>
 
   <!-- VIEW: today -->
@@ -1002,7 +1002,7 @@ function nourForView(v){nourBase=v==='v-focus'?'zen':null;
 function win(xp,kind){
   const before=level().lv;let bonus=0;
   if(Math.random()<.25)bonus=pick([5,10,15,20,30]);
-  S.xp+=xp+bonus;S.wins++;S.winsToday++;
+  S.xp+=xp+bonus;S.wins++;S.winsToday++;S.xpd=S.xpd||{};{const k0=todayStr();S.xpd[k0]=(S.xpd[k0]!=null?S.xpd[k0]:(S.hist[k0]||0)*10)+xp+bonus}
   const t=todayStr();S.hist[t]=(S.hist[t]||0)+1;
   if(S.lastWinDate!==t){S.streak=(S.lastWinDate&&dayDiff(S.lastWinDate,t)<=2)?S.streak+1:1;S.lastWinDate=t}
   const newB=checkBadges();const lvUp=level().lv>before;
@@ -1120,12 +1120,15 @@ function renderDay(){
   $('dayEvSec').hidden=!evs.length;
   $('dayEvents').innerHTML=evs.map(e=>'<li class="ev'+(new Date(e.date+'T'+e.time)<Date.now()?' past':'')+'"><span class="time">'+e.time+'</span>'+picTile(e.title,'#3A0CA3')+'<span class="what">'+esc(e.title)+'<small>'+(e.alarm?'Alarm on':'No alarm')+'</small></span></li>').join('');
 }
+function dayPts(k){return S.xpd&&S.xpd[k]!=null?S.xpd[k]:(S.hist[k]||0)*10}
+function renderWkPts(){const m=monday(new Date()),t=todayStr();let tot=0,h='';
+  for(let i=0;i<7;i++){const d=addDays(m,i),k=ymd(d),p=dayPts(k);tot+=p;
+    h+='<button type="button" class="wkd'+(p?' has':'')+(k===t?' now':'')+'" data-k="'+k+'" aria-label="'+longDate(k)+': '+p+' points"><small>'+d.toLocaleDateString('en-US',{weekday:'short'}).slice(0,2)+'</small><b>'+p+'</b></button>'}
+  $('wkPts').innerHTML=h;$('wkTotal').textContent=tot}
 function render(){
   $('helloName').textContent=S.name||'friend';
   $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
-  const L=level();$('lvTitle').textContent='Level '+L.lv;$('lvBar').style.width=L.pct+'%';
-  $('xpNow').textContent=S.xp;$('winsToday').textContent=S.winsToday;$('streak').textContent=S.streak;
-  const p=dayProgress(todayStr());$('dayPct').textContent=p+'%';$('dayRing').style.strokeDashoffset=226.2*(1-p/100);
+  renderWkPts();
 
   renderDay();
   renderAgenda();renderWeek();
@@ -1216,6 +1219,7 @@ document.querySelectorAll('.cats button').forEach(b=>b.addEventListener('click',
 $('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim();if(!v)return;if(dayMode(viewDay)==='past')return;S.tasks.unshift({id:uid(),text:v,done:false,steps:[],date:viewDay,cat:catF==='all'?undefined:catF});i.value='';save();render()});
 // navigation entre les jours
 document.querySelectorAll('.dtabs button').forEach(b=>b.addEventListener('click',()=>{viewDay=ymd(addDays(new Date(),+b.dataset.rel));render()}));
+$('wkPts').addEventListener('click',e=>{const b=e.target.closest('.wkd');if(b)goDay(b.dataset.k)});
 $('dPrev').addEventListener('click',()=>{viewDay=ymd(addDays(new Date(viewDay+'T12:00'),-1));render()});
 $('dNext').addEventListener('click',()=>{viewDay=ymd(addDays(new Date(viewDay+'T12:00'),1));render()});
 $('dPick').addEventListener('change',e=>{if(/^\d{4}-\d{2}-\d{2}$/.test(e.target.value)){viewDay=e.target.value;render()}});
