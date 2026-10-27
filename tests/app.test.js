@@ -6,7 +6,7 @@ const path = require('node:path');
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/npm-tools/node_modules/playwright')); }
 
-const URL = 'file://' + path.resolve(__dirname, '..', 'index.html');
+let URL, server; // set in test.before (local http server)
 const KEY = 'bravo-v1';
 const AI = 'https://mon-style.imendriss271982.workers.dev/';
 const pad = n => String(n).padStart(2, '0');
@@ -20,8 +20,9 @@ test.before(async () => {
   const local = '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome';
   try { require('fs').accessSync(local); opts.executablePath = local; } catch (e) {}
   browser = await chromium.launch(opts);
+  server = await require('./serve')(); URL = server.base + 'index.html';
 });
-test.after(async () => { await browser.close(); });
+test.after(async () => { await browser.close(); server.close(); });
 
 // a fresh phone with an onboarded user and an empty list (or the given saved state)
 async function open({ state, width = 390, ai, noNotif } = {}) {
@@ -38,7 +39,7 @@ async function open({ state, width = 390, ai, noNotif } = {}) {
   }, [KEY, seed, !!noNotif]);
   await page.route('**/*', r => {
     const u = r.request().url();
-    if (u.startsWith('file:')) return r.continue();
+    if (u.startsWith(server.base)) return u.endsWith('sw.js') ? r.abort() : r.continue();
     if (ai && u.startsWith(AI)) return ai(r);
     return r.abort();
   });

@@ -658,6 +658,55 @@ details.someday .list{margin-top:12px}
 .msg.prop small{display:block;margin-top:6px}
 @media (max-width:360px){.add .addmore{padding-inline:9px}.ev{gap:8px;padding:12px}.ev .bell{width:32px;height:32px}}
 @media (prefers-reduced-motion:reduce){.spanel{animation:none}}
+/* ---------- Help me start ---------- */
+.hmsgo{display:flex;align-items:center;gap:14px;width:100%;border:0;border-radius:20px;padding:16px 18px;text-align:left;color:#fff;background:linear-gradient(135deg,var(--sun),#7209B7);box-shadow:var(--glow-pink)}
+.hmsgo .hgi{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:18px}
+.hmsgo b{display:block;font-size:17px;letter-spacing:.04em}.hmsgo small{display:block;font-size:13px;opacity:.9;font-weight:600}
+.chip.hot{border-color:var(--sun);color:var(--ink);background:rgba(255,46,147,.15)}
+#hms{z-index:24}
+#hms .spanel{gap:18px}
+#hmsBody{display:flex;flex-direction:column;gap:18px}
+#hmsBody p{margin:0}
+#hmsTitle{outline:none}
+.hsub{margin:0;font-size:17px;font-weight:800}
+.htip{margin:0;font-size:14px;color:var(--cyan);font-weight:700}
+.hk{margin:0;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hgrp{display:flex;flex-direction:column;gap:8px}
+.htask{margin:0;display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px}
+.htask .pic{flex:none}
+.hopts{display:flex;flex-direction:column;gap:10px}
+.hopt{display:flex;flex-direction:column;gap:3px;width:100%;min-height:56px;text-align:left;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:16px;padding:13px 16px}
+.hopt b{font-size:15px}.hopt small{font-size:13px;color:var(--muted);font-weight:600}
+.hopt:hover{border-color:var(--sun)}
+.hlink{align-self:center;border:0;background:none;color:var(--cyan);font-weight:800;text-decoration:underline;padding:10px;min-height:44px}
+.hstep{background:var(--surface);border:2px solid var(--cyan);box-shadow:var(--glow-cyan);border-radius:18px;padding:16px 18px;font-size:19px;font-weight:800;line-height:1.35}
+.hexp{margin:0;font-size:14px;color:var(--ink);opacity:.9}
+.hsrc{margin:0;font-size:12px;color:var(--muted)}
+.hwide{width:100%}.hbig{padding:16px;font-size:17px;border-radius:16px}
+.hrow{display:flex;flex-wrap:wrap;gap:8px}.hrow .btn{flex:1 1 30%;min-height:46px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.hgrid .btn{min-height:52px;white-space:normal}
+.hgrid .hok{color:var(--mint)}
+.hsay{margin:0;font-size:15px;font-weight:700;text-align:center}
+.hclock{display:flex;flex-direction:column;align-items:center;gap:2px}
+.hclock b{font-family:var(--f-display);font-size:46px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.hclock.on b{color:var(--cyan)}
+.hclock small{color:var(--muted);font-size:12px;font-weight:700}
+.hta{width:100%;box-sizing:border-box;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 12px;font:inherit;font-weight:600;resize:vertical}
+#hms input[type=text]{width:100%;box-sizing:border-box}
+.hchips{display:flex;flex-wrap:wrap;gap:8px}.hchips .chip{min-height:40px}
+.hnext summary{cursor:pointer;font-weight:800;color:var(--cyan);min-height:40px;display:flex;align-items:center}
+.hnext ol{margin:6px 0 0;padding-left:22px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.hoffer{border:2px dashed var(--gold);border-radius:14px;padding:12px}.hoffer p{margin:0 0 8px;font-weight:700}
+.hload{display:flex;align-items:center;gap:12px;font-weight:800;padding:18px 4px}
+.hdots{display:inline-flex;gap:5px}.hdots i{width:9px;height:9px;border-radius:50%;background:var(--cyan);animation:hb 1s infinite ease-in-out}
+.hdots i:nth-child(2){animation-delay:.15s}.hdots i:nth-child(3){animation-delay:.3s}
+@keyframes hb{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:none}}
+.hdone{display:flex;flex-direction:column;gap:4px;background:var(--mint-soft);border:2px solid var(--mint);border-radius:16px;padding:14px 16px}
+.hdone b{color:var(--mint);font-size:18px}.hdone span{font-size:14px}
+.hmspill{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:7;max-width:calc(100vw - 130px);display:flex;align-items:center;gap:8px;border:2px solid var(--cyan);background:var(--surface);color:var(--ink);border-radius:99px;padding:10px 14px;font-weight:800;font-size:13px;box-shadow:var(--glow-cyan)}
+.hmspill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tego{width:100%}
+@media (prefers-reduced-motion:reduce){.hdots i{animation:none;opacity:.8}}
 </style>
 </head>
 <body>
@@ -701,6 +750,7 @@ details.someday .list{margin-top:12px}
         <button type="button" data-cat="work" aria-pressed="false">💼 Work</button>
         <button type="button" data-cat="personal" aria-pressed="false">🏠 Personal</button>
       </div>
+      <button type="button" class="hmsgo" id="hmsToday" data-hms="today"><span class="hgi" aria-hidden="true">▶</span><span><b>HELP ME START</b><small>Let's make the next step easier.</small></span></button>
       <div class="sechead"><h3 id="listTitle">My list for today</h3><span class="hint" id="listHint">+10 XP per task</span></div>
       <form class="add" id="addForm">
         <input id="newTask" type="text" placeholder="Add a task…" autocomplete="off" maxlength="120" aria-label="New task">
@@ -781,7 +831,7 @@ details.someday .list{margin-top:12px}
       </div>
       <div class="chat" id="chat" aria-live="polite"></div>
       <div class="chips" id="chips">
-        <button class="chip" data-q="I can't get started.">I'm stuck</button>
+        <button class="chip hot" type="button" data-hms="coach">Help me start</button>
         <button class="chip" data-q="Help me plan my day with my list.">Plan my day</button>
         <button class="chip" data-q="Motivate me, I need it.">Motivate me</button>
         <button class="chip" data-q="I feel overwhelmed, too many things.">I'm overwhelmed</button>
@@ -883,6 +933,8 @@ details.someday .list{margin-top:12px}
       <div class="profrow"><div class="grow"><small>Name</small><b id="profName"></b></div><button class="btn small ghost" id="helloBtn" type="button">Edit</button></div>
       <div class="profrow"><div class="grow"><small>Plan</small><b id="profPlan"></b></div><button class="btn small ghost" type="button" data-view="v-pro" data-tier="premium">See plans</button></div>
     </div>
+    <div class="sechead"><h3>Help me start</h3><span class="hint">Your preferences</span></div>
+    <div class="pcard" id="hpBox"></div>
   </section>
 </div>
 
@@ -930,12 +982,21 @@ details.someday .list{margin-top:12px}
     <label class="toggle" id="teAlarmRow"><input id="teAlarm" type="checkbox"> Alarm at the start time</label>
     <div class="fl"><span>Category</span><div class="seg" id="teCat" role="group" aria-label="Category"><button type="button" data-v="none">None</button><button type="button" data-v="work">💼 Work</button><button type="button" data-v="personal">🏠 Personal</button></div></div>
     <div class="fl"><span>Priority</span><div class="seg" id="tePrio" role="group" aria-label="Priority"><button type="button" data-v="high">🔥 High</button><button type="button" data-v="normal">Normal</button><button type="button" data-v="low">Low</button></div></div>
+    <button type="button" class="btn ghost tego" id="teGo">▶ Start this task</button>
     <label class="toggle" id="teDoneRow"><input id="teDone" type="checkbox"> Done</label>
     <p class="ederr" id="teErr" role="alert"></p>
     <div class="edwarn" id="teWarn" role="alert" hidden></div>
     <div class="sbtns"><button class="btn" type="submit" id="teSave">Save</button><button class="btn ghost" type="button" data-edclose>Cancel</button><button class="btn ghost danger" type="button" id="teDel">Delete</button></div>
   </form>
 </div>
+<div class="sheet" id="hms" hidden>
+  <div class="sback" data-hmsclose></div>
+  <section class="spanel" role="dialog" aria-modal="true" aria-labelledby="hmsTitle">
+    <div class="shead"><h3 id="hmsTitle" tabindex="-1">Help me start</h3><button type="button" class="x" data-hmsclose aria-label="Close">×</button></div>
+    <div id="hmsBody" aria-live="polite"></div>
+  </section>
+</div>
+<button type="button" class="hmspill" id="hmsPill" hidden aria-label="Back to your step"><span aria-hidden="true">▶</span><span id="hmsPillT"></span></button>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <div class="overlay" id="overlay" hidden><div class="pop" id="pop" role="alertdialog" aria-live="assertive"></div></div>
@@ -1026,7 +1087,8 @@ function defaults(){
   ],
   challenges:freshChallenges(),
   nudges:freshNudges(),
-  events:[],plan:'free',notes:[],exps:[],shop:[],projs:[]}
+  events:[],plan:'free',notes:[],exps:[],shop:[],projs:[],
+  hp:{},hl:{}} // hp = Help me start preferences (only what the person chose), hl = local usage counts (no text)
 }
 const RE_D=/^\d{4}-\d{2}-\d{2}$/,RE_T=/^([01]\d|2[0-3]):[0-5]\d$/;
 const okDate=d=>typeof d==='string'&&RE_D.test(d)&&ymd(new Date(d+'T12:00'))===d;
@@ -1217,14 +1279,16 @@ function nourForView(v){nourBase=v==='v-focus'?'zen':null;
   nourT=setTimeout(()=>{const m=VIEW_MOOD[v];if(m==='zen')nour('zen');else nour(m,m==='cheer'?1800:1600)},950)}
 // ---------- rewards ----------
 // win() returns exactly what it granted, so it can be taken back if the person un-checks (no XP farming, no XP for unfinished work)
-function win(xp,kind){
+// quiet = a short line instead of the big pop-up (used during a Help me start session, so focus isn't broken)
+function win(xp,kind,quiet){
   const before=level().lv;let bonus=0;
   if(Math.random()<.25)bonus=pick([5,10,15,20,30]);
   S.xp+=xp+bonus;S.wins++;S.winsToday++;S.xpd=S.xpd||{};{const k0=todayStr();S.xpd[k0]=(S.xpd[k0]!=null?S.xpd[k0]:(S.hist[k0]||0)*10)+xp+bonus}
   const t=todayStr();S.hist[t]=(S.hist[t]||0)+1;
   if(S.lastWinDate!==t){S.streak=(S.lastWinDate&&dayDiff(S.lastWinDate,t)<=2)?S.streak+1:1;S.lastWinDate=t}
   const newB=checkBadges();const lvUp=level().lv>before;
-  save();render();showBravo({xp,bonus,newB,lvUp,kind});
+  save();render();
+  if(quiet&&!lvUp&&!newB.length){chime(false);toast('+'+(xp+bonus)+' XP · '+quiet)}else showBravo({xp,bonus,newB,lvUp,kind});
   nour('cheer',2200);
   return{xp:xp+bonus,day:t};
 }
@@ -1302,7 +1366,7 @@ function renderDay(){
   $('listTitle').textContent=mode==='today'?'My list for today':mode==='past'?'What I had planned':'Planning my list';
   {const L=dayTasks(k),dn=L.filter(x=>x.done).length;
   $('listHint').textContent=mode==='today'?(L.length?dn+' / '+L.length+' done · ':'')+'+10 XP each':mode==='past'?'':'Ready for the morning'}
-  $('addForm').hidden=mode==='past';
+  $('addForm').hidden=mode==='past';$('hmsToday').hidden=mode!=='today';
   $('newTask').placeholder=mode==='future'?'Plan a task for '+(rel===1?'tomorrow':'this day')+'…':'Add a task…';
 
   // résumé / récap / report
@@ -1489,8 +1553,8 @@ function renderWeek(){
 // ---------- actions ----------
 const AI_URL='https://mon-style.imendriss271982.workers.dev';
 const AGENT_ID='agent_0001m5apq852esmar2hh3wnrx96r';
-async function askAI(prompt){
-  const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+async function askAI(prompt,signal){
+  const r=await fetch(AI_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt}),signal});
   let d={};try{d=await r.json()}catch(e){}
   if(!r.ok||d.erreur){const e=new Error(d.erreur||('Error '+r.status));e.code=d.code||(r.status===429?'rate_limited':'ai_error');throw e}
   return d;
@@ -1637,7 +1701,7 @@ function openEditor(o){
   seg('teCat',v.cat||'none');seg('tePrio',v.prio||'normal');
   $('teAlarm').checked=!!v.alarm;
   $('teDoneRow').hidden=!t;$('teDone').checked=!!(t&&t.done);
-  $('teDel').hidden=!t;$('teDel').textContent='Delete';
+  $('teDel').hidden=!t;$('teDel').textContent='Delete';$('teGo').hidden=!t||t.done;
   if(o.planning&&!v.date)$('teDate').value=todayStr();
   edErr('');edWarn(null);edSync();
   $('tEd').hidden=false;document.body.classList.add('noscroll');
@@ -1745,6 +1809,7 @@ const NACT={
   start:()=>{try{if(!$('tStart').textContent.match(/pause/i))$('tStart').click()}catch(e){}},
   coach:()=>goView('v-coach'),
   today:()=>goView('v-today'),
+  helpme:()=>hOpen({from:'noor'}),
   close:()=>nourHush()
 };
 function nourLine(v){
@@ -1757,7 +1822,7 @@ function nourLine(v){
     const head=done?hi+'you finished '+done+' task'+(done>1?'s':'')+', bravo! '+open.length+' left. ':hi+'you have '+open.length+' task'+(open.length>1?'s':'')+' today. ';
     return{say:head+'Next one: '+nx+'. You can do it! Do you want to start a focus timer, or add something else?',
       html:(done?'<b>'+done+' done</b>, bravo! '+open.length+' left.':'<b>'+open.length+' task'+(open.length>1?'s':'')+'</b> today.')+' Next: <b>'+nb(nx)+'</b>. You can do it!'+(late?' ('+late+' from before too)':''),
-      chips:[['Start focus','focus'],['Add a task','addTask'],['Not now','close','ghost']]};
+      chips:[['Help me start','helpme'],['Add a task','addTask'],['Not now','close','ghost']]};
   }
   if(v==='v-agenda'){
     const now=t+' '+new Date().toTimeString().slice(0,5);
@@ -1799,6 +1864,7 @@ function checkAlarms(){
   if(ringing||!$('tEd').hidden)return;const now=Date.now();
   const ev=S.tasks.find(e=>e.alarm&&!e.fired&&!e.done&&e.date&&e.time&&alarmDue(e)<=now&&now-alarmDue(e)<30*60e3);
   if(!ev)return;
+  if(hOpenNow())hClose(); // the alarm must be seen: Help me start steps aside (its session is kept)
   ringing=ev.id;const pop=$('pop');pop.className='pop alarm';
   pop.innerHTML='<h2>It\'s time!</h2><p>'+esc(ev.text)+' · '+timeRange(ev)+'</p><div class="abtns"><button class="btn" data-act="go" data-id="'+ev.id+'">Let\'s go (+10 XP)</button><button class="btn ghost" data-act="snooze" data-id="'+ev.id+'">In 5 min</button></div>';
   $('overlay').hidden=false;alarmTone();clearInterval(ringLoop);ringLoop=setInterval(alarmTone,4000);
@@ -1833,7 +1899,8 @@ function renderNudges(){
 }
 function schedule(n,mins){n.next=Date.now()+(mins||n.every)*60e3}
 function checkNudges(){
-  if(nudging||ringing||!$('overlay').hidden)return;const now=new Date();if(!awake(now))return;
+  // no reminder pops up over a Help me start session
+  if(nudging||ringing||!$('overlay').hidden||hOpenNow())return;const now=new Date();if(!awake(now))return;
   let changed=false;
   S.nudges.forEach(n=>{if(n.on&&!n.next){schedule(n);changed=true}});
   const n=S.nudges.find(x=>x.on&&x.next&&x.next<=now.getTime());
@@ -1883,7 +1950,7 @@ function ctx(){
   const evs=S.tasks.filter(e=>!e.done&&e.date&&e.date>tm&&e.time).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8).map(e=>'- '+e.date+' '+ctxLine(e).slice(2)).join('\n')||'(nothing)';
   return (S.name?'First name of the person: '+S.name+'\n':'')+'Date and time now: '+new Date().toLocaleString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})+' (today = '+t+')\nLevel '+level().lv+', '+S.xp+' XP, streak '+S.streak+' days, '+S.winsToday+" wins today.\nToday, to do (with times when planned):\n"+open+'\nToday, done:\n'+done+'\nTomorrow:\n'+tmr+'\nSomeday (no date yet):\n'+sd+'\nYesterday: '+yd.filter(x=>x.done).length+' tasks done out of '+yd.length+', '+(S.hist[y]||0)+' wins.\nChallenges:\n'+ch+'\nLater in the calendar:\n'+evs;
 }
-const RULES="Call the person by their first name now and then (not in every sentence). You are Noor, the voice coach of the ADHD Winner app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
+const RULES="Call the person by their first name now and then (not in every sentence). You are Noor, the voice coach of the ADHD Winner app, for people with ADHD. Your answers are READ OUT LOUD: write the way people talk, in English, 2 to 4 short sentences maximum, no lists, no markdown, no emoji. Be warm, energetic, never guilt-tripping. Use how ADHD works: instant reward, micro-steps, start with an action under 2 minutes, a 5 or 15 minute timer. Often end with ONE concrete action to do right now. When the person is stuck or can't start, give ONE next action they can do in under 2 minutes (not a list), ask at most one question, and if they lack information help them find it instead of pushing them to start. Never say a step is done unless the person said so. You are not a doctor: no diagnosis and no medication advice; if the person mentions serious distress, gently encourage them to reach out to someone close or a professional. ";
 function bubble(role,text){
   const d=document.createElement('div');d.className='msg '+(role==='user'?'me':'ai');
   const s=document.createElement('span');s.className='txt';s.textContent=text;d.appendChild(s);
@@ -2029,6 +2096,344 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)tickT()});
   else if(left>0&&left<dur)tStart.textContent='Resume';
   drawT()})();
 
+
+// ---------- HELP ME START: blocked → one next step → start → record what really happened ----------
+// Works on the real task list (S.tasks) only through createTask / updateTask / completeTask.
+// The live session sits in its own key (like the focus timer), so changing page or refreshing never loses it.
+// Nothing here marks a task done, moves it or rewards it unless the person taps the button that says so.
+const HKEY='adhdwStart';
+const BLOCKERS=[
+  {id:'cant',t:"I can't start",d:'I know what to do, but I cannot get going.',tip:'We start so small it almost feels silly.'},
+  {id:'many',t:'Too many things to do',d:"I feel overwhelmed and don't know what to pick.",tip:'Pick just one. The others can wait.'},
+  {id:'unclear',t:"I don't know what to do next",d:'My task is unclear or too complicated.',tip:'We only need the very next move.'},
+  {id:'distracted',t:'I keep getting distracted',d:'I started something but lost focus.',tip:'Put your phone face down and close other tabs first.'},
+  {id:'later',t:'I keep putting it off',d:'I postpone it even though it matters.',tip:"You don't have to finish. Just begin."},
+  {id:'other',t:'Something else',d:'Let me explain in my own words.',tip:''}
+];
+// Offline step engine: s = [first step, smaller step, another approach]; n = what usually comes next.
+const STEP_RULES=[
+  {re:/present|slide|deck|pitch/i,s:['Open the presentation file and type a temporary title.','Just open the presentation file. Nothing else.','Write 3 words about what the first slide should say.'],n:['Write one rough sentence per slide.','Put the main points on slide 1.','Look it over once and fix one thing.']},
+  {re:/report|essay|write|article|\bcv\b|resume|letter|proposal|blog|thesis|draft/i,s:['Open the document and write a temporary title.','Just open a blank document.','Write one rough sentence about what it is for.'],n:['Write 3 bullet points you want to cover.','Turn the first bullet into a short paragraph.','Read it once and fix one sentence.']},
+  {re:/e-?mail|inbox|reply|message|answer/i,s:['Open your inbox and find the first email to answer.','Just open your inbox.','Write only the greeting line of the reply.'],n:['Write the reply in 3 short sentences.','Read it once, then press send.','Pick the next email.']},
+  {re:/call|phone|ring\b|book an|make an appointment/i,s:['Find the phone number and put it on your screen.','Write down the one thing you need to say.','Put the phone in your hand.'],n:['Press call and say your first sentence.','Write down what was decided.']},
+  {re:/clean|tidy|wash|laundry|dishes|vacuum|room|organi[sz]e|declutter/i,s:['Pick up 5 things and put them where they belong.','Pick up just one thing and put it away.','Clear one small surface, like a chair or a corner.'],n:['Clear one surface completely.','Take out the trash or one full bag.','Do 5 more minutes, then stop.']},
+  {re:/pay|bill|bank|tax|invoice|budget|expense|money|insurance/i,s:['Open the bill or your banking app.','Find the bill and put it in front of you.','Write down the amount and the due date.'],n:['Enter the payment details.','Save the receipt in one place.']},
+  {re:/study|learn|read|revise|course|lesson|homework|exam|chapter/i,s:['Open the book or page and read the first paragraph.','Put the book or page in front of you.','Read just the title and the first line.'],n:['Read for 5 minutes.','Write one sentence about what you just read.','Read 5 more minutes.']},
+  {re:/shop|buy|grocer|order|purchase/i,s:['Write the first 3 things you need on a list.','Write just one thing you need.','Open the shop app or website.'],n:['Finish the list.','Put the first item in the basket.']},
+  {re:/cook|dinner|lunch|breakfast|meal|bake|recipe/i,s:['Take out one pan and the first ingredient.','Clear a small space on the counter.','Decide what to cook, in one word.'],n:['Wash and cut the first ingredient.','Start heating the pan.']},
+  {re:/pack|bag|suitcase|travel|trip|move house/i,s:['Put the bag in front of you and add one item.','Just get the bag out.','Write the 3 things you must not forget.'],n:['Add the 3 must-have items.','Close the bag and put it by the door.']},
+  {re:/form|application|apply|paperwork|visa|renew|passport|contract/i,s:['Open the form and fill in just your name.','Find the form and put it on your screen.','List the documents you need, nothing else.'],n:['Fill in the next section.','Gather one missing document.']},
+  {re:/code|app\b|website|bug|deploy|design|feature/i,s:['Open the project and read the last thing you changed.','Just open the project.','Write the one thing to do next, in 5 words.'],n:['Change one small thing and test it.','Write down where you stopped.']},
+  {re:/exercis|gym|workout|run\b|walk|yoga|sport|training/i,s:['Put on your sport clothes or shoes.','Stand up and stretch for 30 seconds.','Fill your water bottle.'],n:['Do the first 5 minutes.','Keep going for 5 more minutes.']}
+];
+const STEP_DEFAULT={s:['Put everything you need for this in front of you (2 minutes).','Touch the first thing you need for it. Just touch it.','Write the very first action, in 5 words.'],n:['Do 5 minutes on it.','Take a 1-minute break, then 5 more minutes.','Check what is left and pick one more small step.']};
+const MISSING_STEP='Write down the one piece of information you are missing, and who or where could give it to you.';
+const H_LABEL={first:'Noor is finding your first step…',smaller:'Making it smaller…',different:'Looking for another way…',clearer:'Making it clearer…',revise:'Thinking about what you said…',next:'Finding the next step…'};
+
+let H=null,hReq=0,hTick=0;
+const hOpenNow=()=>!$('hms').hidden;
+function hPrefs(){const p=S.hp||{};return{detail:p.detail==='tiny'?'tiny':'normal',mins:[0,2,5,10,15].includes(p.mins)?p.mins:5,one:p.one!==false}}
+// privacy-friendly usage counts, kept on this device only: event names + ids, never task text or what the person wrote
+function track(e){const L=S.hl=S.hl&&typeof S.hl==='object'?S.hl:{};L.c=L.c||{};L.c[e]=(L.c[e]||0)+1;
+  L.s=Array.isArray(L.s)?L.s:[];L.s.push({e,at:Date.now(),sid:H&&H.sid||null});if(L.s.length>200)L.s.splice(0,L.s.length-200);save()}
+function hLog(o){const L=S.hl=S.hl&&typeof S.hl==='object'?S.hl:{};L.o=Array.isArray(L.o)?L.o:[];
+  L.o.push({sid:H.sid,tid:H.tid||null,b:H.b||null,o,sec:Math.round(hEl()/1000),at:Date.now()});if(L.o.length>60)L.o.splice(0,L.o.length-60);H.logged=true;track('outcome_'+o)}
+function hSave(){try{if(!H){localStorage.removeItem(HKEY);return}const c=Object.assign({},H);delete c.note;delete c.why;localStorage.setItem(HKEY,JSON.stringify(c))}catch(e){}}
+const hTask=()=>H&&H.tid?S.tasks.find(x=>x.id===H.tid)||null:null;
+const hTitle=()=>{const t=hTask();return t?t.text:(H&&H.title)||''};
+const hEl=()=>H&&H.tm?H.tm.acc+(H.tm.since?Date.now()-H.tm.since:0):0;
+const hLeft=()=>H.tm.mins?Math.max(0,H.tm.mins*60e3-hEl()):null;
+const hFmt=ms=>{const s=Math.max(0,Math.round(ms/1000));return Math.floor(s/60)+':'+pad(s%60)};
+const hClockTxt=()=>H.tm.mins?hFmt(Math.ceil(hLeft()/1000)*1000):hFmt(hEl());
+function hRun(){if(!H.tm.since){H.tm.since=Date.now();hSave()}}
+function hPause(){if(H&&H.tm&&H.tm.since){H.tm.acc+=Date.now()-H.tm.since;H.tm.since=null;hSave()}}
+// rewards: at most once per session for each kind, remembered in the session so a refresh or double tap can't repeat them
+function hReward(kind,xp,msg){if(!H||H.rw[kind])return;H.rw[kind]=true;hSave();win(xp,kind,msg)}
+
+function hOpen(o){
+  o=o||{};
+  if(H&&H.started){$('hms').hidden=false;hRender();return} // a session is already going: bring it back, never start a second one
+  H={sid:uid(),at:Date.now(),step:'blocker',b:null,tid:o.tid||null,title:'',action:'',next:[],src:'',tried:[],easier:0,
+     tm:{mins:hPrefs().mins,acc:0,since:null},rw:{},started:false,from:o.from||'start'};
+  const t=hTask();if(t)H.title=t.text;
+  track('help_start_opened');hSave();
+  $('hms').hidden=false;document.body.classList.add('noscroll');hRender();
+}
+// × or tapping outside: a running session is only minimised (pill stays); an unstarted one is dropped
+function hClose(){
+  if(!H){hHide();return}
+  if(H.started&&!H.logged){hPause();hHide();hPill();return}
+  if(!H.logged)track('session_abandoned');
+  H=null;hSave();hHide();hPill();
+}
+function hHide(){$('hms').hidden=true;document.body.classList.remove('noscroll')}
+function hEnd(msg){H=null;hSave();hHide();hPill();if(msg)toast(msg);render()}
+function hGo(step){H.step=step;hSave();hRender()}
+function hPill(){const p=$('hmsPill');const on=!!(H&&H.started&&!H.logged&&!hOpenNow());p.hidden=!on;
+  if(on)$('hmsPillT').textContent=H.timeUp?"Time's up. How did it go?":(H.tm.since?hClockTxt()+' · ':'')+(H.action||hTitle())}
+
+// ---------- the step engine: Noor (AI) first, the offline rules when she can't be reached ----------
+function rulesFor(title){return STEP_RULES.find(r=>r.re.test(title||''))||STEP_DEFAULT}
+function hClassify(txt){const s=String(txt||'').toLowerCase();
+  if(/exhaust|tired|no energy|sleepy|drained|burn/.test(s))return 'tired';
+  if(/distract|focus|phone|scroll|wander/.test(s))return 'distracted';
+  if(/information|info\b|don.?t have|missing|need to know|waiting for|answer from/.test(s))return 'missing';
+  if(/too many|too much|so many|overwhelm|huge|big/.test(s))return 'many';
+  if(/where to start|don.?t know (how|what|where)|no idea|confus|unclear/.test(s))return 'start';
+  return 'other'}
+function hFallback(mode,extra){
+  const R=rulesFor(hTitle()),cur=H.action,tried=H.tried;
+  const unused=a=>a.find(x=>!tried.includes(x));
+  if(mode==='first'){const i=hPrefs().detail==='tiny'?1:0;return{step:R.s[i],next:R.n.slice(0,3)}}
+  if(mode==='smaller')return{step:(!tried.includes(R.s[1])&&cur!==R.s[1])?R.s[1]:'Only get ready: put what you need for it in front of you. Nothing more.',next:[cur].filter(Boolean)};
+  if(mode==='different')return{step:unused([R.s[2],R.s[0],R.s[1]])||unused(STEP_DEFAULT.s)||R.s[2],next:R.n.slice(0,3)};
+  if(mode==='next'){const q=H.next.find(x=>!tried.includes(x))||unused(R.n)||unused(STEP_DEFAULT.n);return{step:q||'Do 5 more minutes on it, then check how you feel.',next:[]}}
+  if(mode==='clearer')return{step:cur,explain:'In plain words: '+cur.replace(/\.$/,'')+'. That is the whole step. It should take about 2 minutes, and you don\'t need to finish anything else.'};
+  if(mode==='revise'){const k=hClassify(extra);
+    if(k==='missing')return{step:MISSING_STEP,next:[]};
+    if(k==='many'||k==='start')return hFallback(k==='many'?'smaller':'first');
+    return hFallback('smaller')}
+  return{step:R.s[0],next:R.n.slice(0,3)}
+}
+function hPrompt(mode,extra){
+  const t=hTask(),bl=BLOCKERS.find(b=>b.id===H.b);
+  const ask={first:'Give the FIRST small step.',smaller:'The current step feels too hard: give a SMALLER version of it.',different:'Give a DIFFERENT approach to get started (not a smaller copy of the current step).',
+    clearer:'Explain the current step more clearly in one or two short sentences (put that in "explain"), and keep "step" as the same action reworded simply.',
+    revise:'The person explained what makes the current step difficult. Adapt the next action to that. If they lack information, help them find the missing information instead of telling them to start. If they are exhausted, offer a much lighter action.',
+    next:'The person just completed the current step. Give the NEXT small step.'}[mode];
+  return 'You are Noor, an action coach in the ADHD Winner app. The person is finding it hard to start or continue a task. Suggest ONE concrete next action they can do right now, ideally in under 2 minutes. '+
+   'Rules: start with a clear verb; maximum 16 words; never vague ("work on", "make progress"); do not invent facts about the task; no guilt, no pressure, no diagnosis, no medical advice; no emoji. '+
+   'If the task is too unclear to suggest anything, leave "step" empty and ask ONE short question in "question".\n'+
+   'Task: '+hTitle()+(t&&t.desc?'\nDetails: '+t.desc:'')+
+   (bl?'\nWhat blocks them: '+bl.t+(H.note?' — in their words: '+H.note:''):'')+
+   (H.action?'\nCurrent step: '+H.action:'')+(H.tried.length?'\nAlready suggested (do not repeat): '+H.tried.slice(-6).join(' | '):'')+
+   (H.qa?'\nTheir answer to your question: '+H.qa:'')+
+   (hPrefs().detail==='tiny'?'\nThey prefer extra tiny steps.':'')+
+   (mode==='revise'&&extra?'\nWhat makes it difficult right now, in their words: '+extra:'')+
+   '\nRequest: '+ask+
+   '\nAnswer ONLY in JSON: {"step":"...","next":["...","..."],"explain":"","question":""} ("next" = up to 3 following small steps, can be empty).'
+}
+async function hAI(mode,extra){
+  const ctl=typeof AbortController!=='undefined'?new AbortController():null;
+  const to=setTimeout(()=>{try{ctl&&ctl.abort()}catch(e){}},12000);
+  try{const r=await askAI(hPrompt(mode,extra),ctl&&ctl.signal);
+    const clean=v=>String(v||'').replace(/\s+/g,' ').trim().slice(0,160);
+    const step=clean(r.step),q=clean(r.question);
+    if(!step&&!q)throw new Error('empty');
+    return{step,question:step?'':q,explain:clean(r.explain),next:(Array.isArray(r.next)?r.next:[]).map(clean).filter(Boolean).slice(0,3)}}
+  finally{clearTimeout(to)}
+}
+async function hSuggest(mode,extra){
+  if(!H)return;
+  const req=++hReq,was=H.step;
+  H.prevStep=was==='loading'?H.prevStep:was;H.loading=H_LABEL[mode]||H_LABEL.first;H.step='loading';hRender();
+  let r=null,failed=false;
+  try{r=await hAI(mode,extra)}catch(e){failed=true}
+  if(!H||req!==hReq)return; // closed, or another request replaced this one
+  if(r&&r.question){H.q=r.question;H.step='clarify';hSave();hRender();return}
+  if(!r){r=hFallback(mode,extra);H.src='rules'}else H.src='ai';
+  H.offline=failed;
+  if(mode!=='clearer'&&H.action&&H.action!==r.step)H.prev=H.action;
+  H.action=r.step;H.explain=r.explain||'';
+  if(mode!=='clearer'&&mode!=='smaller'||!H.next.length)H.next=r.next&&r.next.length?r.next:(mode==='first'?rulesFor(hTitle()).n.slice(0,3):H.next);
+  if(!H.tried.includes(r.step))H.tried.push(r.step);
+  H.showNext=!hPrefs().one;
+  track('suggested_action_shown');
+  H.step='suggest';hSave();hRender();
+}
+
+// ---------- screens ----------
+function hBtn(act,label,sub,cls,extra){return '<button type="button" class="hopt'+(cls?' '+cls:'')+'" data-h="'+act+'"'+(extra||'')+'><b>'+label+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</button>'}
+function hCands(){const t=todayStr(),seen=new Set(),out=[];
+  const add=x=>{if(!x||x.done||seen.has(x.id))return;seen.add(x.id);out.push(x)};
+  dayItems(t).filter(x=>!x.done).sort((a,b)=>byPrio(a,b)||byTime(a,b)).forEach(add);
+  pendingBefore(t).sort(byPrio).forEach(add);
+  somedayTasks().filter(x=>!x.done).sort(byPrio).forEach(add);
+  return out}
+function hRender(){
+  hPill();if(!H||!hOpenNow())return;
+  const b=$('hmsBody'),t=hTask(),title=hTitle(),bl=BLOCKERS.find(x=>x.id===H.b);
+  let h='';
+  const taskLine=title?'<div class="hgrp"><p class="hk">Task</p><p class="htask">'+picTile(title,'#7209B7')+'<span>'+esc(title)+'</span></p></div>':'';
+  $('hmsTitle').textContent=H.started?'Start with me':'Help me start';
+  if(H.step==='blocker'){
+    h=(title?taskLine:'')+'<p class="hsub">What is getting in the way right now?</p><div class="hopts" role="group" aria-label="What is blocking you">'+
+      BLOCKERS.map(x=>hBtn('b',x.t,x.d,'',' data-b="'+x.id+'"')).join('')+'</div>'+
+      '<button type="button" class="hlink" data-h="skip">Skip this — just give me a step</button>';
+  }else if(H.step==='other'){
+    h='<label class="fl" for="hNote">Tell me in your own words <span class="opt">optional</span></label><textarea id="hNote" class="hta" rows="3" maxlength="300" placeholder="e.g. I don\'t feel like it and I don\'t know why"></textarea>'+
+      '<p class="hint">Only used to suggest your step. Not saved.</p><div class="sbtns"><button type="button" class="btn" data-h="noteok">Continue</button></div>';
+  }else if(H.step==='pick'){
+    const c=hCands();
+    h=(bl&&bl.tip?'<p class="htip">'+esc(bl.tip)+'</p>':'')+'<p class="hsub">Which task?</p>'+
+      (H.b==='many'&&c.length>1?'<button type="button" class="btn hwide" data-h="choose">Choose one for me</button>':'')+
+      (c.length?'<div class="hopts">'+c.slice(0,8).map(x=>hBtn('task',esc(x.text),esc(whenTxt(x))+(x.prio==='high'?' · 🔥 priority':''),'htaskopt',' data-id="'+x.id+'"')).join('')+'</div>'+(c.length>8?'<p class="hint">Showing your first 8. Pick any one.</p>':''):'<p class="hint">Your list is empty right now.</p>')+
+      '<button type="button" class="hlink" data-h="typenew">It\'s something not on my list</button>';
+  }else if(H.step==='type'){
+    h='<label class="fl" for="hNew">What do you need to do?</label><input id="hNew" type="text" maxlength="120" placeholder="e.g. Prepare my presentation" autocomplete="off">'+
+      '<p class="ederr" id="hErr" role="alert"></p><div class="sbtns"><button type="button" class="btn" data-h="newadd">Add to today and continue</button><button type="button" class="btn ghost" data-h="newtemp">Just help me, don\'t add it</button></div>';
+  }else if(H.step==='loading'){
+    h=taskLine+'<div class="hload" role="status"><span class="hdots" aria-hidden="true"><i></i><i></i><i></i></span>'+esc(H.loading||'One moment…')+'</div><button type="button" class="hlink" data-h="cancelload">Cancel</button>';
+  }else if(H.step==='clarify'){
+    h=taskLine+'<p class="hsub">'+esc(H.q)+'</p><input id="hQa" type="text" maxlength="200" autocomplete="off" aria-label="Your answer">'+
+      '<div class="sbtns"><button type="button" class="btn" data-h="qaok">Continue</button><button type="button" class="btn ghost" data-h="qaskip">Skip the question</button></div>';
+  }else if(H.step==='suggest'||H.step==='edit'){
+    const nx=H.next.filter(x=>x&&x!==H.action);
+    h=taskLine+(bl&&bl.tip&&!H.started?'<p class="htip">'+esc(bl.tip)+'</p>':'')+
+      '<div class="hgrp"><p class="hk">Your next step</p>'+
+      (H.step==='edit'?'<textarea id="hEdit" class="hta" rows="3" maxlength="160" aria-label="Your step">'+esc(H.action)+'</textarea><p class="ederr" id="hErr" role="alert"></p><div class="sbtns"><button type="button" class="btn" data-h="editok">Save my step</button><button type="button" class="btn ghost" data-h="editno">Cancel</button></div></div>':
+      '<div class="hstep">'+esc(H.action)+'</div>'+(H.explain?'<p class="hexp">'+esc(H.explain)+'</p>':'')+
+      '<p class="hsrc">'+(H.src==='ai'?'Suggested by Noor':H.src==='you'?'Your own step':H.offline?'Noor couldn\'t be reached, so this is a simple step from the app.':'A simple starter step')+'</p></div>'+
+      '<button type="button" class="btn hwide hbig" data-h="accept">Start this step</button>'+
+      '<div class="hrow"><button type="button" class="btn ghost" data-h="easier">Make it easier</button><button type="button" class="btn ghost" data-h="other">Show another option</button><button type="button" class="btn ghost" data-h="edit">Edit action</button></div>'+
+      (nx.length?'<details class="hnext"'+(H.showNext?' open':'')+'><summary>See what comes after</summary><ol>'+nx.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol></details>':'')+
+      (H.offer?'<div class="hoffer"><p>Want me to start with tinier steps next time?</p><div class="sbtns"><button type="button" class="btn small" data-h="rememberyes">Yes, remember that</button><button type="button" class="btn small ghost" data-h="rememberno">No thanks</button></div></div>':''));
+  }else if(H.step==='session'){
+    const run=!!H.tm.since,el=hEl(),T=H.tm.mins;
+    h=taskLine+'<div class="hgrp"><p class="hk">Current action</p><div class="hstep">'+esc(H.action)+'</div></div>'+
+      '<p class="hsay">'+(H.back?'Welcome back. Same step, no stress.':el?'Keep going, one step at a time.':"Let's start with this one step.")+'</p>'+
+      (!run?'<div class="seg small" role="group" aria-label="Timer">'+[[2,'2 min'],[5,'5 min'],[10,'10 min'],[0,'No timer']].map(m=>'<button type="button" data-h="mins" data-m="'+m[0]+'" aria-pressed="'+(T===m[0])+'">'+m[1]+'</button>').join('')+'</div>':'')+
+      '<div class="hclock'+(run?' on':'')+'"><b id="hClock">'+hClockTxt()+'</b><small>'+(T?'time left · '+T+' min':'time spent')+(run?'':el?' · paused':'')+'</small></div>'+
+      '<button type="button" class="btn hwide hbig" data-h="go">'+(run?'Pause':el?'Resume':'Start')+'</button>'+
+      '<div class="hgrid"><button type="button" class="btn ghost" data-h="distracted">I\'m distracted</button><button type="button" class="btn ghost" data-h="hard">This step is too difficult</button>'+
+      '<button type="button" class="btn ghost hok" data-h="did">I completed this step</button><button type="button" class="btn ghost" data-h="exit">Exit session</button></div>';
+  }else if(H.step==='distracted'){
+    h='<p class="hsub">That happens. Let\'s come back.</p><div class="hgrp"><p class="hk">You were on</p><p class="htask"><span>'+esc(title)+'</span></p><div class="hstep">'+esc(H.action)+'</div></div>'+
+      '<p class="htip">Put your phone face down and close what pulled you away.</p>'+
+      '<button type="button" class="btn hwide hbig" data-h="back">I\'m back, continue</button>'+
+      '<div class="hrow"><button type="button" class="btn ghost" data-h="easier">Make it easier</button><button type="button" class="btn ghost" data-h="stop">Stop for now</button></div>';
+  }else if(H.step==='adjust'){
+    h=taskLine+'<p class="hsub">Let\'s change something. What would help?</p><div class="hopts">'+
+      hBtn('easier','Make the step smaller')+hBtn('clearer','Explain the step more clearly')+hBtn('other','Give me a different approach')+
+      hBtn('why','Help me understand what is blocking me')+hBtn('switch','Let me choose another task')+'</div>'+
+      '<button type="button" class="hlink" data-h="toback">Back</button>';
+  }else if(H.step==='why'){
+    h='<label class="fl" for="hWhy">What makes this step difficult right now?</label><textarea id="hWhy" class="hta" rows="3" maxlength="300"></textarea>'+
+      '<div class="hchips">'+["I don't know where to start",'There are too many steps','I keep getting distracted',"I don't have the information I need",'I am exhausted'].map(x=>'<button type="button" class="chip" data-h="whychip" data-v="'+esc(x)+'">'+esc(x)+'</button>').join('')+'</div>'+
+      '<p class="hint">Only used for this suggestion. Not saved.</p><div class="sbtns"><button type="button" class="btn" data-h="whyok">Get a new step</button><button type="button" class="btn ghost" data-h="toadjust">Back</button></div>';
+  }else if(H.step==='tired'){
+    h='<p class="hsub">Being exhausted is a real reason. You choose.</p><div class="hopts">'+hBtn('pause10','Pause and come back','Your step stays saved here.')+hBtn('tiny','Give me a tiny step','Something that takes less than a minute.')+hBtn('stop','Stop for today','You can plan it for later.')+'</div>';
+  }else if(H.step==='stepdone'){
+    h='<div class="hdone"><b>Step done ✓</b><span>'+esc(H.action)+'</span></div><p class="hsub">What now?</p><div class="hopts">'+
+      hBtn('nextstep','Next small step')+(t&&!t.done?hBtn('taskdone','Mark the whole task as done','Only if it is really finished.'):'')+hBtn('finish','Stop here for now','Your progress is saved.')+'</div>';
+  }else if(H.step==='outcome'){
+    h=(H.timeUp?'<p class="htip">Time\'s up. You don\'t have to be finished.</p>':'')+'<p class="hsub">How did it go?</p><div class="hopts">'+
+      hBtn('o_started','I started')+hBtn('o_done','I completed the step')+hBtn('o_another','I need another approach')+hBtn('o_stop','I want to stop for now')+'</div>'+
+      (H.timeUp?'':'<button type="button" class="hlink" data-h="tosession">Back to my step</button>');
+  }else if(H.step==='stop'){
+    const can=t&&!t.done,lt=hLaterToday();
+    h='<p class="hsub">That\'s okay. Stopping is allowed.</p>'+(can?'<p>Do you want to plan <b>'+esc(t.text)+'</b> for later?</p><div class="hopts">'+
+      (lt?hBtn('rs_today','Later today','at '+lt):'')+hBtn('rs_tomorrow','Tomorrow',t.time?'at '+t.time:'')+hBtn('rs_keep','Keep it as it is',t.date?'Stays '+whenTxt(t):'Stays in Someday')+'</div>':
+      '<div class="sbtns"><button type="button" class="btn" data-h="rs_keep">Close</button></div>');
+  }
+  b.innerHTML=h;
+  const f=b.querySelector('textarea,input')||null;
+  try{if(f)f.focus();else $('hmsTitle').focus()}catch(e){}
+}
+function hLaterToday(){const d=new Date();d.setMinutes(0,0,0);d.setHours(d.getHours()+2);if(d.getHours()>=22||d.getDate()!==new Date().getDate())return null;return pad(d.getHours())+':00'}
+function hChoose(){const c=hCands();return c[0]||null}
+function hPickTask(id){const t=S.tasks.find(x=>x.id===id);if(!t)return;H.tid=t.id;H.title=t.text;hSave();hSuggest('first')}
+function hAfterBlocker(){if(H.tid&&hTask())return hSuggest('first');hGo('pick')}
+function hStartSession(){H.started=true;H.step='session';H.back=false;track('suggested_action_accepted');hSave();hRender()}
+
+$('hmsBody').addEventListener('click',e=>{
+  const el=e.target.closest('[data-h]');if(!el||!H)return;const a=el.dataset.h;
+  if(a==='b'){H.b=el.dataset.b;track('blocker_selected');if(H.b==='other')return hGo('other');return hAfterBlocker()}
+  if(a==='skip'){H.b=null;return hAfterBlocker()}
+  if(a==='noteok'){H.note=($('hNote').value||'').trim().slice(0,300);return hAfterBlocker()}
+  if(a==='choose'){const c=hChoose();if(c)hPickTask(c.id);return}
+  if(a==='task')return hPickTask(el.dataset.id);
+  if(a==='typenew')return hGo('type');
+  if(a==='newadd'||a==='newtemp'){const v=($('hNew').value||'').trim();
+    if(!v){$('hErr').textContent='Type what you need to do, even in 2 words.';$('hNew').focus();return}
+    if(a==='newtemp'){H.tid=null;H.title=v.slice(0,120);hSave();return hSuggest('first')}
+    // reuse an open task with the same name instead of adding a duplicate
+    const dup=S.tasks.find(x=>!x.done&&normQ(x.text)===normQ(v));if(dup)return hPickTask(dup.id);
+    const r=createTask({text:v,date:todayStr()});if(!r.ok){$('hErr').textContent=r.err;return}
+    toast('Added to today: '+r.task.text);return hPickTask(r.task.id)}
+  if(a==='cancelload'){hReq++;H.step=H.prevStep&&H.prevStep!=='loading'?H.prevStep:'blocker';if(H.step==='suggest'&&!H.action)H.step='blocker';hSave();return hRender()}
+  if(a==='qaok'||a==='qaskip'){H.qa=a==='qaok'?($('hQa').value||'').trim().slice(0,200):'';H.q='';if(a==='qaskip'){H.src='rules';const r=hFallback('first');H.action=r.step;H.next=r.next;H.tried.push(r.step);track('suggested_action_shown');return hGo('suggest')}return hSuggest('first')}
+  if(a==='accept')return hStartSession();
+  if(a==='easier'){track('alternative_requested');H.easier++;if(H.easier>=2&&hPrefs().detail!=='tiny'&&!(S.hp&&S.hp.asked))H.offerNext=true;
+    hSuggest('smaller').then(()=>{if(H&&H.offerNext){H.offer=true;H.offerNext=false;hRender()}});return}
+  if(a==='other'){track('alternative_requested');return hSuggest('different')}
+  if(a==='clearer'){track('alternative_requested');return hSuggest('clearer')}
+  if(a==='edit')return hGo('edit');
+  if(a==='editno')return hGo('suggest');
+  if(a==='editok'){const v=($('hEdit').value||'').replace(/\s+/g,' ').trim();if(!v){$('hErr').textContent='Write your step, even in 2 words.';return}
+    if(H.action!==v){H.action=v;H.src='you';H.explain='';H.tried.push(v)}return hGo('suggest')}
+  if(a==='rememberyes'){S.hp=Object.assign({},S.hp||{},{detail:'tiny',asked:true});save();H.offer=false;toast('Saved: tinier steps first. You can change it in Profile.');renderHp();return hRender()}
+  if(a==='rememberno'){S.hp=Object.assign({},S.hp||{},{asked:true});save();H.offer=false;return hRender()}
+  if(a==='mins'){if(H.tm.since)return;H.tm.mins=+el.dataset.m;H.timeUp=false;hSave();return hRender()}
+  if(a==='go'){
+    if(H.tm.since){hPause();track('session_paused');return hRender()}
+    if(H.tm.mins&&hLeft()<=0){H.tm.acc=0}
+    hRun();if(!H.rw.start){track('session_started');hReward('start',5,'You started. That is the hardest part.')}
+    return hRender()}
+  if(a==='distracted'){hPause();track('session_paused');return hGo('distracted')}
+  if(a==='back'){H.back=true;H.step='session';hRun();hReward('back',3,'You came back. That counts.');hSave();return hRender()}
+  if(a==='hard'){hPause();return hGo('adjust')}
+  if(a==='toback')return hGo(H.started?'session':'suggest');
+  if(a==='toadjust')return hGo('adjust');
+  if(a==='why')return hGo('why');
+  if(a==='whychip'){$('hWhy').value=el.dataset.v;return}
+  if(a==='whyok'){const v=($('hWhy').value||'').trim();if(!v){$('hWhy').focus();return}
+    H.why=v;const k=hClassify(v);track('alternative_requested');
+    if(k==='tired')return hGo('tired');
+    if(k==='distracted')return hGo('distracted');
+    return hSuggest('revise',v)}
+  if(a==='tiny'){track('alternative_requested');return hSuggest('smaller')}
+  if(a==='pause10'){hPause();hClose();toast('Paused. Your step is waiting for you below.');return}
+  if(a==='switch'){hPause();H.tid=null;H.title='';H.action='';H.next=[];H.tried=[];H.explain='';return hGo('pick')}
+  if(a==='did'){hPause();if(!H.started){H.started=true}track('step_completed_by_user');H.done=(H.done||0)+1;hReward('step',10,'Step done. Nice.');return hGo('stepdone')}
+  if(a==='nextstep'){H.step='session';return hSuggest('next')}
+  if(a==='taskdone'){const t=hTask();hLog('completed_step');hEnd();if(t&&!t.done)completeTask(t,10);return}
+  if(a==='finish'){hLog('completed_step');return hEnd('Saved. You moved forward today.')}
+  if(a==='exit'){hPause();H.timeUp=false;return hGo('outcome')}
+  if(a==='tosession')return hGo('session');
+  if(a==='o_started'){hLog('started');return hEnd('Saved: you started. That counts.')}
+  if(a==='o_done'){track('step_completed_by_user');H.done=(H.done||0)+1;hReward('step',10,'Step done. Nice.');return hGo('stepdone')}
+  if(a==='o_another'){track('alternative_requested');H.timeUp=false;return hGo('adjust')}
+  if(a==='o_stop'||a==='stop'){hPause();if(!H.logged)hLog('stopped');return hGo('stop')}
+  if(a==='rs_keep')return hEnd(H.logged?'Okay. Nothing was changed.':'');
+  if(a==='rs_today'||a==='rs_tomorrow'){const t=hTask();if(!t)return hEnd();
+    const patch=a==='rs_today'?{date:todayStr(),time:hLaterToday(),dur:t.dur||null}:{date:ymd(addDays(new Date(),1))};
+    const r=updateTask(t.id,patch);
+    return hEnd(r.ok?'Planned: '+r.task.text+' · '+whenTxt(r.task):"Couldn't move it: "+r.err)}
+});
+$('hmsBody').addEventListener('keydown',e=>{if(e.key!=='Enter'||e.shiftKey)return;const id=e.target.id;
+  const map={hNew:'newadd',hQa:'qaok',hNote:'noteok',hWhy:'whyok',hEdit:'editok'};if(!map[id])return;e.preventDefault();
+  const b=$('hmsBody').querySelector('[data-h="'+map[id]+'"]');if(b)b.click()});
+document.querySelectorAll('[data-hmsclose]').forEach(x=>x.addEventListener('click',hClose));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&hOpenNow())hClose()});
+$('hmsPill').addEventListener('click',()=>{if(!H)return;$('hms').hidden=false;document.body.classList.add('noscroll');if(!['session','distracted','stepdone','outcome','adjust','why','tired','loading','suggest','edit'].includes(H.step))H.step='session';hRender()});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-hms]');if(b){e.preventDefault();hOpen({from:b.dataset.hms})}});
+$('teGo').addEventListener('click',()=>{if(!ed||!ed.id)return;const id=ed.id;closeEditor();hOpen({tid:id,from:'task'})});
+// clock: always computed from timestamps, so pausing, locking the phone or refreshing never miscounts
+hTick=setInterval(()=>{if(!H||!H.tm||!H.tm.since)return;
+  if(H.tm.mins&&hLeft()<=0){hPause();H.timeUp=true;H.step='outcome';hSave();tone([659,784,988],.14,.35,'sine');
+    hRender();return} // if the sheet is minimised, only the pill changes: no surprise pop-up
+  const c=$('hClock');if(c&&hOpenNow())c.textContent=hClockTxt();hPill()},500);
+// bring back a session saved before a refresh (older than 12 h = forgotten, dropped)
+(function(){let s=null;try{s=JSON.parse(localStorage.getItem(HKEY))}catch(e){}
+  if(!s||typeof s!=='object'||!s.sid||!s.tm)return;
+  if(!s.started||Date.now()-(s.at||0)>12*36e5){H=s;if(!s.logged)track('session_abandoned');H=null;hSave();return}
+  H=s;H.rw=H.rw||{};H.tried=Array.isArray(H.tried)?H.tried:[];H.next=Array.isArray(H.next)?H.next:[];
+  if(H.step==='loading')H.step='session';hPill()})();
+
+// ---------- Help me start preferences (Profile): visible, editable, resettable ----------
+function renderHp(){const p=hPrefs(),box=$('hpBox');if(!box)return;
+  const sg=(k,opts,val)=>'<div class="seg small" role="group">'+opts.map(o=>'<button type="button" data-hp="'+k+'" data-v="'+o[0]+'" aria-pressed="'+(String(val)===String(o[0]))+'">'+o[1]+'</button>').join('')+'</div>';
+  const L=S.hl||{},c=L.c||{},op=c.help_start_opened||0,st=c.session_started||0;
+  box.innerHTML='<div class="fl"><span>Step size</span>'+sg('detail',[['normal','Small'],['tiny','Tiny']],p.detail)+'</div>'+
+    '<div class="fl"><span>Session timer</span>'+sg('mins',[[2,'2 min'],[5,'5 min'],[10,'10 min'],[0,'No timer']],p.mins)+'</div>'+
+    '<div class="fl"><span>Next steps</span>'+sg('one',[['true','One at a time'],['false','Show what comes after']],p.one)+'</div>'+
+    '<p class="hint">'+(op?'On this phone: you opened Help me start '+op+' time'+(op>1?'s':'')+' and started a step '+st+' time'+(st>1?'s':'')+' ('+Math.round(st/op*100)+'%).':'Your choices stay on this phone only.')+'</p>'+
+    '<button type="button" class="btn small ghost" data-hp="reset">Reset to default</button>'}
+$('hpBox').addEventListener('click',e=>{const b=e.target.closest('[data-hp]');if(!b)return;const k=b.dataset.hp;
+  if(k==='reset'){S.hp={};save();renderHp();toast('Help me start is back to default.');return}
+  const v=b.dataset.v;S.hp=Object.assign({},S.hp||{});S.hp[k]=k==='mins'?+v:k==='one'?v==='true':v;save();renderHp()});
+renderHp();
 
 // ---------- welcome + affirmation ----------
 // Daily greeting: Noor says one of these every time the app opens (recorded in her energetic ElevenLabs voice).
