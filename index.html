@@ -494,10 +494,6 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .plan h4 small{font-family:var(--f-body);font-size:12px;font-weight:800;color:var(--gold)}
 .plan ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6;color:var(--ink)}
 .plan .btn{align-self:flex-start;margin-top:4px}
-/* Plans sheet (bottom bar): look at Free / Premium / Business without activating anything */
-#plSheet .spanel{gap:16px}
-#plList{display:flex;flex-direction:column;gap:14px}
-#plList .plan .ptag{font-size:12px;font-weight:800;color:var(--cyan)}
 .pbadge{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--gold);color:#12082B}
 .pbadge.biz{background:var(--cyan)}
 .locked{position:relative}
@@ -1228,18 +1224,9 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
     <button data-view="v-coach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg>Coach</button>
     <button data-view="v-notes" class="navnote"><span class="nn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>Note</button>
     <button data-view="v-troph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Week</button>
-    <button id="navPlans" type="button" aria-haspopup="dialog" aria-controls="plSheet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Plans</button>
+    <button data-view="v-biz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>Business</button>
   </div>
 </nav>
-
-<div class="sheet" id="plSheet" hidden>
-  <div class="sback" data-plclose></div>
-  <div class="spanel" role="dialog" aria-modal="true" aria-labelledby="plTitle">
-    <div class="shead"><h3 id="plTitle">Plans</h3><button type="button" class="x" data-plclose aria-label="Close">×</button></div>
-    <p class="hint" style="margin:0">Have a look: nothing changes until you choose.</p>
-    <div id="plList"></div>
-  </div>
-</div>
 
 <div class="sheet" id="tEd" hidden>
   <div class="sback" data-edclose></div>
@@ -3110,17 +3097,6 @@ $('nameForm').addEventListener('submit',e=>{
 $('affGo').addEventListener('click',()=>{affHush();$('splash').hidden=true;nourSay('v-today');setTimeout(()=>nour('wave',2000),300);if(S.sound)chime(false)});
 $('affListen').addEventListener('click',e=>{e.stopPropagation();affSay()});$('affNoor').addEventListener('click',e=>{e.stopPropagation();affSay()});
 $('helloBtn').addEventListener('click',showName);
-
-// ---------- Plans sheet (bottom bar): view Free / Premium / Business, activates nothing ----------
-function openPlans(on){
-  if(on){const cur=S.plan||'free';
-    $('plList').innerHTML=PLANS.map(p=>'<div class="plan '+(p.cls||'')+(cur===p.id?' on':'')+'"><h4>'+p.name+(p.price?' <small>'+p.price+'</small>':'')+'</h4>'+(cur===p.id?'<span class="ptag">✓ Your plan</span>':'')+'<ul>'+p.feat.map(f=>'<li>'+f+'</li>').join('')+'</ul>'+(p.id==='premium'?'<button class="btn small ghost" type="button" data-plsee="premium">See Premium</button>':p.id==='business'?'<button class="btn small ghost" type="button" data-plsee="business">See Business</button>':'')+'</div>').join('')}
-  $('plSheet').hidden=!on;$('navPlans').setAttribute('aria-expanded',String(on))}
-$('navPlans').addEventListener('click',()=>openPlans(true));
-document.querySelectorAll('[data-plclose]').forEach(x=>x.addEventListener('click',()=>openPlans(false)));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('plSheet').hidden)openPlans(false)});
-$('plList').addEventListener('click',e=>{const b=e.target.closest('[data-plsee]');if(!b)return;openPlans(false);
-  const t=b.dataset.plsee,go=document.querySelector(t==='business'?'.mitem[data-view="v-biz"]':'.mitem[data-view="v-pro"][data-tier="premium"]');if(go)go.click()});
 
 // ---------- Pro page: plans (Free / Premium / Business) + paid tools ----------
 const PLANS=[
