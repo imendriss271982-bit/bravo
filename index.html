@@ -800,10 +800,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 html,body{overflow-x:clip;max-width:100%}
 input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[type=date],input[type=time]{font-size:16px!important}
 
-.add#addForm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
-.add#addForm input[type=text]{grid-column:1/-1;width:100%;box-sizing:border-box}
-.add#addForm .btn{width:100%;min-height:48px}
-.add#addForm .addmore{padding-inline:12px}
+.add#addForm{display:flex;flex-wrap:nowrap;gap:10px}
+.add#addForm input[type=text]{flex:1 1 auto;min-width:0}
+.add#addForm .btn{flex:none;min-height:48px;padding-inline:22px}
 
 .ttbl{min-width:520px}
 .tcell{display:flex;align-items:center;gap:10px}
@@ -864,7 +863,6 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
       <form class="add" id="addForm">
         <input id="newTask" type="text" placeholder="Add a task…" autocomplete="off" maxlength="120" aria-label="New task">
         <button class="btn" type="submit">Add</button>
-        <button class="btn ghost addmore" id="addMore" type="button" aria-label="Add with date, time and details" title="Date, time, details">⏰ Plan</button>
       </form>
       <div class="qadd" id="qaBox" hidden aria-live="polite"></div>
       <ul class="list" id="tasks"></ul>
@@ -1821,7 +1819,7 @@ function qaRender(){const b=$('qaBox');if(!qa){b.hidden=true;b.innerHTML='';retu
       '</div><button type="button" class="hlink" data-qa="cancel">Cancel, don\'t add it</button>';
   }else{const t=S.tasks.find(x=>x.id===qa.id);if(!t){qa=null;return qaRender()}
     b.innerHTML='<p class="qok"><span aria-hidden="true">✓</span> Added to <b>'+(t.cat==='work'?'Work':'Personal')+'</b> · '+esc(whenTxt(t))+(t.date&&!t.time?', any time':'')+'</p>'+
-      '<div class="qrow"><button type="button" class="btn small" data-qa="time">⏰ Add a date &amp; time</button><button type="button" class="btn small ghost" data-qa="close">Done</button></div>'}
+      '<div class="qrow"><button type="button" class="btn small" data-qa="time">⏰ Plan it: date &amp; time</button><button type="button" class="btn small ghost" data-qa="close">Done</button></div>'}
   b.hidden=false}
 function qaClose(){qa=null;qaRender()}
 $('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim().replace(/\s+/g,' ');
@@ -1840,8 +1838,6 @@ $('qaBox').addEventListener('click',e=>{const b=e.target.closest('[data-qa]');if
     tone([659,880],.09,.25);qa={step:'done',id:r.task.id};qaRender();
     try{$('qaBox').querySelector('[data-qa="time"]').focus()}catch(e){}}});
 $('newTask').addEventListener('input',()=>{if(qa&&qa.step==='done')qaClose()});
-$('addMore').addEventListener('click',()=>{const v=$('newTask').value.trim();$('newTask').value='';
-  openEditor({text:v,date:dayMode(viewDay)==='past'?todayStr():viewDay,cat:catF==='all'?undefined:catF})});
 // navigation entre les jours
 document.querySelectorAll('.dtabs button').forEach(b=>b.addEventListener('click',()=>{viewDay=ymd(addDays(new Date(),+b.dataset.rel));render()}));
 $('wkPts').addEventListener('click',e=>{const b=e.target.closest('.wkd');if(b)goDay(b.dataset.k)});
@@ -1939,6 +1935,7 @@ function openEditor(o){
   $('tEd').hidden=false;document.body.classList.add('noscroll');
   if(!TOUCH)setTimeout(()=>{try{(o.planning?$('teStart'):$('teText')).focus()}catch(e){}},60);
 }
+window.adhdwNewItem=o=>openEditor(Object.assign({date:todayStr()},o)); // used by the automated tests (no button opens an empty task form on Today any more)
 function closeEditor(){$('tEd').hidden=true;document.body.classList.remove('noscroll');ed=null}
 function edErr(m,f){$('teErr').textContent=m||'';
   document.querySelectorAll('#teForm [aria-invalid]').forEach(x=>x.removeAttribute('aria-invalid'));
