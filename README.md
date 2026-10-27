@@ -22,5 +22,13 @@ Blocker (6 choices, or skip) → pick a real task → ONE next step (Noor via th
 - Preferences (Profile → Help me start): step size, timer, one step at a time. "Tinier steps" is only saved after the person says yes. Reset button.
 - Usage counts stay on the phone (`S.hl`): event names only, never task text or what the person wrote.
 
+## Phone app & backup (Oct 28)
+- **Installable PWA**: complete manifest (separate maskable icon so Android doesn't crop the brain, home-screen shortcuts Add / Calendar / Focus), iPhone launch screens in `splash/`, service worker that cleans old caches, works offline and brings the app forward when a notification is tapped.
+- **Reminders**: notifications always go through the service worker; permission is asked when the person turns an alarm on (explained first, never on first open); missed alarms are listed on return ("While you were away", nothing marked done); "Add to my phone calendar" (.ics) for alarms that must ring even when the app is closed.
+- **Profile → This phone**: honest status (installed? alerts?) and what can and cannot ring.
+- **Profile → Backup**: export / import JSON with validation, no duplicates, double confirmation before replacing, Undo. The plan is never read from a file.
+- Security fix: the first name is now escaped in Noor's bubble.
+- Details, limits and the native-app plan: `docs/MOBILE-PLAN.md`.
+
 ## Tests
 `npm install && npx playwright install chromium && npm test` runs the end-to-end tests in `tests/` (app + Help me start), served over a local http server (`tests/serve.js`).

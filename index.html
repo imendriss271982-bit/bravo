@@ -6,6 +6,18 @@
 <meta name="theme-color" content="#12082B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ADHD Winner">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="ADHD Winner">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1290x2796.jpg">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1179x2556.jpg">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1284x2778.jpg">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1170x2532.jpg">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1125x2436.jpg">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="splash/launch-1242x2688.jpg">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-828x1792.jpg">
+<link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash/launch-750x1334.jpg">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
@@ -651,6 +663,16 @@ details.someday .list{margin-top:12px}
 .sbtns{display:flex;gap:8px;flex-wrap:wrap}
 .sbtns .btn{flex:1 1 auto}
 .btn.danger{color:var(--coral)}
+.btn.armed{background:var(--coral);color:#fff}
+.tego small{opacity:.7;font-weight:600}
+.misslist{list-style:none;margin:6px 0;padding:0;display:flex;flex-direction:column;gap:8px;text-align:left}
+.misslist li{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.misslist small{color:var(--muted);margin-left:auto}
+.devnote{background:rgba(255,255,255,.04);border-radius:14px;padding:12px 14px;font-size:14px}
+.devnote ul{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;line-height:1.4}
+.bkbody{display:flex;flex-direction:column;gap:14px}
+.bkcmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}.bkcmp>div{background:rgba(255,255,255,.05);border-radius:12px;padding:10px}
+.bkcmp small{display:block;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}.bkcmp b{font-size:14px;line-height:1.4}
+.bkerr{color:var(--coral);font-weight:700;margin:0}.bkok{font-weight:800;font-size:17px;margin:0}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom,0px));z-index:26;max-width:min(92vw,440px);background:var(--surface-2);color:var(--ink);border:1px solid var(--cyan);box-shadow:var(--glow-cyan);border-radius:14px;padding:10px 14px;font-weight:700;font-size:14px;text-align:center}
 .msg.result{font-size:13px;font-weight:700}
 .msg.okres,.okres{color:var(--mint)}.msg.warn,.prop .warn{color:var(--gold)}
@@ -808,7 +830,9 @@ details.someday .list{margin-top:12px}
     </form>
     <p class="note">Reminders only come between 8 am and 10 pm, so they never wake you up.</p>
     <p class="note" id="nPermNote" hidden></p>
-    <p class="note">Alarms and reminders ring, and Noor talks to you, while ADHD Winner is open. When the app is closed, a web app cannot ring reliably: only the future phone app version will.</p>
+    <p class="note">Alarms and reminders ring, and Noor talks to you, while ADHD Winner is open. In the background your phone may pause the app; when it is closed, a web app cannot ring. When you come back, ADHD Winner shows what you missed.</p>
+    <button class="btn ghost" type="button" id="calIcs">📲 Add my upcoming alarms to my phone calendar</button>
+    <p class="note">Your phone calendar always rings, even when ADHD Winner is closed. Changes made later in the app are not copied there.</p>
   </section>
 
   <!-- VIEW: coach -->
@@ -935,6 +959,17 @@ details.someday .list{margin-top:12px}
     </div>
     <div class="sechead"><h3>Help me start</h3><span class="hint">Your preferences</span></div>
     <div class="pcard" id="hpBox"></div>
+    <div class="sechead"><h3>This phone</h3><span class="hint">App &amp; alarms</span></div>
+    <div class="pcard" id="devBox"></div>
+    <div class="sechead"><h3>Backup</h3><span class="hint">Keep your data safe</span></div>
+    <div class="pcard" id="bkBox">
+      <div class="profrow"><div class="grow"><small>Last backup</small><b id="bkLast">Never</b></div></div>
+      <p class="hint" style="margin:0">Your tasks, calendar, reminders, notes, preferences and XP live only on this phone. A backup is one file you keep: save it to Files, Google Drive, or email it to yourself.</p>
+      <button class="btn" type="button" id="bkExport">⬇ Save a backup</button>
+      <button class="btn ghost" type="button" id="bkImport">⬆ Restore from a backup</button>
+      <input type="file" id="bkFile" accept=".json,application/json" hidden>
+      <p class="hint" id="bkMsg" role="status" aria-live="polite" style="margin:0"></p>
+    </div>
   </section>
 </div>
 
@@ -980,6 +1015,7 @@ details.someday .list{margin-top:12px}
       <small class="hint" id="teDurTxt" aria-live="polite"></small>
     </div>
     <label class="toggle" id="teAlarmRow"><input id="teAlarm" type="checkbox"> Alarm at the start time</label>
+    <button type="button" class="btn ghost tego" id="teIcs" hidden>📲 Add to my phone calendar <small>(sure alarm)</small></button>
     <div class="fl"><span>Category</span><div class="seg" id="teCat" role="group" aria-label="Category"><button type="button" data-v="none">None</button><button type="button" data-v="work">💼 Work</button><button type="button" data-v="personal">🏠 Personal</button></div></div>
     <div class="fl"><span>Priority</span><div class="seg" id="tePrio" role="group" aria-label="Priority"><button type="button" data-v="high">🔥 High</button><button type="button" data-v="normal">Normal</button><button type="button" data-v="low">Low</button></div></div>
     <button type="button" class="btn ghost tego" id="teGo">▶ Start this task</button>
@@ -994,6 +1030,13 @@ details.someday .list{margin-top:12px}
   <section class="spanel" role="dialog" aria-modal="true" aria-labelledby="hmsTitle">
     <div class="shead"><h3 id="hmsTitle" tabindex="-1">Help me start</h3><button type="button" class="x" data-hmsclose aria-label="Close">×</button></div>
     <div id="hmsBody" aria-live="polite"></div>
+  </section>
+</div>
+<div class="sheet" id="bkSheet" hidden>
+  <div class="sback" data-bkclose></div>
+  <section class="spanel" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+    <div class="shead"><h3 id="bkTitle" tabindex="-1">Restore a backup</h3><button type="button" class="x" data-bkclose aria-label="Close">×</button></div>
+    <div id="bkBody" class="bkbody" aria-live="polite"></div>
   </section>
 </div>
 <button type="button" class="hmspill" id="hmsPill" hidden aria-label="Back to your step"><span aria-hidden="true">▶</span><span id="hmsPillT"></span></button>
@@ -1701,7 +1744,7 @@ function openEditor(o){
   seg('teCat',v.cat||'none');seg('tePrio',v.prio||'normal');
   $('teAlarm').checked=!!v.alarm;
   $('teDoneRow').hidden=!t;$('teDone').checked=!!(t&&t.done);
-  $('teDel').hidden=!t;$('teDel').textContent='Delete';$('teGo').hidden=!t||t.done;
+  $('teDel').hidden=!t;$('teDel').textContent='Delete';$('teGo').hidden=!t||t.done;$('teIcs').hidden=!(t&&t.date&&t.time&&!t.done);
   if(o.planning&&!v.date)$('teDate').value=todayStr();
   edErr('');edWarn(null);edSync();
   $('tEd').hidden=false;document.body.classList.add('noscroll');
@@ -1816,7 +1859,7 @@ function nourLine(v){
   const t=todayStr(),hi=S.name?S.name+', ':'';
   if(v==='v-today'){
     const ts=dayTasks(t),done=ts.filter(x=>x.done).length,open=ts.filter(x=>!x.done),late=pendingBefore(t).length;
-    if(!ts.length)return{say:hi+"your list is empty today. What's one small thing you want to do? Do you want to add a task?",html:hi+"your list is empty today. <b>One small thing</b> you want to do?",chips:[['Add a task','addTask'],['Plan with me','coach']]};
+    if(!ts.length)return{say:hi+"your list is empty today. What's one small thing you want to do? Do you want to add a task?",html:nb(hi)+"your list is empty today. <b>One small thing</b> you want to do?",chips:[['Add a task','addTask'],['Plan with me','coach']]};
     if(!open.length)return{say:'Wow, '+hi+'all '+ts.length+' tasks are done! You are a champion. Do you want to add something else?',html:'Wow! <b>All '+ts.length+' tasks done.</b> You are a champion! Add something else?',chips:[['Add a task','addTask'],['Not now','close','ghost']]};
     const nx=open[0].text;
     const head=done?hi+'you finished '+done+' task'+(done>1?'s':'')+', bravo! '+open.length+' left. ':hi+'you have '+open.length+' task'+(open.length>1?'s':'')+' today. ';
@@ -1869,8 +1912,7 @@ function checkAlarms(){
   pop.innerHTML='<h2>It\'s time!</h2><p>'+esc(ev.text)+' · '+timeRange(ev)+'</p><div class="abtns"><button class="btn" data-act="go" data-id="'+ev.id+'">Let\'s go (+10 XP)</button><button class="btn ghost" data-act="snooze" data-id="'+ev.id+'">In 5 min</button></div>';
   $('overlay').hidden=false;alarmTone();clearInterval(ringLoop);ringLoop=setInterval(alarmTone,4000);
   speak((S.name?S.name+', it':'It')+"'s time: "+ev.text+". You can do it, let's go together.");
-  if(document.hidden&&'Notification' in window&&Notification.permission==='granted'){
-    try{navigator.serviceWorker.ready.then(r=>r.showNotification('ADHD Winner',{body:"⏰ It's time: "+ev.text,icon:'icon-192.png',tag:'alarm-'+ev.id})).catch(()=>{new Notification('ADHD Winner',{body:"⏰ It's time: "+ev.text,icon:'icon-192.png'})})}catch(e){}}
+  if(document.hidden)notify('ADHD Winner',"⏰ It's time: "+ev.text+(ev.time?' · '+timeRange(ev):''),'alarm-'+ev.id,{id:ev.id},true);
 }
 function handleAlarm(id,act){
   clearInterval(ringLoop);ringing=null;const ev=S.tasks.find(x=>x.id===id);
@@ -1910,8 +1952,7 @@ function checkNudges(){
   pop.innerHTML='<div class="nemo" aria-hidden="true">'+n.emo+'</div><h2>Little reminder</h2><p>'+esc(txt)+'</p><div class="abtns"><button class="btn" data-act="ndone" data-id="'+n.id+'">Done (+5 XP)</button><button class="btn ghost" data-act="nlater" data-id="'+n.id+'">In 15 min</button></div>';
   $('overlay').hidden=false;tone([784,988,1175],.12,.25);nour('pointme',2000);
   speak((S.name?S.name+', ':'')+'little reminder: '+txt+'. You can do it!');
-  if(document.hidden&&'Notification' in window&&Notification.permission==='granted'){
-    try{navigator.serviceWorker.ready.then(r=>r.showNotification('ADHD Winner',{body:n.emo+' '+txt,icon:'icon-192.png',tag:'nudge'})).catch(()=>{new Notification('ADHD Winner',{body:n.emo+' '+txt,icon:'icon-192.png'})})}catch(e){}}
+  if(document.hidden)notify('ADHD Winner',n.emo+' '+txt,'nudge-'+n.id,{id:n.id},false);
 }
 function handleNudge(id,act){
   nudging=null;$('pop').className='pop';$('overlay').hidden=true;try{speechSynthesis.cancel()}catch(e){}
@@ -2683,6 +2724,308 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]
 });
 
 if(!S.name||!S.onboarded)showName();else showAff();
+
+// =====================================================================
+// Phone app layer (Oct 28): install, reliable-as-possible reminders, phone calendar, backup
+// =====================================================================
+const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}};
+const notifState=()=>!('Notification' in window)?'unsupported':Notification.permission;
+const splashOn=()=>!$('splash').hidden;
+// run fn once the morning affirmation screen is closed (or now if it is not showing)
+function afterSplash(fn){if(!splashOn())return fn();const mo=new MutationObserver(()=>{if(!splashOn()){mo.disconnect();setTimeout(fn,350)}});mo.observe($('splash'),{attributes:true,attributeFilter:['hidden']})}
+
+// ---------- notifications: always through the service worker (Android needs it), plain Notification as backup ----------
+function notify(title,body,tag,data,loud){
+  if(notifState()!=='granted')return false;
+  const o={body,icon:'icon-192.png',badge:'favicon-32.png',tag:tag||'adhdw',renotify:true,data:data||{},requireInteraction:!!loud,vibrate:loud?[300,150,300,150,300]:[150]};
+  try{
+    if('serviceWorker' in navigator&&navigator.serviceWorker.controller){navigator.serviceWorker.ready.then(r=>r.showNotification(title,o)).catch(()=>{try{new Notification(title,o)}catch(e){}})}
+    else new Notification(title,o);
+    return true;
+  }catch(e){return false}
+}
+// a tapped notification brings the app forward: show the alarm right away
+if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.type==='adhdw-notif')setTimeout(()=>{checkAlarms();checkNudges();showMissed()},300)});
+
+// ---------- coming back to the app: check at once instead of waiting for the next tick ----------
+document.addEventListener('visibilitychange',()=>{if(document.hidden)return;
+  setTimeout(()=>{const was=viewDay===S.date;if(rollDay()){if(was)viewDay=todayStr();render()}checkAlarms();checkNudges();showMissed()},400)});
+addEventListener('pageshow',e=>{if(e.persisted)setTimeout(()=>{checkAlarms();showMissed()},400)});
+
+// ---------- missed alarms: the phone closed the app, so be honest and show what was missed ----------
+// An alarm more than 30 min late never rings (it would be confusing); it is listed here instead. Nothing is marked done.
+function missedAlarms(){const now=Date.now();
+  return S.tasks.filter(e=>e.alarm&&!e.fired&&!e.done&&e.date&&e.time&&now-alarmDue(e)>=30*60e3&&now-alarmDue(e)<48*3600e3).sort((a,b)=>alarmDue(a)-alarmDue(b))}
+function showMissed(){
+  if(splashOn()||ringing||nudging||!$('overlay').hidden||!$('tEd').hidden||hOpenNow())return false;
+  const m=missedAlarms();if(!m.length)return false;
+  const pop=$('pop');pop.className='pop misspop';
+  pop.innerHTML='<div class="nemo" aria-hidden="true">🔕</div><h2>While you were away</h2><p>Your phone paused ADHD Winner, so '+(m.length>1?'these alarms':'this alarm')+' could not ring:</p>'+
+    '<ul class="misslist">'+m.slice(0,6).map(e=>'<li>'+picFor(e.text)+' <b>'+esc(e.text)+'</b><small>'+(e.date===todayStr()?'today':e.date)+' · '+e.time+'</small></li>').join('')+'</ul>'+
+    (m.length>6?'<p class="hint">+ '+(m.length-6)+' more in your calendar</p>':'')+
+    '<p class="hint">Tip: for alarms that must ring, tap “Add to my phone calendar” in the item.</p>'+
+    '<div class="abtns"><button class="btn" type="button" data-miss="ok">OK, got it</button><button class="btn ghost" type="button" data-miss="cal">Open calendar</button></div>';
+  $('overlay').hidden=false;nour('pointme',2000);return true;
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-miss]');if(!b)return;
+  missedAlarms().forEach(x=>{x.fired=true;x.snoozeUntil=null});save();
+  $('pop').className='pop';$('overlay').hidden=true;
+  if(b.dataset.miss==='cal')goView('v-agenda');else toast('No stress. Small step, big win!');
+  render();
+});
+
+// ---------- asking for notifications at the right moment (when the person turns an alarm on) ----------
+// replaces the old toast hint: explains first, the real browser prompt only comes after "Allow"
+notifyHint=function(){
+  const st=notifState(),now=Date.now();
+  if(st==='granted'){if(!notifyHinted){notifyHinted=true;setTimeout(()=>toast('Alarm set. It also shows on your lock screen while the phone keeps the app running.'),2400)}return}
+  if(IS_IOS&&!isStandalone()){if(!notifyHinted){notifyHinted=true;setTimeout(()=>toast('Alarm set. For lock-screen alerts on iPhone: Share ⬆ → Add to Home Screen, then open it from there.'),2400)}return}
+  if(st!=='default'||(S.nAsk&&now-S.nAsk<3*864e5)){if(!notifyHinted){notifyHinted=true;setTimeout(()=>toast('Alarm set. It rings while ADHD Winner is open.'),2400)}return}
+  S.nAsk=now;save();
+  setTimeout(()=>{if(ringing||nudging||!$('overlay').hidden)return;
+    const pop=$('pop');pop.className='pop askpop';
+    pop.innerHTML='<div class="nemo" aria-hidden="true">🔔</div><h2>Alarms on your lock screen?</h2><p>Allow notifications and ADHD Winner can also alert you when you are in another app.</p>'+
+      '<p class="hint">Honest note: if your phone fully closes the app, it cannot ring. For a sure alarm, add it to your phone calendar.</p>'+
+      '<div class="abtns"><button class="btn" type="button" data-nask="yes">Allow</button><button class="btn ghost" type="button" data-nask="no">Not now</button></div>';
+    $('overlay').hidden=false},1200);
+};
+function askNotif(done){
+  if(!('Notification' in window)){done&&done('unsupported');return}
+  try{const r=Notification.requestPermission(p=>{done&&done(p);done=null});if(r&&r.then)r.then(p=>{done&&done(p);done=null},()=>{done&&done(notifState());done=null})}catch(e){done&&done(notifState())}
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-nask]');if(!b)return;
+  $('pop').className='pop';$('overlay').hidden=true;
+  if(b.dataset.nask==='no'){toast('OK. Alarms still ring inside the app while it is open.');return}
+  askNotif(p=>{permLabel();renderDevice();
+    if(p==='granted'){toast('Lock-screen alerts are on ✓');notify('ADHD Winner','You will see your alarms here. You can do it!','test')}
+    else toast('Notifications were not allowed. Alarms still ring inside the app.')});
+});
+
+// ---------- install ----------
+let installEvt=null;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;renderDevice()});
+addEventListener('appinstalled',()=>{installEvt=null;renderDevice();toast('ADHD Winner is on your home screen ✓')});
+
+// ---------- phone calendar (.ics): the one alarm the phone itself guarantees ----------
+const icsEsc=s=>String(s||'').replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/([,;])/g,'\\$1');
+const icsDT=(d,m)=>d.replace(/-/g,'')+'T'+fromMin(m).replace(':','')+'00';
+function icsFor(items){
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+Z$/,'Z');
+  const ev=items.filter(t=>t.date&&t.time).map(t=>{const s=toMin(t.time),e=Math.min(s+(t.dur||30),1439);
+    return ['BEGIN:VEVENT','UID:'+t.id+'@adhd-winner','DTSTAMP:'+stamp,'DTSTART:'+icsDT(t.date,s),'DTEND:'+icsDT(t.date,e),'SUMMARY:'+icsEsc(t.text),
+      t.desc?'DESCRIPTION:'+icsEsc(t.desc):null,
+      ...(t.alarm||isEv(t)?['BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(t.text),'TRIGGER:-PT0M','END:VALARM']:[]),'END:VEVENT'].filter(Boolean).join('\r\n')});
+  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ADHD Winner//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',...ev,'END:VCALENDAR',''].join('\r\n');
+}
+// hands a file to the person: share sheet on iPhone (→ Save to Files), normal download elsewhere
+async function deliverFile(name,text,type){
+  const blob=new Blob([text],{type});
+  if(IS_IOS&&navigator.canShare){try{const f=new File([blob],name,{type});if(navigator.canShare({files:[f]})){await navigator.share({files:[f],title:name});return 'shared'}}catch(e){if(e&&e.name==='AbortError')return 'cancelled'}}
+  const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);return 'downloaded';
+}
+function addToPhoneCalendar(items){
+  items=items.filter(t=>t.date&&t.time);if(!items.length){toast('Nothing with a date and a start time to add.');return}
+  const ics=icsFor(items),name=items.length===1?'adhd-winner-'+items[0].date+'.ics':'adhd-winner-alarms.ics';
+  if(IS_IOS){location.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);return} // iPhone opens “Add to Calendar”
+  deliverFile(name,ics,'text/calendar').then(r=>{if(r!=='cancelled')toast('Open the file to add '+(items.length>1?items.length+' items':'it')+' to your phone calendar.')});
+}
+const upcomingAlarms=()=>{const now=Date.now();return S.tasks.filter(t=>t.alarm&&!t.done&&t.date&&t.time&&new Date(t.date+'T'+t.time).getTime()>now).sort((a,b)=>alarmDue(a)-alarmDue(b))};
+$('teIcs').addEventListener('click',()=>{const t=ed&&ed.id&&S.tasks.find(x=>x.id===ed.id);if(t)addToPhoneCalendar([t])});
+$('calIcs').addEventListener('click',()=>addToPhoneCalendar(upcomingAlarms()));
+
+// ---------- Profile → “This phone”: honest status of installs and alerts ----------
+function renderDevice(){const box=$('devBox');if(!box)return;
+  const inst=isStandalone(),st=notifState(),rows=[];
+  rows.push('<div class="profrow"><div class="grow"><small>App on home screen</small><b>'+(inst?'Installed ✓':'Not yet')+'</b></div>'+
+    (!inst&&installEvt?'<button class="btn small" type="button" data-dev="install">Install</button>':'')+'</div>');
+  if(!inst&&!installEvt)rows.push('<p class="hint" style="margin:0">'+(IS_IOS?'In Safari: tap Share ⬆, then “Add to Home Screen”. Open ADHD Winner from that icon.':'In your browser menu ⋮, choose “Install app” or “Add to Home screen”.')+'</p>');
+  const lab={granted:'On ✓',denied:'Blocked',default:'Off',unsupported:'Not available'}[st];
+  rows.push('<div class="profrow"><div class="grow"><small>Lock-screen alerts</small><b>'+lab+'</b></div>'+
+    (st==='default'&&!(IS_IOS&&!inst)?'<button class="btn small" type="button" data-dev="notif">Turn on</button>':'')+
+    (st==='granted'?'<button class="btn small ghost" type="button" data-dev="test">Test</button>':'')+'</div>');
+  let why;
+  if(st==='unsupported')why=IS_IOS?'On iPhone, alerts only work after adding ADHD Winner to the Home Screen (iOS 16.4 or newer).':'This browser cannot show notifications.';
+  else if(st==='denied')why='Alerts are blocked in your phone or browser settings for this app. You can allow them there.';
+  else if(st==='default'&&IS_IOS&&!inst)why='First add ADHD Winner to your Home Screen, then turn alerts on from there.';
+  else why=null;
+  if(why)rows.push('<p class="hint" style="margin:0">'+why+'</p>');
+  rows.push('<div class="devnote"><b>What you can count on</b><ul>'+
+    '<li>✅ App open: alarms and reminders ring, with Noor’s voice.</li>'+
+    '<li>'+(st==='granted'?'🟡':'⚪')+' App in the background: a lock-screen alert can show, but your phone may pause the app, then it waits until you come back.</li>'+
+    '<li>❌ App closed: a web app cannot ring. When you reopen it, ADHD Winner shows what you missed.</li>'+
+    '<li>🔒 Sure alarm: add the item to your phone calendar.</li></ul></div>');
+  box.innerHTML=rows.join('');
+}
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-dev]');if(!b)return;const a=b.dataset.dev;
+  if(a==='install'&&installEvt){const ev=installEvt;installEvt=null;try{await ev.prompt();await ev.userChoice}catch(x){}renderDevice()}
+  if(a==='notif')askNotif(p=>{permLabel();renderDevice();if(p==='granted'){toast('Lock-screen alerts are on ✓');notify('ADHD Winner','Alerts are on. You can do it!','test')}else toast('Notifications were not allowed. Alarms still ring inside the app.')});
+  if(a==='test'){toast(notify('ADHD Winner','🔔 This is how your alarms will look.','test')?'Test sent. Did it show at the top of your screen?':'Could not show a notification here.')}
+});
+
+// =====================================================================
+// Backup: export / import (JSON file the person keeps). Nothing leaves the phone unless they save the file somewhere.
+// =====================================================================
+const BK_FORMAT='adhd-winner-backup',BK_VERSION=1,BK_MAX_FILE=40e6,BK_MAX_AUDIO=25e6,UNDO_KEY='bravo-v1-undo';
+const blobToData=b=>new Promise(ok=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=()=>ok(null);r.readAsDataURL(b)});
+const dataToBlob=d=>fetch(d).then(r=>r.blob()).catch(()=>null);
+const arr=x=>Array.isArray(x)?x.filter(o=>o&&typeof o==='object'&&!Array.isArray(o)):[];
+const num=(x,d)=>Number.isFinite(+x)&&+x>=0?+x:d;
+const str=(x,max)=>String(x==null?'':x).slice(0,max||500);
+// everything a screen reads, cleaned so a damaged or hand-edited file can never break the app
+function sanitize(s){
+  const D=defaults();
+  ['xp','wins','winsToday','focusTotal','streak','splits','ontime'].forEach(k=>s[k]=Math.round(num(s[k],D[k]||0)));
+  s.name=str(s.name,40).replace(/[<>]/g,'').trim();s.sound=s.sound!==false;s.voice=s.voice!==false;
+  s.badges=Array.isArray(s.badges)?[...new Set(s.badges.filter(b=>typeof b==='string'))]:[];
+  ['hist','cc','xpd','hp','hl'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]={}});
+  for(const k in s.hist)if(!okDate(k)||!Number.isFinite(+s.hist[k]))delete s.hist[k];
+  for(const k in s.xpd)if(!okDate(k)||!Number.isFinite(+s.xpd[k]))delete s.xpd[k];
+  for(const k in s.cc){if(!okDate(k)||!s.cc[k]||typeof s.cc[k]!=='object'){delete s.cc[k];continue}for(const c in s.cc[k])s.cc[k][c]=Math.round(num(s.cc[k][c],0))}
+  s.nudges=arr(s.nudges).filter(n=>n.id&&n.text).map(n=>({id:str(n.id,40),emo:str(n.emo||'🔔',8),text:str(n.text,60),every:[30,60,90,120,180].includes(+n.every)?+n.every:60,on:!!n.on,next:0}));
+  s.challenges=arr(s.challenges).filter(c=>c.id&&c.name).map(c=>Object.assign(c,{id:str(c.id,40),name:str(c.name,60),target:Math.max(1,Math.round(num(c.target,1)))}));
+  s.notes=arr(s.notes).filter(n=>n.id).map(n=>({id:str(n.id,40),text:str(n.text,2000),audio:!!n.audio,dur:n.dur?Math.round(num(n.dur,0)):undefined,at:num(n.at,Date.now())}));
+  s.exps=arr(s.exps).filter(x=>x.id&&x.what&&okDate(x.date)&&num(x.amt,0)>0).map(x=>({id:str(x.id,40),what:str(x.what,80),amt:+x.amt,date:x.date}));
+  s.shop=arr(s.shop).filter(x=>x.id&&x.text).map(x=>({id:str(x.id,40),text:str(x.text,80),done:!!x.done}));
+  s.projs=arr(s.projs).filter(p=>p.id&&p.name).map(p=>({id:str(p.id,40),name:str(p.name,80),plan:p.plan&&typeof p.plan==='object'?Object.fromEntries(Object.entries(p.plan).map(([k,v])=>[k,str(v,2000)])):{},
+    ms:arr(p.ms).filter(m=>m.id&&m.title&&okDate(m.date)).map(m=>({id:str(m.id,40),title:str(m.title,80),date:m.date,done:!!m.done,ev:m.ev||null,rw:m.rw||null}))}));
+  s.tasks.forEach(t=>{t.text=str(t.text,120);if(t.desc!=null)t.desc=str(t.desc,500)});
+  s.tasks=s.tasks.filter(t=>t.text.trim());
+  return s;
+}
+// read and check a backup file; returns {state, audio, meta} or {err}
+function parseBackup(text){
+  let b;try{b=JSON.parse(text)}catch(e){return{err:'This file is not an ADHD Winner backup (it can’t be read).'}}
+  if(!b||typeof b!=='object')return{err:'This file is not an ADHD Winner backup.'};
+  let data,audio={},meta={};
+  if(b.format===BK_FORMAT){
+    if(+b.version>BK_VERSION)return{err:'This backup was made by a newer version of ADHD Winner. Update the app (reload it), then try again.'};
+    data=b.data;audio=b.audio&&typeof b.audio==='object'?b.audio:{};meta={at:b.exportedAt,audioSkipped:b.audioSkipped||0,prefs:b.prefs&&typeof b.prefs==='object'?b.prefs:{}};
+  }else if(Array.isArray(b.tasks))data=b; // a raw copy of the app data also works
+  else return{err:'This file is not an ADHD Winner backup.'};
+  const st=data&&typeof data==='object'?loadState(JSON.stringify(data)):null;
+  if(!st)return{err:'This backup is damaged: the task list is missing. Nothing was changed.'};
+  return{state:sanitize(st),audio,meta};
+}
+function bkSummary(s){
+  const tk=s.tasks.filter(t=>!isEv(t)).length,ev=s.tasks.filter(isEv).length,own=s.nudges.filter(n=>n.id.startsWith('c')).length;
+  const parts=[[tk,'task'],[ev,'appointment'],[own,'own reminder'],[s.notes.length,'note'],[s.projs.length,'project']].filter(x=>x[0]).map(x=>x[0]+' '+x[1]+(x[0]>1?'s':''));
+  if(s.xp)parts.push(s.xp+' XP');return parts.join(' · ')||'Nothing yet';
+}
+// ---- export ----
+async function exportBackup(){
+  const btn=$('bkExport');btn.disabled=true;$('bkMsg').textContent='Preparing your backup…';
+  try{
+    const audio={};let used=0,skipped=0;
+    for(const n of S.notes.filter(n=>n.audio)){const b=await audGet(n.id);if(!b)continue;
+      if(used+b.size>BK_MAX_AUDIO){skipped++;continue}const d=await blobToData(b);if(d){audio[n.id]=d;used+=b.size}}
+    const pack={format:BK_FORMAT,version:BK_VERSION,app:'ADHD Winner',exportedAt:new Date().toISOString(),
+      data:JSON.parse(JSON.stringify(S)),prefs:{cat:catF,calView:(()=>{try{return localStorage.getItem('bravoCalView')}catch(e){return null}})()},audio,audioSkipped:skipped};
+    const name='adhd-winner-backup-'+todayStr()+'.json';
+    const r=await deliverFile(name,JSON.stringify(pack),'application/json');
+    if(r==='cancelled'){$('bkMsg').textContent='Backup not saved.';return}
+    S.lastBackup=Date.now();save();renderBackup();
+    $('bkMsg').textContent='✓ Backup ready: '+name+'. Keep it somewhere safe (Files, Google Drive, or email it to yourself).'+(skipped?' '+skipped+' voice note'+(skipped>1?'s were':' was')+' too big to include.':'');
+    toast('Backup saved ✓');
+  }catch(e){$('bkMsg').textContent='Couldn’t make the backup. Nothing was changed. Try again.'}
+  finally{btn.disabled=false}
+}
+// ---- import ----
+let bk=null; // the backup being looked at
+function bkShow(html){$('bkBody').innerHTML=html;$('bkSheet').hidden=false;document.body.classList.add('noscroll');setTimeout(()=>{try{$('bkTitle').focus()}catch(e){}},50)}
+function bkClose(){$('bkSheet').hidden=true;document.body.classList.remove('noscroll');bk=null}
+async function readBackupFile(f){
+  if(!f)return;
+  if(f.size>BK_MAX_FILE){toast('This file is too big to be an ADHD Winner backup.');return}
+  let text;try{text=await f.text()}catch(e){toast('Couldn’t open this file.');return}
+  const r=parseBackup(text);
+  if(r.err){bkShow('<p class="bkerr" role="alert">'+esc(r.err)+'</p><div class="sbtns"><button class="btn" type="button" data-bk="close">OK</button></div>');return}
+  bk=r;bk.replaceArm=false;
+  const when=r.meta.at?new Date(r.meta.at).toLocaleString('en-US',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):null;
+  bkShow('<p>'+(when?'Backup from <b>'+esc(when)+'</b>':'Backup file')+'</p>'+
+    '<div class="bkcmp"><div><small>In the file</small><b>'+esc(bkSummary(r.state))+'</b></div><div><small>On this phone now</small><b>'+esc(bkSummary(S))+'</b></div></div>'+
+    '<button class="btn" type="button" data-bk="merge">Add to my data</button><p class="hint" style="margin:0">Keeps everything you have and adds what is new. Items already here are skipped, so nothing is doubled.</p>'+
+    '<button class="btn ghost danger" type="button" data-bk="replace" id="bkReplace">Replace all my data</button><p class="hint" style="margin:0">Your current data is replaced by the file. You can undo right after.</p>'+
+    '<div class="sbtns"><button class="btn ghost" type="button" data-bk="close">Cancel</button></div>');
+}
+const taskKey=t=>[t.kind||'task',t.text.trim().toLowerCase(),t.date||'',t.time||''].join('|');
+function mergeInto(cur,inc){
+  const out=JSON.parse(JSON.stringify(cur)),n={added:0,skipped:0};
+  const add=(list,items,keyFn,count=true)=>{const ids=new Set(list.map(x=>x.id)),keys=keyFn?new Set(list.map(keyFn)):null;
+    items.forEach(x=>{if(ids.has(x.id)||(keys&&keys.has(keyFn(x)))){if(count)n.skipped++;return}list.push(x);ids.add(x.id);keys&&keys.add(keyFn(x));if(count)n.added++})};
+  add(out.tasks,inc.tasks,taskKey);
+  add(out.nudges,inc.nudges.filter(x=>x.id.startsWith('c')),x=>x.text.trim().toLowerCase());
+  add(out.nudges,inc.nudges.filter(x=>!x.id.startsWith('c')),null,false);
+  add(out.challenges,inc.challenges,null,false);
+  add(out.notes,inc.notes,x=>(x.text||'')+'|'+x.at);
+  add(out.exps,inc.exps,x=>x.what+'|'+x.amt+'|'+x.date);
+  add(out.shop,inc.shop,x=>x.text.trim().toLowerCase());
+  add(out.projs,inc.projs,x=>x.name.trim().toLowerCase());
+  // progress: never added twice, keep the best of both
+  ['xp','wins','focusTotal','splits','ontime','streak'].forEach(k=>out[k]=Math.max(num(out[k],0),num(inc[k],0)));
+  ['hist','xpd','cc'].forEach(k=>{if(!out[k]||typeof out[k]!=='object')out[k]={}});
+  ['hist','xpd'].forEach(k=>{for(const d in inc[k])out[k][d]=Math.max(num(out[k][d],0),num(inc[k][d],0))});
+  for(const d in inc.cc){out.cc[d]=out.cc[d]||{};for(const c in inc.cc[d])out.cc[d][c]=Math.max(num(out.cc[d][c],0),inc.cc[d][c])}
+  out.badges=[...new Set([...(out.badges||[]),...inc.badges])];
+  if(!out.name&&inc.name)out.name=inc.name;
+  if(!Object.keys(out.hp||{}).length&&Object.keys(inc.hp||{}).length)out.hp=inc.hp;
+  return{state:out,n};
+}
+async function restoreAudio(state,audio){let lost=0;
+  for(const note of state.notes.filter(x=>x.audio)){
+    const d=audio[note.id];const b=d&&typeof d==='string'&&d.startsWith('data:audio')?await dataToBlob(d):null;
+    if(b){try{await audPut(note.id,b)}catch(e){lost++;note.audio=false}}
+    else if(!(await audGet(note.id))){note.audio=false;note.text=note.text||'🎙️ Voice note (sound not in the backup)';lost++}
+  }return lost}
+async function applyBackup(mode){
+  const r=bk;if(!r)return;
+  const before=JSON.stringify(S);let undoOk=true;try{localStorage.setItem(UNDO_KEY,before)}catch(e){undoOk=false}
+  let next,msg;
+  if(mode==='replace'){next=r.state;next.plan=S.plan; // the plan is never taken from a file
+    msg='Your data was replaced by the backup.'}
+  else{const m=mergeInto(S,r.state);next=m.state;
+    if(!m.n.added&&m.state.xp===S.xp){bkShow('<p>Nothing new: everything in this backup is already on this phone.</p><div class="sbtns"><button class="btn" type="button" data-bk="close">OK</button></div>');try{localStorage.removeItem(UNDO_KEY)}catch(e){}return}
+    msg=m.n.added+' item'+(m.n.added===1?'':'s')+' added'+(m.n.skipped?', '+m.n.skipped+' already here (skipped)':'')+'.'}
+  const lost=await restoreAudio(next,r.audio||{});
+  const checked=loadState(JSON.stringify(next));if(!checked){bkShow('<p class="bkerr" role="alert">Something went wrong. Nothing was changed.</p><div class="sbtns"><button class="btn" type="button" data-bk="close">OK</button></div>');return}
+  S=sanitize(checked);rollDay();
+  if(!save()){S=loadState(before);bkShow('<p class="bkerr" role="alert">Couldn’t save on this phone (storage full?). Nothing was changed.</p><div class="sbtns"><button class="btn" type="button" data-bk="close">OK</button></div>');return}
+  if(mode==='replace'){const pf=r.meta.prefs||{};
+    if(['all','work','personal'].includes(pf.cat)){catF=pf.cat;try{localStorage.setItem('bravoCat',catF)}catch(e){}}
+    if(['day','week','month'].includes(pf.calView)){calView=pf.calView;try{localStorage.setItem('bravoCalView',calView)}catch(e){}}}
+  viewDay=todayStr();render();renderNudges();renderPro();renderHp();renderBackup();
+  bkShow('<p class="bkok" role="status">✓ '+esc(msg)+'</p>'+(lost?'<p class="hint">'+lost+' voice note'+(lost>1?'s':'')+' had no sound in the file.</p>':'')+
+    '<div class="sbtns"><button class="btn" type="button" data-bk="close">Done</button>'+(undoOk?'<button class="btn ghost" type="button" data-bk="undo">Undo</button>':'')+'</div>');
+  toast('Backup restored ✓');
+}
+function undoImport(){let raw=null;try{raw=localStorage.getItem(UNDO_KEY)}catch(e){}
+  const s=raw&&loadState(raw);if(!s){toast('Nothing to undo.');return bkClose()}
+  S=s;save();try{localStorage.removeItem(UNDO_KEY)}catch(e){}
+  render();renderNudges();renderPro();renderHp();renderBackup();bkClose();toast('Undone: your data is back as before.')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-bk]');if(!b)return;const a=b.dataset.bk;
+  if(a==='close')return bkClose();
+  if(a==='undo')return undoImport();
+  if(a==='merge')return applyBackup('merge');
+  if(a==='replace'){if(!bk)return;if(!bk.replaceArm){bk.replaceArm=true;b.textContent='Tap again to replace everything';b.classList.add('armed');return}return applyBackup('replace')}
+});
+document.querySelectorAll('[data-bkclose]').forEach(x=>x.addEventListener('click',bkClose));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('bkSheet').hidden)bkClose()});
+$('bkExport').addEventListener('click',exportBackup);
+$('bkImport').addEventListener('click',()=>$('bkFile').click());
+$('bkFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];e.target.value='';readBackupFile(f)});
+function renderBackup(){const el=$('bkLast');if(!el)return;
+  if(!S.lastBackup){el.textContent='Never';return}
+  const d=Math.floor((Date.now()-S.lastBackup)/864e5);el.textContent=d<1?'Today':d===1?'Yesterday':d+' days ago'}
+renderBackup();renderDevice();
+
+// ---------- home-screen shortcuts (?go=add|calendar|focus) and opening from a notification ----------
+(()=>{let q;try{q=new URLSearchParams(location.search)}catch(e){return}
+  const go=q.get('go'),fromN=q.get('from')==='notification';
+  if(go||fromN||q.get('source'))try{history.replaceState(null,'',location.pathname)}catch(e){}
+  if(go)afterSplash(()=>{if(go==='add')openEditor({});else if(go==='calendar')goView('v-agenda');else if(go==='focus')goView('v-focus')});
+  afterSplash(()=>setTimeout(()=>{checkAlarms();if(!ringing)showMissed()},fromN?100:1200));
+})();
+
 
 render();drawT();
 })();
