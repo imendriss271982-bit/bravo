@@ -1,0 +1,7 @@
+{
+  "name": "adhd-winner",
+  "private": true,
+  "description": "ADHD Winner web app (static site). Only used to run the tests.",
+  "scripts": { "test": "node --test --test-concurrency=1 tests/app.test.js" },
+  "devDependencies": { "playwright": "^1.50.0" }
+}
