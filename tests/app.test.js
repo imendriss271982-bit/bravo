@@ -80,9 +80,11 @@ async function fillEditor(page, { text, when, date, start, end, kind, prio, cat 
   if (end !== undefined) await page.fill('#teEnd', end);
   if (prio) await page.click(`#tePrio [data-v="${prio}"]`);
 }
+// the full editor for a new item (on screen it opens from the calendar's "+ Add" or from "Plan it" after Add)
+const openNewEditor = page => page.evaluate(() => window.adhdwNewItem());
 async function newTask(page, o) {
   await goToday(page);
-  await page.click('#addMore');
+  await openNewEditor(page);
   await fillEditor(page, Object.assign({ cat: o.kind === 'event' ? undefined : 'personal' }, o));
   await page.click('#teSave');
   if (await page.isVisible('#teWarn') && o.confirmOverlap) await page.click('#teSave');
@@ -179,7 +181,7 @@ test('10: an unscheduled task stays accessible (Today, Calendar, after refresh)'
 test('11: overlapping tasks are warned about, both kept, shown side by side', async () => {
   const p = await open();
   await newTask(p, { text: 'Team meeting', when: 'tomorrow', start: '10:00', end: '11:00' });
-  await goToday(p); await p.click('#addMore');
+  await goToday(p); await openNewEditor(p);
   await fillEditor(p, { text: 'Dentist', when: 'tomorrow', start: '10:30', end: '11:30', cat: 'personal' });
   await p.click('#teSave');
   assert.ok(await p.isVisible('#teWarn'), 'warning shown');
@@ -247,7 +249,7 @@ test('15: empty and invalid input is refused with a clear message', async () => 
   await goToday(p); await p.click('#addForm button[type=submit]');
   assert.equal((await state(p)).tasks.length, 0);
   assert.match(await p.textContent('#toast'), /Type what you want/);
-  await p.click('#addMore'); await p.click('#teSave');
+  await openNewEditor(p); await p.click('#teSave');
   assert.match(await p.textContent('#teErr'), /name/); assert.equal(await p.getAttribute('#teText', 'aria-invalid'), 'true');
   await fillEditor(p, { text: 'Backwards', when: 'today', start: '15:00', end: '14:00' }); await p.click('#teSave');
   assert.match(await p.textContent('#teErr'), /end must be after the start/i);

@@ -367,7 +367,7 @@ test('Today (home page) shows no Noor and no Noor bubble; she is back on other p
 });
 
 // ---------- 9. Phone: no zoom, no keyboard jumping up, Add then Plan ----------
-test('phone: fields are 16 px (no iPhone zoom), the keyboard never opens by itself, Plan sits right after Add', async () => {
+test('phone: fields are 16 px (no iPhone zoom), the keyboard never opens by itself, Plan comes after Add', async () => {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 700 }, isMobile: true, hasTouch: true });
   const p = await ctx.newPage(); p.errors = []; p.on('pageerror', e => p.errors.push(e.message));
   await p.addInitScript(([k, s]) => { if (!localStorage.getItem(k)) localStorage.setItem(k, JSON.stringify(s)); try { speechSynthesis.speak = () => {}; } catch (e) {}
@@ -376,13 +376,16 @@ test('phone: fields are 16 px (no iPhone zoom), the keyboard never opens by itse
   await p.goto(URL); await boot(p);
   assert.ok(await p.evaluate(() => matchMedia('(pointer:coarse)').matches), 'test runs as a touch phone');
   for (const sel of ['#newTask', '#newChal']) assert.equal(await p.$eval(sel, e => getComputedStyle(e).fontSize), '16px', sel);
-  // Add then Plan, both on screen, under the field
-  const r = await p.evaluate(() => ['#newTask', '#addForm button[type=submit]', '#addMore'].map(s => document.querySelector(s).getBoundingClientRect()).map(b => ({ l: b.left, r: b.right, t: b.top })));
-  assert.ok(r[1].t > r[0].t && r[2].t > r[0].t, 'buttons under the field');
-  assert.ok(r[1].r <= r[2].l, 'Plan is right after Add'); assert.ok(r[2].r <= 375, 'Plan fully on screen');
+  // no Plan button next to Add: Plan comes after the task is added
+  assert.equal(await p.$('#addMore'), null);
+  const r = await p.evaluate(() => ['#newTask', '#addForm button[type=submit]'].map(s => document.querySelector(s).getBoundingClientRect()).map(b => ({ l: b.left, r: b.right })));
+  assert.ok(r[0].r <= r[1].l && r[1].r <= 375, 'Add on the right of the field, on screen');
   assert.ok(await fits(p));
+  await p.tap('#newTask'); await p.fill('#newTask', 'Call the bank'); await p.tap('#addForm button[type=submit]');
+  await p.tap('#qaBox [data-qa="work"]');
+  assert.match(await p.textContent('#qaBox [data-qa="time"]'), /Plan it/);
   // opening the editor or Help me start does not put the cursor in a field
-  await p.tap('#addMore'); await p.waitForTimeout(200);
+  await p.tap('#qaBox [data-qa="time"]'); await p.waitForTimeout(200);
   assert.equal(await p.evaluate(() => document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName)), false, 'editor: no keyboard');
   assert.equal(await p.$eval('#teText', e => getComputedStyle(e).fontSize), '16px');
   await p.tap('#tEd .shead .x');
