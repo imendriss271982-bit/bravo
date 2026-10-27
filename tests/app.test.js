@@ -70,9 +70,10 @@ async function showDay(page, k, view = 'day') {
   await page.click(`.mday[data-k="${k}"]`);
   if (view !== 'day') await page.click(`#cvTabs [data-cv="${view}"]`);
 }
-async function fillEditor(page, { text, when, date, start, end, kind, prio }) {
+async function fillEditor(page, { text, when, date, start, end, kind, prio, cat }) {
   if (text !== undefined) await page.fill('#teText', text);
   if (kind) await page.click(`#teKind [data-v="${kind}"]`);
+  if (cat) await page.click(`#teCat [data-v="${cat}"]`);
   if (when) await page.click(`#teWhen [data-w="${when}"]`);
   if (date) await page.fill('#teDate', date);
   if (start !== undefined) await page.fill('#teStart', start);
@@ -82,10 +83,15 @@ async function fillEditor(page, { text, when, date, start, end, kind, prio }) {
 async function newTask(page, o) {
   await goToday(page);
   await page.click('#addMore');
-  await fillEditor(page, o);
+  await fillEditor(page, Object.assign({ cat: o.kind === 'event' ? undefined : 'personal' }, o));
   await page.click('#teSave');
   if (await page.isVisible('#teWarn') && o.confirmOverlap) await page.click('#teSave');
   await page.waitForTimeout(150);
+}
+// quick add on Today: type → Add → Personal or Work (required before anything is saved)
+async function quickAdd(page, text, cat = 'personal') {
+  await goToday(page); await page.fill('#newTask', text); await page.click('#addForm button[type=submit]');
+  await page.click(`#qaBox [data-qa="${cat}"]`); await page.waitForTimeout(100);
 }
 const blocks = (page, text) => page.$$eval('#events .blk', (els, t) => els.filter(e => e.textContent.includes(t)).map(e => ({ label: e.getAttribute('aria-label'), top: parseFloat(e.style.top), left: e.style.left })), text);
 const rows = (page, sel, text) => page.$$eval(sel + ' li[data-tid]', (els, t) => els.filter(e => e.textContent.includes(t)).map(e => ({ id: e.dataset.tid, cls: e.className })), text);
@@ -174,7 +180,7 @@ test('11: overlapping tasks are warned about, both kept, shown side by side', as
   const p = await open();
   await newTask(p, { text: 'Team meeting', when: 'tomorrow', start: '10:00', end: '11:00' });
   await goToday(p); await p.click('#addMore');
-  await fillEditor(p, { text: 'Dentist', when: 'tomorrow', start: '10:30', end: '11:30' });
+  await fillEditor(p, { text: 'Dentist', when: 'tomorrow', start: '10:30', end: '11:30', cat: 'personal' });
   await p.click('#teSave');
   assert.ok(await p.isVisible('#teWarn'), 'warning shown');
   assert.match(await p.textContent('#teWarn'), /Team meeting/);
@@ -223,7 +229,7 @@ test('13: focus timer start, pause, resume, reset, survives page change and refr
 
 test('14: XP is never awarded twice for the same task', async () => {
   const p = await open();
-  await goToday(p); await p.fill('#newTask', 'Water plants'); await p.click('#addForm button[type=submit]');
+  await quickAdd(p, 'Water plants');
   const [t] = await byText(p, 'Water plants'); const box = `#tasks li[data-tid="${t.id}"] [data-act="task"]`;
   await p.click(box); await p.waitForTimeout(100);
   let s = await state(p); const xp1 = s.xp; assert.ok(xp1 >= 10); assert.equal(s.wins, 1);
@@ -248,9 +254,13 @@ test('15: empty and invalid input is refused with a clear message', async () => 
   await fillEditor(p, { start: '', end: '10:00' }); await p.click('#teSave');
   assert.match(await p.textContent('#teErr'), /start time/i);
   assert.equal((await state(p)).tasks.length, 0, 'nothing invalid was saved');
-  // a simple task needs only a title
+  // a simple task needs only a title + Personal or Work
   await fillEditor(p, { text: 'Just this', end: '' }); await p.click('#teSave');
+  assert.match(await p.textContent('#teErr'), /personal or work/i);
+  assert.equal((await byText(p, 'Just this')).length, 0, 'not saved without a type');
+  await fillEditor(p, { cat: 'work' }); await p.click('#teSave');
   assert.equal((await byText(p, 'Just this')).length, 1);
+  assert.equal((await byText(p, 'Just this'))[0].cat, 'work');
   // damaged saved data is repaired instead of crashing or being deleted
   const q = await open({ state: { v: 2, name: 'T', onboarded: true, date: TODAY, tasks: [
     { id: 'a', text: 'Bad time', date: TODAY, time: '25:99', dur: 30 },
@@ -279,7 +289,7 @@ test('17: AI and notification failures are handled honestly', async () => {
   await p.waitForFunction(() => !document.getElementById('coachSend').disabled);
   assert.match(await p.textContent('#chat'), /nothing was changed/);
   assert.equal((await state(p)).tasks.length, 0);
-  await goToday(p); await p.fill('#newTask', 'Clean desk'); await p.click('#addForm button[type=submit]');
+  await quickAdd(p, 'Clean desk', 'work');
   await p.click('#tasks [data-act="split"]'); await p.waitForTimeout(400);
   assert.match(await p.textContent('#toast'), /couldn't be reached/);
   assert.equal((await byText(p, 'Clean desk'))[0].steps.length, 3);

@@ -30,5 +30,15 @@ Blocker (6 choices, or skip) → pick a real task → ONE next step (Noor via th
 - Security fix: the first name is now escaped in Noor's bubble.
 - Details, limits and the native-app plan: `docs/MOBILE-PLAN.md`.
 
+## Personal / Work, table view, Arabic, Start Rate (Oct 28)
+- **Add a task**: type it → **Add** → two big cards **PERSONAL / WORK** (nothing is saved before the choice; Cancel gives the text back) → optional **⏰ Add a date & time**. The task is filed under the day being viewed (Tomorrow tab = tomorrow), never the day it was typed. The full editor also asks Personal or Work for new tasks.
+- **Table view**: grid button next to the list title (choice remembered). Every task and appointment, all days: Task · Type · Date · Start · Duration · Status, sortable (type, date, start, status), filtered by the Work / Personal chips. Tick, **Later** (next day, same time, no XP lost), tap the type to switch it, tap the name to edit or delete. On a phone the table scrolls sideways inside its box, task names stay visible.
+- **Calendar**: same `S.tasks` as the list and table. When two open items cross, a gentle note says *These tasks overlap. Would you like to adjust the schedule?* with **Change** (opens the later one) or **Keep both** (remembered until the times change). Nothing is ever moved automatically.
+- **Help me start in Arabic**: `عربي / English` button in the sheet and in Profile. Every button, message and offline step is in Arabic, right to left (`dir="rtl"` on the sheet, its pill and the Today button only). Noor is asked to answer in simple Modern Standard Arabic; Arabic task names are matched by Arabic keywords. The rest of the app stays in English for now.
+- **Profile → My starts**: Start Rate = sessions where Help me start showed a step **and** the person pressed Start / said “I started” / finished a step, ÷ sessions where a step was shown. Once per session, refresh-proof. Also: different tasks started, starts in the last 7 days. “Share my numbers” exports a JSON file without task names (for the user test).
+- **XP**: micro-steps give a quiet toast (no full-screen pop-up); a daily challenge can't be credited twice (un-ticking takes the XP back); “Move to today” goes through `updateTask` (alarms reset correctly).
+- **Delete** from a list: first tap shows “Delete?”, second tap deletes (disarms after 3.5 s).
+- User test with 5 people: `docs/USER-TEST-PLAN.md` (set-up ready, results still to collect).
+
 ## Tests
-`npm install && npx playwright install chromium && npm test` runs the end-to-end tests in `tests/` (app + Help me start), served over a local http server (`tests/serve.js`).
+`npm install && npx playwright install chromium && npm test` runs the end-to-end tests in `tests/` (app, Help me start, phone & backup, Oct 28 features), served over a local http server (`tests/serve.js`).
