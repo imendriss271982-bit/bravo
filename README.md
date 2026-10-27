@@ -40,5 +40,16 @@ Blocker (6 choices, or skip) → pick a real task → ONE next step (Noor via th
 - **Delete** from a list: first tap shows “Delete?”, second tap deletes (disarms after 3.5 s).
 - User test with 5 people: `docs/USER-TEST-PLAN.md` (set-up ready, results still to collect).
 
+## ADHD Winner Business (Oct 28)
+A dedicated work workspace: ☰ menu → **Business** (also Pro → Business). Needs the Business plan (free trial for now).
+- **One list, no duplicates**: a business task is a normal task in `S.tasks` with `cat:'work'` and a `biz` object (project, urgency, importance, consequences, deadline, estimate, status, priority override, dependencies, notes, history). Its calendar entry and its reminder are the same object, so editing moves it, completing marks it done in the calendar, deleting removes the reminder.
+- **Tabs**: Dashboard · Tasks (subtasks with progress “3 of 6”, reorder, start, schedule) · Priorities (P1/P2/P3 with reasons, override, one question when info is missing) · Calendar (next 7 days with free time, overlaps, proposals to approve) · Coach · Pending (missed-task review, blocked/waiting, paused/delegated, notes) · Review (weekly, from saved data only).
+- **Priority**: urgency + deadline + importance + consequences + free work time before the deadline + blockers. Urgent alone is not P1. Missing importance → the app asks instead of guessing.
+- **Reminders**: on by default for scheduled business tasks, 0–60 min before the start (`remBefore`, also in the .ics export). Same in-app/notification limits as the rest of the app (a closed web app cannot ring; use the phone-calendar export).
+- **Coach**: an offline planner picks ONE next action (+ max 2), a first step and a free slot, and asks before scheduling. Noor's AI (Cloudflare worker) only rephrases those facts; if it's unreachable the page says “Offline planner”. Facts and assumptions are shown separately.
+- **Missed tasks**: never moved or marked failed automatically; “What happened?” with 7 reasons + note, then reschedule / choose a time / pause until they reply / delegate / pause / remove.
+- **Work hours** (⚙ Hours): days, hours, default reminder; Gulf time zones default to Sun–Thu.
+- Tests: `tests/business.test.js` (the 14 acceptance scenarios).
+
 ## Tests
 `npm install && npx playwright install chromium && npm test` runs the end-to-end tests in `tests/` (app, Help me start, phone & backup, Oct 28 features), served over a local http server (`tests/serve.js`).
