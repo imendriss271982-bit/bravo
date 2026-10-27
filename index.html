@@ -751,7 +751,7 @@ details.someday .list{margin-top:12px}
     <div class="nudges" id="nudges"></div>
     <form class="evform" id="nForm">
       <span class="label">New reminder</span>
-      <input id="nuText" type="text" placeholder="e.g. Take a break, call mom" maxlength="60" aria-label="Reminder">
+      <input id="nuText" type="text" placeholder="e.g. Call mom" maxlength="60" aria-label="Reminder">
       <select id="nEvery" aria-label="How often"><option value="30">Every 30 min</option><option value="60" selected>Every hour</option><option value="90">Every 1 h 30</option><option value="120">Every 2 hours</option><option value="180">Every 3 hours</option></select>
       <button class="btn" type="submit">Add reminder</button>
       <button class="btn ghost" type="button" id="nPerm">Also show on my lock screen</button>
@@ -1001,16 +1001,13 @@ const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 
 const COLORS=['#2BC94A','#FF2E93','#00B8D9','#E0A800','#9B3DFF','#FF5A36'];
 const freshChallenges=()=>[
-  {id:'sport',name:'Exercise 20 min',target:1,color:COLORS[1]},
-  {id:'eau',name:'Glasses of water',target:8,color:COLORS[2]},
-  {id:'air',name:'Get some fresh air',target:1,color:COLORS[0]},
-  {id:'dodo',name:'In bed before 11 pm',target:1,color:COLORS[4]}
+  {id:'eau',name:'Glasses of water',target:8,color:COLORS[2]}
 ];
 const freshNudges=()=>[
-  {id:'water',emo:'💧',text:'Drink a glass of water',every:60,on:true,next:0},
-  {id:'task',emo:'✅',text:'Look at your next task',every:90,on:true,next:0},
-  {id:'move',emo:'🧘',text:'Stand up and stretch',every:120,on:false,next:0}
+  {id:'water',emo:'💧',text:'Drink a glass of water',every:60,on:true,next:0}
 ];
+// built-in extras that were removed (only water stays): cleaned out of saved data too
+const OLD_CHAL=['sport','air','dodo'],OLD_NUDGE=['task','move'];
 // ONE list = the single source of truth for everything with a date: S.tasks.
 // A task: {id, text, desc, date:'YYYY-MM-DD'|null (null = someday), time:'HH:MM'|null, dur:minutes|null,
 //          cat, prio:'high'|'normal'|'low', kind:'event' for appointments, done, steps, alarm, fired, snoozeUntil, rw (XP granted)}
@@ -1056,6 +1053,10 @@ function loadState(raw){
   if(!s||!Array.isArray(s.tasks))return null;
   const ver=s.v||1,D=defaults();
   for(const k in D)if(s[k]===undefined)s[k]=k==='tasks'||k==='events'?[]:D[k];
+  s.challenges=s.challenges.filter(c=>c&&!OLD_CHAL.includes(c.id));
+  if(!s.challenges.some(c=>c.id==='eau'))s.challenges.unshift(freshChallenges()[0]);
+  s.nudges=(Array.isArray(s.nudges)?s.nudges:[]).filter(n=>n&&!OLD_NUDGE.includes(n.id));
+  if(!s.nudges.some(n=>n.id==='water'))s.nudges.unshift(freshNudges()[0]);
   s.challenges.forEach((c,i)=>{const f=D.challenges.find(x=>x.id===c.id);c.color=f?f.color:COLORS[i%COLORS.length]});
   const base=s.date||todayStr();
   if(ver<2){
@@ -1126,7 +1127,7 @@ const BADGES=[
   {id:'split',l:'÷',n:'Splitter',d:'Split a task',test:()=>S.splits>=1},
   {id:'focus',l:'F',n:'Focused',d:'Finish a focus session',test:()=>S.focusTotal>=1},
   {id:'eau',l:'8',n:'Hydrated',d:'8 glasses of water',test:()=>S.challenges.some(c=>c.id==='eau'&&ccount(c,todayStr())>=8)},
-  {id:'chal',l:'4',n:'Perfect day',d:'4 challenges done',test:()=>S.challenges.filter(c=>ccount(c,todayStr())>=c.target).length>=4},
+  {id:'chal',l:'★',n:'Perfect day',d:'All challenges done',test:()=>S.challenges.length>0&&S.challenges.every(c=>ccount(c,todayStr())>=c.target)},
   {id:'ontime',l:'⏰',n:'On time',d:'Answer an alarm',test:()=>S.ontime>=1},
   {id:'str3',l:'3d',n:'Consistent',d:'3-day streak',test:()=>S.streak>=3},
   {id:'week',l:'W',n:'Week won',d:'5 active days in a week',test:()=>weekStats().days>=5},
@@ -1814,7 +1815,7 @@ function handleAlarm(id,act){
   if(ev.fired)return;
   ev.fired=true;ev.snoozeUntil=null;S.ontime=(S.ontime||0)+1;win(10,'ontime');
 }
-// ---------- gentle reminders (water, next task...) ----------
+// ---------- gentle reminders (water + your own) ----------
 const N_FROM=8,N_TO=22;
 const EVERY_TXT={30:'every 30 min',60:'every hour',90:'every 1 h 30',120:'every 2 hours',180:'every 3 hours'};
 let nudging=null;
@@ -2052,8 +2053,8 @@ const IC={tasks:'<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 
 const TOUR=[
   {k:'tasks',mood:'pointme',t:'Your tasks',p:'Write them in <b>Work</b> or <b>Personal</b>. Every task you finish = a <b>Bravo</b> and XP.',
     say:"Here you write your tasks, for work or personal. Every task you finish gives you a Bravo and points. Small steps, big wins!"},
-  {k:'agenda',mood:'pointme',t:'Calendar & reminders',p:'Add your appointments: I ring the <b>alarm</b>. I also remind you to drink water or take a break.',
-    say:"Put your appointments in the calendar, and I'll ring the alarm for you. I'll also remind you to drink water and take little breaks."},
+  {k:'agenda',mood:'pointme',t:'Calendar & reminders',p:'Add your appointments: I ring the <b>alarm</b>. I also remind you to drink water.',
+    say:"Put your appointments in the calendar, and I'll ring the alarm for you. I'll also remind you to drink water."},
   {k:'coach',mood:'wave',t:'Talk to me',p:'Tap my face anytime. Tell me what blocks you and we find <b>one small step</b> together.',
     say:"And if you feel stuck, just tap my face and talk to me. We'll find one small step together. I'm always here for you!"}
 ];
