@@ -729,6 +729,71 @@ details.someday .list{margin-top:12px}
 .hmspill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tego{width:100%}
 @media (prefers-reduced-motion:reduce){.hdots i{animation:none;opacity:.8}}
+
+/* quick add: Personal / Work */
+.qadd{display:flex;flex-direction:column;gap:12px;padding:16px;border:1px solid var(--line);border-radius:20px;background:var(--surface);margin-top:12px}
+.qq{margin:0;display:flex;flex-direction:column;gap:4px}.qq b{font-size:16px;overflow-wrap:anywhere}.qq span{color:var(--muted);font-weight:700}
+.qcards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qcard{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;border:2px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:18px;padding:14px 14px 16px;min-height:120px}
+.qcard .qi{font-size:26px}.qcard b{font-size:15px;letter-spacing:.06em}.qcard small{font-size:12px;color:var(--muted);font-weight:600;line-height:1.35}
+.qcard.personal{border-color:var(--sun)}.qcard.personal b{color:var(--sun)}
+.qcard.work{border-color:var(--cyan)}.qcard.work b{color:var(--cyan)}
+.qcard:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.qok{margin:0;font-weight:700}.qok span{color:var(--mint);font-weight:900}
+.qrow{display:flex;gap:10px;flex-wrap:wrap}
+#teCat[aria-invalid="true"]{border-radius:14px}
+
+/* list / table toggle + table view */
+.lhead{align-items:center;flex-wrap:wrap}.lhead h3{margin-right:auto}
+.vtog{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.vtog button{width:40px;height:36px;display:grid;place-items:center;border:0;background:transparent;color:var(--muted)}
+.vtog button svg{width:19px;height:19px}
+.vtog button[aria-pressed="true"]{background:var(--surface-2);color:var(--cyan)}
+.tblbox{min-width:0;max-width:100%;overflow:hidden}
+.tscroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.tscroll:focus-visible{outline:3px solid var(--gold)}
+.ttbl{border-collapse:separate;border-spacing:0;width:100%;min-width:600px;font-size:14px}
+.ttbl th,.ttbl td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle;font-variant-numeric:tabular-nums}
+.ttbl thead th{position:relative;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+.ttbl thead th button{border:0;background:none;color:inherit;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0}
+.ttbl thead th[aria-sort="ascending"],.ttbl thead th[aria-sort="descending"]{color:var(--cyan)}
+.ttbl tbody tr:last-child>*{border-bottom:0}
+.ttbl tbody th{position:sticky;left:0;background:var(--surface);z-index:1;white-space:normal;min-width:130px;max-width:170px;box-shadow:1px 0 0 var(--line)}
+.ttbl thead th:first-child{position:sticky;left:0;z-index:2}
+.tname{border:0;background:none;color:var(--ink);font:inherit;font-weight:800;text-align:left;padding:0;overflow-wrap:anywhere;line-height:1.3}
+.ttbl tr.st-done .tname{text-decoration:line-through;opacity:.6}
+.ttbl .muted{color:var(--muted)}
+.tst{font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink)}
+.tst.late{background:var(--coral-soft);color:var(--coral)}.tst.done{background:var(--mint-soft);color:var(--mint)}.tst.someday{color:var(--muted)}
+.tact{display:flex;gap:8px;align-items:center}
+.tempty{padding:18px;border:1px dashed var(--line);border-radius:16px;margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Help me start: language switch + right-to-left */
+.hshr{display:flex;align-items:center;gap:8px}
+.hlang{border:1px solid var(--line);background:var(--surface);color:var(--cyan);border-radius:999px;padding:6px 14px;font-weight:800;font-size:14px;min-height:36px}
+#hms [dir="rtl"],#hms .spanel[dir="rtl"]{font-family:"Geeza Pro","Segoe UI","Noto Sans Arabic","Tahoma",var(--f-body)}
+.spanel[dir="rtl"] .hopt,.spanel[dir="rtl"] .hlink{text-align:right}
+.spanel[dir="rtl"] .hk{letter-spacing:0;font-size:12px}
+.spanel[dir="rtl"] .hnext ol{padding-left:0;padding-right:22px}
+.spanel[dir="rtl"] .fl .opt,.spanel[dir="rtl"] .fl .req{margin-left:0;margin-right:4px;letter-spacing:0}
+.spanel[dir="rtl"] .hstep{line-height:1.6}
+.hmsgo[dir="rtl"]{text-align:right}.hmsgo[dir="rtl"] b{letter-spacing:0}
+
+/* My starts (Profile) */
+.srtop{display:flex;gap:16px;align-items:center}
+.srtop p{margin:0;font-weight:600;line-height:1.45}
+.srbig{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;width:96px;height:96px;border-radius:50%;border:3px solid var(--cyan);box-shadow:var(--glow-cyan)}
+.srbig b{font-family:var(--f-display);font-size:28px;color:var(--cyan);font-variant-numeric:tabular-nums}.srbig small{font-size:11px;font-weight:800;color:var(--muted)}
+.srrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.srrow div{display:flex;flex-direction:column;gap:2px;background:var(--surface-2);border-radius:14px;padding:10px}
+.srrow b{font-size:20px;font-variant-numeric:tabular-nums}.srrow small{font-size:12px;color:var(--muted);font-weight:700;line-height:1.3}
+#srBox{display:flex;flex-direction:column;gap:12px}
+
+.x.armed{width:auto;padding:0 12px;border-radius:999px;background:var(--coral);color:#fff;font-size:13px;font-weight:800;white-space:nowrap}
+
+.ovl{display:flex;flex-direction:column;gap:8px;border:1px solid var(--gold);border-radius:16px;padding:12px 14px;background:rgba(255,226,59,.06);margin-bottom:10px}
+.ovl p{margin:0}.ovl b{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -773,16 +838,23 @@ details.someday .list{margin-top:12px}
         <button type="button" data-cat="personal" aria-pressed="false">🏠 Personal</button>
       </div>
       <button type="button" class="hmsgo" id="hmsToday" data-hms="today"><span class="hgi" aria-hidden="true">▶</span><span><b>HELP ME START</b><small>Let's make the next step easier.</small></span></button>
-      <div class="sechead"><h3 id="listTitle">My list for today</h3><span class="hint" id="listHint">+10 XP per task</span></div>
+      <div class="sechead lhead"><h3 id="listTitle">My list for today</h3><span class="hint" id="listHint">+10 XP per task</span>
+        <div class="vtog" id="vTog" role="group" aria-label="How to show my tasks">
+          <button type="button" data-lv="list" aria-pressed="true" aria-label="List view" title="List view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/></svg></button>
+          <button type="button" data-lv="table" aria-pressed="false" aria-label="Table view" title="Table view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18M3 15h18M10 4v16"/></svg></button>
+        </div></div>
       <form class="add" id="addForm">
         <input id="newTask" type="text" placeholder="Add a task…" autocomplete="off" maxlength="120" aria-label="New task">
         <button class="btn" type="submit">Add</button>
         <button class="btn ghost addmore" id="addMore" type="button" aria-label="Add with date, time and details" title="Date, time, details">⏰ Plan</button>
       </form>
+      <div class="qadd" id="qaBox" hidden aria-live="polite"></div>
       <ul class="list" id="tasks"></ul>
+      <div class="tblbox" id="tblBox" hidden></div>
     </div>
     <div class="sec" id="dayEvSec" hidden>
       <div class="sechead"><h3>Schedule</h3><span class="hint">Same as your calendar</span></div>
+      <div id="dayOvl"></div>
       <ul class="list" id="dayEvents"></ul>
     </div>
     <details class="sec someday" id="somedaySec" hidden>
@@ -814,6 +886,7 @@ details.someday .list{margin-top:12px}
     <div id="calBody"></div>
     <div id="daySec" class="sec" style="gap:12px">
       <div class="sechead"><h3 id="dayTitle"></h3><span class="hint">Tap an item to edit it</span></div>
+      <div id="calOvl"></div>
       <ul class="list" id="events"></ul>
     </div>
     <button class="btn" id="calAdd" type="button">+ Add to calendar</button>
@@ -957,6 +1030,8 @@ details.someday .list{margin-top:12px}
       <div class="profrow"><div class="grow"><small>Name</small><b id="profName"></b></div><button class="btn small ghost" id="helloBtn" type="button">Edit</button></div>
       <div class="profrow"><div class="grow"><small>Plan</small><b id="profPlan"></b></div><button class="btn small ghost" type="button" data-view="v-pro" data-tier="premium">See plans</button></div>
     </div>
+    <div class="sechead"><h3>My starts</h3><span class="hint">Help me start</span></div>
+    <div class="pcard" id="srBox"></div>
     <div class="sechead"><h3>Help me start</h3><span class="hint">Your preferences</span></div>
     <div class="pcard" id="hpBox"></div>
     <div class="sechead"><h3>This phone</h3><span class="hint">App &amp; alarms</span></div>
@@ -1004,6 +1079,7 @@ details.someday .list{margin-top:12px}
     <div class="shead"><h3 id="teTitle">New task</h3><button type="button" class="x" data-edclose aria-label="Close">×</button></div>
     <div class="seg" id="teKind" role="group" aria-label="Type"><button type="button" data-v="task">✅ Task</button><button type="button" data-v="event">📅 Appointment</button></div>
     <label class="fl">What? <span class="req">required</span><input id="teText" type="text" maxlength="120" placeholder="e.g. Call the bank" aria-required="true"></label>
+    <div class="fl" id="teCatRow"><span>Personal or work? <span class="req" id="teCatReq">required</span></span><div class="seg" id="teCat" role="group" aria-label="Personal or work"><button type="button" data-v="personal">🏠 Personal</button><button type="button" data-v="work">💼 Work</button><button type="button" data-v="none" id="teCatNone">No tag</button></div></div>
     <label class="fl">Details <span class="opt">optional</span><textarea id="teDesc" maxlength="500" rows="2" placeholder="Notes, address, link…"></textarea></label>
     <div class="fl"><span>When? <span class="opt">optional</span></span>
       <div class="seg" id="teWhen" role="group" aria-label="Day"><button type="button" data-w="today">Today</button><button type="button" data-w="tomorrow">Tomorrow</button><button type="button" data-w="none">No date yet</button></div>
@@ -1016,7 +1092,6 @@ details.someday .list{margin-top:12px}
     </div>
     <label class="toggle" id="teAlarmRow"><input id="teAlarm" type="checkbox"> Alarm at the start time</label>
     <button type="button" class="btn ghost tego" id="teIcs" hidden>📲 Add to my phone calendar <small>(sure alarm)</small></button>
-    <div class="fl"><span>Category</span><div class="seg" id="teCat" role="group" aria-label="Category"><button type="button" data-v="none">None</button><button type="button" data-v="work">💼 Work</button><button type="button" data-v="personal">🏠 Personal</button></div></div>
     <div class="fl"><span>Priority</span><div class="seg" id="tePrio" role="group" aria-label="Priority"><button type="button" data-v="high">🔥 High</button><button type="button" data-v="normal">Normal</button><button type="button" data-v="low">Low</button></div></div>
     <button type="button" class="btn ghost tego" id="teGo">▶ Start this task</button>
     <label class="toggle" id="teDoneRow"><input id="teDone" type="checkbox"> Done</label>
@@ -1028,7 +1103,7 @@ details.someday .list{margin-top:12px}
 <div class="sheet" id="hms" hidden>
   <div class="sback" data-hmsclose></div>
   <section class="spanel" role="dialog" aria-modal="true" aria-labelledby="hmsTitle">
-    <div class="shead"><h3 id="hmsTitle" tabindex="-1">Help me start</h3><button type="button" class="x" data-hmsclose aria-label="Close">×</button></div>
+    <div class="shead"><h3 id="hmsTitle" tabindex="-1">Help me start</h3><div class="hshr"><button type="button" class="hlang" id="hmsLang" lang="ar">عربي</button><button type="button" class="x" data-hmsclose aria-label="Close">×</button></div></div>
     <div id="hmsBody" aria-live="polite"></div>
   </section>
 </div>
@@ -1406,10 +1481,10 @@ function renderDay(){
   $('dLabel').textContent=rn&&Math.abs(rel)<=1?longDate(k):(rn?rn+' · ':'')+longDate(k);
   $('dPick').value=k;
   // en-tête de section
-  $('listTitle').textContent=mode==='today'?'My list for today':mode==='past'?'What I had planned':'Planning my list';
-  {const L=dayTasks(k),dn=L.filter(x=>x.done).length;
+  if(listView!=='table')$('listTitle').textContent=mode==='today'?'My list for today':mode==='past'?'What I had planned':'Planning my list';
+  if(listView!=='table'){const L=dayTasks(k),dn=L.filter(x=>x.done).length;
   $('listHint').textContent=mode==='today'?(L.length?dn+' / '+L.length+' done · ':'')+'+10 XP each':mode==='past'?'':'Ready for the morning'}
-  $('addForm').hidden=mode==='past';$('hmsToday').hidden=mode!=='today';
+  $('addForm').hidden=mode==='past';if(mode==='past'&&qa)qaClose();$('hmsToday').hidden=mode!=='today';
   $('newTask').placeholder=mode==='future'?'Plan a task for '+(rel===1?'tomorrow':'this day')+'…':'Add a task…';
 
   // résumé / récap / report
@@ -1429,6 +1504,12 @@ function renderDay(){
   }
   $('dSummary').innerHTML=sum;
 
+  // list or table (same data, the choice is remembered on this phone)
+  const tbl=listView==='table';
+  document.querySelectorAll('#vTog [data-lv]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lv===listView)));
+  $('tasks').hidden=tbl;$('tblBox').hidden=!tbl;
+  document.querySelector('#v-today .daynav').hidden=tbl;document.querySelector('#v-today .dlabel').hidden=tbl;
+  if(tbl){$('listTitle').textContent='All my tasks';$('listHint').textContent='';renderTable()}
   // tâches
   const ul=$('tasks');
   const shown=catF==='all'?list:list.filter(x=>x.cat===catF);
@@ -1462,14 +1543,66 @@ function renderDay(){
 
   // the day's schedule: appointments + every task that has a time (same objects as the calendar)
   const evs=dayItems(k).filter(e=>isEv(e)||e.time).sort(byTime);
-  $('dayEvSec').hidden=!evs.length;
+  $('dayEvSec').hidden=!evs.length||tbl;
   $('dayEvents').innerHTML=evs.map(calRow).join('');
+  $('dayOvl').innerHTML=mode==='past'||ovlOk(k)?'':overlapNote(k);
   // someday: tasks without a date yet
   const sd=somedayTasks(),sdOpen=sd.filter(x=>!x.done);
-  $('somedaySec').hidden=mode!=='today'||!sd.length;
+  $('somedaySec').hidden=mode!=='today'||!sd.length||tbl;
   $('sdCount').textContent=sdOpen.length;
   $('someday').innerHTML=[...sd].sort((a,b)=>a.done-b.done||byPrio(a,b)).map(somedayRow).join('');
 }
+// ---------- table view: every task and appointment, sortable, filtered by Work / Personal ----------
+let listView='list';try{listView=localStorage.getItem('adhdwListView')==='table'?'table':'list'}catch(e){}
+let tSort={k:'status',dir:1};try{const o=JSON.parse(localStorage.getItem('adhdwTblSort'));if(o&&['date','time','type','status'].includes(o.k))tSort={k:o.k,dir:o.dir===-1?-1:1}}catch(e){}
+function setListView(v){listView=v==='table'?'table':'list';try{localStorage.setItem('adhdwListView',listView)}catch(e){}if(listView==='table'&&viewDay!==todayStr())viewDay=todayStr();render()}
+const tStatus=t=>t.done?'done':!t.date?'someday':t.date<todayStr()?'late':'todo';
+const T_ST={todo:['To do',1],late:['Late',0],someday:['Someday',2],done:['Done',3]};
+const tShortDate=k=>new Date(k+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+function tblItems(){const wk=Date.now()-7*864e5;
+  return S.tasks.filter(t=>(!t.done||(t.doneAt||0)>=wk||(t.date&&t.date>=ymd(addDays(new Date(),-7))))&&(catF==='all'||t.cat===catF))}
+function tCmp(a,b){
+  const dk=x=>(x.date||'9999-99-99')+(x.time||'99:99'),tk=x=>x.time||'99:99';
+  const k=tSort.k;let r=0;
+  if(k==='date')r=dk(a).localeCompare(dk(b));
+  else if(k==='time')r=tk(a).localeCompare(tk(b))||dk(a).localeCompare(dk(b));
+  else if(k==='type')r=(a.cat||'z').localeCompare(b.cat||'z')||dk(a).localeCompare(dk(b));
+  else r=T_ST[tStatus(a)][1]-T_ST[tStatus(b)][1]||dk(a).localeCompare(dk(b));
+  return r*tSort.dir||byPrio(a,b);
+}
+function renderTable(){
+  const items=tblItems().sort(tCmp),th=(k,l)=>k?'<th scope="col" aria-sort="'+(tSort.k===k?(tSort.dir>0?'ascending':'descending'):'none')+'"><button type="button" data-ts="'+k+'">'+l+(tSort.k===k?(tSort.dir>0?' ▲':' ▼'):'')+'</button></th>':'<th scope="col">'+l+'</th>';
+  if(!items.length){$('tblBox').innerHTML='<p class="empty tempty">'+(catF==='all'?'No tasks yet. Add one above: it shows here, in your list and in your calendar.':'No '+(catF==='work'?'work':'personal')+' tasks. Add one above, or tap “All”.')+'</p>';return}
+  $('tblBox').innerHTML='<div class="tscroll" tabindex="0" role="region" aria-label="My tasks table"><table class="ttbl"><thead><tr>'+th(null,'Task')+th('type','Type')+th('date','Date')+th('time','Start')+th(null,'Duration')+th('status','Status')+th(null,'<span class="sr">Actions</span>')+'</tr></thead><tbody>'+
+    items.map(t=>{const st=tStatus(t);
+      return '<tr class="st-'+st+'" data-tid="'+t.id+'"><th scope="row"><button type="button" class="tname" data-act="edit" data-id="'+t.id+'">'+(isEv(t)?'<span aria-hidden="true">📅 </span>':'')+(t.prio==='high'?'<span aria-hidden="true">🔥 </span>':'')+esc(t.text)+'</button></th>'+
+        '<td><button type="button" class="catb '+(t.cat||'')+'" data-act="tcat" data-id="'+t.id+'" aria-label="Type: '+(t.cat||'none')+'. Tap to change">'+(t.cat==='work'?'Work':t.cat==='personal'?'Personal':'+ Tag')+'</button></td>'+
+        '<td>'+(t.date?tShortDate(t.date):'<span class="muted">—</span>')+'</td>'+
+        '<td>'+(t.time||'<span class="muted">—</span>')+'</td>'+
+        '<td>'+(t.dur?(t.dur>=60?Math.floor(t.dur/60)+' h'+(t.dur%60?' '+t.dur%60:''):t.dur+' min'):'<span class="muted">—</span>')+'</td>'+
+        '<td><span class="tst '+st+'">'+T_ST[st][0]+'</span></td>'+
+        '<td><div class="tact"><button type="button" class="check" data-act="toggle" data-id="'+t.id+'" aria-pressed="'+t.done+'" aria-label="'+(t.done?'Mark '+esc(t.text)+' as not done':'Mark '+esc(t.text)+' as done')+'">'+CHECK+'</button>'+
+        (t.done?'':'<button type="button" class="btn small ghost" data-act="later" data-id="'+t.id+'" aria-label="Postpone '+esc(t.text)+'">Later</button>')+'</div></td></tr>'}).join('')+
+    '</tbody></table></div><p class="hint">Tap a task to change its time, type or to delete it. Done tasks stay here for 7 days.</p>';
+}
+$('vTog').addEventListener('click',e=>{const b=e.target.closest('[data-lv]');if(b)setListView(b.dataset.lv)});
+$('tblBox').addEventListener('click',e=>{const b=e.target.closest('[data-ts]');if(!b)return;const k=b.dataset.ts;
+  tSort=tSort.k===k?{k,dir:-tSort.dir}:{k,dir:1};try{localStorage.setItem('adhdwTblSort',JSON.stringify(tSort))}catch(e){}renderTable();
+  try{$('tblBox').querySelector('[data-ts="'+k+'"]').focus()}catch(e){}});
+// postpone = next day (from today if it was late or had no date), same time; never touches XP
+function postpone(id){const t=S.tasks.find(x=>x.id===id);if(!t||t.done)return;
+  const base=t.date&&t.date>todayStr()?new Date(t.date+'T12:00'):new Date();
+  const r=updateTask(id,{date:ymd(addDays(base,1))});
+  toast(r.ok?'Moved to '+whenTxt(r.task)+'. No problem.':"Couldn't move it: "+r.err)}
+// pairs of open items on one day whose times cross (no duration = 30 min, like the editor)
+function overlapPairs(k){const it=dayItems(k).filter(t=>t.time&&!t.done).sort(byTime),out=[];
+  for(let i=0;i<it.length;i++)for(let j=i+1;j<it.length;j++){const a=it[i],b=it[j];if(toMin(b.time)<toMin(a.time)+(a.dur||30))out.push([a,b])}
+  return out}
+const ovlSig=k=>overlapPairs(k).map(p=>p.map(x=>x.id+'@'+x.time+'/'+(x.dur||'')).join('+')).join(',');
+function ovlOk(k){const sig=ovlSig(k);return !!sig&&S.ovlOk&&S.ovlOk[k]===sig}
+function overlapNote(k){const p=overlapPairs(k);if(!p.length)return '';const [a,b]=p[0];
+  return '<div class="ovl" role="note"><p><b>These tasks overlap.</b> Would you like to adjust the schedule?</p><p class="hint">'+esc(a.text)+' · '+timeRange(a)+(a.dur?'':' (30 min)')+'<br>'+esc(b.text)+' · '+timeRange(b)+(b.dur?'':' (30 min)')+(p.length>1?'<br>+ '+(p.length-1)+' more':'')+'</p>'+
+    '<div class="qrow"><button type="button" class="btn small" data-act="edit" data-id="'+b.id+'">Change '+esc(b.text.length>22?b.text.slice(0,21)+'…':b.text)+'</button><button type="button" class="btn small ghost" data-act="ovlok" data-k="'+k+'">Keep both</button></div></div>'}
 function metaChips(t){
   let h='';
   if(t.time)h+='<span class="tchip">⏰ '+timeRange(t)+'</span>';
@@ -1505,7 +1638,7 @@ function render(){
   renderWkPts();
 
   renderDay();
-  renderAgenda();renderWeek();
+  renderAgenda();renderWeek();if(typeof renderSr==='function')renderSr();
 
   $('badges').innerHTML=BADGES.map(b=>'<div class="badge'+(S.badges.includes(b.id)?'':' locked')+'"><div class="medal">'+b.l+'</div><b>'+b.n+'</b><small>'+b.d+'</small></div>').join('');
   $('badgeCount').textContent=S.badges.length+' / '+BADGES.length+' trophies';
@@ -1573,6 +1706,7 @@ function renderAgenda(){
   $('dayTitle').textContent=selDay===t?'Today':sdate.toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'});
   const all=dayItems(selDay),anytime=all.filter(x=>!x.time).sort((a,b)=>a.done-b.done||byPrio(a,b)),timed=all.filter(x=>x.time).sort(byTime);
   $('daySec').hidden=calView==='month';
+  $('calOvl').innerHTML=selDay<t||ovlOk(selDay)?'':overlapNote(selDay);
   if(calView==='day'){
     $('events').innerHTML=(anytime.length?'<li class="label" style="list-style:none">Anytime</li>'+anytime.map(calRow).join(''):'')+
       (timed.length?'<li style="list-style:none">'+dayTimeline(selDay)+'</li>':'<li class="empty">No times planned. Tap “Add to calendar” to give a task an hour.</li>');
@@ -1606,7 +1740,7 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b)return;
   const id=b.dataset.id,act=b.dataset.act;
   if(act==='goday'){goDay(b.dataset.k);return}
-  if(act==='move'){const t=S.tasks.find(x=>x.id===id);if(!t)return;t.date=todayStr();save();tone([659,880],.09,.25);render();return}
+  if(act==='move'){const t=S.tasks.find(x=>x.id===id);if(!t)return;const r=updateTask(id,{date:todayStr()});if(!r.ok){toast(r.err);return}tone([659,880],.09,.25);return}
   if(act==='moveday'||act==='moveall'){const t=todayStr();
     S.tasks.forEach(x=>{if(!x.done&&(act==='moveall'?x.date<t:x.date===b.dataset.k))x.date=t});
     save();tone([523,659,880],.08,.25);if(act==='moveday')viewDay=t;render();return}
@@ -1615,15 +1749,25 @@ document.addEventListener('click',e=>{
   if(act==='toggle'){const t=S.tasks.find(x=>x.id===id);if(!t)return;if(t.done)uncompleteTask(t);else completeTask(t,10);return}
   if(act==='step'){const t=S.tasks.find(x=>x.id===id);if(!t||t.date!==todayStr())return;const s=t.steps[+b.dataset.i];if(!s)return;
     if(s.done){s.done=false;unwin(s.rw);s.rw=null;if(t.done){t.done=false;delete t.doneAt;unwin(t.rw);t.rw=null}save();render();return}
-    s.done=true;if(t.steps.every(z=>z.done))completeTask(t,15);else{s.rw=win(5);save()}return}
+    s.done=true;if(t.steps.every(z=>z.done))completeTask(t,15);else{s.rw=win(5,'step','Small step done');save()}return}
   if(act==='split')splitTask(id);
   if(act==='edit'){openEditor({id});return}
   if(act==='plan'){openEditor({id,planning:true});return}
   if(act==='mday'){pickDay(b.dataset.k,'day');return}
+  if(act==='tcat'){const t=S.tasks.find(x=>x.id===id);if(!t)return;const r=updateTask(id,{cat:t.cat==='work'?'personal':'work'});if(r.ok)toast(r.task.text+' → '+(r.task.cat==='work'?'Work':'Personal'));return}
+  if(act==='later'){postpone(id);return}
+  if(act==='ovlok'){const k=b.dataset.k;S.ovlOk=S.ovlOk&&typeof S.ovlOk==='object'?S.ovlOk:{};S.ovlOk[k]=ovlSig(k);save();render();toast('Okay, both stay as they are.');return}
   if(act==='cat'){const t=S.tasks.find(x=>x.id===id);if(!t)return;t.cat=!t.cat?'work':t.cat==='work'?'personal':undefined;if(!t.cat)delete t.cat;save();render();return}
-  if(act==='del'){const t=S.tasks.find(x=>x.id===id);if(!t)return;deleteTask(id);toast('Deleted: '+t.text);return}
-  if(act==='cplus'){const c=S.challenges.find(x=>x.id===id),k=todayStr(),n=ccount(c,k)+1;setCount(c,k,n);if(n===c.target)win(15);else{tone([659,880],.09,.3);save();render()}}
-  if(act==='cminus'){const c=S.challenges.find(x=>x.id===id),k=todayStr();setCount(c,k,ccount(c,k)-1);save();render()}
+  if(act==='del'){const t=S.tasks.find(x=>x.id===id);if(!t)return;
+    if(!b.classList.contains('armed')){document.querySelectorAll('.x.armed').forEach(x=>{x.classList.remove('armed');x.textContent='×'});
+      b.classList.add('armed');b.textContent='Delete?';b.setAttribute('aria-label','Tap again to delete '+t.text);
+      clearTimeout(b._dt);b._dt=setTimeout(()=>{b.classList.remove('armed');b.textContent='×';b.setAttribute('aria-label','Delete')},3500);return}
+    deleteTask(id);toast('Deleted: '+t.text);return}
+  if(act==='cplus'){const c=S.challenges.find(x=>x.id===id),k=todayStr(),n=ccount(c,k)+1;if(!c)return;setCount(c,k,n);
+    S.crw=S.crw&&typeof S.crw==='object'?S.crw:{};const day=S.crw[k]=S.crw[k]||{};
+    if(n===c.target&&!day[c.id])day[c.id]=win(15);else{tone([659,880],.09,.3);save();render()}}
+  if(act==='cminus'){const c=S.challenges.find(x=>x.id===id),k=todayStr();if(!c)return;setCount(c,k,ccount(c,k)-1);
+    const day=S.crw&&S.crw[k];if(day&&day[c.id]&&ccount(c,k)<c.target){unwin(day[c.id]);delete day[c.id]}save();render()}
   if(act==='day'){pickDay(b.dataset.k)}
   if(act==='bell'){const ev=S.tasks.find(x=>x.id===id);if(!ev||!ev.time)return;ev.alarm=!ev.alarm;ev.fired=false;ev.snoozeUntil=null;save();render();if(ev.alarm)notifyHint()}
   if(act==='claim'){S.weekClaimed=weekKey(new Date());save();win(50,'week')}
@@ -1647,12 +1791,36 @@ async function splitTask(id){
   t.steps=steps.map(s=>({t:s,done:false}));S.splits++;checkBadges();save();render();
 }
 document.querySelectorAll('.cats button').forEach(b=>b.addEventListener('click',()=>{catF=b.dataset.cat;try{localStorage.setItem('bravoCat',catF)}catch(e){};render()}));
-$('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim();
+// ---------- quick add: 1) type it  2) Personal or Work (required)  3) optional date & time ----------
+// Nothing is saved until the person picks Personal or Work; the date/time step never blocks.
+let qa=null;
+const QA_CATS={personal:{i:'🏠',t:'PERSONAL',d:'Shopping, appointments, health, home, family'},work:{i:'💼',t:'WORK',d:'Emails, meetings, projects, calls, reports'}};
+function qaRender(){const b=$('qaBox');if(!qa){b.hidden=true;b.innerHTML='';return}
+  if(qa.step==='cat'){
+    b.innerHTML='<p class="qq"><b>“'+esc(qa.text)+'”</b><span>Is it personal or work?</span></p><div class="qcards" role="group" aria-label="Personal or work">'+
+      ['personal','work'].map(k=>'<button type="button" class="qcard '+k+'" data-qa="'+k+'"><span class="qi" aria-hidden="true">'+QA_CATS[k].i+'</span><b>'+QA_CATS[k].t+'</b><small>'+QA_CATS[k].d+'</small></button>').join('')+
+      '</div><button type="button" class="hlink" data-qa="cancel">Cancel, don\'t add it</button>';
+  }else{const t=S.tasks.find(x=>x.id===qa.id);if(!t){qa=null;return qaRender()}
+    b.innerHTML='<p class="qok"><span aria-hidden="true">✓</span> Added to <b>'+(t.cat==='work'?'Work':'Personal')+'</b> · '+esc(whenTxt(t))+(t.date&&!t.time?', any time':'')+'</p>'+
+      '<div class="qrow"><button type="button" class="btn small" data-qa="time">⏰ Add a date &amp; time</button><button type="button" class="btn small ghost" data-qa="close">Done</button></div>'}
+  b.hidden=false}
+function qaClose(){qa=null;qaRender()}
+$('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask'),v=i.value.trim().replace(/\s+/g,' ');
   if(!v){i.focus();toast('Type what you want to do first.');return}
   if(dayMode(viewDay)==='past')return;
-  const r=createTask({text:v,date:viewDay,cat:catF==='all'?undefined:catF});
-  if(!r.ok){toast(r.err);return}
-  i.value='';});
+  if(v.length>120){toast('Keep the name under 120 characters.');return}
+  qa={step:'cat',text:v,date:viewDay};i.value='';qaRender();
+  const first=$('qaBox').querySelector('[data-qa="'+(catF==='work'?'work':'personal')+'"]');try{first.focus()}catch(e){}});
+$('qaBox').addEventListener('click',e=>{const b=e.target.closest('[data-qa]');if(!b||!qa)return;const a=b.dataset.qa;
+  if(a==='cancel'){const txt=qa.text;qaClose();$('newTask').value=txt;try{$('newTask').focus()}catch(e){}return}
+  if(a==='close')return qaClose();
+  if(a==='time'){const id=qa.id;qaClose();return openEditor({id,planning:true})}
+  if(a==='personal'||a==='work'){
+    const r=createTask({text:qa.text,date:qa.date,cat:a});
+    if(!r.ok){toast(r.err);return}
+    tone([659,880],.09,.25);qa={step:'done',id:r.task.id};qaRender();
+    try{$('qaBox').querySelector('[data-qa="time"]').focus()}catch(e){}}});
+$('newTask').addEventListener('input',()=>{if(qa&&qa.step==='done')qaClose()});
 $('addMore').addEventListener('click',()=>{const v=$('newTask').value.trim();$('newTask').value='';
   openEditor({text:v,date:dayMode(viewDay)==='past'?todayStr():viewDay,cat:catF==='all'?undefined:catF})});
 // navigation entre les jours
@@ -1742,6 +1910,8 @@ function openEditor(o){
   $('teDate').value=v.date||'';
   $('teStart').value=v.time||'';$('teEnd').value=v.time&&v.dur?fromMin(toMin(v.time)+v.dur):'';
   seg('teCat',v.cat||'none');seg('tePrio',v.prio||'normal');
+  // a new task needs Personal or Work; "No tag" is only kept for older items that never had one
+  $('teCatNone').hidden=!(t&&!t.cat);
   $('teAlarm').checked=!!v.alarm;
   $('teDoneRow').hidden=!t;$('teDone').checked=!!(t&&t.done);
   $('teDel').hidden=!t;$('teDel').textContent='Delete';$('teGo').hidden=!t||t.done;$('teIcs').hidden=!(t&&t.date&&t.time&&!t.done);
@@ -1753,12 +1923,13 @@ function openEditor(o){
 function closeEditor(){$('tEd').hidden=true;document.body.classList.remove('noscroll');ed=null}
 function edErr(m,f){$('teErr').textContent=m||'';
   document.querySelectorAll('#teForm [aria-invalid]').forEach(x=>x.removeAttribute('aria-invalid'));
-  const map={text:'teText',date:'teDate',start:'teStart',end:'teEnd'};if(m&&map[f]){const el=$(map[f]);el.setAttribute('aria-invalid','true');try{el.focus()}catch(e){}}}
+  const map={text:'teText',date:'teDate',start:'teStart',end:'teEnd',cat:'teCat'};if(m&&map[f]){const el=$(map[f]);el.setAttribute('aria-invalid','true');try{el.focus()}catch(e){}}}
 function edWarn(list){const w=$('teWarn');
   if(!list||!list.length){w.hidden=true;w.innerHTML='';$('teSave').textContent='Save';return}
   w.innerHTML='<b>Heads up: this overlaps with</b><ul>'+list.map(x=>'<li>'+esc(x.text)+' · '+timeRange(x)+'</li>').join('')+'</ul>Both will be kept. Tap <b>Save anyway</b> to confirm, or change the time.';
   w.hidden=false;$('teSave').textContent='Save anyway'}
 function edSync(){
+  if(ed)$('teCatReq').hidden=!!ed.id||segVal('teKind')==='event';
   const d=$('teDate').value,t=todayStr(),tm=ymd(addDays(new Date(),1));
   document.querySelectorAll('#teWhen [data-w]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.w==='none'?!d:b.dataset.w==='today'?d===t:d===tm)));
   const noDate=!d;$('teTimeBox').classList.toggle('off',noDate);
@@ -1784,6 +1955,7 @@ function readEditor(){
 $('teForm').addEventListener('submit',e=>{e.preventDefault();if(!ed)return;
   const r=readEditor();if(r.err){edErr(r.err,r.f);return}
   const c=checkTask(cleanInput(r.v));if(c){edErr(c.m,c.f);return}
+  if(!ed.id&&!r.v.kind&&!r.v.cat){edErr('Is it personal or work? Pick one to save it.','cat');return}
   const ov=overlapsWith(cleanInput(r.v),ed.id),key=[r.v.date,r.v.time,r.v.dur].join('|');
   if(ov.length&&ed.ok!==key){ed.ok=key;edErr('');edWarn(ov);return}
   const wasNew=!ed.id,res=ed.id?updateTask(ed.id,r.v):createTask(r.v);
@@ -1798,7 +1970,7 @@ $('teForm').addEventListener('submit',e=>{e.preventDefault();if(!ed)return;
 });
 $('teForm').addEventListener('input',e=>{if(!ed)return;ed.ok=null;edWarn(null);if(e.target.id==='teStart'&&$('teStart').value&&!$('teEnd').value){}edSync()});
 $('teForm').addEventListener('click',e=>{
-  const s=e.target.closest('.seg [data-v]');if(s){seg(s.parentElement.id,s.dataset.v);if(ed){ed.ok=null;edWarn(null)}return}
+  const s=e.target.closest('.seg [data-v]');if(s){seg(s.parentElement.id,s.dataset.v);if(ed){ed.ok=null;edWarn(null)}if(s.parentElement.id==='teCat'){$('teCat').removeAttribute('aria-invalid');if(/personal or work/i.test($('teErr').textContent))$('teErr').textContent=''}edSync();return}
   const w=e.target.closest('#teWhen [data-w]');
   if(w){const v=w.dataset.w;$('teDate').value=v==='today'?todayStr():v==='tomorrow'?ymd(addDays(new Date(),1)):'';if(ed){ed.ok=null;edWarn(null)}edSync();return}
   const d=e.target.closest('#teDurs [data-d]');
@@ -2144,32 +2316,123 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)tickT()});
 // Nothing here marks a task done, moves it or rewards it unless the person taps the button that says so.
 const HKEY='adhdwStart';
 const BLOCKERS=[
-  {id:'cant',t:"I can't start",d:'I know what to do, but I cannot get going.',tip:'We start so small it almost feels silly.'},
-  {id:'many',t:'Too many things to do',d:"I feel overwhelmed and don't know what to pick.",tip:'Pick just one. The others can wait.'},
-  {id:'unclear',t:"I don't know what to do next",d:'My task is unclear or too complicated.',tip:'We only need the very next move.'},
-  {id:'distracted',t:'I keep getting distracted',d:'I started something but lost focus.',tip:'Put your phone face down and close other tabs first.'},
-  {id:'later',t:'I keep putting it off',d:'I postpone it even though it matters.',tip:"You don't have to finish. Just begin."},
-  {id:'other',t:'Something else',d:'Let me explain in my own words.',tip:''}
+  {id:'cant',t:"I can't start",d:'I know what to do, but I cannot get going.',tip:'We start so small it almost feels silly.',ar:{t:'لا أستطيع البدء',d:'أعرف ما عليّ فعله، لكن لا أستطيع الانطلاق.',tip:'سنبدأ بخطوة صغيرة جدًا، تكاد تكون مضحكة.'}},
+  {id:'many',t:'Too many things to do',d:"I feel overwhelmed and don't know what to pick.",tip:'Pick just one. The others can wait.',ar:{t:'أشياء كثيرة جدًا',d:'أشعر بالضغط ولا أعرف ماذا أختار.',tip:'مهمة واحدة فقط. الباقي يمكنه الانتظار.'}},
+  {id:'unclear',t:"I don't know what to do next",d:'My task is unclear or too complicated.',tip:'We only need the very next move.',ar:{t:'لا أعرف الخطوة التالية',d:'مهمتي غير واضحة أو معقّدة.',tip:'نحتاج فقط إلى الحركة التالية.'}},
+  {id:'distracted',t:'I keep getting distracted',d:'I started something but lost focus.',tip:'Put your phone face down and close other tabs first.',ar:{t:'أتشتّت باستمرار',d:'بدأتُ شيئًا لكن فقدتُ التركيز.',tip:'أولًا: قلب الهاتف على وجهه، وإغلاق التبويبات الأخرى.'}},
+  {id:'later',t:'I keep putting it off',d:'I postpone it even though it matters.',tip:"You don't have to finish. Just begin.",ar:{t:'أؤجّلها باستمرار',d:'أؤجّلها رغم أنها مهمّة.',tip:'لا داعي للإنهاء. يكفي أن نبدأ.'}},
+  {id:'other',t:'Something else',d:'Let me explain in my own words.',tip:'',ar:{t:'شيء آخر',d:'أريد أن أشرح بكلماتي.',tip:''}}
 ];
 // Offline step engine: s = [first step, smaller step, another approach]; n = what usually comes next.
 const STEP_RULES=[
-  {re:/present|slide|deck|pitch/i,s:['Open the presentation file and type a temporary title.','Just open the presentation file. Nothing else.','Write 3 words about what the first slide should say.'],n:['Write one rough sentence per slide.','Put the main points on slide 1.','Look it over once and fix one thing.']},
-  {re:/report|essay|write|article|\bcv\b|resume|letter|proposal|blog|thesis|draft/i,s:['Open the document and write a temporary title.','Just open a blank document.','Write one rough sentence about what it is for.'],n:['Write 3 bullet points you want to cover.','Turn the first bullet into a short paragraph.','Read it once and fix one sentence.']},
-  {re:/e-?mail|inbox|reply|message|answer/i,s:['Open your inbox and find the first email to answer.','Just open your inbox.','Write only the greeting line of the reply.'],n:['Write the reply in 3 short sentences.','Read it once, then press send.','Pick the next email.']},
-  {re:/call|phone|ring\b|book an|make an appointment/i,s:['Find the phone number and put it on your screen.','Write down the one thing you need to say.','Put the phone in your hand.'],n:['Press call and say your first sentence.','Write down what was decided.']},
-  {re:/clean|tidy|wash|laundry|dishes|vacuum|room|organi[sz]e|declutter/i,s:['Pick up 5 things and put them where they belong.','Pick up just one thing and put it away.','Clear one small surface, like a chair or a corner.'],n:['Clear one surface completely.','Take out the trash or one full bag.','Do 5 more minutes, then stop.']},
-  {re:/pay|bill|bank|tax|invoice|budget|expense|money|insurance/i,s:['Open the bill or your banking app.','Find the bill and put it in front of you.','Write down the amount and the due date.'],n:['Enter the payment details.','Save the receipt in one place.']},
-  {re:/study|learn|read|revise|course|lesson|homework|exam|chapter/i,s:['Open the book or page and read the first paragraph.','Put the book or page in front of you.','Read just the title and the first line.'],n:['Read for 5 minutes.','Write one sentence about what you just read.','Read 5 more minutes.']},
-  {re:/shop|buy|grocer|order|purchase/i,s:['Write the first 3 things you need on a list.','Write just one thing you need.','Open the shop app or website.'],n:['Finish the list.','Put the first item in the basket.']},
-  {re:/cook|dinner|lunch|breakfast|meal|bake|recipe/i,s:['Take out one pan and the first ingredient.','Clear a small space on the counter.','Decide what to cook, in one word.'],n:['Wash and cut the first ingredient.','Start heating the pan.']},
-  {re:/pack|bag|suitcase|travel|trip|move house/i,s:['Put the bag in front of you and add one item.','Just get the bag out.','Write the 3 things you must not forget.'],n:['Add the 3 must-have items.','Close the bag and put it by the door.']},
-  {re:/form|application|apply|paperwork|visa|renew|passport|contract/i,s:['Open the form and fill in just your name.','Find the form and put it on your screen.','List the documents you need, nothing else.'],n:['Fill in the next section.','Gather one missing document.']},
-  {re:/code|app\b|website|bug|deploy|design|feature/i,s:['Open the project and read the last thing you changed.','Just open the project.','Write the one thing to do next, in 5 words.'],n:['Change one small thing and test it.','Write down where you stopped.']},
-  {re:/exercis|gym|workout|run\b|walk|yoga|sport|training/i,s:['Put on your sport clothes or shoes.','Stand up and stretch for 30 seconds.','Fill your water bottle.'],n:['Do the first 5 minutes.','Keep going for 5 more minutes.']}
+  {re:/present|slide|deck|pitch/i,s:['Open the presentation file and type a temporary title.','Just open the presentation file. Nothing else.','Write 3 words about what the first slide should say.'],n:['Write one rough sentence per slide.','Put the main points on slide 1.','Look it over once and fix one thing.'],ar:/عرض|شرائح|تقديمي|بريزنتيشن/,a:{s:['فتح ملف العرض وكتابة عنوان مؤقت.','فتح ملف العرض فقط. لا شيء آخر.','كتابة 3 كلمات عمّا ستقوله الشريحة الأولى.'],n:['كتابة جملة تقريبية لكل شريحة.','وضع النقاط الرئيسية في الشريحة الأولى.','مراجعة سريعة وتصحيح شيء واحد.']}},
+  {re:/report|essay|write|article|\bcv\b|resume|letter|proposal|blog|thesis|draft/i,s:['Open the document and write a temporary title.','Just open a blank document.','Write one rough sentence about what it is for.'],n:['Write 3 bullet points you want to cover.','Turn the first bullet into a short paragraph.','Read it once and fix one sentence.'],ar:/تقرير|مقال|كتابة|اكتب|رسالة|سيرة|مقترح|بحث|مسودة/,a:{s:['فتح المستند وكتابة عنوان مؤقت.','فتح مستند فارغ فقط.','كتابة جملة تقريبية واحدة عن الهدف منه.'],n:['كتابة 3 نقاط أساسية.','تحويل النقطة الأولى إلى فقرة قصيرة.','قراءته مرة واحدة وتصحيح جملة واحدة.']}},
+  {re:/e-?mail|inbox|reply|message|answer/i,s:['Open your inbox and find the first email to answer.','Just open your inbox.','Write only the greeting line of the reply.'],n:['Write the reply in 3 short sentences.','Read it once, then press send.','Pick the next email.'],ar:/بريد|ايميل|إيميل|إيميلات|رد على|الرد على/,a:{s:['فتح البريد وإيجاد أول رسالة تحتاج ردًّا.','فتح صندوق البريد فقط.','كتابة سطر التحية في الرد فقط.'],n:['كتابة الرد في 3 جمل قصيرة.','قراءته مرة ثم الضغط على «إرسال».','اختيار الرسالة التالية.']}},
+  {re:/call|phone|ring\b|book an|make an appointment/i,s:['Find the phone number and put it on your screen.','Write down the one thing you need to say.','Put the phone in your hand.'],n:['Press call and say your first sentence.','Write down what was decided.'],ar:/اتصال|اتصل|مكالمة|هاتف|تلفون|حجز موعد/,a:{s:['إيجاد رقم الهاتف ووضعه على الشاشة.','كتابة الشيء الوحيد الذي يجب قوله.','إمساك الهاتف باليد.'],n:['الضغط على «اتصال» وقول الجملة الأولى.','تدوين ما تمّ الاتفاق عليه.']}},
+  {re:/clean|tidy|wash|laundry|dishes|vacuum|room|organi[sz]e|declutter/i,s:['Pick up 5 things and put them where they belong.','Pick up just one thing and put it away.','Clear one small surface, like a chair or a corner.'],n:['Clear one surface completely.','Take out the trash or one full bag.','Do 5 more minutes, then stop.'],ar:/تنظيف|نظف|ترتيب|رتب|غسيل|غسل الملابس|صحون|غرفة|كنس/,a:{s:['التقاط 5 أشياء وإعادتها إلى مكانها.','التقاط شيء واحد فقط وإعادته إلى مكانه.','ترتيب مساحة صغيرة واحدة، مثل كرسي أو زاوية.'],n:['ترتيب سطح واحد بالكامل.','إخراج القمامة أو كيس واحد ممتلئ.','5 دقائق إضافية ثم التوقف.']}},
+  {re:/pay|bill|bank|tax|invoice|budget|expense|money|insurance/i,s:['Open the bill or your banking app.','Find the bill and put it in front of you.','Write down the amount and the due date.'],n:['Enter the payment details.','Save the receipt in one place.'],ar:/دفع|ادفع|سداد|فاتورة|فواتير|بنك|ضريبة|ميزانية|مصاريف|تأمين/,a:{s:['فتح الفاتورة أو تطبيق البنك.','إيجاد الفاتورة ووضعها أمامي.','كتابة المبلغ وتاريخ الاستحقاق.'],n:['إدخال بيانات الدفع.','حفظ الإيصال في مكان واحد.']}},
+  {re:/study|learn|read|revise|course|lesson|homework|exam|chapter/i,s:['Open the book or page and read the first paragraph.','Put the book or page in front of you.','Read just the title and the first line.'],n:['Read for 5 minutes.','Write one sentence about what you just read.','Read 5 more minutes.'],ar:/دراسة|ادرس|مذاكرة|قراءة|اقرأ|مراجعة|درس|واجب|امتحان|فصل/,a:{s:['فتح الكتاب أو الصفحة وقراءة الفقرة الأولى.','وضع الكتاب أو الصفحة أمامي.','قراءة العنوان والسطر الأول فقط.'],n:['القراءة لمدة 5 دقائق.','كتابة جملة واحدة عمّا قرأتُه.','5 دقائق قراءة إضافية.']}},
+  {re:/shop|buy|grocer|order|purchase/i,s:['Write the first 3 things you need on a list.','Write just one thing you need.','Open the shop app or website.'],n:['Finish the list.','Put the first item in the basket.'],ar:/تسوق|تسوّق|شراء|اشتر|مقاضي|أغراض البيت/,a:{s:['كتابة أول 3 أشياء أحتاجها في قائمة.','كتابة شيء واحد فقط أحتاجه.','فتح تطبيق المتجر أو موقعه.'],n:['إكمال القائمة.','وضع أول منتج في السلة.']}},
+  {re:/cook|dinner|lunch|breakfast|meal|bake|recipe/i,s:['Take out one pan and the first ingredient.','Clear a small space on the counter.','Decide what to cook, in one word.'],n:['Wash and cut the first ingredient.','Start heating the pan.'],ar:/طبخ|اطبخ|عشاء|غداء|فطور|وجبة|خبز|وصفة/,a:{s:['إخراج قِدر واحد وأول مكوّن.','إفراغ مساحة صغيرة على الطاولة.','تحديد ما سأطبخه، بكلمة واحدة.'],n:['غسل أول مكوّن وتقطيعه.','تشغيل النار تحت القِدر.']}},
+  {re:/pack|bag|suitcase|travel|trip|move house/i,s:['Put the bag in front of you and add one item.','Just get the bag out.','Write the 3 things you must not forget.'],n:['Add the 3 must-have items.','Close the bag and put it by the door.'],ar:/حقيبة|شنطة|سفر|رحلة/,a:{s:['وضع الحقيبة أمامي وإضافة غرض واحد.','إخراج الحقيبة فقط.','كتابة 3 أشياء لا يجب نسيانها.'],n:['إضافة الأغراض الثلاثة الأساسية.','إغلاق الحقيبة ووضعها عند الباب.']}},
+  {re:/form|application|apply|paperwork|visa|renew|passport|contract/i,s:['Open the form and fill in just your name.','Find the form and put it on your screen.','List the documents you need, nothing else.'],n:['Fill in the next section.','Gather one missing document.'],ar:/نموذج|استمارة|أوراق|معاملة|تأشيرة|فيزا|تجديد|جواز|عقد|طلب/,a:{s:['فتح النموذج وكتابة الاسم فقط.','إيجاد النموذج ووضعه على الشاشة.','كتابة قائمة المستندات المطلوبة فقط.'],n:['ملء القسم التالي.','تجهيز مستند واحد ناقص.']}},
+  {re:/code|app\b|website|bug|deploy|design|feature/i,s:['Open the project and read the last thing you changed.','Just open the project.','Write the one thing to do next, in 5 words.'],n:['Change one small thing and test it.','Write down where you stopped.'],ar:/برمجة|كود|تطبيق|موقع|تصميم/,a:{s:['فتح المشروع وقراءة آخر تعديل.','فتح المشروع فقط.','كتابة الخطوة التالية في 5 كلمات.'],n:['تغيير شيء صغير واحد وتجربته.','تدوين مكان التوقف.']}},
+  {re:/exercis|gym|workout|run\b|walk|yoga|sport|training/i,s:['Put on your sport clothes or shoes.','Stand up and stretch for 30 seconds.','Fill your water bottle.'],n:['Do the first 5 minutes.','Keep going for 5 more minutes.'],ar:/رياضة|تمرين|تمارين|نادي|جيم|مشي|جري|يوغا/,a:{s:['ارتداء ملابس الرياضة أو حذائها.','الوقوف والتمدّد لمدة 30 ثانية.','ملء قارورة الماء.'],n:['أول 5 دقائق من التمرين.','5 دقائق إضافية.']}}
 ];
-const STEP_DEFAULT={s:['Put everything you need for this in front of you (2 minutes).','Touch the first thing you need for it. Just touch it.','Write the very first action, in 5 words.'],n:['Do 5 minutes on it.','Take a 1-minute break, then 5 more minutes.','Check what is left and pick one more small step.']};
-const MISSING_STEP='Write down the one piece of information you are missing, and who or where could give it to you.';
-const H_LABEL={first:'Noor is finding your first step…',smaller:'Making it smaller…',different:'Looking for another way…',clearer:'Making it clearer…',revise:'Thinking about what you said…',next:'Finding the next step…'};
+const STEP_DEFAULT={s:['Put everything you need for this in front of you (2 minutes).','Touch the first thing you need for it. Just touch it.','Write the very first action, in 5 words.'],n:['Do 5 minutes on it.','Take a 1-minute break, then 5 more minutes.','Check what is left and pick one more small step.'],
+  a:{s:['وضع كل ما يلزم لهذه المهمة أمامي (دقيقتان).','لمس أول شيء تحتاجه المهمة. لمسه فقط.','كتابة أول إجراء في 5 كلمات.'],n:['5 دقائق على المهمة.','استراحة دقيقة، ثم 5 دقائق أخرى.','مراجعة ما تبقّى واختيار خطوة صغيرة أخرى.']}};
+// ---------- Help me start in English or Arabic (only this feature for now; the rest of the app stays in English) ----------
+// Arabic is written for the person to read as their own words (first person) or as neutral actions (verbal nouns),
+// so it works for women and men without guessing who is reading.
+const HLANG=()=>S.hp&&S.hp.lang==='ar'?'ar':'en';
+const AR_NUM='ar-u-nu-latn';
+const HX={
+ en:{title:'Help me start',titleOn:'Start with me',task:'Task',qBlock:'What is getting in the way right now?',qBlockAria:'What is blocking you',
+  skip:'Skip this — just give me a step',ownWords:'Tell me in your own words',optional:'optional',ownPh:"e.g. I don't feel like it and I don't know why",
+  notSaved:'Only used to suggest your step. Not saved.',notSaved2:'Only used for this suggestion. Not saved.',continue:'Continue',whichTask:'Which task?',
+  chooseForMe:'Choose one for me',prio:'priority',first8:'Showing your first 8. Pick any one.',emptyList:'Your list is empty right now.',
+  notOnList:"It's something not on my list",whatToDo:'What do you need to do?',whatPh:'e.g. Prepare my presentation',
+  addContinue:'Add to today and continue',justHelp:"Just help me, don't add it",oneMoment:'One moment…',cancel:'Cancel',yourAnswer:'Your answer',skipQ:'Skip the question',
+  L_first:'Noor is finding your first step…',L_smaller:'Making it smaller…',L_different:'Looking for another way…',L_clearer:'Making it clearer…',L_revise:'Thinking about what you said…',L_next:'Finding the next step…',
+  nextStep:'Your next step',yourStep:'Your step',saveStep:'Save my step',srcAI:'Suggested by Noor',srcYou:'Your own step',
+  srcOffline:"Noor couldn't be reached, so this is a simple step from the app.",srcRules:'A simple starter step',
+  accept:'Start this step',easier:'Make it easier',another:'Show another option',editAction:'Edit action',seeAfter:'See what comes after',
+  offerQ:'Want me to start with tinier steps next time?',offerYes:'Yes, remember that',offerNo:'No thanks',
+  currentAction:'Current action',welcomeBack:'Welcome back. Same step, no stress.',keepGoing:'Keep going, one step at a time.',letsStart:"Let's start with this one step.",
+  timer:'Timer',m2:'2 min',m5:'5 min',m10:'10 min',noTimer:'No timer',timeLeft:n=>'time left · '+n+' min',timeSpent:'time spent',pausedSfx:' · paused',
+  pause:'Pause',resume:'Resume',start:'Start',distracted:"I'm distracted",tooHard:'This step is too difficult',didStep:'I completed this step',exit:'Exit session',
+  happens:"That happens. Let's come back.",youWereOn:'You were on',phoneDown:'Put your phone face down and close what pulled you away.',imBack:"I'm back, continue",stopNow:'Stop for now',
+  changeQ:"Let's change something. What would help?",adjSmaller:'Make the step smaller',adjClearer:'Explain the step more clearly',adjOther:'Give me a different approach',
+  adjWhy:'Help me understand what is blocking me',adjSwitch:'Let me choose another task',back:'Back',
+  whyQ:'What makes this step difficult right now?',whyChips:["I don't know where to start",'There are too many steps','I keep getting distracted',"I don't have the information I need",'I am exhausted'],
+  newStep:'Get a new step',tiredQ:'Being exhausted is a real reason. You choose.',tPause:'Pause and come back',tPauseD:'Your step stays saved here.',
+  tTiny:'Give me a tiny step',tTinyD:'Something that takes less than a minute.',tStop:'Stop for today',tStopD:'You can plan it for later.',
+  stepDone:'Step done ✓',whatNow:'What now?',nextSmall:'Next small step',wholeDone:'Mark the whole task as done',wholeDoneD:'Only if it is really finished.',
+  stopHere:'Stop here for now',stopHereD:'Your progress is saved.',timeUpTip:"Time's up. You don't have to be finished.",howDidItGo:'How did it go?',
+  oStarted:'I started',oDone:'I completed the step',oAnother:'I need another approach',oStop:'I want to stop for now',backToStep:'Back to my step',
+  stopOk:"That's okay. Stopping is allowed.",planLater:x=>'Do you want to plan '+x+' for later?',laterToday:'Later today',tomorrow:'Tomorrow',atTime:x=>'at '+x,
+  keepIt:'Keep it as it is',staysWhen:t=>t.date?'Stays '+whenTxt(t):'Stays in Someday',close:'Close',
+  errType:'Type what you need to do, even in 2 words.',errStep:'Write your step, even in 2 words.',
+  rwStart:'You started. That is the hardest part.',rwStep:'Step done. Nice.',rwBack:'You came back. That counts.',
+  tAdded:x=>'Added to today: '+x,tTinySaved:'Saved: tinier steps first. You can change it in Profile.',tPaused:'Paused. Your step is waiting for you below.',
+  tMoved:'Saved. You moved forward today.',tStarted:'Saved: you started. That counts.',tNothing:'Okay. Nothing was changed.',
+  tPlanned:t=>'Planned: '+t.text+' · '+whenTxt(t),tCantMove:e=>"Couldn't move it: "+e,
+  pillUp:"Time's up. How did it go?",pillAria:'Back to your step',goBig:'HELP ME START',goSmall:"Let's make the next step easier.",
+  missing:'Write down the one piece of information you are missing, and who or where could give it to you.',
+  getReady:'Only get ready: put what you need for it in front of you. Nothing more.',more5:'Do 5 more minutes on it, then check how you feel.',
+  plain:s=>'In plain words: '+s.replace(/\.$/,'')+". That is the whole step. It should take about 2 minutes, and you don't need to finish anything else.",
+  someday:'Someday',langBtn:'عربي',langAria:'اقرأ «ساعدني أبدأ» بالعربية'},
+ ar:{title:'ساعدني أبدأ',titleOn:'لنبدأ معًا',task:'المهمة',qBlock:'ما الذي يعيق البدء الآن؟',qBlockAria:'ما الذي يعيق البدء',
+  skip:'تخطّي هذا — أريد خطوة مباشرة',ownWords:'أشرح بكلماتي',optional:'اختياري',ownPh:'مثال: لا رغبة لديّ، ولا أعرف السبب',
+  notSaved:'يُستخدم فقط لاقتراح الخطوة، ولا يُحفظ.',notSaved2:'يُستخدم لهذا الاقتراح فقط، ولا يُحفظ.',continue:'متابعة',whichTask:'أي مهمة؟',
+  chooseForMe:'نور تختار لي واحدة',prio:'أولوية',first8:'هذه أول 8 مهام. أي واحدة منها تكفي.',emptyList:'القائمة فارغة الآن.',
+  notOnList:'مهمة غير موجودة في قائمتي',whatToDo:'ماذا عليّ أن أفعل؟',whatPh:'مثال: تحضير العرض التقديمي',
+  addContinue:'إضافتها لليوم والمتابعة',justHelp:'المساعدة فقط، دون إضافتها',oneMoment:'لحظة واحدة…',cancel:'إلغاء',yourAnswer:'إجابتي',skipQ:'تخطي السؤال',
+  L_first:'نور تبحث عن الخطوة الأولى…',L_smaller:'نجعل الخطوة أصغر…',L_different:'نبحث عن طريقة أخرى…',L_clearer:'نوضّح الخطوة…',L_revise:'نور تفكّر فيما كتبتُه…',L_next:'نبحث عن الخطوة التالية…',
+  nextStep:'الخطوة التالية',yourStep:'خطوتي',saveStep:'حفظ خطوتي',srcAI:'اقتراح من نور',srcYou:'خطوة من اختياري',
+  srcOffline:'تعذّر الوصول إلى نور، فهذه خطوة بسيطة من التطبيق.',srcRules:'خطوة بداية بسيطة',
+  accept:'أبدأ هذه الخطوة',easier:'أريدها أسهل',another:'خيار آخر',editAction:'تعديل الخطوة',seeAfter:'ماذا بعدها؟',
+  offerQ:'هل نبدأ بخطوات أصغر في المرة القادمة؟',offerYes:'نعم، تذكّري ذلك',offerNo:'لا، شكرًا',
+  currentAction:'الخطوة الحالية',welcomeBack:'أهلًا بالعودة. الخطوة نفسها، بلا ضغط.',keepGoing:'نكمل، خطوة بخطوة.',letsStart:'لنبدأ بهذه الخطوة فقط.',
+  timer:'المؤقت',m2:'دقيقتان',m5:'5 دقائق',m10:'10 دقائق',noTimer:'بلا مؤقت',timeLeft:n=>'الوقت المتبقي · '+n+' د',timeSpent:'الوقت المنقضي',pausedSfx:' · متوقف مؤقتًا',
+  pause:'إيقاف مؤقت',resume:'استئناف',start:'بدء',distracted:'تشتّت انتباهي',tooHard:'هذه الخطوة صعبة جدًا',didStep:'أنهيتُ هذه الخطوة',exit:'إنهاء الجلسة',
+  happens:'هذا يحدث. لنعد بهدوء.',youWereOn:'كنتُ أعمل على',phoneDown:'قلب الهاتف على وجهه، وإغلاق ما شتّت الانتباه.',imBack:'عدتُ، لنكمل',stopNow:'التوقف الآن',
+  changeQ:'لنغيّر شيئًا. ما الذي سيساعد؟',adjSmaller:'خطوة أصغر',adjClearer:'شرح أوضح للخطوة',adjOther:'طريقة مختلفة',
+  adjWhy:'أريد أن أفهم ما الذي يعيقني',adjSwitch:'اختيار مهمة أخرى',back:'رجوع',
+  whyQ:'ما الذي يجعل هذه الخطوة صعبة الآن؟',whyChips:['لا أعرف من أين أبدأ','الخطوات كثيرة جدًا','أتشتّت باستمرار','تنقصني معلومة أحتاجها','أشعر بإرهاق شديد'],
+  newStep:'خطوة جديدة',tiredQ:'الإرهاق سبب حقيقي. القرار لي.',tPause:'استراحة ثم عودة',tPauseD:'الخطوة تبقى محفوظة هنا.',
+  tTiny:'خطوة صغيرة جدًا',tTinyD:'شيء يستغرق أقل من دقيقة.',tStop:'التوقف لهذا اليوم',tStopD:'يمكن جدولتها لوقت لاحق.',
+  stepDone:'تمّت الخطوة ✓',whatNow:'والآن؟',nextSmall:'الخطوة الصغيرة التالية',wholeDone:'المهمة كلها انتهت',wholeDoneD:'فقط إذا انتهت فعلًا.',
+  stopHere:'التوقف هنا الآن',stopHereD:'تقدّمي محفوظ.',timeUpTip:'انتهى الوقت. لا بأس إن لم تنتهِ المهمة.',howDidItGo:'كيف سار الأمر؟',
+  oStarted:'بدأتُ',oDone:'أنهيتُ الخطوة',oAnother:'أحتاج طريقة أخرى',oStop:'أريد التوقف الآن',backToStep:'العودة إلى الخطوة',
+  stopOk:'لا بأس. التوقف مسموح.',planLater:x=>'هل نجدول '+x+' لوقت لاحق؟',laterToday:'لاحقًا اليوم',tomorrow:'غدًا',atTime:x=>'الساعة '+x,
+  keepIt:'تركها كما هي',staysWhen:t=>t.date?'تبقى '+hWhen(t):'تبقى في «يومًا ما»',close:'إغلاق',
+  errType:'المهمة بكلمتين تكفي.',errStep:'الخطوة بكلمتين تكفي.',
+  rwStart:'البداية هي الأصعب، وقد تمّت.',rwStep:'تمّت الخطوة. رائع.',rwBack:'العودة تُحسب أيضًا.',
+  tAdded:x=>'أُضيفت لليوم: '+x,tTinySaved:'تم الحفظ: خطوات أصغر أولًا. يمكن تغيير ذلك من الملف الشخصي.',tPaused:'إيقاف مؤقت. الخطوة تنتظر في الأسفل.',
+  tMoved:'تم الحفظ. تقدّم حقيقي اليوم.',tStarted:'تم الحفظ: البداية تُحسب.',tNothing:'حسنًا. لم يتغيّر شيء.',
+  tPlanned:t=>'تمت الجدولة: '+t.text+' · '+hWhen(t),tCantMove:e=>'تعذّر النقل: '+e,
+  pillUp:'انتهى الوقت. كيف سار الأمر؟',pillAria:'العودة إلى الخطوة',goBig:'ساعدني أبدأ',goSmall:'لنجعل الخطوة التالية أسهل.',
+  missing:'كتابة المعلومة الوحيدة الناقصة، ومن أو أين يمكن الحصول عليها.',
+  getReady:'التحضير فقط: وضع ما يلزم أمامي. لا أكثر.',more5:'5 دقائق إضافية، ثم التوقف لملاحظة الشعور.',
+  plain:s=>'بكلمات بسيطة: '+s.replace(/[.。]$/,'')+'. هذه هي الخطوة كلها. تستغرق نحو دقيقتين، ولا داعي لإنهاء أي شيء آخر.',
+  someday:'يومًا ما',langBtn:'English',langAria:'Read Help me start in English'}
+};
+function hx(k){const v=HX[HLANG()][k];return v===undefined?HX.en[k]:v}
+// a blocker's text in the current language
+const bT=(b,f)=>HLANG()==='ar'&&b.ar?b.ar[f]:b[f];
+// "when" for a task, in the current language
+function hWhen(t){if(HLANG()!=='ar')return whenTxt(t);
+  if(!t.date)return hx('someday');
+  const r=dayDiff(todayStr(),t.date),d=r===0?'اليوم':r===1?'غدًا':r===-1?'أمس':new Date(t.date+'T12:00').toLocaleDateString(AR_NUM,{weekday:'long',day:'numeric',month:'long'});
+  return d+(t.time?' الساعة '+timeRange(t):'')}
+// Arabic reads right to left: only the Help me start sheet, its pill and the Today button switch direction
+function hDir(){const ar=HLANG()==='ar',dir=ar?'rtl':'ltr',lang=ar?'ar':'en';
+  [document.querySelector('#hms .spanel'),$('hmsPill'),$('hmsToday')].forEach(el=>{if(el){el.dir=dir;el.lang=lang}});
+  const lb=$('hmsLang');if(lb){lb.textContent=hx('langBtn');lb.setAttribute('aria-label',hx('langAria'));lb.lang=ar?'en':'ar'}
+  const g=$('hmsToday');if(g){g.querySelector('b').textContent=hx('goBig');g.querySelector('small').textContent=hx('goSmall')}
+  $('hmsPill').setAttribute('aria-label',hx('pillAria'))}
+function hSetLang(l){S.hp=Object.assign({},S.hp||{},{lang:l==='ar'?'ar':'en'});save();track('lang_'+HLANG());hDir();renderHp();if(H&&hOpenNow()){if(H.step==='loading')return;hRender()}}
 
 let H=null,hReq=0,hTick=0;
 const hOpenNow=()=>!$('hms').hidden;
@@ -2178,7 +2441,26 @@ function hPrefs(){const p=S.hp||{};return{detail:p.detail==='tiny'?'tiny':'norma
 function track(e){const L=S.hl=S.hl&&typeof S.hl==='object'?S.hl:{};L.c=L.c||{};L.c[e]=(L.c[e]||0)+1;
   L.s=Array.isArray(L.s)?L.s:[];L.s.push({e,at:Date.now(),sid:H&&H.sid||null});if(L.s.length>200)L.s.splice(0,L.s.length-200);save()}
 function hLog(o){const L=S.hl=S.hl&&typeof S.hl==='object'?S.hl:{};L.o=Array.isArray(L.o)?L.o:[];
-  L.o.push({sid:H.sid,tid:H.tid||null,b:H.b||null,o,sec:Math.round(hEl()/1000),at:Date.now()});if(L.o.length>60)L.o.splice(0,L.o.length-60);H.logged=true;track('outcome_'+o)}
+  L.o.push({sid:H.sid,tid:H.tid||null,b:H.b||null,o,sec:Math.round(hEl()/1000),at:Date.now()});ssMark('res',o);if(L.o.length>60)L.o.splice(0,L.o.length-60);H.logged=true;track('outcome_'+o)}
+// One record per session, on this phone only (no task names, nothing typed):
+//   eligible session = Noor (or the app) showed at least one concrete step;
+//   started          = the person pressed Start in the session, said "I started", or completed a step.
+//   Opening the sheet, reading a step or tapping "Start this step" alone does not count.
+// Each session can count once at most, whatever is tapped twice or after a refresh.
+function ssRec(){if(!H)return null;const L=S.hl=S.hl&&typeof S.hl==='object'?S.hl:{};L.ss=L.ss&&typeof L.ss==='object'&&!Array.isArray(L.ss)?L.ss:{};
+  let r=L.ss[H.sid];
+  if(!r){r=L.ss[H.sid]={at:H.at||Date.now(),d:todayStr(),tid:H.tid||null,shown:false,started:false,st:null,res:null};
+    const ks=Object.keys(L.ss);if(ks.length>200)ks.sort((a,b)=>(L.ss[a].at||0)-(L.ss[b].at||0)).slice(0,ks.length-200).forEach(k=>delete L.ss[k])}
+  return r}
+function ssMark(f,v){const r=ssRec();if(!r)return;
+  if(f==='started'){if(r.started)return;r.started=true;r.st=Date.now();r.tid=H.tid||r.tid}
+  else if(f==='res'){if(!r.res)r.res=v}
+  else r[f]=v;
+  save()}
+function startStats(){const ss=(S.hl&&S.hl.ss)||{},all=Object.values(ss).filter(r=>r&&typeof r==='object');
+  const el=all.filter(r=>r.shown),st=el.filter(r=>r.started);
+  return{opened:all.length,eligible:el.length,started:st.length,rate:el.length?Math.round(st.length/el.length*100):null,
+    tasks:new Set(st.map(r=>r.tid).filter(Boolean)).size,last7:st.filter(r=>(r.st||0)>=Date.now()-7*864e5).length}}
 function hSave(){try{if(!H){localStorage.removeItem(HKEY);return}const c=Object.assign({},H);delete c.note;delete c.why;localStorage.setItem(HKEY,JSON.stringify(c))}catch(e){}}
 const hTask=()=>H&&H.tid?S.tasks.find(x=>x.id===H.tid)||null:null;
 const hTitle=()=>{const t=hTask();return t?t.text:(H&&H.title)||''};
@@ -2197,41 +2479,42 @@ function hOpen(o){
   H={sid:uid(),at:Date.now(),step:'blocker',b:null,tid:o.tid||null,title:'',action:'',next:[],src:'',tried:[],easier:0,
      tm:{mins:hPrefs().mins,acc:0,since:null},rw:{},started:false,from:o.from||'start'};
   const t=hTask();if(t)H.title=t.text;
-  track('help_start_opened');hSave();
+  track('help_start_opened');ssRec();hSave();
   $('hms').hidden=false;document.body.classList.add('noscroll');hRender();
 }
 // × or tapping outside: a running session is only minimised (pill stays); an unstarted one is dropped
 function hClose(){
   if(!H){hHide();return}
   if(H.started&&!H.logged){hPause();hHide();hPill();return}
-  if(!H.logged)track('session_abandoned');
+  if(!H.logged){track('session_abandoned');ssMark('res','abandoned')}
   H=null;hSave();hHide();hPill();
 }
 function hHide(){$('hms').hidden=true;document.body.classList.remove('noscroll')}
 function hEnd(msg){H=null;hSave();hHide();hPill();if(msg)toast(msg);render()}
 function hGo(step){H.step=step;hSave();hRender()}
 function hPill(){const p=$('hmsPill');const on=!!(H&&H.started&&!H.logged&&!hOpenNow());p.hidden=!on;
-  if(on)$('hmsPillT').textContent=H.timeUp?"Time's up. How did it go?":(H.tm.since?hClockTxt()+' · ':'')+(H.action||hTitle())}
+  if(on)$('hmsPillT').textContent=H.timeUp?hx('pillUp'):(H.tm.since?hClockTxt()+' · ':'')+(H.action||hTitle())}
 
 // ---------- the step engine: Noor (AI) first, the offline rules when she can't be reached ----------
-function rulesFor(title){return STEP_RULES.find(r=>r.re.test(title||''))||STEP_DEFAULT}
+function rulesFor(title){title=title||'';const r=STEP_RULES.find(r=>r.re.test(title)||(r.ar&&r.ar.test(title)))||STEP_DEFAULT;return HLANG()==='ar'?r.a:r}
+const stepDefault=()=>HLANG()==='ar'?STEP_DEFAULT.a:STEP_DEFAULT;
 function hClassify(txt){const s=String(txt||'').toLowerCase();
-  if(/exhaust|tired|no energy|sleepy|drained|burn/.test(s))return 'tired';
-  if(/distract|focus|phone|scroll|wander/.test(s))return 'distracted';
-  if(/information|info\b|don.?t have|missing|need to know|waiting for|answer from/.test(s))return 'missing';
-  if(/too many|too much|so many|overwhelm|huge|big/.test(s))return 'many';
-  if(/where to start|don.?t know (how|what|where)|no idea|confus|unclear/.test(s))return 'start';
+  if(/exhaust|tired|no energy|sleepy|drained|burn|إرهاق|مرهق|متعب|تعب|منهك|نعسان|لا طاقة/.test(s))return 'tired';
+  if(/distract|focus|phone|scroll|wander|أتشتت|أتشتّت|تشتت|تشتّت|تركيز|الهاتف|الجوال/.test(s))return 'distracted';
+  if(/information|info\b|don.?t have|missing|need to know|waiting for|answer from|معلومة|معلومات|تنقصني|ناقص|أنتظر/.test(s))return 'missing';
+  if(/too many|too much|so many|overwhelm|huge|big|كثيرة|كثير|ضغط|كبيرة/.test(s))return 'many';
+  if(/where to start|don.?t know (how|what|where)|no idea|confus|unclear|من أين أبدأ|لا أعرف|غير واضح/.test(s))return 'start';
   return 'other'}
 function hFallback(mode,extra){
   const R=rulesFor(hTitle()),cur=H.action,tried=H.tried;
   const unused=a=>a.find(x=>!tried.includes(x));
   if(mode==='first'){const i=hPrefs().detail==='tiny'?1:0;return{step:R.s[i],next:R.n.slice(0,3)}}
-  if(mode==='smaller')return{step:(!tried.includes(R.s[1])&&cur!==R.s[1])?R.s[1]:'Only get ready: put what you need for it in front of you. Nothing more.',next:[cur].filter(Boolean)};
-  if(mode==='different')return{step:unused([R.s[2],R.s[0],R.s[1]])||unused(STEP_DEFAULT.s)||R.s[2],next:R.n.slice(0,3)};
-  if(mode==='next'){const q=H.next.find(x=>!tried.includes(x))||unused(R.n)||unused(STEP_DEFAULT.n);return{step:q||'Do 5 more minutes on it, then check how you feel.',next:[]}}
-  if(mode==='clearer')return{step:cur,explain:'In plain words: '+cur.replace(/\.$/,'')+'. That is the whole step. It should take about 2 minutes, and you don\'t need to finish anything else.'};
+  if(mode==='smaller')return{step:(!tried.includes(R.s[1])&&cur!==R.s[1])?R.s[1]:hx('getReady'),next:[cur].filter(Boolean)};
+  if(mode==='different')return{step:unused([R.s[2],R.s[0],R.s[1]])||unused(stepDefault().s)||R.s[2],next:R.n.slice(0,3)};
+  if(mode==='next'){const q=H.next.find(x=>!tried.includes(x))||unused(R.n)||unused(stepDefault().n);return{step:q||hx('more5'),next:[]}}
+  if(mode==='clearer')return{step:cur,explain:hx('plain')(cur)};
   if(mode==='revise'){const k=hClassify(extra);
-    if(k==='missing')return{step:MISSING_STEP,next:[]};
+    if(k==='missing')return{step:hx('missing'),next:[]};
     if(k==='many'||k==='start')return hFallback(k==='many'?'smaller':'first');
     return hFallback('smaller')}
   return{step:R.s[0],next:R.n.slice(0,3)}
@@ -2252,6 +2535,7 @@ function hPrompt(mode,extra){
    (hPrefs().detail==='tiny'?'\nThey prefer extra tiny steps.':'')+
    (mode==='revise'&&extra?'\nWhat makes it difficult right now, in their words: '+extra:'')+
    '\nRequest: '+ask+
+   (HLANG()==='ar'?'\nLanguage: write "step", "next", "explain" and "question" in clear, simple Modern Standard Arabic that any Arab reader understands. Write steps as neutral actions (verbal nouns, e.g. "فتح المستند وكتابة عنوان مؤقت") so they suit both women and men. Keep the JSON keys in English.':'')+
    '\nAnswer ONLY in JSON: {"step":"...","next":["...","..."],"explain":"","question":""} ("next" = up to 3 following small steps, can be empty).'
 }
 async function hAI(mode,extra){
@@ -2267,7 +2551,7 @@ async function hAI(mode,extra){
 async function hSuggest(mode,extra){
   if(!H)return;
   const req=++hReq,was=H.step;
-  H.prevStep=was==='loading'?H.prevStep:was;H.loading=H_LABEL[mode]||H_LABEL.first;H.step='loading';hRender();
+  H.prevStep=was==='loading'?H.prevStep:was;H.loadMode=['first','smaller','different','clearer','revise','next'].includes(mode)?mode:'first';H.step='loading';hRender();
   let r=null,failed=false;
   try{r=await hAI(mode,extra)}catch(e){failed=true}
   if(!H||req!==hReq)return; // closed, or another request replaced this one
@@ -2279,7 +2563,7 @@ async function hSuggest(mode,extra){
   if(mode!=='clearer'&&mode!=='smaller'||!H.next.length)H.next=r.next&&r.next.length?r.next:(mode==='first'?rulesFor(hTitle()).n.slice(0,3):H.next);
   if(!H.tried.includes(r.step))H.tried.push(r.step);
   H.showNext=!hPrefs().one;
-  track('suggested_action_shown');
+  track('suggested_action_shown');ssMark('shown',true);
   H.step='suggest';hSave();hRender();
 }
 
@@ -2292,80 +2576,80 @@ function hCands(){const t=todayStr(),seen=new Set(),out=[];
   somedayTasks().filter(x=>!x.done).sort(byPrio).forEach(add);
   return out}
 function hRender(){
-  hPill();if(!H||!hOpenNow())return;
+  hPill();hDir();if(!H||!hOpenNow())return;
   const b=$('hmsBody'),t=hTask(),title=hTitle(),bl=BLOCKERS.find(x=>x.id===H.b);
   let h='';
-  const taskLine=title?'<div class="hgrp"><p class="hk">Task</p><p class="htask">'+picTile(title,'#7209B7')+'<span>'+esc(title)+'</span></p></div>':'';
-  $('hmsTitle').textContent=H.started?'Start with me':'Help me start';
+  const taskLine=title?'<div class="hgrp"><p class="hk">'+hx('task')+'</p><p class="htask">'+picTile(title,'#7209B7')+'<bdi>'+esc(title)+'</bdi></p></div>':'';
+  $('hmsTitle').textContent=H.started?hx('titleOn'):hx('title');
   if(H.step==='blocker'){
-    h=(title?taskLine:'')+'<p class="hsub">What is getting in the way right now?</p><div class="hopts" role="group" aria-label="What is blocking you">'+
-      BLOCKERS.map(x=>hBtn('b',x.t,x.d,'',' data-b="'+x.id+'"')).join('')+'</div>'+
-      '<button type="button" class="hlink" data-h="skip">Skip this — just give me a step</button>';
+    h=(title?taskLine:'')+'<p class="hsub">'+hx('qBlock')+'</p><div class="hopts" role="group" aria-label="'+hx('qBlockAria')+'">'+
+      BLOCKERS.map(x=>hBtn('b',bT(x,'t'),bT(x,'d'),'',' data-b="'+x.id+'"')).join('')+'</div>'+
+      '<button type="button" class="hlink" data-h="skip">'+hx('skip')+'</button>';
   }else if(H.step==='other'){
-    h='<label class="fl" for="hNote">Tell me in your own words <span class="opt">optional</span></label><textarea id="hNote" class="hta" rows="3" maxlength="300" placeholder="e.g. I don\'t feel like it and I don\'t know why"></textarea>'+
-      '<p class="hint">Only used to suggest your step. Not saved.</p><div class="sbtns"><button type="button" class="btn" data-h="noteok">Continue</button></div>';
+    h='<label class="fl" for="hNote">'+hx('ownWords')+' <span class="opt">'+hx('optional')+'</span></label><textarea id="hNote" class="hta" rows="3" maxlength="300" placeholder="'+hx('ownPh')+'"></textarea>'+
+      '<p class="hint">'+hx('notSaved')+'</p><div class="sbtns"><button type="button" class="btn" data-h="noteok">'+hx('continue')+'</button></div>';
   }else if(H.step==='pick'){
     const c=hCands();
-    h=(bl&&bl.tip?'<p class="htip">'+esc(bl.tip)+'</p>':'')+'<p class="hsub">Which task?</p>'+
-      (H.b==='many'&&c.length>1?'<button type="button" class="btn hwide" data-h="choose">Choose one for me</button>':'')+
-      (c.length?'<div class="hopts">'+c.slice(0,8).map(x=>hBtn('task',esc(x.text),esc(whenTxt(x))+(x.prio==='high'?' · 🔥 priority':''),'htaskopt',' data-id="'+x.id+'"')).join('')+'</div>'+(c.length>8?'<p class="hint">Showing your first 8. Pick any one.</p>':''):'<p class="hint">Your list is empty right now.</p>')+
-      '<button type="button" class="hlink" data-h="typenew">It\'s something not on my list</button>';
+    h=(bl&&bT(bl,'tip')?'<p class="htip">'+esc(bT(bl,'tip'))+'</p>':'')+'<p class="hsub">'+hx('whichTask')+'</p>'+
+      (H.b==='many'&&c.length>1?'<button type="button" class="btn hwide" data-h="choose">'+hx('chooseForMe')+'</button>':'')+
+      (c.length?'<div class="hopts">'+c.slice(0,8).map(x=>hBtn('task','<bdi>'+esc(x.text)+'</bdi>',esc(hWhen(x))+(x.prio==='high'?' · 🔥 '+hx('prio'):''),'htaskopt',' data-id="'+x.id+'"')).join('')+'</div>'+(c.length>8?'<p class="hint">'+hx('first8')+'</p>':''):'<p class="hint">'+hx('emptyList')+'</p>')+
+      '<button type="button" class="hlink" data-h="typenew">'+hx('notOnList')+'</button>';
   }else if(H.step==='type'){
-    h='<label class="fl" for="hNew">What do you need to do?</label><input id="hNew" type="text" maxlength="120" placeholder="e.g. Prepare my presentation" autocomplete="off">'+
-      '<p class="ederr" id="hErr" role="alert"></p><div class="sbtns"><button type="button" class="btn" data-h="newadd">Add to today and continue</button><button type="button" class="btn ghost" data-h="newtemp">Just help me, don\'t add it</button></div>';
+    h='<label class="fl" for="hNew">'+hx('whatToDo')+'</label><input id="hNew" type="text" maxlength="120" placeholder="'+hx('whatPh')+'" autocomplete="off">'+
+      '<p class="ederr" id="hErr" role="alert"></p><div class="sbtns"><button type="button" class="btn" data-h="newadd">'+hx('addContinue')+'</button><button type="button" class="btn ghost" data-h="newtemp">'+hx('justHelp')+'</button></div>';
   }else if(H.step==='loading'){
-    h=taskLine+'<div class="hload" role="status"><span class="hdots" aria-hidden="true"><i></i><i></i><i></i></span>'+esc(H.loading||'One moment…')+'</div><button type="button" class="hlink" data-h="cancelload">Cancel</button>';
+    h=taskLine+'<div class="hload" role="status"><span class="hdots" aria-hidden="true"><i></i><i></i><i></i></span>'+esc(H.loadMode?hx('L_'+H.loadMode):hx('oneMoment'))+'</div><button type="button" class="hlink" data-h="cancelload">'+hx('cancel')+'</button>';
   }else if(H.step==='clarify'){
-    h=taskLine+'<p class="hsub">'+esc(H.q)+'</p><input id="hQa" type="text" maxlength="200" autocomplete="off" aria-label="Your answer">'+
-      '<div class="sbtns"><button type="button" class="btn" data-h="qaok">Continue</button><button type="button" class="btn ghost" data-h="qaskip">Skip the question</button></div>';
+    h=taskLine+'<p class="hsub">'+esc(H.q)+'</p><input id="hQa" type="text" maxlength="200" autocomplete="off" aria-label="'+hx('yourAnswer')+'">'+
+      '<div class="sbtns"><button type="button" class="btn" data-h="qaok">'+hx('continue')+'</button><button type="button" class="btn ghost" data-h="qaskip">'+hx('skipQ')+'</button></div>';
   }else if(H.step==='suggest'||H.step==='edit'){
     const nx=H.next.filter(x=>x&&x!==H.action);
-    h=taskLine+(bl&&bl.tip&&!H.started?'<p class="htip">'+esc(bl.tip)+'</p>':'')+
-      '<div class="hgrp"><p class="hk">Your next step</p>'+
-      (H.step==='edit'?'<textarea id="hEdit" class="hta" rows="3" maxlength="160" aria-label="Your step">'+esc(H.action)+'</textarea><p class="ederr" id="hErr" role="alert"></p><div class="sbtns"><button type="button" class="btn" data-h="editok">Save my step</button><button type="button" class="btn ghost" data-h="editno">Cancel</button></div></div>':
-      '<div class="hstep">'+esc(H.action)+'</div>'+(H.explain?'<p class="hexp">'+esc(H.explain)+'</p>':'')+
-      '<p class="hsrc">'+(H.src==='ai'?'Suggested by Noor':H.src==='you'?'Your own step':H.offline?'Noor couldn\'t be reached, so this is a simple step from the app.':'A simple starter step')+'</p></div>'+
-      '<button type="button" class="btn hwide hbig" data-h="accept">Start this step</button>'+
-      '<div class="hrow"><button type="button" class="btn ghost" data-h="easier">Make it easier</button><button type="button" class="btn ghost" data-h="other">Show another option</button><button type="button" class="btn ghost" data-h="edit">Edit action</button></div>'+
-      (nx.length?'<details class="hnext"'+(H.showNext?' open':'')+'><summary>See what comes after</summary><ol>'+nx.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol></details>':'')+
-      (H.offer?'<div class="hoffer"><p>Want me to start with tinier steps next time?</p><div class="sbtns"><button type="button" class="btn small" data-h="rememberyes">Yes, remember that</button><button type="button" class="btn small ghost" data-h="rememberno">No thanks</button></div></div>':''));
+    h=taskLine+(bl&&bT(bl,'tip')&&!H.started?'<p class="htip">'+esc(bT(bl,'tip'))+'</p>':'')+
+      '<div class="hgrp"><p class="hk">'+hx('nextStep')+'</p>'+
+      (H.step==='edit'?'<textarea id="hEdit" class="hta" rows="3" maxlength="160" aria-label="'+hx('yourStep')+'">'+esc(H.action)+'</textarea><p class="ederr" id="hErr" role="alert"></p><div class="sbtns"><button type="button" class="btn" data-h="editok">'+hx('saveStep')+'</button><button type="button" class="btn ghost" data-h="editno">'+hx('cancel')+'</button></div></div>':
+      '<div class="hstep"><bdi>'+esc(H.action)+'</bdi></div>'+(H.explain?'<p class="hexp"><bdi>'+esc(H.explain)+'</bdi></p>':'')+
+      '<p class="hsrc">'+(H.src==='ai'?hx('srcAI'):H.src==='you'?hx('srcYou'):H.offline?hx('srcOffline'):hx('srcRules'))+'</p></div>'+
+      '<button type="button" class="btn hwide hbig" data-h="accept">'+hx('accept')+'</button>'+
+      '<div class="hrow"><button type="button" class="btn ghost" data-h="easier">'+hx('easier')+'</button><button type="button" class="btn ghost" data-h="other">'+hx('another')+'</button><button type="button" class="btn ghost" data-h="edit">'+hx('editAction')+'</button></div>'+
+      (nx.length?'<details class="hnext"'+(H.showNext?' open':'')+'><summary>'+hx('seeAfter')+'</summary><ol>'+nx.map(x=>'<li><bdi>'+esc(x)+'</bdi></li>').join('')+'</ol></details>':'')+
+      (H.offer?'<div class="hoffer"><p>'+hx('offerQ')+'</p><div class="sbtns"><button type="button" class="btn small" data-h="rememberyes">'+hx('offerYes')+'</button><button type="button" class="btn small ghost" data-h="rememberno">'+hx('offerNo')+'</button></div></div>':''));
   }else if(H.step==='session'){
     const run=!!H.tm.since,el=hEl(),T=H.tm.mins;
-    h=taskLine+'<div class="hgrp"><p class="hk">Current action</p><div class="hstep">'+esc(H.action)+'</div></div>'+
-      '<p class="hsay">'+(H.back?'Welcome back. Same step, no stress.':el?'Keep going, one step at a time.':"Let's start with this one step.")+'</p>'+
-      (!run?'<div class="seg small" role="group" aria-label="Timer">'+[[2,'2 min'],[5,'5 min'],[10,'10 min'],[0,'No timer']].map(m=>'<button type="button" data-h="mins" data-m="'+m[0]+'" aria-pressed="'+(T===m[0])+'">'+m[1]+'</button>').join('')+'</div>':'')+
-      '<div class="hclock'+(run?' on':'')+'"><b id="hClock">'+hClockTxt()+'</b><small>'+(T?'time left · '+T+' min':'time spent')+(run?'':el?' · paused':'')+'</small></div>'+
-      '<button type="button" class="btn hwide hbig" data-h="go">'+(run?'Pause':el?'Resume':'Start')+'</button>'+
-      '<div class="hgrid"><button type="button" class="btn ghost" data-h="distracted">I\'m distracted</button><button type="button" class="btn ghost" data-h="hard">This step is too difficult</button>'+
-      '<button type="button" class="btn ghost hok" data-h="did">I completed this step</button><button type="button" class="btn ghost" data-h="exit">Exit session</button></div>';
+    h=taskLine+'<div class="hgrp"><p class="hk">'+hx('currentAction')+'</p><div class="hstep"><bdi>'+esc(H.action)+'</bdi></div></div>'+
+      '<p class="hsay">'+(H.back?hx('welcomeBack'):el?hx('keepGoing'):hx('letsStart'))+'</p>'+
+      (!run?'<div class="seg small" role="group" aria-label="'+hx('timer')+'">'+[[2,hx('m2')],[5,hx('m5')],[10,hx('m10')],[0,hx('noTimer')]].map(m=>'<button type="button" data-h="mins" data-m="'+m[0]+'" aria-pressed="'+(T===m[0])+'">'+m[1]+'</button>').join('')+'</div>':'')+
+      '<div class="hclock'+(run?' on':'')+'"><b id="hClock" dir="ltr">'+hClockTxt()+'</b><small>'+(T?hx('timeLeft')(T):hx('timeSpent'))+(run?'':el?hx('pausedSfx'):'')+'</small></div>'+
+      '<button type="button" class="btn hwide hbig" data-h="go">'+(run?hx('pause'):el?hx('resume'):hx('start'))+'</button>'+
+      '<div class="hgrid"><button type="button" class="btn ghost" data-h="distracted">'+hx('distracted')+'</button><button type="button" class="btn ghost" data-h="hard">'+hx('tooHard')+'</button>'+
+      '<button type="button" class="btn ghost hok" data-h="did">'+hx('didStep')+'</button><button type="button" class="btn ghost" data-h="exit">'+hx('exit')+'</button></div>';
   }else if(H.step==='distracted'){
-    h='<p class="hsub">That happens. Let\'s come back.</p><div class="hgrp"><p class="hk">You were on</p><p class="htask"><span>'+esc(title)+'</span></p><div class="hstep">'+esc(H.action)+'</div></div>'+
-      '<p class="htip">Put your phone face down and close what pulled you away.</p>'+
-      '<button type="button" class="btn hwide hbig" data-h="back">I\'m back, continue</button>'+
-      '<div class="hrow"><button type="button" class="btn ghost" data-h="easier">Make it easier</button><button type="button" class="btn ghost" data-h="stop">Stop for now</button></div>';
+    h='<p class="hsub">'+hx('happens')+'</p><div class="hgrp"><p class="hk">'+hx('youWereOn')+'</p><p class="htask"><bdi>'+esc(title)+'</bdi></p><div class="hstep"><bdi>'+esc(H.action)+'</bdi></div></div>'+
+      '<p class="htip">'+hx('phoneDown')+'</p>'+
+      '<button type="button" class="btn hwide hbig" data-h="back">'+hx('imBack')+'</button>'+
+      '<div class="hrow"><button type="button" class="btn ghost" data-h="easier">'+hx('easier')+'</button><button type="button" class="btn ghost" data-h="stop">'+hx('stopNow')+'</button></div>';
   }else if(H.step==='adjust'){
-    h=taskLine+'<p class="hsub">Let\'s change something. What would help?</p><div class="hopts">'+
-      hBtn('easier','Make the step smaller')+hBtn('clearer','Explain the step more clearly')+hBtn('other','Give me a different approach')+
-      hBtn('why','Help me understand what is blocking me')+hBtn('switch','Let me choose another task')+'</div>'+
-      '<button type="button" class="hlink" data-h="toback">Back</button>';
+    h=taskLine+'<p class="hsub">'+hx('changeQ')+'</p><div class="hopts">'+
+      hBtn('easier',hx('adjSmaller'))+hBtn('clearer',hx('adjClearer'))+hBtn('other',hx('adjOther'))+
+      hBtn('why',hx('adjWhy'))+hBtn('switch',hx('adjSwitch'))+'</div>'+
+      '<button type="button" class="hlink" data-h="toback">'+hx('back')+'</button>';
   }else if(H.step==='why'){
-    h='<label class="fl" for="hWhy">What makes this step difficult right now?</label><textarea id="hWhy" class="hta" rows="3" maxlength="300"></textarea>'+
-      '<div class="hchips">'+["I don't know where to start",'There are too many steps','I keep getting distracted',"I don't have the information I need",'I am exhausted'].map(x=>'<button type="button" class="chip" data-h="whychip" data-v="'+esc(x)+'">'+esc(x)+'</button>').join('')+'</div>'+
-      '<p class="hint">Only used for this suggestion. Not saved.</p><div class="sbtns"><button type="button" class="btn" data-h="whyok">Get a new step</button><button type="button" class="btn ghost" data-h="toadjust">Back</button></div>';
+    h='<label class="fl" for="hWhy">'+hx('whyQ')+'</label><textarea id="hWhy" class="hta" rows="3" maxlength="300"></textarea>'+
+      '<div class="hchips">'+hx('whyChips').map(x=>'<button type="button" class="chip" data-h="whychip" data-v="'+esc(x)+'">'+esc(x)+'</button>').join('')+'</div>'+
+      '<p class="hint">'+hx('notSaved2')+'</p><div class="sbtns"><button type="button" class="btn" data-h="whyok">'+hx('newStep')+'</button><button type="button" class="btn ghost" data-h="toadjust">'+hx('back')+'</button></div>';
   }else if(H.step==='tired'){
-    h='<p class="hsub">Being exhausted is a real reason. You choose.</p><div class="hopts">'+hBtn('pause10','Pause and come back','Your step stays saved here.')+hBtn('tiny','Give me a tiny step','Something that takes less than a minute.')+hBtn('stop','Stop for today','You can plan it for later.')+'</div>';
+    h='<p class="hsub">'+hx('tiredQ')+'</p><div class="hopts">'+hBtn('pause10',hx('tPause'),hx('tPauseD'))+hBtn('tiny',hx('tTiny'),hx('tTinyD'))+hBtn('stop',hx('tStop'),hx('tStopD'))+'</div>';
   }else if(H.step==='stepdone'){
-    h='<div class="hdone"><b>Step done ✓</b><span>'+esc(H.action)+'</span></div><p class="hsub">What now?</p><div class="hopts">'+
-      hBtn('nextstep','Next small step')+(t&&!t.done?hBtn('taskdone','Mark the whole task as done','Only if it is really finished.'):'')+hBtn('finish','Stop here for now','Your progress is saved.')+'</div>';
+    h='<div class="hdone"><b>'+hx('stepDone')+'</b><bdi>'+esc(H.action)+'</bdi></div><p class="hsub">'+hx('whatNow')+'</p><div class="hopts">'+
+      hBtn('nextstep',hx('nextSmall'))+(t&&!t.done?hBtn('taskdone',hx('wholeDone'),hx('wholeDoneD')):'')+hBtn('finish',hx('stopHere'),hx('stopHereD'))+'</div>';
   }else if(H.step==='outcome'){
-    h=(H.timeUp?'<p class="htip">Time\'s up. You don\'t have to be finished.</p>':'')+'<p class="hsub">How did it go?</p><div class="hopts">'+
-      hBtn('o_started','I started')+hBtn('o_done','I completed the step')+hBtn('o_another','I need another approach')+hBtn('o_stop','I want to stop for now')+'</div>'+
-      (H.timeUp?'':'<button type="button" class="hlink" data-h="tosession">Back to my step</button>');
+    h=(H.timeUp?'<p class="htip">'+hx('timeUpTip')+'</p>':'')+'<p class="hsub">'+hx('howDidItGo')+'</p><div class="hopts">'+
+      hBtn('o_started',hx('oStarted'))+hBtn('o_done',hx('oDone'))+hBtn('o_another',hx('oAnother'))+hBtn('o_stop',hx('oStop'))+'</div>'+
+      (H.timeUp?'':'<button type="button" class="hlink" data-h="tosession">'+hx('backToStep')+'</button>');
   }else if(H.step==='stop'){
     const can=t&&!t.done,lt=hLaterToday();
-    h='<p class="hsub">That\'s okay. Stopping is allowed.</p>'+(can?'<p>Do you want to plan <b>'+esc(t.text)+'</b> for later?</p><div class="hopts">'+
-      (lt?hBtn('rs_today','Later today','at '+lt):'')+hBtn('rs_tomorrow','Tomorrow',t.time?'at '+t.time:'')+hBtn('rs_keep','Keep it as it is',t.date?'Stays '+whenTxt(t):'Stays in Someday')+'</div>':
-      '<div class="sbtns"><button type="button" class="btn" data-h="rs_keep">Close</button></div>');
+    h='<p class="hsub">'+hx('stopOk')+'</p>'+(can?'<p>'+hx('planLater')('<b><bdi>'+esc(t.text)+'</bdi></b>')+'</p><div class="hopts">'+
+      (lt?hBtn('rs_today',hx('laterToday'),hx('atTime')(lt)):'')+hBtn('rs_tomorrow',hx('tomorrow'),t.time?hx('atTime')(t.time):'')+hBtn('rs_keep',hx('keepIt'),hx('staysWhen')(t))+'</div>':
+      '<div class="sbtns"><button type="button" class="btn" data-h="rs_keep">'+hx('close')+'</button></div>');
   }
   b.innerHTML=h;
   const f=b.querySelector('textarea,input')||null;
@@ -2373,7 +2657,7 @@ function hRender(){
 }
 function hLaterToday(){const d=new Date();d.setMinutes(0,0,0);d.setHours(d.getHours()+2);if(d.getHours()>=22||d.getDate()!==new Date().getDate())return null;return pad(d.getHours())+':00'}
 function hChoose(){const c=hCands();return c[0]||null}
-function hPickTask(id){const t=S.tasks.find(x=>x.id===id);if(!t)return;H.tid=t.id;H.title=t.text;hSave();hSuggest('first')}
+function hPickTask(id){const t=S.tasks.find(x=>x.id===id);if(!t)return;H.tid=t.id;H.title=t.text;ssMark('tid',t.id);hSave();hSuggest('first')}
 function hAfterBlocker(){if(H.tid&&hTask())return hSuggest('first');hGo('pick')}
 function hStartSession(){H.started=true;H.step='session';H.back=false;track('suggested_action_accepted');hSave();hRender()}
 
@@ -2386,14 +2670,14 @@ $('hmsBody').addEventListener('click',e=>{
   if(a==='task')return hPickTask(el.dataset.id);
   if(a==='typenew')return hGo('type');
   if(a==='newadd'||a==='newtemp'){const v=($('hNew').value||'').trim();
-    if(!v){$('hErr').textContent='Type what you need to do, even in 2 words.';$('hNew').focus();return}
+    if(!v){$('hErr').textContent=hx('errType');$('hNew').focus();return}
     if(a==='newtemp'){H.tid=null;H.title=v.slice(0,120);hSave();return hSuggest('first')}
     // reuse an open task with the same name instead of adding a duplicate
     const dup=S.tasks.find(x=>!x.done&&normQ(x.text)===normQ(v));if(dup)return hPickTask(dup.id);
     const r=createTask({text:v,date:todayStr()});if(!r.ok){$('hErr').textContent=r.err;return}
-    toast('Added to today: '+r.task.text);return hPickTask(r.task.id)}
+    toast(hx('tAdded')(r.task.text));return hPickTask(r.task.id)}
   if(a==='cancelload'){hReq++;H.step=H.prevStep&&H.prevStep!=='loading'?H.prevStep:'blocker';if(H.step==='suggest'&&!H.action)H.step='blocker';hSave();return hRender()}
-  if(a==='qaok'||a==='qaskip'){H.qa=a==='qaok'?($('hQa').value||'').trim().slice(0,200):'';H.q='';if(a==='qaskip'){H.src='rules';const r=hFallback('first');H.action=r.step;H.next=r.next;H.tried.push(r.step);track('suggested_action_shown');return hGo('suggest')}return hSuggest('first')}
+  if(a==='qaok'||a==='qaskip'){H.qa=a==='qaok'?($('hQa').value||'').trim().slice(0,200):'';H.q='';if(a==='qaskip'){H.src='rules';const r=hFallback('first');H.action=r.step;H.next=r.next;H.tried.push(r.step);track('suggested_action_shown');ssMark('shown',true);return hGo('suggest')}return hSuggest('first')}
   if(a==='accept')return hStartSession();
   if(a==='easier'){track('alternative_requested');H.easier++;if(H.easier>=2&&hPrefs().detail!=='tiny'&&!(S.hp&&S.hp.asked))H.offerNext=true;
     hSuggest('smaller').then(()=>{if(H&&H.offerNext){H.offer=true;H.offerNext=false;hRender()}});return}
@@ -2401,18 +2685,18 @@ $('hmsBody').addEventListener('click',e=>{
   if(a==='clearer'){track('alternative_requested');return hSuggest('clearer')}
   if(a==='edit')return hGo('edit');
   if(a==='editno')return hGo('suggest');
-  if(a==='editok'){const v=($('hEdit').value||'').replace(/\s+/g,' ').trim();if(!v){$('hErr').textContent='Write your step, even in 2 words.';return}
+  if(a==='editok'){const v=($('hEdit').value||'').replace(/\s+/g,' ').trim();if(!v){$('hErr').textContent=hx('errStep');return}
     if(H.action!==v){H.action=v;H.src='you';H.explain='';H.tried.push(v)}return hGo('suggest')}
-  if(a==='rememberyes'){S.hp=Object.assign({},S.hp||{},{detail:'tiny',asked:true});save();H.offer=false;toast('Saved: tinier steps first. You can change it in Profile.');renderHp();return hRender()}
+  if(a==='rememberyes'){S.hp=Object.assign({},S.hp||{},{detail:'tiny',asked:true});save();H.offer=false;toast(hx('tTinySaved'));renderHp();return hRender()}
   if(a==='rememberno'){S.hp=Object.assign({},S.hp||{},{asked:true});save();H.offer=false;return hRender()}
   if(a==='mins'){if(H.tm.since)return;H.tm.mins=+el.dataset.m;H.timeUp=false;hSave();return hRender()}
   if(a==='go'){
     if(H.tm.since){hPause();track('session_paused');return hRender()}
     if(H.tm.mins&&hLeft()<=0){H.tm.acc=0}
-    hRun();if(!H.rw.start){track('session_started');hReward('start',5,'You started. That is the hardest part.')}
+    hRun();ssMark('started');if(!H.rw.start){track('session_started');hReward('start',5,hx('rwStart'))}
     return hRender()}
   if(a==='distracted'){hPause();track('session_paused');return hGo('distracted')}
-  if(a==='back'){H.back=true;H.step='session';hRun();hReward('back',3,'You came back. That counts.');hSave();return hRender()}
+  if(a==='back'){H.back=true;H.step='session';hRun();hReward('back',3,hx('rwBack'));hSave();return hRender()}
   if(a==='hard'){hPause();return hGo('adjust')}
   if(a==='toback')return hGo(H.started?'session':'suggest');
   if(a==='toadjust')return hGo('adjust');
@@ -2424,28 +2708,29 @@ $('hmsBody').addEventListener('click',e=>{
     if(k==='distracted')return hGo('distracted');
     return hSuggest('revise',v)}
   if(a==='tiny'){track('alternative_requested');return hSuggest('smaller')}
-  if(a==='pause10'){hPause();hClose();toast('Paused. Your step is waiting for you below.');return}
+  if(a==='pause10'){hPause();hClose();toast(hx('tPaused'));return}
   if(a==='switch'){hPause();H.tid=null;H.title='';H.action='';H.next=[];H.tried=[];H.explain='';return hGo('pick')}
-  if(a==='did'){hPause();if(!H.started){H.started=true}track('step_completed_by_user');H.done=(H.done||0)+1;hReward('step',10,'Step done. Nice.');return hGo('stepdone')}
+  if(a==='did'){hPause();if(!H.started){H.started=true}ssMark('started');track('step_completed_by_user');H.done=(H.done||0)+1;hReward('step',10,hx('rwStep'));return hGo('stepdone')}
   if(a==='nextstep'){H.step='session';return hSuggest('next')}
   if(a==='taskdone'){const t=hTask();hLog('completed_step');hEnd();if(t&&!t.done)completeTask(t,10);return}
-  if(a==='finish'){hLog('completed_step');return hEnd('Saved. You moved forward today.')}
+  if(a==='finish'){hLog('completed_step');return hEnd(hx('tMoved'))}
   if(a==='exit'){hPause();H.timeUp=false;return hGo('outcome')}
   if(a==='tosession')return hGo('session');
-  if(a==='o_started'){hLog('started');return hEnd('Saved: you started. That counts.')}
-  if(a==='o_done'){track('step_completed_by_user');H.done=(H.done||0)+1;hReward('step',10,'Step done. Nice.');return hGo('stepdone')}
+  if(a==='o_started'){ssMark('started');hLog('started');return hEnd(hx('tStarted'))}
+  if(a==='o_done'){ssMark('started');track('step_completed_by_user');H.done=(H.done||0)+1;hReward('step',10,hx('rwStep'));return hGo('stepdone')}
   if(a==='o_another'){track('alternative_requested');H.timeUp=false;return hGo('adjust')}
   if(a==='o_stop'||a==='stop'){hPause();if(!H.logged)hLog('stopped');return hGo('stop')}
-  if(a==='rs_keep')return hEnd(H.logged?'Okay. Nothing was changed.':'');
+  if(a==='rs_keep')return hEnd(H.logged?hx('tNothing'):'');
   if(a==='rs_today'||a==='rs_tomorrow'){const t=hTask();if(!t)return hEnd();
     const patch=a==='rs_today'?{date:todayStr(),time:hLaterToday(),dur:t.dur||null}:{date:ymd(addDays(new Date(),1))};
     const r=updateTask(t.id,patch);
-    return hEnd(r.ok?'Planned: '+r.task.text+' · '+whenTxt(r.task):"Couldn't move it: "+r.err)}
+    return hEnd(r.ok?hx('tPlanned')(r.task):hx('tCantMove')(r.err))}
 });
 $('hmsBody').addEventListener('keydown',e=>{if(e.key!=='Enter'||e.shiftKey)return;const id=e.target.id;
   const map={hNew:'newadd',hQa:'qaok',hNote:'noteok',hWhy:'whyok',hEdit:'editok'};if(!map[id])return;e.preventDefault();
   const b=$('hmsBody').querySelector('[data-h="'+map[id]+'"]');if(b)b.click()});
 document.querySelectorAll('[data-hmsclose]').forEach(x=>x.addEventListener('click',hClose));
+$('hmsLang').addEventListener('click',()=>hSetLang(HLANG()==='ar'?'en':'ar'));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&hOpenNow())hClose()});
 $('hmsPill').addEventListener('click',()=>{if(!H)return;$('hms').hidden=false;document.body.classList.add('noscroll');if(!['session','distracted','stepdone','outcome','adjust','why','tired','loading','suggest','edit'].includes(H.step))H.step='session';hRender()});
 document.addEventListener('click',e=>{const b=e.target.closest('[data-hms]');if(b){e.preventDefault();hOpen({from:b.dataset.hms})}});
@@ -2463,18 +2748,33 @@ hTick=setInterval(()=>{if(!H||!H.tm||!H.tm.since)return;
   if(H.step==='loading')H.step='session';hPill()})();
 
 // ---------- Help me start preferences (Profile): visible, editable, resettable ----------
+function renderSr(){const box=$('srBox');if(!box)return;const s=startStats();
+  box.innerHTML=s.eligible?
+    '<div class="srtop"><div class="srbig"><b>'+s.rate+'%</b><small>Start rate</small></div><p>You really started in <b>'+s.started+'</b> of <b>'+s.eligible+'</b> sessions where Help me start gave you a step.</p></div>'+
+    '<div class="srrow"><div><b>'+s.tasks+'</b><small>different tasks started</small></div><div><b>'+s.last7+'</b><small>starts in the last 7 days</small></div><div><b>'+s.opened+'</b><small>times opened</small></div></div>'+
+    '<p class="hint">“Started” means you pressed Start, said “I started” or finished a step. Just opening it does not count. Counted on this phone only, without your task names.</p>'+
+    '<button type="button" class="btn small ghost" id="srExport">Share my numbers (no task names)</button>':
+    '<p class="hint" style="margin:0">No starts counted yet. Tap <b>Help me start</b> on Today: each time it gets you going, it shows here.</p>'}
+$('srBox').addEventListener('click',e=>{if(!e.target.closest('#srExport'))return;
+  const s=startStats(),ss=Object.values((S.hl&&S.hl.ss)||{});
+  // for the user test: numbers and dates only, never task names or anything typed
+  const out={app:'ADHD Winner',kind:'help-me-start-stats',exported:new Date().toISOString(),summary:s,
+    sessions:ss.map(r=>({day:r.d,stepShown:!!r.shown,started:!!r.started,secondsToStart:r.started&&r.st?Math.round((r.st-r.at)/1000):null,result:r.res||null})),
+    counts:(S.hl&&S.hl.c)||{}};
+  deliverFile('adhd-winner-start-stats-'+todayStr()+'.json',JSON.stringify(out,null,1),'application/json').then(r=>{if(r!=='cancelled')toast('Your numbers are ready to send. No task names inside.')})});
 function renderHp(){const p=hPrefs(),box=$('hpBox');if(!box)return;
   const sg=(k,opts,val)=>'<div class="seg small" role="group">'+opts.map(o=>'<button type="button" data-hp="'+k+'" data-v="'+o[0]+'" aria-pressed="'+(String(val)===String(o[0]))+'">'+o[1]+'</button>').join('')+'</div>';
-  const L=S.hl||{},c=L.c||{},op=c.help_start_opened||0,st=c.session_started||0;
-  box.innerHTML='<div class="fl"><span>Step size</span>'+sg('detail',[['normal','Small'],['tiny','Tiny']],p.detail)+'</div>'+
+  box.innerHTML='<div class="fl"><span>Language</span><div class="seg small" role="group" aria-label="Help me start language"><button type="button" data-hp="lang" data-v="en" aria-pressed="'+(HLANG()==='en')+'">English</button><button type="button" data-hp="lang" data-v="ar" lang="ar" aria-pressed="'+(HLANG()==='ar')+'">العربية</button></div></div>'+
+    '<div class="fl"><span>Step size</span>'+sg('detail',[['normal','Small'],['tiny','Tiny']],p.detail)+'</div>'+
     '<div class="fl"><span>Session timer</span>'+sg('mins',[[2,'2 min'],[5,'5 min'],[10,'10 min'],[0,'No timer']],p.mins)+'</div>'+
     '<div class="fl"><span>Next steps</span>'+sg('one',[['true','One at a time'],['false','Show what comes after']],p.one)+'</div>'+
-    '<p class="hint">'+(op?'On this phone: you opened Help me start '+op+' time'+(op>1?'s':'')+' and started a step '+st+' time'+(st>1?'s':'')+' ('+Math.round(st/op*100)+'%).':'Your choices stay on this phone only.')+'</p>'+
+    '<p class="hint">Your choices stay on this phone only.</p>'+
     '<button type="button" class="btn small ghost" data-hp="reset">Reset to default</button>'}
 $('hpBox').addEventListener('click',e=>{const b=e.target.closest('[data-hp]');if(!b)return;const k=b.dataset.hp;
   if(k==='reset'){S.hp={};save();renderHp();toast('Help me start is back to default.');return}
+  if(k==='lang')return hSetLang(b.dataset.v);
   const v=b.dataset.v;S.hp=Object.assign({},S.hp||{});S.hp[k]=k==='mins'?+v:k==='one'?v==='true':v;save();renderHp()});
-renderHp();
+renderHp();hDir();renderSr();
 
 // ---------- welcome + affirmation ----------
 // Daily greeting: Noor says one of these every time the app opens (recorded in her energetic ElevenLabs voice).
@@ -2878,7 +3178,7 @@ function sanitize(s){
   ['xp','wins','winsToday','focusTotal','streak','splits','ontime'].forEach(k=>s[k]=Math.round(num(s[k],D[k]||0)));
   s.name=str(s.name,40).replace(/[<>]/g,'').trim();s.sound=s.sound!==false;s.voice=s.voice!==false;
   s.badges=Array.isArray(s.badges)?[...new Set(s.badges.filter(b=>typeof b==='string'))]:[];
-  ['hist','cc','xpd','hp','hl'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]={}});
+  ['hist','cc','xpd','hp','hl','crw'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]={}});
   for(const k in s.hist)if(!okDate(k)||!Number.isFinite(+s.hist[k]))delete s.hist[k];
   for(const k in s.xpd)if(!okDate(k)||!Number.isFinite(+s.xpd[k]))delete s.xpd[k];
   for(const k in s.cc){if(!okDate(k)||!s.cc[k]||typeof s.cc[k]!=='object'){delete s.cc[k];continue}for(const c in s.cc[k])s.cc[k][c]=Math.round(num(s.cc[k][c],0))}
