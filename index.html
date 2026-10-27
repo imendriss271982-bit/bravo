@@ -794,6 +794,24 @@ details.someday .list{margin-top:12px}
 
 .ovl{display:flex;flex-direction:column;gap:8px;border:1px solid var(--gold);border-radius:16px;padding:12px 14px;background:rgba(255,226,59,.06);margin-bottom:10px}
 .ovl p{margin:0}.ovl b{color:var(--gold)}
+
+/* iPhone: 16 px fields = no automatic zoom when typing; nothing may push the page sideways */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{overflow-x:clip;max-width:100%}
+input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[type=date],input[type=time]{font-size:16px!important}
+
+.add#addForm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.add#addForm input[type=text]{grid-column:1/-1;width:100%;box-sizing:border-box}
+.add#addForm .btn{width:100%;min-height:48px}
+.add#addForm .addmore{padding-inline:12px}
+
+.ttbl{min-width:520px}
+.tcell{display:flex;align-items:center;gap:10px}
+.tcell .check{flex:none}
+.ttbl tbody th{min-width:150px;max-width:190px}
+.ttbl td.tlate{color:var(--coral);font-weight:800}
+.ttbl .check[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);box-shadow:0 0 12px rgba(124,255,79,.55)}
+.ttbl .check[aria-pressed="true"] svg{opacity:1;color:#12082B}
 </style>
 </head>
 <body>
@@ -1160,6 +1178,8 @@ const dayDiff=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
 const uid=()=>Math.random().toString(36).slice(2,9);
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+// phone or tablet (finger): don't put the cursor in a field by ourselves, the keyboard would jump up and cover the screen
+const TOUCH=(()=>{try{return matchMedia('(pointer:coarse)').matches}catch(e){return false}})();
 // ---------- pictures: every task, challenge and appointment gets a picture ----------
 const PICS=[
   [/water|drink|hydrat|eau/i,'💧'],[/exercis|sport|gym|workout|run|walk|jog|fitness|yoga/i,'🏃‍♀️'],[/fresh air|outside|park|garden|nature/i,'🌳'],
@@ -1554,7 +1574,7 @@ function renderDay(){
 }
 // ---------- table view: every task and appointment, sortable, filtered by Work / Personal ----------
 let listView='list';try{listView=localStorage.getItem('adhdwListView')==='table'?'table':'list'}catch(e){}
-let tSort={k:'status',dir:1};try{const o=JSON.parse(localStorage.getItem('adhdwTblSort'));if(o&&['date','time','type','status'].includes(o.k))tSort={k:o.k,dir:o.dir===-1?-1:1}}catch(e){}
+let tSort={k:'date',dir:1};try{const o=JSON.parse(localStorage.getItem('adhdwTblSort'));if(o&&['date','time','type'].includes(o.k))tSort={k:o.k,dir:o.dir===-1?-1:1}}catch(e){}
 function setListView(v){listView=v==='table'?'table':'list';try{localStorage.setItem('adhdwListView',listView)}catch(e){}if(listView==='table'&&viewDay!==todayStr())viewDay=todayStr();render()}
 const tStatus=t=>t.done?'done':!t.date?'someday':t.date<todayStr()?'late':'todo';
 const T_ST={todo:['To do',1],late:['Late',0],someday:['Someday',2],done:['Done',3]};
@@ -1568,22 +1588,21 @@ function tCmp(a,b){
   else if(k==='time')r=tk(a).localeCompare(tk(b))||dk(a).localeCompare(dk(b));
   else if(k==='type')r=(a.cat||'z').localeCompare(b.cat||'z')||dk(a).localeCompare(dk(b));
   else r=T_ST[tStatus(a)][1]-T_ST[tStatus(b)][1]||dk(a).localeCompare(dk(b));
-  return r*tSort.dir||byPrio(a,b);
+  return (a.done-b.done)||r*tSort.dir||byPrio(a,b);
 }
 function renderTable(){
   const items=tblItems().sort(tCmp),th=(k,l)=>k?'<th scope="col" aria-sort="'+(tSort.k===k?(tSort.dir>0?'ascending':'descending'):'none')+'"><button type="button" data-ts="'+k+'">'+l+(tSort.k===k?(tSort.dir>0?' ▲':' ▼'):'')+'</button></th>':'<th scope="col">'+l+'</th>';
   if(!items.length){$('tblBox').innerHTML='<p class="empty tempty">'+(catF==='all'?'No tasks yet. Add one above: it shows here, in your list and in your calendar.':'No '+(catF==='work'?'work':'personal')+' tasks. Add one above, or tap “All”.')+'</p>';return}
-  $('tblBox').innerHTML='<div class="tscroll" tabindex="0" role="region" aria-label="My tasks table"><table class="ttbl"><thead><tr>'+th(null,'Task')+th('type','Type')+th('date','Date')+th('time','Start')+th(null,'Duration')+th('status','Status')+th(null,'<span class="sr">Actions</span>')+'</tr></thead><tbody>'+
-    items.map(t=>{const st=tStatus(t);
-      return '<tr class="st-'+st+'" data-tid="'+t.id+'"><th scope="row"><button type="button" class="tname" data-act="edit" data-id="'+t.id+'">'+(isEv(t)?'<span aria-hidden="true">📅 </span>':'')+(t.prio==='high'?'<span aria-hidden="true">🔥 </span>':'')+esc(t.text)+'</button></th>'+
+  const late=t=>!t.done&&t.date&&t.date<todayStr();
+  $('tblBox').innerHTML='<div class="tscroll" tabindex="0" role="region" aria-label="My tasks table"><table class="ttbl"><thead><tr>'+th(null,'Task')+th('type','Type')+th('date','Date')+th('time','Start')+th(null,'Duration')+'</tr></thead><tbody>'+
+    items.map(t=>'<tr class="'+(t.done?'st-done':late(t)?'st-late':'')+'" data-tid="'+t.id+'"><th scope="row"><div class="tcell">'+
+        '<button type="button" class="check" data-act="toggle" data-id="'+t.id+'" aria-pressed="'+t.done+'" aria-label="'+(t.done?'Mark '+esc(t.text)+' as not done':'Mark '+esc(t.text)+' as done')+'">'+CHECK+'</button>'+
+        '<button type="button" class="tname" data-act="edit" data-id="'+t.id+'">'+(isEv(t)?'<span aria-hidden="true">📅 </span>':'')+(t.prio==='high'?'<span aria-hidden="true">🔥 </span>':'')+esc(t.text)+'</button></div></th>'+
         '<td><button type="button" class="catb '+(t.cat||'')+'" data-act="tcat" data-id="'+t.id+'" aria-label="Type: '+(t.cat||'none')+'. Tap to change">'+(t.cat==='work'?'Work':t.cat==='personal'?'Personal':'+ Tag')+'</button></td>'+
-        '<td>'+(t.date?tShortDate(t.date):'<span class="muted">—</span>')+'</td>'+
+        '<td class="'+(late(t)?'tlate':'')+'">'+(t.date?tShortDate(t.date):'<span class="muted">Someday</span>')+'</td>'+
         '<td>'+(t.time||'<span class="muted">—</span>')+'</td>'+
-        '<td>'+(t.dur?(t.dur>=60?Math.floor(t.dur/60)+' h'+(t.dur%60?' '+t.dur%60:''):t.dur+' min'):'<span class="muted">—</span>')+'</td>'+
-        '<td><span class="tst '+st+'">'+T_ST[st][0]+'</span></td>'+
-        '<td><div class="tact"><button type="button" class="check" data-act="toggle" data-id="'+t.id+'" aria-pressed="'+t.done+'" aria-label="'+(t.done?'Mark '+esc(t.text)+' as not done':'Mark '+esc(t.text)+' as done')+'">'+CHECK+'</button>'+
-        (t.done?'':'<button type="button" class="btn small ghost" data-act="later" data-id="'+t.id+'" aria-label="Postpone '+esc(t.text)+'">Later</button>')+'</div></td></tr>'}).join('')+
-    '</tbody></table></div><p class="hint">Tap a task to change its time, type or to delete it. Done tasks stay here for 7 days.</p>';
+        '<td>'+(t.dur?(t.dur>=60?Math.floor(t.dur/60)+' h'+(t.dur%60?' '+t.dur%60:''):t.dur+' min'):'<span class="muted">—</span>')+'</td></tr>').join('')+
+    '</tbody></table></div><p class="hint">Tick the box when it\'s done. Tap a task to change its time, type, or to delete it. Done tasks stay here for 7 days.</p>';
 }
 $('vTog').addEventListener('click',e=>{const b=e.target.closest('[data-lv]');if(b)setListView(b.dataset.lv)});
 $('tblBox').addEventListener('click',e=>{const b=e.target.closest('[data-ts]');if(!b)return;const k=b.dataset.ts;
@@ -1809,10 +1828,10 @@ $('addForm').addEventListener('submit',e=>{e.preventDefault();const i=$('newTask
   if(!v){i.focus();toast('Type what you want to do first.');return}
   if(dayMode(viewDay)==='past')return;
   if(v.length>120){toast('Keep the name under 120 characters.');return}
-  qa={step:'cat',text:v,date:viewDay};i.value='';qaRender();
+  qa={step:'cat',text:v,date:viewDay};i.value='';try{i.blur()}catch(e){}qaRender();
   const first=$('qaBox').querySelector('[data-qa="'+(catF==='work'?'work':'personal')+'"]');try{first.focus()}catch(e){}});
 $('qaBox').addEventListener('click',e=>{const b=e.target.closest('[data-qa]');if(!b||!qa)return;const a=b.dataset.qa;
-  if(a==='cancel'){const txt=qa.text;qaClose();$('newTask').value=txt;try{$('newTask').focus()}catch(e){}return}
+  if(a==='cancel'){const txt=qa.text;qaClose();$('newTask').value=txt;if(!TOUCH)try{$('newTask').focus()}catch(e){}return}
   if(a==='close')return qaClose();
   if(a==='time'){const id=qa.id;qaClose();return openEditor({id,planning:true})}
   if(a==='personal'||a==='work'){
@@ -1918,7 +1937,7 @@ function openEditor(o){
   if(o.planning&&!v.date)$('teDate').value=todayStr();
   edErr('');edWarn(null);edSync();
   $('tEd').hidden=false;document.body.classList.add('noscroll');
-  setTimeout(()=>{try{(o.planning?$('teStart'):$('teText')).focus()}catch(e){}},60);
+  if(!TOUCH)setTimeout(()=>{try{(o.planning?$('teStart'):$('teText')).focus()}catch(e){}},60);
 }
 function closeEditor(){$('tEd').hidden=true;document.body.classList.remove('noscroll');ed=null}
 function edErr(m,f){$('teErr').textContent=m||'';
@@ -2654,7 +2673,7 @@ function hRender(){
   }
   b.innerHTML=h;
   const f=b.querySelector('textarea,input')||null;
-  try{if(f)f.focus();else $('hmsTitle').focus()}catch(e){}
+  try{if(f&&!TOUCH)f.focus();else $('hmsTitle').focus()}catch(e){}
 }
 function hLaterToday(){const d=new Date();d.setMinutes(0,0,0);d.setHours(d.getHours()+2);if(d.getHours()>=22||d.getDate()!==new Date().getDate())return null;return pad(d.getHours())+':00'}
 function hChoose(){const c=hCands();return c[0]||null}
