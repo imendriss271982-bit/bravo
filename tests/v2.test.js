@@ -69,7 +69,15 @@ async function showDay(page, k) {
   await page.click(`.mday[data-k="${k}"]`);
 }
 const tableRows = page => page.$$eval('#tblBox tbody tr', trs => trs.map(tr => [...tr.children].map(c => c.textContent.trim())));
-const fits = page => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1);
+const fits = page => page.evaluate(() => {
+  if (document.documentElement.scrollWidth > innerWidth + 1) return false;
+  for (const e of document.querySelectorAll('body *')) {
+    if (e.closest('.tscroll,.nfx,.ndock,[hidden]') || !e.getClientRects().length) continue;
+    const st = getComputedStyle(e); if (st.position === 'fixed' || st.visibility === 'hidden') continue;
+    const r = e.getBoundingClientRect(); if (r.width && r.right > innerWidth + 1) return false;
+  }
+  return true;
+});
 const h = (page, act, extra = '') => page.click(`#hmsBody [data-h="${act}"]${extra}`);
 
 // ---------- 1. Personal / Work right after typing ----------
@@ -107,7 +115,7 @@ test('quick add: Personal or Work is asked before saving; Cancel saves nothing; 
 });
 
 // ---------- 2. Table view ----------
-test('table view: toggle is remembered, shows every task with type/date/start/duration/status, same data as the list', async () => {
+test('table view: toggle is remembered, tick box on the left, type/date/start/duration, same data as the list', async () => {
   const p = await open({ tasks: [
     task('a', 'Send an email', { cat: 'work', date: TOMORROW, time: '09:00', dur: 15 }),
     task('b', 'Buy groceries', { cat: 'personal', date: TOMORROW, time: '17:00', dur: 30 }),
@@ -120,15 +128,20 @@ test('table view: toggle is remembered, shows every task with type/date/start/du
   assert.ok(await p.isVisible('#tblBox')); assert.equal(await p.isVisible('#tasks'), false);
   let rows = await tableRows(p);
   assert.equal(rows.length, 5, 'tasks from every day, plus someday');
+  assert.equal(await p.$$eval('#tblBox thead th', ths => ths.map(t => t.textContent.trim().replace(/[▲▼ ]+$/, '')).join('|')), 'Task|Type|Date|Start|Duration', 'no Status column');
   const email = rows.find(r => r[0].includes('Send an email'));
-  assert.equal(email[1], 'Work'); assert.equal(email[3], '09:00'); assert.equal(email[4], '15 min'); assert.equal(email[5], 'To do');
+  assert.deepEqual(email.slice(1), ['Work', email[2], '09:00', '15 min']);
   assert.equal(rows.find(r => r[0].includes('Prepare a report'))[4], '1 h');
-  assert.equal(rows[0][5], 'Late', 'sorted by status: late first');
-  assert.equal(rows.find(r => r[0].includes('Learn Spanish'))[5], 'Someday');
+  assert.match(rows[0][0], /Old bill/, 'sorted by date: oldest first');
+  assert.match(rows[rows.length - 1][0], /Learn Spanish/); assert.equal(rows[rows.length - 1][2], 'Someday');
+  assert.equal(await p.$$eval('#tblBox [data-act="later"]', b => b.length), 0, 'no "Later" button');
+  // the tick box sits on the left of the task name
+  const pos = await p.$eval('#tblBox tr[data-tid="a"]', tr => [tr.querySelector('.check').getBoundingClientRect().right, tr.querySelector('.tname').getBoundingClientRect().left]);
+  assert.ok(pos[0] <= pos[1], 'checkbox left of the name');
 
-  // sort by date, then filter Work
-  await p.click('#tblBox [data-ts="date"]');
-  rows = await tableRows(p); assert.match(rows[0][0], /Old bill/); assert.match(rows[rows.length - 1][0], /Learn Spanish/);
+  // sort by type, then filter Work
+  await p.click('#tblBox [data-ts="type"]');
+  rows = await tableRows(p); assert.equal(rows[0][1], 'Personal');
   await p.click('.cats [data-cat="work"]');
   rows = await tableRows(p); assert.deepEqual(rows.map(r => r[1]), ['Work', 'Work']);
   await p.click('.cats [data-cat="all"]');
@@ -138,18 +151,14 @@ test('table view: toggle is remembered, shows every task with type/date/start/du
   assert.ok(await p.isVisible('#tblBox'), 'table view remembered');
   assert.equal(await p.getAttribute('#vTog [data-lv="table"]', 'aria-pressed'), 'true');
 
-  // mark done from the table → done everywhere; un-tick gives the XP back
+  // tick from the table → done everywhere, moves to the bottom, crossed out
   await p.click('#tblBox tr[data-tid="a"] [data-act="toggle"]');
   await p.click('#overlay', { position: { x: 5, y: 5 } }).catch(() => {});
-  let s = await state(p); assert.equal(s.tasks.find(t => t.id === 'a').done, true); const xp = s.xp; assert.ok(xp >= 10);
-  assert.match(await p.textContent('#tblBox tr[data-tid="a"]'), /Done/);
-
-  // postpone: next day, same time, no XP change
-  await p.click('#tblBox tr[data-tid="b"] [data-act="later"]');
-  s = await state(p); const b = s.tasks.find(t => t.id === 'b');
-  assert.deepEqual([b.date, b.time, b.dur], [IN2, '17:00', 30]); assert.equal(s.xp, xp, 'postponing never costs XP');
-  await p.click('#tblBox tr[data-tid="d"] [data-act="later"]');
-  assert.equal((await state(p)).tasks.find(t => t.id === 'd').date, TOMORROW, 'a late task moves to tomorrow, not to the day after its old date');
+  const s = await state(p); assert.equal(s.tasks.find(t => t.id === 'a').done, true); assert.ok(s.xp >= 10);
+  assert.match(await p.getAttribute('#tblBox tr[data-tid="a"]', 'class'), /st-done/);
+  rows = await tableRows(p); assert.match(rows[rows.length - 1][0], /Send an email/, 'done tasks go to the bottom');
+  await p.click('#tblBox tr[data-tid="a"] [data-act="toggle"]');
+  assert.equal((await state(p)).tasks.find(t => t.id === 'a').done, false, 'untick from the table');
 
   // change type from the table
   await p.click('#tblBox tr[data-tid="c"] [data-act="tcat"]');
@@ -355,4 +364,35 @@ test('Today (home page) shows no Noor and no Noor bubble; she is back on other p
   await goToday(p);
   assert.equal(await p.isVisible('#fab'), false); assert.equal(await p.isVisible('#nBubble'), false);
   assert.deepEqual(p.errors, []);
+});
+
+// ---------- 9. Phone: no zoom, no keyboard jumping up, Add then Plan ----------
+test('phone: fields are 16 px (no iPhone zoom), the keyboard never opens by itself, Plan sits right after Add', async () => {
+  const ctx = await browser.newContext({ viewport: { width: 375, height: 700 }, isMobile: true, hasTouch: true });
+  const p = await ctx.newPage(); p.errors = []; p.on('pageerror', e => p.errors.push(e.message));
+  await p.addInitScript(([k, s]) => { if (!localStorage.getItem(k)) localStorage.setItem(k, JSON.stringify(s)); try { speechSynthesis.speak = () => {}; } catch (e) {}
+    HTMLMediaElement.prototype.play = function () { return Promise.reject(new Error('x')); }; }, [KEY, { v: 2, name: 'Tester', onboarded: true, date: TODAY, tasks: [task('t1', 'Pay rent', { cat: 'personal' })], voice: false, sound: false }]);
+  await p.route('**/*', r => { const u = r.request().url(); return u.startsWith(server.base) && !u.endsWith('sw.js') ? r.continue() : r.abort(); });
+  await p.goto(URL); await boot(p);
+  assert.ok(await p.evaluate(() => matchMedia('(pointer:coarse)').matches), 'test runs as a touch phone');
+  for (const sel of ['#newTask', '#newChal']) assert.equal(await p.$eval(sel, e => getComputedStyle(e).fontSize), '16px', sel);
+  // Add then Plan, both on screen, under the field
+  const r = await p.evaluate(() => ['#newTask', '#addForm button[type=submit]', '#addMore'].map(s => document.querySelector(s).getBoundingClientRect()).map(b => ({ l: b.left, r: b.right, t: b.top })));
+  assert.ok(r[1].t > r[0].t && r[2].t > r[0].t, 'buttons under the field');
+  assert.ok(r[1].r <= r[2].l, 'Plan is right after Add'); assert.ok(r[2].r <= 375, 'Plan fully on screen');
+  assert.ok(await fits(p));
+  // opening the editor or Help me start does not put the cursor in a field
+  await p.tap('#addMore'); await p.waitForTimeout(200);
+  assert.equal(await p.evaluate(() => document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName)), false, 'editor: no keyboard');
+  assert.equal(await p.$eval('#teText', e => getComputedStyle(e).fontSize), '16px');
+  await p.tap('#tEd .shead .x');
+  await p.tap('#hmsToday'); await p.tap('#hmsBody [data-b="other"]'); await p.waitForTimeout(150);
+  assert.equal(await p.evaluate(() => document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName)), false, 'Help me start: no keyboard');
+  await p.tap('#hms .shead .x');
+  // after Add, the keyboard closes so the Personal / Work cards can be seen
+  await p.tap('#newTask'); await p.fill('#newTask', 'Buy milk'); await p.tap('#addForm button[type=submit]');
+  assert.notEqual(await p.evaluate(() => document.activeElement.id), 'newTask');
+  assert.ok(await p.isVisible('#qaBox [data-qa="personal"]'));
+  assert.deepEqual(p.errors, []);
+  await ctx.close();
 });
