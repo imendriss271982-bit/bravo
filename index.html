@@ -1063,7 +1063,7 @@ details.someday .list{margin-top:12px}
   </div>
 </div>
 
-<div class="ndock" id="ndock"><div class="nbubble" id="nBubble" hidden role="status" aria-live="polite"><button class="nx" id="nClose" type="button" aria-label="Close">×</button><p id="nText"></p><div class="nchips" id="nChips"></div></div><button class="fab nour" id="fab" type="button" aria-label="Talk to coach Noor"><span class="nface"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Noor</span></button></div>
+<div class="ndock" id="ndock" hidden><div class="nbubble" id="nBubble" hidden role="status" aria-live="polite"><button class="nx" id="nClose" type="button" aria-label="Close">×</button><p id="nText"></p><div class="nchips" id="nChips"></div></div><button class="fab nour" id="fab" type="button" aria-label="Talk to coach Noor"><span class="nface"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span></span><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span><span class="nlabel">Noor</span></button></div>
 <nav aria-label="Navigation">
   <div class="in">
     <button data-view="v-today" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 10 2 2 4-4M8 16h8"/></svg>Today</button>
@@ -2007,6 +2007,7 @@ document.querySelectorAll('nav button,[data-view]:not(nav button)').forEach(b=>b
   if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
   $('fab').hidden=b.dataset.view==='v-coach';
+  $('ndock').hidden=b.dataset.view==='v-today'; // no Noor and no Noor bubble on the home page (Today)
   const pv=$(b.dataset.view);pv.classList.remove('pturn');void pv.offsetWidth;pv.classList.add('pturn');
   nourForView(b.dataset.view);
   nourSay(b.dataset.view); // speak right inside the tap: iPhone blocks delayed speech
@@ -2057,7 +2058,7 @@ let nHideT=0;
 function nourHush(){clearTimeout(nHideT);$('nBubble').hidden=true;try{speechSynthesis.cancel()}catch(e){};talk(false)}
 function nourSay(v){
   clearTimeout(nHideT);
-  if(v==='v-coach'){$('nBubble').hidden=true;return}
+  if(v==='v-coach'||v==='v-today'){$('nBubble').hidden=true;return}
   const L=nourLine(v);if(!L)return;
   $('nText').innerHTML=L.html;
   $('nChips').innerHTML=L.chips.map(c=>'<button type="button" data-na="'+c[1]+'"'+(c[2]?' class="'+c[2]+'"':'')+'>'+c[0]+'</button>').join('');

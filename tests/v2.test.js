@@ -343,3 +343,16 @@ test('delete from a list asks for a second tap; nothing is deleted by one tap', 
   assert.match(await p.textContent('#toast'), /Deleted: Keep me/);
   assert.deepEqual(p.errors, []);
 });
+
+// ---------- 8. Home page without Noor ----------
+test('Today (home page) shows no Noor and no Noor bubble; she is back on other pages', async () => {
+  const p = await open({ tasks: [task('t1', 'Pay rent', { cat: 'personal' })] });
+  await p.waitForTimeout(600);
+  assert.equal(await p.isVisible('#fab'), false, 'no Noor on Today after opening');
+  assert.equal(await p.isVisible('#nBubble'), false, 'no Noor message on Today');
+  await goView(p, 'v-agenda');
+  assert.ok(await p.isVisible('#fab'), 'Noor is on the calendar');
+  await goToday(p);
+  assert.equal(await p.isVisible('#fab'), false); assert.equal(await p.isVisible('#nBubble'), false);
+  assert.deepEqual(p.errors, []);
+});
