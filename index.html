@@ -811,6 +811,121 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .ttbl td.tlate{color:var(--coral);font-weight:800}
 .ttbl .check[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);box-shadow:0 0 12px rgba(124,255,79,.55)}
 .ttbl .check[aria-pressed="true"] svg{opacity:1;color:#12082B}
+/* ===== ADHD Winner Business: calm professional workspace (cyan = business, coral = P1, gold = P2) ===== */
+.mitem .mbz{width:24px;text-align:center;font-size:20px;flex:none}
+.bzhead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.bzhead h2{font-size:24px;margin-top:6px;letter-spacing:-.3px}
+.bztabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:2px 16px 4px;scroll-snap-type:x proximity}
+.bztabs::-webkit-scrollbar{display:none}
+.bztabs button{flex:0 0 auto;min-height:44px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:9px 15px;font-weight:800;font-size:14px;scroll-snap-align:start;display:flex;align-items:center;gap:6px}
+.bztabs button[aria-selected="true"]{background:var(--cyan);border-color:var(--cyan);color:#12082B}
+.bzcnt{background:var(--coral);color:#fff;border-radius:99px;font-size:11px;min-width:20px;height:20px;display:inline-grid;place-items:center;padding:0 6px}
+.bzbody{display:flex;flex-direction:column;gap:22px}
+.bzcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.bzcard>h3,.bzsec>h3{font-size:17px}
+.bzsec{display:flex;flex-direction:column;gap:12px}
+.bzsec .sechead h3{font-size:17px}
+.bzmain{border:2px solid var(--cyan);box-shadow:var(--glow-cyan);background:linear-gradient(160deg,#1D1042,#16234A)}
+.bzkick{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
+.bzmain h3{font-size:21px;line-height:1.25}
+.bzrow{display:flex;gap:10px;flex-wrap:wrap}
+.bzrow>.btn{flex:1 1 140px;min-height:48px}
+.bzq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bzstat{background:var(--surface-2);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:2px}
+.bzstat b{font-family:var(--f-display);font-size:24px;font-variant-numeric:tabular-nums}
+.bzstat small{color:var(--muted);font-weight:700;font-size:12px}
+.bzstat.warn b{color:var(--coral)}
+.bzlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.bzli{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.bzli .grow{flex:1;min-width:0}
+.bzli .grow b{display:block;overflow-wrap:anywhere}
+.bzli small{color:var(--muted);font-size:12.5px;font-weight:600}
+.bzli.dim{opacity:.6}
+.bzli.done b{text-decoration:line-through;opacity:.7}
+.pchip{font-size:11px;font-weight:900;padding:3px 8px;border-radius:7px;white-space:nowrap;background:var(--surface-2);color:var(--muted)}
+.pchip.p1{background:var(--coral);color:#fff}.pchip.p2{background:var(--gold);color:#12082B}.pchip.p3{background:var(--surface-2);color:var(--ink)}
+.pchip.urg{background:transparent;border:1.5px solid var(--coral);color:var(--coral)}
+.pchip.stc{background:transparent;border:1.5px solid var(--muted);color:var(--muted)}
+.pchip.dl{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.pchip.late{border-color:var(--coral);color:var(--coral)}
+.tchip.bzc{color:var(--cyan)}.tchip.bzc.p1{color:var(--coral)}
+.chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.bzt{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:16px;overflow:hidden}
+.bzt.p1{border-left-color:var(--coral)}.bzt.p2{border-left-color:var(--gold)}
+.bzt.isdone{opacity:.65}
+.bzt>summary{list-style:none;display:flex;align-items:flex-start;gap:12px;padding:14px;cursor:pointer}
+.bzt>summary::-webkit-details-marker{display:none}
+.bzt>summary .grow{flex:1;min-width:0}
+.bzt>summary b{font-size:16px;overflow-wrap:anywhere}
+.bzt.isdone>summary b{text-decoration:line-through}
+.bzt .chev{color:var(--muted);transition:transform .2s;margin-top:4px}
+.bzt[open] .chev{transform:rotate(180deg)}
+.bzprog{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:12.5px;font-weight:800;color:var(--muted)}
+.bzprog .pbar{flex:1;margin:0}
+.bztb{padding:0 14px 16px;display:flex;flex-direction:column;gap:12px}
+.bztb .desc{color:var(--muted);font-size:14px;margin:0;white-space:pre-wrap}
+.subs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.subs li{display:flex;align-items:center;gap:10px;padding:6px 0}
+.subs li span{flex:1;min-width:0;overflow-wrap:anywhere}
+.subs li.done span{text-decoration:line-through;color:var(--muted)}
+.subs .check{width:30px;height:30px}
+.subs li.done .check{background:var(--mint);border-color:var(--mint)}
+.subs .mv{border:1px solid var(--line);background:var(--surface-2);border-radius:9px;width:34px;height:34px;font-size:14px;padding:0}
+.bzt .check[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);color:#12082B}
+.bzacts{display:flex;flex-wrap:wrap;gap:8px}
+.bzacts .btn{min-height:42px}
+.btn.danger.armed,.btn.armed{background:var(--coral);color:#fff}
+.reason{margin:0;padding-left:18px;color:var(--muted);font-size:13.5px;display:flex;flex-direction:column;gap:3px}
+.facts{border-left:3px solid var(--cyan);padding-left:12px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.facts.assume{border-left-color:var(--gold)}
+.facts b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts p{margin:0}
+.srcnote{font-size:12px;color:var(--muted);font-weight:700}
+.bzask{border:1px solid var(--gold);background:rgba(255,226,59,.06);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.bzask p{margin:0;font-weight:700}
+.bzday{display:flex;flex-direction:column;gap:8px}
+.bzday h4{font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.bzday h4 small{color:var(--muted);font-weight:700;font-family:var(--f-body);font-size:12.5px}
+.bzev{display:flex;gap:12px;align-items:center;border-radius:12px;padding:10px 12px;background:var(--surface);border:1px solid var(--line)}
+.bzev.other{background:transparent;border-style:dashed;opacity:.75}
+.bzev.done .grow b{text-decoration:line-through;opacity:.7}
+.bzev .tm{font-weight:800;font-variant-numeric:tabular-nums;min-width:52px;font-size:13.5px}
+.bzev .tm small{display:block;color:var(--muted);font-weight:700}
+.bzev .grow{flex:1;min-width:0}
+.bzev .grow b{display:block;overflow-wrap:anywhere}
+.bzev small{color:var(--muted);font-size:12px;font-weight:600}
+.bzopts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.bzopts .btn{min-height:48px;white-space:normal;font-size:14px}
+.bzopts .btn[aria-pressed="true"]{background:var(--cyan);color:#12082B}
+.bzsbody{display:flex;flex-direction:column;gap:16px}
+.bzsbody textarea{width:100%;box-sizing:border-box;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 12px;font:inherit;font-weight:600;resize:vertical}
+.bzsbody input[type=number]{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 12px;font:inherit;font-weight:600;width:110px}
+.bzsbody details>summary{cursor:pointer;font-weight:800;color:var(--cyan);padding:6px 0}
+.bzsbody details[open]>summary{margin-bottom:12px}
+.bzsbody details .fl+.fl{margin-top:14px}
+.subed{display:flex;flex-direction:column;gap:8px}
+.subed .srow{display:flex;gap:6px;align-items:center}
+.subed .srow input{flex:1;min-width:0}
+.subed .srow button{flex:none;width:40px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);padding:0}
+.prbox{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;background:var(--surface)}
+.prbox .ph{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800}
+.deplist{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow:auto}
+.deplist label{display:flex;gap:10px;align-items:center;font-weight:600;font-size:14px}
+.deplist input{width:20px;height:20px}
+.nhist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13.5px}
+.nhist li{background:var(--surface-2);border-radius:10px;padding:8px 10px}
+.nhist small{display:block;color:var(--muted);font-weight:700;font-size:11.5px}
+.wkbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.wkbar h3{font-size:16px;text-align:center}
+.rvlist{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.rvblock{display:flex;flex-direction:column;gap:4px}
+.rvblock b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan)}
+.rvblock p{margin:0}
+.bzpitch ul{margin:0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.daysel{display:flex;gap:6px;flex-wrap:wrap}
+.daysel button{min-width:44px;min-height:44px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:12px;font-weight:800}
+.daysel button[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#12082B}
+@media (min-width:640px){.bzq{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1031,11 +1146,33 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
     </div>
 
     <div class="tier sec" data-tier="business">
-    <div class="sechead"><h3>Projects</h3><span class="pbadge biz">Business</span></div>
-    <div class="locked" data-need="business"><div class="lockbody pcard">
-      <form class="prow" id="projForm" autocomplete="off"><input type="text" id="projName" placeholder="New project (e.g. Open an online shop)" aria-label="Project name"><button class="btn" type="submit">Create</button></form>
-      <div class="list" id="projs"></div>
-    </div></div>
+    <p class="note" style="margin:0">Business has its own workspace now.</p>
+    <button class="btn" type="button" data-view="v-biz">💼 Open ADHD Winner Business</button>
+    </div>
+  </section>
+
+  <!-- VIEW: ADHD Winner Business (dedicated work workspace) -->
+  <section id="v-biz" class="sec" hidden>
+    <div class="bzhead">
+      <div><span class="pbadge biz">Business</span><h2>ADHD Winner Business</h2></div>
+      <button class="btn small ghost" type="button" id="bzSet" aria-label="Work hours and reminders">⚙ Hours</button>
+    </div>
+    <div class="bztabs" id="bzTabs" role="tablist" aria-label="Business sections">
+      <button type="button" role="tab" data-bz="dash">Dashboard</button>
+      <button type="button" role="tab" data-bz="tasks">Tasks</button>
+      <button type="button" role="tab" data-bz="prio">Priorities</button>
+      <button type="button" role="tab" data-bz="cal">Calendar</button>
+      <button type="button" role="tab" data-bz="coach">Coach</button>
+      <button type="button" role="tab" data-bz="pend">Pending<span class="bzcnt" id="bzPendCnt" hidden></span></button>
+      <button type="button" role="tab" data-bz="review">Review</button>
+    </div>
+    <div id="bzBody" class="bzbody" role="tabpanel" aria-live="polite"></div>
+    <div class="sec" id="bzProjWrap" hidden>
+      <div class="sechead"><h3>Goals &amp; projects</h3><span class="hint">Link tasks to a project</span></div>
+      <div class="locked" data-need="business"><div class="lockbody pcard">
+        <form class="prow" id="projForm" autocomplete="off"><input type="text" id="projName" placeholder="New project (e.g. Open an online shop)" aria-label="Project name"><button class="btn" type="submit">Create</button></form>
+        <div class="list" id="projs"></div>
+      </div></div>
     </div>
   </section>
 
@@ -1071,10 +1208,11 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
     <button class="mitem" type="button" data-view="v-profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button>
     <button class="mitem" type="button" data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
     <button class="mitem" type="button" data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
+    <button class="mitem mbiz" type="button" data-view="v-biz"><span class="mbz" aria-hidden="true">💼</span>Business</button>
     <button class="mitem" type="button" id="mPro" aria-expanded="false" aria-controls="mProSub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Pro<span class="chev" aria-hidden="true">▾</span></button>
     <div class="msub" id="mProSub" hidden>
       <button class="mitem" type="button" data-view="v-pro" data-tier="premium"><span class="pbadge">Premium</span>Notes, expenses, shopping</button>
-      <button class="mitem" type="button" data-view="v-pro" data-tier="business"><span class="pbadge biz">Business</span>Projects &amp; milestones</button>
+      <button class="mitem" type="button" data-view="v-biz"><span class="pbadge biz">Business</span>Work tasks, coach &amp; review</button>
     </div>
   </div>
 </div>
@@ -1128,6 +1266,13 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
   <section class="spanel" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
     <div class="shead"><h3 id="bkTitle" tabindex="-1">Restore a backup</h3><button type="button" class="x" data-bkclose aria-label="Close">×</button></div>
     <div id="bkBody" class="bkbody" aria-live="polite"></div>
+  </section>
+</div>
+<div class="sheet" id="bzSheet" hidden>
+  <div class="sback" data-bzclose></div>
+  <section class="spanel" role="dialog" aria-modal="true" aria-labelledby="bzSTitle">
+    <div class="shead"><h3 id="bzSTitle" tabindex="-1"></h3><button type="button" class="x" data-bzclose aria-label="Close">×</button></div>
+    <div id="bzSBody" class="bzsbody"></div>
   </section>
 </div>
 <button type="button" class="hmspill" id="hmsPill" hidden aria-label="Back to your step"><span aria-hidden="true">▶</span><span id="hmsPillT"></span></button>
@@ -1244,7 +1389,30 @@ function normTask(t){
   if(!['work','personal'].includes(t.cat))delete t.cat;
   if(!t.time){t.alarm=false;t.fired=false}
   t.alarm=!!t.alarm;t.fired=!!t.fired;
+  if(t.time&&[0,5,10,15,30,60].includes(+t.remBefore))t.remBefore=+t.remBefore;else delete t.remBefore;
+  if(t.biz!==undefined)normBiz(t);
   return t;
+}
+// ---------- ADHD Winner Business: extra fields of a business task (t.biz). Same task object = same calendar entry and alarm. ----------
+const BZ_ST=['todo','doing','blocked','resched','paused','delegated'];
+const BZ_LV=['high','med','low'];
+function normBiz(t){
+  const b=t.biz&&typeof t.biz==='object'&&!Array.isArray(t.biz)?t.biz:null;if(!b){delete t.biz;return}
+  const s=(v,n)=>String(v==null?'':v).slice(0,n);
+  b.proj=b.proj?s(b.proj,40):null;b.urgent=!!b.urgent;
+  b.imp=BZ_LV.includes(b.imp)?b.imp:null;b.conseq=BZ_LV.includes(b.conseq)?b.conseq:null;
+  b.deadline=okDate(b.deadline)?b.deadline:null;
+  b.est=+b.est>=5&&+b.est<=1440?Math.round(+b.est):null;
+  b.status=BZ_ST.includes(b.status)?b.status:'todo';
+  b.over=[1,2,3].includes(+b.over)?+b.over:null;
+  b.deps=Array.isArray(b.deps)?[...new Set(b.deps.filter(x=>typeof x==='string'&&x!==t.id))].slice(0,20):[];
+  b.notes=(Array.isArray(b.notes)?b.notes:[]).filter(n=>n&&typeof n==='object').slice(-100).map(n=>({id:s(n.id||Math.random().toString(36).slice(2,9),40),at:+n.at||Date.now(),text:s(n.text,500),reason:n.reason?s(n.reason,40):undefined,date:okDate(n.date)?n.date:undefined}));
+  b.hist=(Array.isArray(b.hist)?b.hist:[]).filter(h=>h&&typeof h==='object'&&h.ev).slice(-100).map(h=>({at:+h.at||Date.now(),ev:s(h.ev,20),from:h.from?s(h.from,20):undefined,to:h.to?s(h.to,20):undefined}));
+  b.rev=okDate(b.rev)?b.rev:null;b.created=+b.created||Date.now();b.ord=Number.isFinite(+b.ord)?+b.ord:0;
+  b.startAt=+b.startAt||null;b.actual=+b.actual>0?Math.round(+b.actual):null;b.waitSince=+b.waitSince||null;
+  b.who=b.who?s(b.who,60):undefined;
+  t.steps.forEach(x=>{x.t=s(x.t,120);if(!x.id)x.id=Math.random().toString(36).slice(2,9)});
+  t.cat='work';
 }
 function loadState(raw){
   let s=null;try{s=JSON.parse(raw)}catch(e){s=null}
@@ -1291,8 +1459,8 @@ const isEv=t=>t.kind==='event';
 const dayTasks=k=>S.tasks.filter(t=>!isEv(t)&&t.date===k);
 const dayEvents=k=>S.tasks.filter(t=>isEv(t)&&t.date===k);
 const dayItems=k=>S.tasks.filter(t=>t.date===k);
-const somedayTasks=()=>S.tasks.filter(t=>!isEv(t)&&!t.date);
-const pendingBefore=k=>S.tasks.filter(t=>!isEv(t)&&!t.done&&t.date&&t.date<k);
+const somedayTasks=()=>S.tasks.filter(t=>!isEv(t)&&!t.date&&!t.biz); // business tasks without a date live in the Business workspace
+const pendingBefore=k=>S.tasks.filter(t=>!isEv(t)&&!t.done&&t.date&&t.date<k&&!t.biz); // unfinished business tasks are reviewed in Business → Pending, never moved in bulk
 const endMin=t=>toMin(t.time)+(t.dur||30);
 const timeRange=t=>t.time?(t.dur?t.time+'–'+fromMin(toMin(t.time)+t.dur):t.time):'';
 const byTime=(a,b)=>(a.time?0:1)-(b.time?0:1)||(a.time||'').localeCompare(b.time||'');
@@ -1436,15 +1604,16 @@ function unwin(rw){
   if(S.xpd&&S.xpd[rw.day]!=null)S.xpd[rw.day]=Math.max(0,S.xpd[rw.day]-rw.xp);
 }
 // the only way a task gets checked / un-checked, from any screen (list, calendar, editor, Noor)
-function completeTask(t,xp){
+function completeTask(t,xp,quiet){
   if(!t||t.done)return false;
   t.done=true;t.doneAt=Date.now();t.steps.forEach(s=>s.done=true);
-  if(!t.rw){t.rw=win(xp||10);save()}else{save();render()}
+  if(t.biz){const b=t.biz;if(b.startAt&&t.doneAt-b.startAt<12*3600e3)b.actual=Math.max(1,Math.round((t.doneAt-b.startAt)/60e3));b.startAt=null;bzHist(t,'done')}
+  if(!t.rw){t.rw=win(xp||10,undefined,quiet);save()}else{save();render()}
   return true;
 }
 function uncompleteTask(t){
   if(!t||!t.done)return false;
-  t.done=false;delete t.doneAt;unwin(t.rw);t.rw=null;save();render();return true;
+  t.done=false;delete t.doneAt;unwin(t.rw);t.rw=null;if(t.biz)bzHist(t,'reopened');save();render();return true;
 }
 function checkBadges(){const nb=BADGES.filter(b=>!S.badges.includes(b.id)&&b.test());nb.forEach(b=>S.badges.push(b.id));return nb}
 let hideT;
@@ -1622,6 +1791,7 @@ function overlapNote(k){const p=overlapPairs(k);if(!p.length)return '';const [a,
     '<div class="qrow"><button type="button" class="btn small" data-act="edit" data-id="'+b.id+'">Change '+esc(b.text.length>22?b.text.slice(0,21)+'…':b.text)+'</button><button type="button" class="btn small ghost" data-act="ovlok" data-k="'+k+'">Keep both</button></div></div>'}
 function metaChips(t){
   let h='';
+  if(t.biz&&!t.done){const p=bzPrio(t).p;h+='<span class="tchip bzc p'+(p||0)+'">💼 '+(p?'P'+p:'Business')+'</span>'}
   if(t.time)h+='<span class="tchip">⏰ '+timeRange(t)+'</span>';
   else if(!t.date)h+='<span class="tchip sd">Someday</span>';
   if(t.prio==='high')h+='<span class="tchip hot">🔥 Priority</span>';else if(t.prio==='low')h+='<span class="tchip">Low</span>';
@@ -1656,6 +1826,7 @@ function render(){
 
   renderDay();
   renderAgenda();renderWeek();if(typeof renderSr==='function')renderSr();
+  if(!$('v-biz').hidden)bzRender();
 
   $('badges').innerHTML=BADGES.map(b=>'<div class="badge'+(S.badges.includes(b.id)?'':' locked')+'"><div class="medal">'+b.l+'</div><b>'+b.n+'</b><small>'+b.d+'</small></div>').join('');
   $('badgeCount').textContent=S.badges.length+' / '+BADGES.length+' trophies';
@@ -1757,9 +1928,9 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b)return;
   const id=b.dataset.id,act=b.dataset.act;
   if(act==='goday'){goDay(b.dataset.k);return}
-  if(act==='move'){const t=S.tasks.find(x=>x.id===id);if(!t)return;const r=updateTask(id,{date:todayStr()});if(!r.ok){toast(r.err);return}tone([659,880],.09,.25);return}
+  if(act==='move'){const t=S.tasks.find(x=>x.id===id);if(!t)return;if(t.biz&&t.date&&t.date<todayStr()&&!t.done){bzGo('pend');return}const r=updateTask(id,{date:todayStr()});if(!r.ok){toast(r.err);return}tone([659,880],.09,.25);return}
   if(act==='moveday'||act==='moveall'){const t=todayStr();
-    S.tasks.forEach(x=>{if(!x.done&&(act==='moveall'?x.date<t:x.date===b.dataset.k))x.date=t});
+    S.tasks.forEach(x=>{if(!x.done&&!x.biz&&(act==='moveall'?x.date<t:x.date===b.dataset.k))x.date=t});
     save();tone([523,659,880],.08,.25);if(act==='moveday')viewDay=t;render();return}
   if(act==='task'){const t=S.tasks.find(x=>x.id===id);if(!t||t.date!==todayStr())return;
     if(t.done)uncompleteTask(t);else completeTask(t,10);return}
@@ -1895,6 +2066,7 @@ function updateTask(id,patch){
   const m=cleanInput(Object.assign({text:t.text,desc:t.desc,date:t.date,time:t.time,dur:t.dur,cat:t.cat,prio:t.prio,kind:t.kind,alarm:t.alarm},patch));
   const err=checkTask(m);if(err)return{ok:false,err:err.m,field:err.f};
   const moved=m.date!==t.date||m.time!==t.time;
+  if(moved&&t.biz){const was=(t.date||'')+(t.time?' '+t.time:''),now=(m.date||'')+(m.time?' '+m.time:'');bzHist(t,!m.date?'unscheduled':t.date?'moved':'scheduled',was||undefined,now||undefined);if(t.date&&m.date&&!['blocked','paused','delegated'].includes(t.biz.status))t.biz.status='resched'}
   Object.assign(t,{text:m.text,desc:m.desc,date:m.date,time:m.time,dur:m.dur,cat:m.cat,prio:m.prio,kind:m.kind,alarm:m.alarm&&!!m.time});
   ['desc','cat','prio','kind'].forEach(k=>{if(!t[k])delete t[k]});
   delete t.ex;
@@ -1905,6 +2077,7 @@ function updateTask(id,patch){
 function deleteTask(id){
   if(!S.tasks.some(x=>x.id===id))return false;
   S.tasks=S.tasks.filter(x=>x.id!==id);
+  S.tasks.forEach(x=>{if(x.biz&&x.biz.deps.includes(id))x.biz.deps=x.biz.deps.filter(d=>d!==id)});
   (S.projs||[]).forEach(p=>(p.ms||[]).forEach(m=>{if(m.ev===id)m.ev=null}));
   save();render();return true;
 }
@@ -1917,6 +2090,7 @@ function seg(id,v){document.querySelectorAll('#'+id+' [data-v]').forEach(b=>b.se
 const segVal=id=>{const b=document.querySelector('#'+id+' [aria-pressed="true"]');return b?b.dataset.v:null};
 function openEditor(o){
   o=o||{};const t=o.id?S.tasks.find(x=>x.id===o.id):null;if(o.id&&!t)return;
+  if(t&&t.biz){bzEdit(t.id);return}
   const v=t?Object.assign({},t):Object.assign({text:'',date:todayStr(),time:null,dur:null,alarm:false},o);
   ed={id:t?t.id:null,ok:null,planning:!!o.planning};delArm=false;
   $('teTitle').textContent=t?(o.planning?'Plan it':'Edit'):'New '+(v.kind==='event'?'appointment':'task');
@@ -2005,7 +2179,7 @@ function notifyHint(){if(notifyHinted)return;notifyHinted=true;
 // another tab changed the data: reload it instead of overwriting it
 addEventListener('storage',e=>{if(e.key!==KEY||!e.newValue)return;const n=loadState(e.newValue);if(n){S=n;render()}});
 
-const VIEWS=['v-today','v-agenda','v-coach','v-notes','v-focus','v-troph','v-pro','v-profile'];
+const VIEWS=['v-today','v-agenda','v-coach','v-notes','v-focus','v-troph','v-pro','v-profile','v-biz'];
 function openMenu(on){$('menu').hidden=!on;$('menuBtn').setAttribute('aria-expanded',String(on));
   if(on){const pro=$('v-pro').hidden?null:$('v-pro').dataset.tier;const sub=!!pro;$('mProSub').hidden=!sub;$('mPro').setAttribute('aria-expanded',String(sub))}}
 $('menuBtn').addEventListener('click',()=>openMenu(true));
@@ -2019,7 +2193,8 @@ document.querySelectorAll('nav button,[data-view]:not(nav button)').forEach(b=>b
   if(v==='v-pro'){const t=tier||$('v-pro').dataset.tier||'premium';$('v-pro').dataset.tier=t;$('proTitle').textContent=t==='business'?'Business':'Premium'}
   openMenu(false);
   VIEWS.forEach(x=>$(x).hidden=x!==v);
-  if(b.dataset.view==='v-pro'||b.dataset.view==='v-notes')renderPro();
+  if(b.dataset.view==='v-pro'||b.dataset.view==='v-notes'||b.dataset.view==='v-biz')renderPro();
+  if(b.dataset.view==='v-biz'){bzTab=b.dataset.bztab||bzTab||'dash';bzRender()}
   if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
   $('fab').hidden=b.dataset.view==='v-coach';
@@ -2091,16 +2266,17 @@ $('yesReset').addEventListener('click',()=>{const s=S.sound,v=S.voice;S=defaults
 // ---------- alarms ----------
 let ringing=null,ringLoop=null;
 // alarms come from the same list as the calendar: any item with a date, a start time and the bell on
-const alarmDue=e=>e.snoozeUntil||new Date(e.date+'T'+e.time).getTime();
+const alarmDue=e=>e.snoozeUntil||new Date(e.date+'T'+e.time).getTime()-(e.remBefore||0)*60e3; // remBefore: minutes before the start (business reminders)
 function checkAlarms(){
   if(ringing||!$('tEd').hidden)return;const now=Date.now();
   const ev=S.tasks.find(e=>e.alarm&&!e.fired&&!e.done&&e.date&&e.time&&alarmDue(e)<=now&&now-alarmDue(e)<30*60e3);
   if(!ev)return;
   if(hOpenNow())hClose(); // the alarm must be seen: Help me start steps aside (its session is kept)
   ringing=ev.id;const pop=$('pop');pop.className='pop alarm';
-  pop.innerHTML='<h2>It\'s time!</h2><p>'+esc(ev.text)+' · '+timeRange(ev)+'</p><div class="abtns"><button class="btn" data-act="go" data-id="'+ev.id+'">Let\'s go (+10 XP)</button><button class="btn ghost" data-act="snooze" data-id="'+ev.id+'">In 5 min</button></div>';
+  const soon=Math.round((new Date(ev.date+'T'+ev.time).getTime()-now)/60e3);
+  pop.innerHTML='<h2>'+(soon>0?'Starts in '+soon+' min':'It\'s time!')+'</h2><p>'+esc(ev.text)+' · '+timeRange(ev)+'</p><div class="abtns"><button class="btn" data-act="go" data-id="'+ev.id+'">Let\'s go (+10 XP)</button><button class="btn ghost" data-act="snooze" data-id="'+ev.id+'">In 5 min</button></div>';
   $('overlay').hidden=false;alarmTone();clearInterval(ringLoop);ringLoop=setInterval(alarmTone,4000);
-  speak((S.name?S.name+', it':'It')+"'s time: "+ev.text+". You can do it, let's go together.");
+  speak(soon>0?(S.name?S.name+', ':'')+ev.text+' starts in '+soon+' minutes. Get ready.':(S.name?S.name+', it':'It')+"'s time: "+ev.text+". You can do it, let's go together.");
   if(document.hidden)notify('ADHD Winner',"⏰ It's time: "+ev.text+(ev.time?' · '+timeRange(ev):''),'alarm-'+ev.id,{id:ev.id},true);
 }
 function handleAlarm(id,act){
@@ -2939,7 +3115,7 @@ function renderPlans(){
     '<p class="note" style="margin:0">Payment is not open yet: during this early version, Premium and Business are a free trial.</p>';
 }
 function renderLocks(){
-  document.querySelectorAll('#v-pro [data-need],#v-notes [data-need]').forEach(box=>{const need=box.dataset.need,ok=hasPlan(need);
+  document.querySelectorAll('#v-pro [data-need],#v-notes [data-need],#v-biz [data-need]').forEach(box=>{const need=box.dataset.need,ok=hasPlan(need);
     box.classList.toggle('locked',!ok);box.querySelector('.lockbody').setAttribute('aria-hidden',ok?'false':'true');
     let lc=box.querySelector('.lockcard');
     if(ok){if(lc)lc.remove();return}
@@ -3040,6 +3216,599 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]
   save();renderPro();render();
 });
 
+// =====================================================================
+// ADHD Winner Business (Oct 28): a professional workspace on top of the SAME task list.
+// A business task is a normal task in S.tasks with cat:'work' and a t.biz object (see normBiz).
+// So the task, its calendar entry and its reminder are ONE object: editing never duplicates,
+// completing or deleting it removes its reminder, and the main Calendar shows it automatically.
+// Nothing here is invented: every number comes from saved data; the AI only rephrases facts.
+// =====================================================================
+const BZ_STATUS={todo:'Not started',doing:'In progress',blocked:'Blocked',resched:'Rescheduled',paused:'Paused',delegated:'Delegated'};
+const BZ_REASONS=[['time','Not enough time'],['unexpected','Unexpected work'],['hard','Task was too difficult to start'],['waiting','Waiting for someone else'],['longer','Task took longer than expected'],['nolonger','No longer a priority'],['other','Other']];
+const BZ_RNAME=Object.fromEntries(BZ_REASONS);
+const BZ_PNAME={1:'Critical',2:'Important',3:'Can be scheduled later'};
+const BZ_LVN={high:'High',med:'Medium',low:'Low'};
+const BZ_DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+let bzTab='dash',bzWeekStart=monday(new Date()),bzFilter='active',bzE=null,bzRv=null,bzProp={},bzAI={},bzArm=null;
+
+function bzCfg(){
+  let c=S.bizCfg;
+  if(!c||typeof c!=='object'){let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+    const gulf=/^Asia\/(Qatar|Riyadh|Dubai|Kuwait|Bahrain|Muscat|Aden)$/.test(tz);
+    c=S.bizCfg={from:'09:00',to:'17:00',days:gulf?[0,1,2,3,4]:[1,2,3,4,5],rem:10,set:false}}
+  if(!RE_T.test(c.from))c.from='09:00';if(!RE_T.test(c.to)||toMin(c.to)<=toMin(c.from))c.to=fromMin(Math.min(1439,toMin(c.from)+480));
+  c.days=Array.isArray(c.days)?c.days.filter(d=>d>=0&&d<=6):[1,2,3,4,5];
+  if(![0,5,10,15,30,60].includes(+c.rem))c.rem=10;
+  return c;
+}
+const bzTasks=()=>S.tasks.filter(t=>t.biz);
+const bzActive=t=>!t.done&&!['paused','delegated'].includes(t.biz.status);
+function bzHist(t,ev,from,to){if(!t||!t.biz)return;t.biz.hist.push({at:Date.now(),ev,from,to});if(t.biz.hist.length>100)t.biz.hist=t.biz.hist.slice(-100)}
+const bzDur=m=>m==null?'—':m<60?m+' min':Math.floor(m/60)+' h'+(m%60?' '+pad(m%60):'');
+const bzDay=k=>{const r=relName(k);return r&&Math.abs(dayDiff(todayStr(),k))<=1?r:new Date(k+'T12:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})};
+const bzWhen=t=>t.date?bzDay(t.date)+(t.time?' · '+timeRange(t):''):'Not scheduled';
+function bzLeft(t){const e=t.biz.est;if(!e)return null;const n=t.steps.length,d=t.steps.filter(x=>x.done).length;return n?Math.max(5,Math.round(e*(n-d)/n)):e}
+function bzBlockers(t){const b=t.biz,out=[];
+  b.deps.forEach(id=>{const d=S.tasks.find(x=>x.id===id);if(d&&!d.done)out.push('waiting for “'+d.text+'”')});
+  if(b.status==='blocked'){const n=[...b.notes].reverse().find(x=>x.text);out.push(n?n.text:'marked as blocked')}
+  return out}
+
+// ---------- free time: work hours (settings) minus everything already in the calendar ----------
+function bzBusy(k,ex){return S.tasks.filter(t=>t.id!==ex&&!t.done&&t.date===k&&t.time).map(t=>[toMin(t.time),toMin(t.time)+(t.dur||30)]).sort((a,b)=>a[0]-b[0])}
+function bzGaps(k,ex){const c=bzCfg(),t=todayStr();if(k<t||!c.days.includes(new Date(k+'T12:00').getDay()))return[];
+  let s=toMin(c.from);const e=toMin(c.to);if(k===t){const n=new Date();s=Math.max(s,Math.ceil((n.getHours()*60+n.getMinutes()+15)/15)*15)} // leave 15 min to get ready
+  const g=[];let cur=s;for(const [a,b] of bzBusy(k,ex)){if(b<=cur)continue;if(a>=e)break;if(a>cur)g.push([cur,Math.min(a,e)]);cur=Math.max(cur,b)}
+  if(cur<e)g.push([cur,e]);return g.filter(x=>x[1]-x[0]>=5)}
+const bzFreeDay=(k,ex)=>bzGaps(k,ex).reduce((a,g)=>a+g[1]-g[0],0);
+function bzFreeUntil(dl,ex){let tot=0;for(let i=0;i<62;i++){const k=ymd(addDays(new Date(),i));if(k>dl)break;tot+=bzFreeDay(k,ex)}return tot}
+function bzFindSlot(mins,o){o=o||{};mins=Math.max(5,Math.round(mins||30));
+  for(let i=0;i<(o.days||28);i++){const k=ymd(addDays(new Date(),i));if(o.before&&k>o.before)return null;if(o.after&&k<o.after)continue;
+    for(const g of bzGaps(k,o.exclude))if(g[1]-g[0]>=mins)return{date:k,time:fromMin(g[0]),dur:mins}}
+  return null}
+
+// ---------- priority: urgency is only one input; deadline, importance, consequences, time and blockers count too ----------
+function bzPrio(t){const b=t.biz;if(!b)return{p:null,reasons:[],score:0};
+  const r=[],today=todayStr();let s=0,dl=null;
+  const add=(w,txt)=>{s+=w;r.push([w,txt])};
+  const ask=b.imp==null?{k:'imp',q:'How important is this for your business?'}:(b.conseq==null&&(b.urgent||b.deadline))?{k:'conseq',q:'What happens if it is late?'}:null;
+  if(b.urgent)add(2,'You marked it urgent');
+  if(b.imp==='high')add(3.5,'High importance for the business');else if(b.imp==='med')add(1.5,'Medium importance for the business');else if(b.imp==='low')add(0,'Low importance for the business');
+  if(b.conseq==='high')add(3,'Serious consequences if it is late');else if(b.conseq==='med')add(1,'Some consequences if it is late');else if(b.conseq==='low')add(0,'Few consequences if it is late');
+  if(b.deadline){dl=dayDiff(today,b.deadline);
+    if(dl<0)add(5,'Deadline passed '+(-dl)+' day'+(dl===-1?'':'s')+' ago');
+    else if(dl===0)add(4.5,'Due today');else if(dl===1)add(4,'Due tomorrow');
+    else if(dl<=3)add(2.5,'Due in '+dl+' days');else if(dl<=7)add(1,'Due in '+dl+' days');else add(0,'Deadline in '+dl+' days: there is time');
+    const left=bzLeft(t);
+    if(left&&dl>=0){const free=bzFreeUntil(b.deadline,t.id);
+      if(free<left)add(2,'Only '+bzDur(free)+' of free work time before the deadline, for about '+bzDur(left)+' of work');
+      else if(free<left*2)add(1,'Tight: '+bzDur(free)+' free before the deadline for about '+bzDur(left)+' of work')}}
+  const n=t.steps.length,d=t.steps.filter(x=>x.done).length;
+  if(d&&d<n)add(.5,'Already started ('+d+' of '+n+' subtasks)');
+  if(b.urgent&&b.imp==='low'&&b.conseq!=='high'&&(dl==null||dl>3))r.push([9,'Urgent, but low impact and no close deadline: it can wait']);
+  r.sort((x,y)=>y[0]-x[0]);for(let i=0;i<r.length;i++)r[i]=r[i][1]; // strongest reasons first
+  let auto=s>=7?1:s>=3.5?2:3;
+  const blk=bzBlockers(t);
+  if(blk.length){const cap=dl!=null&&dl<=3?2:3;if(auto<cap)auto=cap;r.unshift('Blocked: '+blk[0]+'. It cannot move forward yet')}
+  if(ask&&!b.over)return{p:null,auto:null,reasons:r,ask,blocked:!!blk.length,score:s};
+  const p=b.over||auto;
+  if(b.over&&b.over!==auto)r.unshift('You chose P'+b.over+' (recommended: P'+auto+')');
+  return{p,auto,reasons:r,ask,blocked:!!blk.length,score:s};
+}
+function bzRank(list){return list.map(t=>({t,pr:bzPrio(t)})).sort((a,b)=>(a.pr.p||2.5)-(b.pr.p||2.5)||b.pr.score-a.pr.score||(a.t.biz.deadline||'9999').localeCompare(b.t.biz.deadline||'9999')||a.t.biz.ord-b.t.biz.ord)}
+// keep the normal lists' 🔥 in line with the business priority
+function bzSyncPrio(){let ch=false;bzTasks().forEach(t=>{if(t.done)return;const p=bzPrio(t).p,w=p===1?'high':p===3?'low':undefined;if(t.prio!==w){if(w)t.prio=w;else delete t.prio;ch=true}});if(ch)save()}
+const bzMissed=()=>bzTasks().filter(t=>!t.done&&t.date&&t.date<todayStr()&&t.biz.rev!==t.date&&!['paused','delegated'].includes(t.biz.status)).sort((a,b)=>a.date.localeCompare(b.date));
+
+// ---------- the planner behind the coach and the dashboard (facts only, rules written down) ----------
+function bzPlan(){
+  const c=bzCfg(),today=todayStr(),open=bzTasks().filter(bzActive),ranked=bzRank(open),mset=new Set(bzMissed()),ready=ranked.filter(x=>!x.pr.blocked&&!mset.has(x.t)); // a missed task waits for its review
+  const work=c.days.includes(new Date().getDay()),freeToday=bzFreeDay(today),facts=[],assume=[];
+  facts.push(open.length+' open business task'+(open.length===1?'':'s')+(open.length?' ('+ranked.filter(x=>x.pr.p===1).length+' at P1)':''));
+  open.filter(t=>t.biz.deadline&&dayDiff(today,t.biz.deadline)<=3).sort((a,b)=>a.biz.deadline.localeCompare(b.biz.deadline)).slice(0,3)
+    .forEach(t=>facts.push((t.biz.deadline<today?'Overdue since ':'Deadline ')+bzDay(t.biz.deadline)+': '+t.text));
+  open.filter(t=>t.date===today&&t.time).sort(byTime).slice(0,3).forEach(t=>facts.push('In your calendar today: '+timeRange(t)+' '+t.text));
+  facts.push(work?'Free work time left today: '+bzDur(freeToday)+' (your hours '+c.from+'–'+c.to+', minus your calendar)':'Today is not one of your work days');
+  const missed=[...mset];if(missed.length)facts.push(missed.length+' unfinished task'+(missed.length>1?'s':'')+' from earlier days to review');
+  const blocked=ranked.filter(x=>x.pr.blocked);if(blocked.length)facts.push(blocked.length+' blocked: '+blocked.slice(0,2).map(x=>x.t.text).join(', '));
+  if(!c.set)assume.push('Work hours not confirmed yet: I use '+c.from+'–'+c.to+', '+c.days.map(d=>BZ_DOW[d]).join(' ')+'. Change them with ⚙ Hours.');
+  const top=ready[0]||null,main=top&&top.pr.p?top:ready.find(x=>x.pr.p)||top;
+  const sec=main?ready.filter(x=>x!==main&&x.pr.p&&x.pr.p<=2).slice(0,2):[];
+  let step=null,slot=null,planned=false;
+  if(main){const t=main.t,st=t.steps.find(x=>!x.done);
+    step=st?st.t:'Open it and write the very first small action (2 minutes)';
+    if(!st)assume.push('“'+t.text+'” has no subtasks: the first step is a suggestion, not something you wrote.');
+    if(!t.biz.est)assume.push('No duration set for “'+t.text+'”: I count 30 minutes.');
+    if(main.pr.p==null)assume.push('“'+t.text+'” has no priority yet (one question is missing), so it is not ranked for sure.');
+    const nt=[...t.biz.notes].reverse().find(x=>x.text);if(nt)facts.push('Your last note on it: '+nt.text);
+    const n=new Date(),nowK=today+' '+pad(n.getHours())+':'+pad(n.getMinutes());
+    if(t.date&&t.time&&(t.date+' '+fromMin(Math.min(1439,toMin(t.time)+(t.dur||30))))>nowK)planned=true;
+    else{const block=Math.min(bzLeft(t)||30,90);slot=bzFindSlot(block,{exclude:t.id,before:t.biz.deadline&&t.biz.deadline>=today?t.biz.deadline:null})||bzFindSlot(block,{exclude:t.id});
+      if(slot&&t.biz.deadline&&slot.date>t.biz.deadline)slot.late=true}}
+  const follow=ranked.filter(x=>x.t.biz.status==='blocked'&&x.t.biz.waitSince&&Date.now()-x.t.biz.waitSince>=2*864e5).slice(0,1).map(x=>x.t);
+  return{main,sec,follow,facts,assume,freeToday,work,step,slot,planned,missed,open,ranked};
+}
+
+// ---------- small renderers ----------
+const BZ_PSHORT={1:'Critical',2:'Important',3:'Later'};
+const pchip=(p,pr)=>p?'<span class="pchip p'+p+'">P'+p+' · '+BZ_PSHORT[p]+'</span>':pr&&pr.ask?'<span class="pchip">Priority: 1 question</span>':'';
+function bzChips(t,pr){pr=pr||bzPrio(t);const b=t.biz,today=todayStr();
+  let h=t.done?'<span class="pchip">Completed</span>':pchip(pr.p,pr);
+  if(!t.done&&b.urgent)h+='<span class="pchip urg">Urgent</span>';
+  if(!t.done&&pr.blocked)h+='<span class="pchip stc">Blocked</span>';
+  if(!t.done&&['paused','delegated','resched','doing'].includes(b.status))h+='<span class="pchip stc">'+BZ_STATUS[b.status]+'</span>';
+  if(b.deadline)h+='<span class="pchip dl'+(!t.done&&b.deadline<today?' late':'')+'">⚑ '+bzDay(b.deadline)+'</span>';
+  if(t.date&&!t.done)h+='<span class="pchip dl">'+(t.time?'⏰ ':'📅 ')+bzWhen(t)+'</span>';
+  return '<div class="chips2">'+h+'</div>'}
+function bzProg(t){const n=t.steps.length;if(!n)return '';const d=t.steps.filter(x=>x.done).length;
+  return '<div class="bzprog"><span>'+d+' of '+n+' subtasks completed</span><div class="pbar" role="progressbar" aria-label="Subtasks" aria-valuemin="0" aria-valuemax="'+n+'" aria-valuenow="'+d+'"><i style="width:'+Math.round(d/n*100)+'%"></i></div></div>'}
+const bzLi=(t,extra)=>'<li class="bzli'+(t.done?' done':'')+'"><div class="grow"><b>'+esc(t.text)+'</b>'+(extra?'<small>'+extra+'</small>':'')+bzChips(t)+'</div><button type="button" class="btn small ghost" data-bza="edit" data-id="'+esc(t.id)+'">Open</button></li>';
+const bzEmpty=m=>'<p class="empty">'+m+'</p>';
+const projName=id=>{const p=(S.projs||[]).find(x=>x.id===id);return p?p.name:''};
+
+function bzMainCard(P,coach){
+  if(!P.main)return '<div class="bzcard bzmain"><span class="bzkick">Main priority</span><h3>'+(P.open.length?'Everything open is blocked or waiting.':'No business tasks yet.')+'</h3><p class="hint" style="margin:0">'+(P.open.length?'Check Pending to unblock one, or add a new task.':'Add your first task: one small, clear action.')+'</p><div class="bzrow"><button class="btn" type="button" data-bza="new">＋ New business task</button>'+(P.open.length?'<button class="btn ghost" type="button" data-bza="tab" data-v="pend">Pending</button>':'')+'</div></div>';
+  const t=P.main.t,pr=P.main.pr,sl=P.slot,pk=sl?sl.date+'|'+sl.time+'|'+sl.dur:'';
+  let plan='';
+  if(P.planned)plan='<p class="hint" style="margin:0">Already in your calendar: '+bzWhen(t)+'.</p>';
+  else if(sl){plan=bzProp.main===t.id+'@'+pk?
+      '<div class="bzask"><p>Put “'+esc(t.text)+'” in your calendar on '+bzDay(sl.date)+', '+sl.time+'–'+fromMin(toMin(sl.time)+sl.dur)+', with a reminder?</p><div class="bzrow"><button class="btn" type="button" data-bza="place" data-id="'+esc(t.id)+'" data-slot="'+pk+'">Yes, schedule it</button><button class="btn ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Choose another time</button></div></div>'
+      :'<button class="btn ghost" type="button" data-bza="propose" data-id="'+esc(t.id)+'" data-slot="'+pk+'">📅 Free slot: '+bzDay(sl.date)+' '+sl.time+'–'+fromMin(toMin(sl.time)+sl.dur)+(sl.late?' (after the deadline)':'')+'</button>'+(sl.late?'<p class="hint" style="margin:0">There is not enough free work time before the deadline. Options: move a P3 task, shorten the work, or ask to move the deadline.</p>':'')}
+  else plan='<p class="hint" style="margin:0">No free slot in your work hours in the next 4 weeks for this length. Split it into smaller subtasks, or widen your hours (⚙ Hours).</p>';
+  return '<div class="bzcard bzmain"><span class="bzkick">'+(coach?'Do this next':'Today\'s main priority')+'</span><h3>'+esc(t.text)+'</h3>'+bzChips(t,pr)+bzProg(t)+
+    '<p style="margin:0"><b>Why:</b> '+esc(pr.reasons.slice(0,2).join('; ')||'It is the highest-ranked open task.')+'</p>'+
+    '<p style="margin:0"><b>First step:</b> '+esc(P.step)+'</p>'+plan+
+    '<div class="bzrow"><button class="btn" type="button" data-bza="start" data-id="'+esc(t.id)+'">▶ Start now</button>'+(coach?'':'<button class="btn ghost" type="button" data-bza="tab" data-v="coach">💬 Speak with Coach</button>')+'</div></div>';
+}
+
+// ---------- Dashboard ----------
+function bzDash(){
+  const P=bzPlan(),today=todayStr(),all=bzTasks(),wk=monday(new Date()).getTime();
+  const todays=all.filter(t=>t.date===today).sort((a,b)=>a.done-b.done||byTime(a,b));
+  const overdue=all.filter(t=>!t.done&&t.biz.deadline&&t.biz.deadline<today);
+  const blocked=P.ranked.filter(x=>x.pr.blocked).map(x=>x.t);
+  const soon=all.filter(t=>!t.done&&t.biz.deadline&&t.biz.deadline>=today&&dayDiff(today,t.biz.deadline)<=7).sort((a,b)=>a.biz.deadline.localeCompare(b.biz.deadline));
+  const doneWk=all.filter(t=>t.done&&t.doneAt>=wk).length;
+  let h='';
+  if(P.missed.length)h+='<div class="bzask"><p>'+(P.missed.length===1?'1 task wasn\'t finished on its day.':P.missed.length+' tasks weren\'t finished on their day.')+' Take 1 minute to review '+(P.missed.length===1?'it':'them')+'.</p><button class="btn" type="button" data-bza="tab" data-v="pend">Review now</button></div>';
+  h+=bzMainCard(P);
+  h+='<div class="bzq"><div class="bzstat"><b>'+todays.filter(t=>!t.done).length+'</b><small>to do today</small></div><div class="bzstat'+(overdue.length?' warn':'')+'"><b>'+overdue.length+'</b><small>overdue</small></div><div class="bzstat'+(blocked.length?' warn':'')+'"><b>'+blocked.length+'</b><small>blocked</small></div><div class="bzstat"><b>'+doneWk+'</b><small>done this week</small></div></div>';
+  h+='<div class="bzsec"><div class="sechead"><h3>Today</h3><span class="hint">'+bzDay(today)+'</span></div>'+(todays.length?'<ul class="bzlist">'+todays.map(t=>bzLi(t,t.time?timeRange(t):'Any time today')).join('')+'</ul>':bzEmpty('Nothing scheduled today. The coach can find a slot for your priority.'))+'</div>';
+  h+='<div class="bzsec"><div class="sechead"><h3>Upcoming deadlines</h3><span class="hint">Next 7 days</span></div>'+(soon.length?'<ul class="bzlist">'+soon.slice(0,5).map(t=>bzLi(t)).join('')+'</ul>':bzEmpty('No deadline in the next 7 days.'))+'</div>';
+  if(overdue.length||blocked.length)h+='<div class="bzsec"><div class="sechead"><h3>Overdue or blocked</h3></div><ul class="bzlist">'+[...new Set([...overdue,...blocked])].slice(0,6).map(t=>bzLi(t,bzBlockers(t)[0]?esc('Blocked: '+bzBlockers(t)[0]):'')).join('')+'</ul></div>';
+  const pj=(S.projs||[]).map(p=>{const ts=all.filter(t=>t.biz.proj===p.id),d=ts.filter(t=>t.done).length;return{p,ts,d}}).filter(x=>x.ts.length);
+  if(pj.length)h+='<div class="bzsec"><div class="sechead"><h3>Progress on projects</h3><span class="hint">Business tasks done</span></div>'+pj.map(x=>'<div class="bzcard" style="gap:6px"><b>'+esc(x.p.name)+'</b><div class="bzprog"><span>'+x.d+' of '+x.ts.length+' tasks</span><div class="pbar"><i style="width:'+Math.round(x.d/x.ts.length*100)+'%"></i></div></div></div>').join('')+'</div>';
+  return h;
+}
+
+// ---------- Tasks ----------
+function bzTaskCard(t,i,n,open){
+  const pr=bzPrio(t),b=t.biz,id=esc(t.id),stepH=t.steps.map((s,j)=>'<li class="'+(s.done?'done':'')+'"><button type="button" class="check" data-bza="sub" data-id="'+id+'" data-i="'+j+'" aria-pressed="'+!!s.done+'" aria-label="'+(s.done?'Mark subtask as not done: ':'Subtask done: ')+esc(s.t)+'">'+CHECK+'</button><span>'+esc(s.t)+'</span>'+
+    (t.done?'':'<button type="button" class="mv" data-bza="subup" data-id="'+id+'" data-i="'+j+'" aria-label="Move subtask up"'+(j?'':' disabled')+'>↑</button><button type="button" class="mv" data-bza="subdown" data-id="'+id+'" data-i="'+j+'" aria-label="Move subtask down"'+(j<t.steps.length-1?'':' disabled')+'>↓</button>')+'</li>').join('');
+  const blk=bzBlockers(t),nt=[...b.notes].reverse().find(x=>x.text);
+  return '<details class="bzt p'+(t.done?0:pr.p||0)+(t.done?' isdone':'')+'" data-tid="'+id+'"'+(open?' open':'')+'><summary>'+
+    '<button type="button" class="check" data-bza="done" data-id="'+id+'" aria-pressed="'+t.done+'" aria-label="'+(t.done?'Mark as not done: ':'Mark as completed: ')+esc(t.text)+'">'+CHECK+'</button>'+
+    '<div class="grow"><b>'+esc(t.text)+'</b>'+(b.proj&&projName(b.proj)?'<small class="hint" style="display:block">'+esc(projName(b.proj))+'</small>':'')+bzChips(t,pr)+bzProg(t)+'</div><span class="chev" aria-hidden="true">▾</span></summary><div class="bztb">'+
+    (t.desc?'<p class="desc">'+esc(t.desc)+'</p>':'')+
+    (blk.length?'<p class="hint" style="margin:0">⛔ Blocked: '+esc(blk.join('; '))+'</p>':'')+
+    (pr.p&&!t.done?'<p class="hint" style="margin:0"><b>P'+pr.p+' because:</b> '+esc(pr.reasons.slice(0,3).join('; ')||'default')+'</p>':'')+
+    (nt?'<p class="hint" style="margin:0">📝 '+esc(nt.text)+'</p>':'')+
+    (t.steps.length?'<ul class="subs">'+stepH+'</ul>':'')+
+    (t.done?'':'<form class="prow" data-bzsub="'+id+'" autocomplete="off"><input type="text" maxlength="120" placeholder="Add a subtask" aria-label="New subtask for '+esc(t.text)+'"><button class="btn small" type="submit">Add</button></form>')+
+    '<div class="bzacts">'+(t.done?'':'<button class="btn small" type="button" data-bza="start" data-id="'+id+'">▶ Start</button>')+
+    '<button class="btn small ghost" type="button" data-bza="edit" data-id="'+id+'">Edit</button>'+
+    (t.done?'':'<button class="btn small ghost" type="button" data-bza="sched" data-id="'+id+'">'+(t.time?'Reschedule':'Schedule')+'</button>')+
+    (t.done||bzFilter!=='active'?'':'<button class="btn small ghost" type="button" data-bza="up" data-id="'+id+'" aria-label="Move task up"'+(i?'':' disabled')+'>↑</button><button class="btn small ghost" type="button" data-bza="down" data-id="'+id+'" aria-label="Move task down"'+(i<n-1?'':' disabled')+'>↓</button>')+
+    '<button class="btn small ghost danger'+(bzArm==='del'+t.id?' armed':'')+'" type="button" data-bza="del" data-id="'+id+'">'+(bzArm==='del'+t.id?'Tap again to delete':'Delete')+'</button></div>'+
+    (bzProp[t.id]?bzPropBox(t):'')+'</div></details>';
+}
+function bzOrdered(){const all=bzTasks();return bzFilter==='done'?all.filter(t=>t.done).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0)):all.filter(t=>!t.done).sort((a,b)=>a.biz.ord-b.biz.ord||a.biz.created-b.biz.created)}
+function bzTasksTab(){
+  const open=new Set([...document.querySelectorAll('#bzBody details.bzt[open]')].map(d=>d.dataset.tid)),L=bzOrdered();
+  return '<div class="bzrow"><button class="btn" type="button" data-bza="new">＋ New business task</button></div>'+
+    '<div class="seg" role="group" aria-label="Show"><button type="button" data-bza="filter" data-v="active" aria-pressed="'+(bzFilter==='active')+'">Active ('+bzTasks().filter(t=>!t.done).length+')</button><button type="button" data-bza="filter" data-v="done" aria-pressed="'+(bzFilter==='done')+'">Completed ('+bzTasks().filter(t=>t.done).length+')</button></div>'+
+    (L.length?'<div class="bzlist">'+L.map((t,i)=>bzTaskCard(t,i,L.length,open.has(t.id))).join('')+'</div>':bzEmpty(bzFilter==='done'?'No completed business tasks yet.':'No business tasks yet. Add one: a title is enough to start, you can add details later.'));
+}
+
+// ---------- Priority manager ----------
+function bzPrioTab(){
+  const R=bzRank(bzTasks().filter(bzActive)),ask=R.filter(x=>x.pr.ask&&!x.t.biz.over&&x.pr.p==null),groups={1:[],2:[],3:[]};
+  R.filter(x=>x.pr.p).forEach(x=>groups[x.pr.p].push(x));
+  const row=x=>{const t=x.t,o=t.biz.over||0;
+    return '<div class="bzcard" style="gap:8px"><div class="ph" style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><b style="overflow-wrap:anywhere">'+esc(t.text)+'</b>'+pchip(x.pr.p)+'</div>'+
+      '<ul class="reason">'+x.pr.reasons.slice(0,4).map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul>'+
+      '<div class="seg small" role="group" aria-label="Priority of '+esc(t.text)+'">'+[0,1,2,3].map(v=>'<button type="button" data-bza="over" data-id="'+esc(t.id)+'" data-v="'+v+'" aria-pressed="'+(o===v)+'">'+(v?'P'+v:'Auto (P'+x.pr.auto+')')+'</button>').join('')+'</div></div>'};
+  let h='<p class="hint" style="margin:0">P1 = critical, needs attention now · P2 = important · P3 = can be scheduled later. The app explains each one; you can always override it.</p>';
+  if(ask.length)h+='<div class="bzsec"><div class="sechead"><h3>One quick question</h3><span class="hint">Needed to rank</span></div>'+ask.map(x=>'<div class="bzask"><p>'+esc(x.t.text)+': '+esc(x.pr.ask.q)+'</p><div class="seg">'+(x.pr.ask.k==='imp'?[['high','High'],['med','Medium'],['low','Low']]:[['high','Serious'],['med','Some'],['low','Minor']]).map(o=>'<button type="button" data-bza="answer" data-k="'+x.pr.ask.k+'" data-id="'+esc(x.t.id)+'" data-v="'+o[0]+'">'+o[1]+'</button>').join('')+'</div></div>').join('')+'</div>';
+  [1,2,3].forEach(p=>{h+='<div class="bzsec"><div class="sechead"><h3>P'+p+' · '+BZ_PNAME[p]+'</h3><span class="hint">'+groups[p].length+'</span></div>'+(groups[p].length?groups[p].map(row).join(''):bzEmpty('None.'))+'</div>'});
+  return h;
+}
+
+// ---------- Calendar ----------
+function bzNotifCard(){const st=notifState();
+  const line=st==='granted'?'✓ Alerts are allowed on this device.':st==='denied'?'Alerts are blocked for ADHD Winner in your browser settings. Reminders still pop up inside the app while it is open.':st==='default'?'Alerts are not allowed yet. Reminders pop up inside the app while it is open.':'This browser can\'t show alerts outside the app'+(IS_IOS?' (on iPhone: add ADHD Winner to your Home Screen first)':'')+'. Reminders pop up inside the app while it is open.';
+  return '<div class="bzcard"><h3>Reminders</h3><p style="margin:0">'+line+'</p>'+(st==='default'?'<button class="btn small" type="button" data-bza="allow">Allow alerts</button>':'')+
+    '<p class="hint" style="margin:0">Every scheduled business task gets a reminder by default ('+(bzCfg().rem?bzCfg().rem+' min before':'at the start')+'). A web app cannot ring when it is fully closed: for a reminder your phone guarantees, add your tasks to your phone calendar. Changes made later in ADHD Winner are not copied there.</p>'+
+    '<button class="btn small ghost" type="button" data-bza="ics">📲 Add my scheduled business tasks to my phone calendar</button></div>'}
+function bzPropBox(t){const sl=bzProp[t.id];
+  if(sl==='none'){const est=bzLeft(t)||30;return '<div class="bzask"><p>No free '+bzDur(est)+' block in your work hours'+(t.biz.deadline?' before the deadline':'')+' in the next 4 weeks.</p><p class="hint" style="margin:0">Options: split it into smaller subtasks, move a P3 task, widen your hours (⚙ Hours)'+(t.biz.deadline?', or ask to move the deadline':'')+'.</p><div class="bzrow"><button class="btn small ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Pick a time myself</button></div></div>'}
+  return '<div class="bzask"><p>Proposed: '+bzDay(sl.date)+', '+sl.time+'–'+fromMin(toMin(sl.time)+sl.dur)+(sl.late?' (after the deadline: there is no free time before it)':' (free in your calendar)')+'</p><div class="bzrow"><button class="btn small" type="button" data-bza="place" data-id="'+esc(t.id)+'" data-slot="'+sl.date+'|'+sl.time+'|'+sl.dur+'">Approve</button><button class="btn small ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Edit</button></div></div>'}
+function bzProposeFor(t){const est=bzLeft(t)||t.biz.est||30,today=todayStr(),dl=t.biz.deadline&&t.biz.deadline>=today?t.biz.deadline:null;
+  let sl=bzFindSlot(est,{exclude:t.id,before:dl});if(!sl&&dl){sl=bzFindSlot(est,{exclude:t.id});if(sl)sl.late=true}
+  bzProp[t.id]=sl||'none'}
+function bzCalTab(){
+  const today=todayStr(),c=bzCfg();let h=bzNotifCard();
+  h+='<div class="bzsec"><div class="sechead"><h3>Next 7 days</h3><span class="hint">Work hours '+c.from+'–'+c.to+'</span></div>';
+  for(let i=0;i<7;i++){const k=ymd(addDays(new Date(),i)),items=S.tasks.filter(t=>t.date===k&&(t.time||t.biz)).sort(byTime),dls=bzTasks().filter(t=>!t.done&&t.biz.deadline===k);
+    const wd=c.days.includes(new Date(k+'T12:00').getDay()),free=wd?bzFreeDay(k):0;
+    const ov=overlapPairs(k).filter(p=>p[0].biz||p[1].biz)[0];
+    h+='<div class="bzday"><h4>'+bzDay(k)+'<small>'+(wd?bzDur(free)+' free':'Not a work day')+'</small></h4>'+
+      (ov?'<div class="ovl" role="note"><p><b>These overlap:</b> '+esc(ov[0].text)+' ('+timeRange(ov[0])+') and '+esc(ov[1].text)+' ('+timeRange(ov[1])+'). Nothing was moved.</p><div class="qrow"><button type="button" class="btn small" data-bza="edit" data-id="'+esc((ov[1].biz?ov[1]:ov[0]).id)+'">Change '+esc((ov[1].biz?ov[1]:ov[0]).text.slice(0,24))+'</button></div></div>':'')+
+      dls.map(t=>'<div class="bzev"><span class="tm">⚑</span><div class="grow"><b>Deadline: '+esc(t.text)+'</b><small>'+(t.done?'Completed':'Open')+'</small></div></div>').join('')+
+      (items.length?items.map(t=>{const pr=t.biz?bzPrio(t):null;return '<div class="bzev'+(t.biz?'':' other')+(t.done?' done':'')+'"><span class="tm">'+(t.time||'Any')+(t.time?'<small>'+fromMin(Math.min(1439,toMin(t.time)+(t.dur||30)))+'</small>':'')+'</span><div class="grow"><b>'+esc(t.text)+'</b><small>'+(t.biz?(pr.p?'P'+pr.p+' · ':'')+(t.biz.est?bzDur(t.biz.est)+' · ':'')+(t.biz.deadline?'deadline '+bzDay(t.biz.deadline)+' · ':'')+(t.done?'Completed':BZ_STATUS[t.biz.status])+(t.alarm?' · 🔔 '+(t.remBefore?t.remBefore+' min before':'at start'):''):(isEv(t)?'Appointment':'Personal / other')+(t.done?' · done':''))+'</small></div>'+(t.biz?'<button class="btn small ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Edit</button>':'')+'</div>'}).join(''):(dls.length?'':'<p class="hint" style="margin:0">Nothing scheduled.</p>'))+'</div>'}
+  h+='</div>';
+  const un=bzRank(bzTasks().filter(t=>bzActive(t)&&!t.time)).map(x=>x.t);
+  h+='<div class="bzsec"><div class="sechead"><h3>Not scheduled yet</h3><span class="hint">'+un.length+'</span></div>'+(un.length?un.map(t=>'<div class="bzcard" style="gap:8px"><b>'+esc(t.text)+'</b>'+bzChips(t)+(bzProp[t.id]?bzPropBox(t):'<div class="bzrow"><button class="btn small" type="button" data-bza="sched" data-id="'+esc(t.id)+'">Propose a time</button></div>')+'</div>').join(''):bzEmpty('Every open business task has a time.'))+'</div>';
+  h+='<button class="btn ghost" type="button" data-bza="fullcal">Open the full calendar</button>';
+  return h;
+}
+
+// ---------- Coach ----------
+function bzCoachTab(){
+  const P=bzPlan(),sig=P.main?[P.main.t.id,P.main.pr.p,P.step,P.slot&&P.slot.date+P.slot.time,P.missed.length].join('#'):'';
+  let h='<div class="bzcard" style="flex-direction:row;align-items:center;gap:12px"><img src="nour-face.jpg" alt="" width="48" height="48" style="border-radius:50%;flex:none"><div class="grow" style="flex:1"><b>Noor · business coach</b><div class="hint">I look at your tasks, deadlines and calendar, then pick ONE next action.</div></div><button class="btn small ghost" type="button" data-bza="say">🔊 Listen</button></div>';
+  if(P.missed.length)h+='<div class="bzask"><p>Before planning: '+P.missed.length+' unfinished task'+(P.missed.length>1?'s need':' needs')+' a quick review, so I don\'t schedule something that can\'t move.</p><button class="btn small" type="button" data-bza="tab" data-v="pend">Review now</button></div>';
+  h+=bzMainCard(P,true);
+  if(P.sec.length)h+='<div class="bzsec"><div class="sechead"><h3>If you have more time</h3><span class="hint">Max 2</span></div><ul class="bzlist">'+P.sec.map(x=>bzLi(x.t,esc(x.pr.reasons[0]||''))).join('')+'</ul></div>';
+  if(P.follow.length){const t=P.follow[0],d=Math.floor((Date.now()-t.biz.waitSince)/864e5);
+    h+='<div class="bzask"><p>You have been waiting '+d+' days on “'+esc(t.text)+'”. A short follow-up message could unblock it.</p><button class="btn small" type="button" data-bza="follow" data-id="'+esc(t.id)+'">Add “Send a follow-up” as a subtask</button></div>'}
+  // the AI only rephrases the facts; if it can't be reached, this is said plainly
+  if(P.main){const a=bzAI[sig];
+    h+='<div class="bzcard" style="gap:8px"><span class="srcnote">'+(!a||a.state==='wait'?'Noor (AI) is reading your plan…':a.state==='ok'?'Noor (AI), based only on the facts below':'Offline planner')+'</span><p style="margin:0" id="bzAiTxt">'+(a&&a.state==='ok'?esc(a.text):a&&a.state==='err'?'Noor\'s AI can\'t be reached right now. The plan above comes from simple rules applied to your saved tasks and calendar: nothing was invented.':'')+'</p></div>';
+    if(!a)setTimeout(()=>bzAsk(sig,P),0)}
+  h+='<div class="facts"><b>From your app</b>'+P.facts.map(f=>'<p>'+esc(f)+'</p>').join('')+'</div>';
+  if(P.assume.length)h+='<div class="facts assume"><b>Assumptions (not from your data)</b>'+P.assume.map(f=>'<p>'+esc(f)+'</p>').join('')+'</div>';
+  h+='<p class="hint" style="margin:0">Noor never changes your calendar without your yes. How the priority is chosen: urgency, deadline, importance, consequences, free time and blockers (see Priorities).</p>';
+  return h;
+}
+async function bzAsk(sig,P){
+  if(bzAI[sig])return;bzAI[sig]={state:'wait'};
+  const t=P.main.t;
+  const prompt='You are Noor, a calm business coach for people with ADHD. Using ONLY the facts below, write 2 short, encouraging sentences in English: why this task is the right next action, and how to begin with the first step. Do not invent tasks, dates, meetings, numbers or progress that are not in the facts. No lists, no emoji. Answer ONLY in JSON: {"say":"..."}\n\nMain priority: '+t.text+' (P'+(P.main.pr.p||'?')+')\nWhy: '+P.main.pr.reasons.slice(0,3).join('; ')+'\nFirst step: '+P.step+'\n'+(P.slot?'Free slot found: '+P.slot.date+' '+P.slot.time+'\n':'')+'Facts:\n- '+P.facts.join('\n- ')+(S.name?'\nFirst name: '+S.name:'');
+  try{const r=await askAI(prompt);const say=r&&typeof r.say==='string'?r.say.trim().slice(0,400):'';if(!say)throw new Error('empty');bzAI[sig]={state:'ok',text:say}}
+  catch(e){bzAI[sig]={state:'err'}}
+  if(!$('v-biz').hidden&&bzTab==='coach')bzRender();
+}
+
+// ---------- Pending: missed tasks, blocked, paused, notes ----------
+function bzPendTab(){
+  const M=bzMissed(),today=todayStr();let h='';
+  if(M.length){const t=M[0],y=ymd(addDays(new Date(),-1));
+    const q=t.date===y?'You didn\'t complete this task yesterday. What happened?':'You didn\'t complete this task on '+bzDay(t.date)+'. What happened?';
+    if(!bzRv||bzRv.id!==t.id){const sv=[...t.biz.notes].reverse().find(n=>n.date===t.date&&n.reason);bzRv=sv?{id:t.id,reason:sv.reason,note:sv.text,step:2}:{id:t.id,reason:null,step:1}}
+    h+='<div class="bzcard bzmain"><span class="bzkick">Review · '+M.length+' left</span><h3>'+esc(t.text)+'</h3>'+bzChips(t)+bzProg(t);
+    if(bzRv.step===1){
+      h+='<p style="margin:0;font-weight:800">'+q+'</p><div class="bzopts" role="group" aria-label="What happened">'+BZ_REASONS.map(r=>'<button type="button" class="btn ghost" data-bza="why" data-v="'+r[0]+'" aria-pressed="'+(bzRv.reason===r[0])+'">'+r[1]+'</button>').join('')+'</div>'+
+        '<label class="fl">Note <span class="opt">optional</span><textarea id="bzRvNote" rows="2" maxlength="500" placeholder="e.g. Waiting for supplier to send the quotation">'+esc(bzRv.note||'')+'</textarea></label>'+
+        '<div class="bzrow"><button class="btn" type="button" data-bza="rvnext" data-id="'+esc(t.id)+'"'+(bzRv.reason?'':' disabled')+'>Save and decide</button></div><p class="hint" style="margin:0">Nothing is marked failed and nothing moves until you decide.</p>';
+    }else{
+      const pr=bzPrio(t),est=bzLeft(t)||30,dl=t.biz.deadline&&t.biz.deadline>=today?t.biz.deadline:null;
+      let sl=bzFindSlot(est,{exclude:t.id,before:dl});if(!sl&&dl){sl=bzFindSlot(est,{exclude:t.id});if(sl)sl.late=true}
+      const wait=bzRv.reason==='waiting';
+      h+='<p class="hint" style="margin:0">Saved: '+esc(BZ_RNAME[bzRv.reason])+'. Re-checked today: '+(pr.p?'P'+pr.p+' · '+esc(pr.reasons.slice(0,2).join('; ')):'priority needs one answer')+'.</p><p style="margin:0;font-weight:800">What do you want to do with it?</p><div class="bzopts">'+
+        (wait?'<button type="button" class="btn" data-bza="rvdo" data-id="'+esc(t.id)+'" data-v="wait">Pause until they reply</button>':'')+
+        (sl?'<button type="button" class="btn'+(wait?' ghost':'')+'" data-bza="rvdo" data-id="'+esc(t.id)+'" data-v="resched" data-slot="'+sl.date+'|'+sl.time+'|'+sl.dur+'">Reschedule: '+bzDay(sl.date)+' '+sl.time+(sl.late?' (after deadline)':'')+'</button>':'<button type="button" class="btn ghost" data-bza="rvdo" data-id="'+esc(t.id)+'" data-v="pick">Reschedule (no free slot found: pick a time)</button>')+
+        '<button type="button" class="btn ghost" data-bza="rvdo" data-id="'+esc(t.id)+'" data-v="pick">Choose another time</button>'+
+        '<button type="button" class="btn ghost" data-bza="rvdo" data-id="'+esc(t.id)+'" data-v="delegate">Delegate</button>'+
+        '<button type="button" class="btn ghost" data-bza="rvdo" data-id="'+esc(t.id)+'" data-v="pause">Pause</button>'+
+        '<button type="button" class="btn ghost danger'+(bzArm==='rvdel'+t.id?' armed':'')+'" data-bza="rvdo" data-id="'+esc(t.id)+'" data-v="remove">'+(bzArm==='rvdel'+t.id?'Tap again to remove':'Remove')+'</button></div>'+
+        (bzRv.deleg?'<form class="prow" data-bzdeleg="'+esc(t.id)+'" autocomplete="off"><input type="text" maxlength="60" placeholder="Delegated to… (name)" aria-label="Delegated to"><button class="btn small" type="submit">Save</button></form>':'');
+    }
+    h+='</div>';
+  }else h+='<div class="bzcard"><h3>Nothing to review</h3><p class="hint" style="margin:0">Every past business task is done or reviewed.</p></div>';
+  const blocked=bzTasks().filter(t=>!t.done&&bzBlockers(t).length&&!['paused','delegated'].includes(t.biz.status));
+  h+='<div class="bzsec"><div class="sechead"><h3>Blocked or waiting</h3><span class="hint">'+blocked.length+'</span></div>'+(blocked.length?'<ul class="bzlist">'+blocked.map(t=>'<li class="bzli"><div class="grow"><b>'+esc(t.text)+'</b><small>'+esc(bzBlockers(t).join('; '))+(t.biz.waitSince?' · since '+bzDay(ymd(new Date(t.biz.waitSince))):'')+'</small></div>'+(t.biz.status==='blocked'?'<button class="btn small" type="button" data-bza="unblock" data-id="'+esc(t.id)+'">Unblocked</button>':'<button class="btn small ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Open</button>')+'</li>').join('')+'</ul>':bzEmpty('Nothing is blocked.'))+'</div>';
+  const pz=bzTasks().filter(t=>!t.done&&['paused','delegated'].includes(t.biz.status));
+  if(pz.length)h+='<div class="bzsec"><div class="sechead"><h3>Paused or delegated</h3><span class="hint">'+pz.length+'</span></div><ul class="bzlist">'+pz.map(t=>'<li class="bzli dim"><div class="grow"><b>'+esc(t.text)+'</b><small>'+BZ_STATUS[t.biz.status]+(t.biz.who?' to '+esc(t.biz.who):'')+'</small></div><button class="btn small ghost" type="button" data-bza="resume" data-id="'+esc(t.id)+'">Resume</button></li>').join('')+'</ul></div>';
+  const notes=bzTasks().flatMap(t=>t.biz.notes.map(n=>({n,t}))).sort((a,b)=>b.n.at-a.n.at).slice(0,10);
+  h+='<div class="bzsec"><div class="sechead"><h3>Notes</h3><span class="hint">Kept with each task</span></div>'+(notes.length?'<ul class="nhist">'+notes.map(x=>'<li><small>'+esc(x.t.text)+' · '+new Date(x.n.at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+(x.n.reason?' · '+esc(BZ_RNAME[x.n.reason]||x.n.reason):'')+'</small>'+esc(x.n.text||'(no text)')+'</li>').join('')+'</ul>':bzEmpty('No notes yet.'))+'</div>';
+  return h;
+}
+
+// ---------- Weekly review: every figure is computed from saved data ----------
+function bzWeekData(ws){
+  const a=ws.getTime(),we=addDays(ws,7),z=we.getTime(),k0=ymd(ws),k6=ymd(addDays(ws,6)),today=todayStr(),cur=today>=k0&&today<=k6,endK=cur?today:ymd(we);
+  const all=bzTasks(),inW=ms=>ms>=a&&ms<z;
+  const done=all.filter(t=>t.done&&inW(t.doneAt||0));
+  const existed=all.filter(t=>t.biz.created<z);
+  const open=existed.filter(t=>!t.done||(t.doneAt||0)>=z);
+  const overdue=open.filter(t=>t.biz.deadline&&t.biz.deadline<endK);
+  const dls=all.filter(t=>t.biz.deadline&&t.biz.deadline>=k0&&t.biz.deadline<=k6);
+  const onTime=t=>t.done&&ymd(new Date(t.doneAt))<=t.biz.deadline;
+  const met=dls.filter(onTime),missedD=dls.filter(t=>!onTime(t)&&t.biz.deadline<today);
+  const active=existed.filter(t=>(t.done&&inW(t.doneAt||0))||(t.date&&t.date>=k0&&t.date<=k6)||(t.biz.deadline&&t.biz.deadline>=k0&&t.biz.deadline<=k6));
+  let sT=0,sD=0;active.forEach(t=>{sT+=t.steps.length;sD+=t.steps.filter(x=>x.done).length});
+  const reasons={};all.forEach(t=>t.biz.notes.forEach(n=>{if(n.reason&&inW(n.at))reasons[n.reason]=(reasons[n.reason]||0)+1}));
+  const post=all.map(t=>({t,n:t.biz.hist.filter(h=>h.ev==='moved'&&inW(h.at)).length})).filter(x=>x.n>=2).sort((x,y)=>y.n-x.n);
+  const timed=done.filter(t=>t.biz.est&&t.biz.actual);
+  const sumE=timed.reduce((s,t)=>s+t.biz.est,0),sumA=timed.reduce((s,t)=>s+t.biz.actual,0);
+  const proj=(S.projs||[]).map(p=>{const ts=all.filter(t=>t.biz.proj===p.id&&t.biz.created<z);return{p,n:ts.length,d:ts.filter(t=>t.done&&(t.doneAt||0)<z).length,dw:ts.filter(t=>t.done&&inW(t.doneAt||0)).length}}).filter(x=>x.n);
+  return{k0,k6,cur,done,open,overdue,dls,met,missedD,sT,sD,reasons,post,timed,sumE,sumA,proj,active};
+}
+function bzAdvice(W){
+  const tips=[],R=W.reasons;
+  if(W.timed.length>=2&&W.sumA>W.sumE*1.25)tips.push('Tasks took about '+Math.round((W.sumA/W.sumE-1)*100)+'% longer than estimated (measured on '+W.timed.length+' tasks): add a buffer of about a quarter when you estimate.');
+  if((R.time||0)+(R.longer||0)>=2)tips.push('“Not enough time” or “took longer” was noted '+((R.time||0)+(R.longer||0))+' times: book longer blocks in your calendar for big tasks.');
+  if(R.waiting)tips.push('You waited on other people '+R.waiting+' time'+(R.waiting>1?'s':'')+': reserve a short block for follow-up messages, for example every morning.');
+  if(R.hard)tips.push('Some tasks were hard to start: give them a 5-minute first subtask and use ▶ Start now.');
+  if((R.unexpected||0)>=2)tips.push('Unexpected work came up '+R.unexpected+' times: keep one free hour a day for surprises.');
+  W.post.slice(0,2).forEach(x=>tips.push('“'+x.t.text+'” was moved '+x.n+' times: split it into smaller steps, or decide if it still matters.'));
+  if(W.missedD.length)tips.push(W.missedD.length+' deadline'+(W.missedD.length>1?'s were':' was')+' missed: plan tasks with a deadline at least one work day before it.');
+  return tips;
+}
+function bzReviewTab(){
+  const W=bzWeekData(bzWeekStart),tips=bzAdvice(W),evts=W.done.length+W.open.length;
+  const lab=new Date(W.k0+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' – '+new Date(W.k6+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+  let h='<div class="wkbar"><button class="btn small ghost" type="button" data-bza="wk" data-v="-1" aria-label="Previous week">‹</button><h3>'+(W.cur?'This week · ':'')+lab+'</h3><button class="btn small ghost" type="button" data-bza="wk" data-v="1" aria-label="Next week"'+(W.cur?' disabled':'')+'>›</button></div>';
+  h+='<div class="bzq"><div class="bzstat"><b>'+W.done.length+'</b><small>tasks completed</small></div><div class="bzstat"><b>'+W.open.length+'</b><small>still open</small></div><div class="bzstat'+(W.overdue.length?' warn':'')+'"><b>'+W.overdue.length+'</b><small>overdue</small></div><div class="bzstat"><b>'+(W.sT?Math.round(W.sD/W.sT*100)+'%':'—')+'</b><small>subtasks done'+(W.sT?' ('+W.sD+'/'+W.sT+')':'')+'</small></div></div>';
+  h+='<div class="bzcard"><h3>Deadlines this week</h3>'+(W.dls.length?'<p style="margin:0">'+W.met.length+' met · '+W.missedD.length+' missed'+(W.dls.length-W.met.length-W.missedD.length?' · '+(W.dls.length-W.met.length-W.missedD.length)+' still coming':'')+'</p>'+(W.missedD.length?'<ul class="rvlist">'+W.missedD.map(t=>'<li>Missed: '+esc(t.text)+' ('+bzDay(t.biz.deadline)+')</li>').join('')+'</ul>':''):'<p class="hint" style="margin:0">No deadline this week.</p>')+'</div>';
+  if(W.proj.length)h+='<div class="bzcard"><h3>Progress toward goals</h3>'+W.proj.map(x=>'<div><b>'+esc(x.p.name)+'</b><div class="bzprog"><span>'+x.d+' of '+x.n+' tasks done'+(x.dw?' (+'+x.dw+' this week)':'')+'</span><div class="pbar"><i style="width:'+Math.round(x.d/x.n*100)+'%"></i></div></div></div>').join('')+'</div>';
+  const rs=Object.entries(W.reasons).sort((a,b)=>b[1]-a[1]);
+  h+='<div class="bzcard"><h3>Blockers you noted</h3>'+(rs.length?'<ul class="rvlist">'+rs.map(r=>'<li>'+esc(BZ_RNAME[r[0]]||r[0])+': '+r[1]+'</li>').join('')+'</ul>':'<p class="hint" style="margin:0">None recorded this week.</p>')+
+    (W.post.length?'<p style="margin:0"><b>Moved several times:</b> '+W.post.map(x=>esc(x.t.text)+' ('+x.n+'×)').join(', ')+'</p>':'')+'</div>';
+  h+='<div class="bzcard"><h3>Estimated vs actual time</h3>'+(W.timed.length?'<p style="margin:0">'+W.timed.length+' task'+(W.timed.length>1?'s':'')+': estimated '+bzDur(W.sumE)+', actual '+bzDur(W.sumA)+'.</p><p class="hint" style="margin:0">Actual time is measured from ▶ Start to Completed.</p>':'<p class="hint" style="margin:0">Not tracked yet: use ▶ Start on a task with an estimate, then mark it completed.</p>')+'</div>';
+  // coach assessment: built from the figures above, never from guesses
+  const well=W.done.length?'You completed '+W.done.length+' task'+(W.done.length>1?'s':'')+': '+W.done.slice(0,3).map(t=>t.text).join(', ')+(W.done.length>3?'…':'')+'.'+(W.met.length?' '+W.met.length+' deadline'+(W.met.length>1?'s':'')+' met.':''):'No business task was marked completed this week. That is information, not failure: next week starts with one small step.';
+  const slow=rs.length?'Most noted: '+rs.slice(0,2).map(r=>(BZ_RNAME[r[0]]||r[0]).toLowerCase()+' ('+r[1]+')').join(', ')+'.':W.post.length?'Some tasks were moved several times.':'No blockers were recorded, so I can\'t say what slowed you down.';
+  const nextP=bzRank(bzTasks().filter(bzActive)).filter(x=>x.pr.p&&x.pr.p<=2).slice(0,2).map(x=>x.t.text);
+  h+='<div class="bzcard bzmain"><span class="bzkick">Coach review</span>'+(evts<2&&!rs.length?'<p class="hint" style="margin:0">Not much data this week yet, so this review is short.</p>':'')+
+    '<div class="rvblock"><b>What went well</b><p>'+esc(well)+'</p></div>'+
+    '<div class="rvblock"><b>What slowed you down</b><p>'+esc(slow)+'</p></div>'+
+    '<div class="rvblock"><b>What to improve</b><p>'+esc(tips[0]||(evts<3?'Not enough data yet to suggest a change.':'Keep the same rhythm: it is working.'))+'</p></div>'+
+    '<div class="rvblock"><b>Next week\'s focus</b><p>'+esc(nextP.length?'Finish '+nextP.map(x=>'“'+x+'”').join(' and ')+' before lower-priority work.':'Pick one priority on Monday with the coach.')+'</p></div>'+
+    (tips.length>1?'<div class="rvblock"><b>More suggestions</b><ul class="rvlist">'+tips.slice(1).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>':'')+
+    '<p class="srcnote" style="margin:0">Based only on your saved tasks, notes and times.</p></div>';
+  return h;
+}
+
+// ---------- page ----------
+function bzRender(){
+  const v=$('v-biz');if(!v)return;
+  const ok=hasPlan('business');
+  $('bzTabs').hidden=!ok;$('bzSet').hidden=!ok;
+  $('bzProjWrap').hidden=!ok||bzTab!=='dash';
+  if(!ok){$('bzBody').innerHTML='<div class="bzcard bzpitch"><h3>Your work, one clear next step</h3><ul><li>Business tasks with subtasks, deadlines and urgency</li><li>Automatic priority (P1 / P2 / P3) with the reason</li><li>Scheduled in your calendar, with reminders</li><li>A business coach that picks your next action</li><li>Missed-task review and a weekly business review</li></ul><button class="btn" type="button" data-plan="business">Try Business free</button><p class="hint" style="margin:0">Payment is not open yet: during this early version, Business is a free trial.</p></div>';return}
+  bzSyncPrio();
+  const m=bzMissed().length;$('bzPendCnt').hidden=!m;$('bzPendCnt').textContent=m;
+  document.querySelectorAll('#bzTabs [data-bz]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.bz===bzTab)));
+  const f={dash:bzDash,tasks:bzTasksTab,prio:bzPrioTab,cal:bzCalTab,coach:bzCoachTab,pend:bzPendTab,review:bzReviewTab}[bzTab]||bzDash;
+  $('bzBody').innerHTML=f();
+}
+function bzGo(tab){bzTab=tab;if($('v-biz').hidden)goView('v-biz');else bzRender();scrollTo(0,0)}
+window.adhdwBiz={prio:id=>bzPrio(S.tasks.find(t=>t.id===id)),slot:(m,o)=>bzFindSlot(m,o),plan:()=>{const P=bzPlan();return{main:P.main&&P.main.t.id,sec:P.sec.map(x=>x.t.id),step:P.step,slot:P.slot,facts:P.facts,assume:P.assume,planned:P.planned}},week:()=>{const W=bzWeekData(bzWeekStart);return{done:W.done.length,open:W.open.length,overdue:W.overdue.length,met:W.met.length,missed:W.missedD.length,sT:W.sT,sD:W.sD,reasons:W.reasons,est:W.sumE,actual:W.sumA}},go:bzGo}; // used by the automated tests
+
+// ---------- actions ----------
+function bzSaveAll(msg){save();render();bzRender();if(msg)toast(msg)}
+function bzPlace(id,sl){const t=S.tasks.find(x=>x.id===id);if(!t)return;
+  const [date,time,d]=sl.split('|'),dur=+d||t.biz.est||30;
+  const clash=overlapsWith({date,time,dur},id);if(clash.length){delete bzProp[id];bzProp.main=null;bzRender();toast('That time is no longer free ('+clash[0].text+'). Nothing was changed.');return}
+  const r=updateTask(id,{date,time,dur,alarm:true});if(!r.ok){toast("Couldn't schedule: "+r.err);return}
+  if(t.remBefore==null)t.remBefore=bzCfg().rem;t.fired=false;delete bzProp[id];bzProp.main=null;
+  bzSaveAll('Scheduled: '+t.text+' · '+bzDay(date)+' '+timeRange(t)+'. Reminder '+(t.remBefore?t.remBefore+' min before.':'at the start.'));
+  if(typeof notifyHint==='function')notifyHint();
+}
+function bzStart(id){const t=S.tasks.find(x=>x.id===id);if(!t||t.done)return;
+  if(t.biz.status!=='doing')bzHist(t,'started');t.biz.status='doing';t.biz.startAt=Date.now();save();render();
+  hOpen({tid:id,from:'biz'})}
+function bzStep(t,i){const s=t.steps[i];if(!s)return;
+  if(s.done){s.done=false;unwin(s.rw);s.rw=null;if(t.done)uncompleteTask(t);bzSaveAll();return}
+  s.done=true;if(['todo','resched'].includes(t.biz.status))t.biz.status='doing';
+  if(t.steps.every(z=>z.done)){completeTask(t,15,'All subtasks done: task completed');bzRender();return}
+  s.rw=win(5,'step','Subtask done');bzSaveAll();
+}
+document.addEventListener('click',e=>{
+  const tb=e.target.closest('#bzTabs [data-bz]');if(tb){bzTab=tb.dataset.bz;bzArm=null;bzRender();return}
+  const b=e.target.closest('[data-bza]');if(!b)return;
+  const a=b.dataset.bza,id=b.dataset.id,t=id?S.tasks.find(x=>x.id===id&&x.biz):null;
+  if(b.closest('summary')&&a==='done')e.preventDefault();
+  if(a!=='del'&&a!=='rvdo')bzArm=null;
+  if(a==='tab')return bzGo(b.dataset.v);
+  if(a==='new')return bzEdit(null);
+  if(a==='edit'){if(t)bzEdit(id);return}
+  if(a==='filter'){bzFilter=b.dataset.v;return bzRender()}
+  if(a==='fullcal')return goView('v-agenda');
+  if(a==='allow'){askNotif(p=>{if(typeof permLabel==='function')permLabel();bzRender();toast(p==='granted'?'Alerts are on ✓':'Alerts were not allowed. Reminders still pop up inside the app.')});return}
+  if(a==='ics'){addToPhoneCalendar(bzTasks().filter(x=>!x.done&&x.date&&x.time&&x.date>=todayStr()));return}
+  if(a==='say'){const P=bzPlan();speak(P.main?(S.name?S.name+', ':'')+'your next action is: '+P.main.t.text+'. First step: '+P.step+'.':'You have no open business task. Add one small, clear action.');if(!S.voice)toast('Voice is off (turn it on with the speaker button in Coach).');return}
+  if(a==='wk'){const n=addDays(bzWeekStart,7*+b.dataset.v);if(n<=monday(new Date()))bzWeekStart=n;return bzRender()}
+  if(a==='why'){bzRv.reason=b.dataset.v;bzRv.note=($('bzRvNote')||{}).value||'';return bzRender()}
+  if(!t)return;
+  if(a==='done'){if(t.done)uncompleteTask(t);else completeTask(t,10,'Business task completed');bzRender();return}
+  if(a==='sub')return bzStep(t,+b.dataset.i);
+  if(a==='subup'||a==='subdown'){const i=+b.dataset.i,j=a==='subup'?i-1:i+1;if(j<0||j>=t.steps.length)return;[t.steps[i],t.steps[j]]=[t.steps[j],t.steps[i]];return bzSaveAll()}
+  if(a==='up'||a==='down'){const L=bzOrdered(),i=L.indexOf(t),j=a==='up'?i-1:i+1;if(i<0||j<0||j>=L.length)return;L.forEach((x,k)=>x.biz.ord=k);[L[i].biz.ord,L[j].biz.ord]=[j,i];return bzSaveAll()}
+  if(a==='del'){if(bzArm!=='del'+id){bzArm='del'+id;return bzRender()}bzArm=null;deleteTask(id);bzRender();toast('Deleted: '+t.text+'. Its calendar entry and reminder are gone too.');return}
+  if(a==='start')return bzStart(id);
+  if(a==='sched'){bzProposeFor(t);if(bzTab!=='tasks'&&bzTab!=='cal')bzTab='cal';return bzRender()}
+  if(a==='propose'){bzProp.main=id+'@'+b.dataset.slot;return bzRender()}
+  if(a==='place')return bzPlace(id,b.dataset.slot);
+  if(a==='over'){const v=+b.dataset.v;const was=t.biz.over;t.biz.over=v||null;if(was!==t.biz.over)bzHist(t,'priority',was?'P'+was:'auto',v?'P'+v:'auto');return bzSaveAll(v?'Priority set to P'+v:'Priority back to automatic')}
+  if(a==='answer'){t.biz[b.dataset.k]=b.dataset.v;return bzSaveAll()}
+  if(a==='unblock'){t.biz.status='todo';t.biz.waitSince=null;bzHist(t,'unblocked');return bzSaveAll('Unblocked: '+t.text)}
+  if(a==='resume'){t.biz.status='todo';bzHist(t,'resumed');return bzSaveAll('Back in your active tasks: '+t.text)}
+  if(a==='follow'){t.steps.push({id:uid(),t:'Send a follow-up message',done:false});bzHist(t,'followup');return bzSaveAll('Added: Send a follow-up message')}
+  if(a==='rvnext'){const note=($('bzRvNote')||{}).value||'';if(!bzRv||!bzRv.reason)return;
+    t.biz.notes.push({id:uid(),at:Date.now(),text:note.trim().slice(0,500),reason:bzRv.reason,date:t.date});bzHist(t,'missed',t.date);
+    if(bzRv.reason==='nolonger'&&!t.biz.over)t.biz.over=3;
+    bzRv.step=2;bzRv.note=note;return bzSaveAll('Note saved with the task.')}
+  if(a==='rvdo'){const v=b.dataset.v,day=t.date;
+    if(v==='remove'){if(bzArm!=='rvdel'+id){bzArm='rvdel'+id;return bzRender()}bzArm=null;bzRv=null;deleteTask(id);bzRender();return toast('Removed: '+t.text)}
+    if(v==='delegate'){bzRv.deleg=true;return bzRender()}
+    if(v==='resched'){bzRv=null;return bzPlace(id,b.dataset.slot)}
+    if(v==='pick')return bzEdit(id);
+    t.biz.rev=day;
+    if(v==='wait'){t.biz.status='blocked';t.biz.waitSince=Date.now();bzRv=null;updateTask(id,{date:null,time:null,dur:null,alarm:false});bzHist(t,'waiting');return bzSaveAll('Paused until they reply. The coach will suggest a follow-up later.')}
+    if(v==='pause'){t.biz.status='paused';bzRv=null;updateTask(id,{date:null,time:null,dur:null,alarm:false});bzHist(t,'paused');return bzSaveAll('Paused: '+t.text+'. Resume it from Pending.')}
+  }
+});
+document.addEventListener('submit',e=>{
+  const f=e.target.closest('[data-bzsub]');
+  if(f){e.preventDefault();const t=S.tasks.find(x=>x.id===f.dataset.bzsub);const i=f.querySelector('input'),v=i.value.trim();if(!t||!v)return;
+    t.steps.push({id:uid(),t:v.slice(0,120),done:false});bzSaveAll();
+    setTimeout(()=>{const n=document.querySelector('[data-bzsub="'+CSS.escape(t.id)+'"] input');if(n&&!TOUCH)n.focus()},30);return}
+  const g=e.target.closest('[data-bzdeleg]');
+  if(g){e.preventDefault();const t=S.tasks.find(x=>x.id===g.dataset.bzdeleg);const who=g.querySelector('input').value.trim();if(!t)return;
+    t.biz.rev=t.date;t.biz.status='delegated';t.biz.who=who.slice(0,60)||undefined;bzRv=null;updateTask(t.id,{date:null,time:null,dur:null,alarm:false});bzHist(t,'delegated');bzSaveAll('Delegated'+(who?' to '+who:'')+'. It stays in Pending until you resume it.')}
+});
+document.addEventListener('input',e=>{if(e.target.id==='bzRvNote'&&bzRv)bzRv.note=e.target.value});
+document.addEventListener('click',e=>{if(e.target.closest('[data-plan="business"]'))setTimeout(bzRender,0)});
+
+// ---------- business task editor (create + edit) ----------
+function bzOpenSheet(title,html){$('bzSTitle').textContent=title;$('bzSBody').innerHTML=html;$('bzSheet').hidden=false;document.body.classList.add('noscroll');setTimeout(()=>{try{$('bzSTitle').focus()}catch(e){}},50)}
+function bzCloseSheet(){$('bzSheet').hidden=true;document.body.classList.remove('noscroll');bzE=null}
+document.querySelectorAll('[data-bzclose]').forEach(x=>x.addEventListener('click',bzCloseSheet));
+$('bzSheet').addEventListener('click',e=>{if(e.target.closest('[data-bzclose]'))bzCloseSheet()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('bzSheet').hidden)bzCloseSheet()});
+const segH=(f,opts,cur,label)=>'<div class="seg" data-f="'+f+'" role="group" aria-label="'+label+'">'+opts.map(o=>'<button type="button" data-v="'+o[0]+'" aria-pressed="'+(String(cur)===String(o[0]))+'">'+o[1]+'</button>').join('')+'</div>';
+function bzEdit(id){
+  if(!hasPlan('business')){bzGo('dash');return}
+  if(!$('tEd').hidden)closeEditor();
+  const t=id?S.tasks.find(x=>x.id===id&&x.biz):null;if(id&&!t)return;
+  const c=bzCfg(),b=t?t.biz:{urgent:false,imp:null,conseq:null,deadline:null,est:null,status:'todo',over:null,deps:[],notes:[],proj:null};
+  bzE={id:t?t.id:null,steps:t?t.steps.map(s=>Object.assign({},s)):[],ok:null,del:false,urgent:b.urgent,imp:b.imp,conseq:b.conseq,est:b.est,over:b.over||0,status:b.status};
+  const others=bzTasks().filter(x=>x.id!==bzE.id&&!x.done&&!(bzE.id&&x.biz.deps.includes(bzE.id)));
+  const rem=t?(t.time?(t.alarm?String(t.remBefore||0):'off'):String(c.rem)):String(c.rem);
+  bzOpenSheet(t?'Edit business task':'New business task',
+  '<form id="bzForm" novalidate autocomplete="off" class="bzsbody">'+
+  '<label class="fl">Task <span class="req">required</span><input id="bzT" type="text" maxlength="120" placeholder="e.g. Follow up with suppliers" value="'+esc(t?t.text:'')+'"></label>'+
+  '<div class="fl"><span>Urgent?</span>'+segH('urgent',[['1','⚡ Urgent'],['0','Not urgent']],b.urgent?1:0,'Urgent')+'</div>'+
+  '<div class="fl"><span>Importance to the business</span>'+segH('imp',[['high','High'],['med','Medium'],['low','Low']],b.imp,'Importance')+'</div>'+
+  '<label class="fl">Deadline <span class="opt">optional</span><input id="bzDl" type="date" value="'+(b.deadline||'')+'"></label>'+
+  '<div class="fl"><span>Estimated time</span>'+segH('est',[[15,'15 min'],[30,'30 min'],[60,'1 h'],[120,'2 h'],[180,'3 h']],b.est,'Estimated duration')+'<label class="sub">Other (minutes)<input id="bzEst" type="number" min="5" max="1440" inputmode="numeric" value="'+(b.est&&![15,30,60,120,180].includes(b.est)?b.est:'')+'"></label></div>'+
+  '<div class="fl"><span>Subtasks <span class="opt">small actions</span></span><div class="subed" id="bzSubs"></div><div class="bzrow"><button type="button" class="btn small ghost" data-be="addsub">＋ Add a subtask</button><button type="button" class="btn small ghost" data-be="aisub">✨ Suggest subtasks</button></div></div>'+
+  '<div class="fl"><span>When will you do it? <span class="opt">optional</span></span><div class="two"><label class="sub">Day<input id="bzD" type="date" value="'+(t&&t.date||'')+'"></label><label class="sub">Start<input id="bzS" type="time" value="'+(t&&t.time||'')+'"></label></div><button type="button" class="btn small ghost" data-be="suggest">✨ Suggest a free time</button><small class="hint" id="bzSugTxt" aria-live="polite"></small></div>'+
+  '<label class="fl">Reminder<select id="bzRem"><option value="off">No reminder</option>'+[0,5,10,15,30,60].map(m=>'<option value="'+m+'"'+(rem===String(m)?' selected':'')+'>'+(m?m+' min before':'At the start time')+'</option>').join('')+'</select></label>'+
+  '<div class="prbox" id="bzPr" aria-live="polite"></div>'+
+  '<div class="fl"><span>Priority</span>'+segH('over',[[0,'Auto'],[1,'P1'],[2,'P2'],[3,'P3']],b.over||0,'Priority')+'</div>'+
+  '<details'+(t&&(t.desc||b.notes.length||b.deps.length||b.status!=='todo')?' open':'')+'><summary>More details</summary>'+
+    '<label class="fl">Description<textarea id="bzDesc" rows="3" maxlength="500" placeholder="Context, links, who is involved…">'+esc(t&&t.desc||'')+'</textarea></label>'+
+    '<label class="fl">Business goal or project<select id="bzProj"><option value="">No project</option>'+(S.projs||[]).map(p=>'<option value="'+esc(p.id)+'"'+(b.proj===p.id?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'<option value="__new">＋ New project…</option></select></label>'+
+    '<label class="fl" id="bzNewProjRow" hidden>New project name<input id="bzNewProj" type="text" maxlength="80" placeholder="e.g. Open an online shop"></label>'+
+    '<div class="fl"><span>If it is late, the consequences are…</span>'+segH('conseq',[['high','Serious'],['med','Some'],['low','Minor']],b.conseq,'Consequences')+'</div>'+
+    '<label class="fl">Status<select id="bzSt">'+Object.entries(BZ_STATUS).map(([k,v])=>'<option value="'+k+'"'+(b.status===k?' selected':'')+'>'+v+'</option>').join('')+'</select></label>'+
+    '<div class="fl"><span>Depends on <span class="opt">optional</span></span>'+(others.length?'<div class="deplist">'+others.map(x=>'<label><input type="checkbox" value="'+esc(x.id)+'"'+(b.deps.includes(x.id)?' checked':'')+'>'+esc(x.text)+'</label>').join('')+'</div>':'<small class="hint">No other open business task.</small>')+'</div>'+
+    '<label class="fl">Add a note or blocker<textarea id="bzNote" rows="2" maxlength="500" placeholder="e.g. Waiting for the supplier quotation"></textarea></label>'+
+    (b.notes.length?'<ul class="nhist">'+[...b.notes].reverse().slice(0,8).map(n=>'<li><small>'+new Date(n.at).toLocaleDateString('en-GB',{day:'numeric',month:'short'})+(n.reason?' · '+esc(BZ_RNAME[n.reason]||n.reason):'')+'</small>'+esc(n.text||'(no text)')+'</li>').join('')+'</ul>':'')+
+  '</details>'+
+  (t?'<label class="toggle"><input id="bzDone" type="checkbox"'+(t.done?' checked':'')+'> Completed</label>':'')+
+  '<p class="ederr" id="bzErr" role="alert"></p><div class="edwarn" id="bzWarn" role="alert" hidden></div>'+
+  '<div class="sbtns"><button class="btn" type="submit" id="bzSave">Save</button><button class="btn ghost" type="button" data-bzclose>Cancel</button>'+(t?'<button class="btn ghost danger" type="button" data-be="del">Delete</button>':'')+'</div></form>');
+  bzSubsRender();bzPrUpdate();
+  if(!TOUCH)setTimeout(()=>{try{$('bzT').focus()}catch(e){}},80);
+}
+function bzSubsRender(){const box=$('bzSubs');if(!box)return;
+  box.innerHTML=bzE.steps.map((s,i)=>'<div class="srow"><input type="text" maxlength="120" data-si="'+i+'" value="'+esc(s.t)+'" aria-label="Subtask '+(i+1)+'" placeholder="Subtask '+(i+1)+'"><button type="button" data-be="sup" data-i="'+i+'" aria-label="Move up"'+(i?'':' disabled')+'>↑</button><button type="button" data-be="sdel" data-i="'+i+'" aria-label="Remove subtask">×</button></div>').join('')}
+function bzRead(){
+  const v=id=>($(id)||{}).value||'';
+  const estIn=v('bzEst').trim(),est=estIn?Math.round(+estIn):bzE.est;
+  const st=$('bzSt')?$('bzSt').value:bzE.status;
+  const deps=[...document.querySelectorAll('#bzForm .deplist input:checked')].map(x=>x.value);
+  return{text:v('bzT').trim().replace(/\s+/g,' '),desc:v('bzDesc').trim(),deadline:v('bzDl')||null,est:estIn&&!(est>=5&&est<=1440)?NaN:est||null,
+    date:v('bzD')||null,time:v('bzS')||null,rem:v('bzRem'),proj:v('bzProj'),newProj:v('bzNewProj').trim(),status:st,deps,note:v('bzNote').trim(),done:$('bzDone')?$('bzDone').checked:false,
+    urgent:bzE.urgent,imp:bzE.imp,conseq:bzE.conseq,over:bzE.over};
+}
+function bzPrUpdate(){const box=$('bzPr');if(!box||!bzE)return;const r=bzRead();
+  const fake={id:bzE.id||'_new',text:r.text,steps:bzE.steps.filter(s=>s.t.trim()),date:r.date,time:r.time,biz:{urgent:r.urgent,imp:r.imp,conseq:r.conseq,deadline:okDate(r.deadline)?r.deadline:null,est:r.est>0?r.est:null,status:r.status,over:+r.over||null,deps:r.deps,notes:[]}};
+  const pr=bzPrio(fake);
+  box.innerHTML=pr.p?'<div class="ph">'+(r.over?'Your choice':'Recommended')+': '+pchip(pr.p)+(r.over&&pr.auto!==+r.over?'<span class="hint">(app suggests P'+pr.auto+')</span>':'')+'</div><ul class="reason">'+pr.reasons.slice(0,4).map(x=>'<li>'+esc(x)+'</li>').join('')+(pr.reasons.length?'':'<li>No urgency, importance or deadline yet</li>')+'</ul>'
+    :'<div class="ph">Priority: one question first</div><p class="hint" style="margin:0">'+esc(pr.ask.q)+' Answer above'+(pr.ask.k==='conseq'?' (More details → consequences)':'')+', or pick P1/P2/P3 yourself.</p>';
+}
+function bzEdErr(m,f){$('bzErr').textContent=m||'';if(m&&f){const el=$(f);if(el){el.setAttribute('aria-invalid','true');try{el.focus()}catch(e){}}}}
+$('bzSheet').addEventListener('input',e=>{if(!bzE)return;
+  const si=e.target.closest('[data-si]');if(si){const s=bzE.steps[+si.dataset.si];if(s)s.t=si.value}
+  if(e.target.id==='bzEst'&&e.target.value)document.querySelectorAll('#bzForm [data-f="est"] button').forEach(x=>x.setAttribute('aria-pressed','false'));
+  if(['bzD','bzS','bzEst','bzDl'].includes(e.target.id)){bzE.ok=null;$('bzWarn').hidden=true;$('bzSave').textContent='Save'}
+  e.target.removeAttribute('aria-invalid');bzPrUpdate()});
+$('bzSheet').addEventListener('change',e=>{if(!bzE)return;if(e.target.id==='bzProj'){$('bzNewProjRow').hidden=e.target.value!=='__new'}bzPrUpdate()});
+$('bzSheet').addEventListener('click',async e=>{if(!bzE)return;
+  const sb=e.target.closest('#bzForm .seg [data-v]');
+  if(sb){const f=sb.parentElement.dataset.f,v=sb.dataset.v;sb.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===sb)));
+    if(f==='urgent')bzE.urgent=v==='1';else if(f==='est'){bzE.est=+v;$('bzEst').value='';bzE.ok=null}else if(f==='over')bzE.over=+v;else bzE[f]=v;
+    bzPrUpdate();return}
+  const be=e.target.closest('[data-be]');if(!be)return;const a=be.dataset.be;
+  if(a==='addsub'){bzE.steps.push({id:uid(),t:'',done:false});bzSubsRender();const ins=document.querySelectorAll('#bzSubs input');const l=ins[ins.length-1];if(l)try{l.focus()}catch(x){}return}
+  if(a==='sdel'){bzE.steps.splice(+be.dataset.i,1);bzSubsRender();bzPrUpdate();return}
+  if(a==='sup'){const i=+be.dataset.i;if(i>0){[bzE.steps[i-1],bzE.steps[i]]=[bzE.steps[i],bzE.steps[i-1]];bzSubsRender()}return}
+  if(a==='aisub'){const r=bzRead();if(!r.text){bzEdErr('Write the task first.','bzT');return}
+    be.disabled=true;be.textContent='Noor is thinking…';
+    try{const res=await askAI('You help a busy professional with ADHD. Break this business task into 3 to 6 concrete subtasks (short, 8 words max each, in English). Answer only in JSON: {"etapes":["..."]}\n\nTask: '+r.text+(r.desc?'\nDetails: '+r.desc:''));
+      const arr=Array.isArray(res)?res:res&&res.etapes;if(!Array.isArray(arr)||!arr.length)throw new Error('empty');
+      if(!bzE)return;arr.slice(0,6).forEach(x=>bzE.steps.push({id:uid(),t:String(x).slice(0,120),done:false}));bzSubsRender();bzPrUpdate();be.textContent='✨ Suggested by Noor (AI): edit freely'}
+    catch(err){if(!bzE)return;be.textContent='✨ Suggest subtasks';toast("Noor's AI can't be reached right now. Add your subtasks yourself, one small action each.")}
+    be.disabled=false;return}
+  if(a==='suggest'){const r=bzRead(),mins=r.est>0?r.est:30,today=todayStr(),dl=okDate(r.deadline)&&r.deadline>=today?r.deadline:null;
+    let sl=bzFindSlot(mins,{exclude:bzE.id,before:dl}),late=false;if(!sl&&dl){sl=bzFindSlot(mins,{exclude:bzE.id});late=!!sl}
+    if(!sl){$('bzSugTxt').textContent='No free '+bzDur(mins)+' block in your work hours in the next 4 weeks. Shorten it, split it, or widen your hours.';return}
+    $('bzD').value=sl.date;$('bzS').value=sl.time;if(!(r.est>0)){bzE.est=30}
+    if($('bzRem').value==='off')$('bzRem').value=String(bzCfg().rem);
+    $('bzSugTxt').textContent='Suggested: '+bzDay(sl.date)+' '+sl.time+'–'+fromMin(toMin(sl.time)+mins)+(late?'. Not enough free time before the deadline: this is the first free slot after it.':', free in your calendar. You can change it.');
+    bzE.ok=null;bzPrUpdate();return}
+  if(a==='del'){if(!bzE.id)return;if(!bzE.del){bzE.del=true;be.textContent='Tap again to delete';be.classList.add('armed');return}
+    const t=S.tasks.find(x=>x.id===bzE.id);deleteTask(bzE.id);bzCloseSheet();bzRender();if(t)toast('Deleted: '+t.text+'. Its calendar entry and reminder are gone too.');return}
+});
+$('bzSheet').addEventListener('submit',e=>{const f=e.target.closest('#bzForm');if(!f||!bzE)return;e.preventDefault();
+  document.querySelectorAll('#bzForm [aria-invalid]').forEach(x=>x.removeAttribute('aria-invalid'));
+  const r=bzRead(),today=todayStr();
+  if(!r.text)return bzEdErr('Give it a name, even a short one.','bzT');
+  if(r.deadline&&!okDate(r.deadline))return bzEdErr("That deadline date doesn't exist.",'bzDl');
+  if(Number.isNaN(r.est))return bzEdErr('Estimated time: between 5 and 1440 minutes.','bzEst');
+  if(r.date&&!okDate(r.date))return bzEdErr("That day doesn't exist.",'bzD');
+  if(r.time&&!r.date)return bzEdErr('Pick the day for this start time, or clear the time.','bzD');
+  if(r.time&&r.est&&toMin(r.time)+r.est>1440)return bzEdErr('It would end after midnight. Start earlier or split it.','bzS');
+  if(r.proj==='__new'&&!r.newProj)return bzEdErr('Name the new project, or choose another one.','bzNewProj');
+  // warnings that need a second tap: overlaps (never moved for you), after the deadline, not enough time
+  const dur=r.time?(r.est||null):null,warn=[];
+  if(r.time&&!r.done){const ov=overlapsWith({date:r.date,time:r.time,dur},bzE.id);if(ov.length)warn.push('<b>This overlaps with</b><ul>'+ov.map(x=>'<li>'+esc(x.text)+' · '+timeRange(x)+'</li>').join('')+'</ul>Both will be kept; nothing else is moved.')}
+  if(r.date&&r.deadline&&r.date>r.deadline&&!r.done)warn.push('It is planned <b>after its deadline</b> ('+bzDay(r.deadline)+').');
+  if(r.deadline&&r.est&&r.deadline>=today&&!r.done){const free=bzFreeUntil(r.deadline,bzE.id);if(free<r.est)warn.push('<b>Not enough free work time</b> before the deadline: '+bzDur(free)+' free for about '+bzDur(r.est)+'. Options: move a P3 task, shorten or split it, or ask to move the deadline.')}
+  const key=[r.date,r.time,r.est,r.deadline].join('|');
+  if(warn.length&&bzE.ok!==key){bzE.ok=key;$('bzWarn').innerHTML=warn.join('<br>')+'<br>Tap <b>Save anyway</b> to confirm, or change it.';$('bzWarn').hidden=false;$('bzSave').textContent='Save anyway';bzEdErr('');return}
+  let proj=r.proj&&r.proj!=='__new'?r.proj:null;
+  if(r.proj==='__new'){const p={id:uid(),name:r.newProj.slice(0,80),plan:{},ms:[]};S.projs.push(p);proj=p.id}
+  const alarm=!!r.time&&r.rem!=='off',base={text:r.text,desc:r.desc,date:r.date,time:r.time,dur,cat:'work',alarm};
+  const steps=bzE.steps.filter(s=>s.t.trim()).map(s=>({id:s.id||uid(),t:s.t.trim().slice(0,120),done:!!s.done,rw:s.rw||null}));
+  let t,wasNew=!bzE.id;
+  if(wasNew){const res=createTask(base);if(!res.ok&&!res.task){return bzEdErr(res.err||"Couldn't save.")}t=res.task;
+    const ords=bzTasks().filter(x=>x!==t).map(x=>x.biz.ord);
+    t.biz={created:Date.now(),ord:ords.length?Math.min(...ords)-1:0,notes:[],hist:[],deps:[]};bzHist(t,'created');if(t.date)bzHist(t,'scheduled',undefined,t.date+(t.time?' '+t.time:''))}
+  else{t=S.tasks.find(x=>x.id===bzE.id);if(!t){bzCloseSheet();return}
+    const res=updateTask(t.id,base);if(!res.ok)return bzEdErr(res.err||"Couldn't save.")}
+  const b=t.biz,oldSt=b.status,oldRem=t.remBefore;
+  Object.assign(b,{proj,urgent:r.urgent,imp:r.imp,conseq:r.conseq,deadline:r.deadline,est:r.est,over:+r.over||null,deps:r.deps});
+  if(r.status!==oldSt){b.status=r.status;if(!wasNew)bzHist(t,'status',oldSt,r.status);if(r.status==='blocked')b.waitSince=b.waitSince||Date.now();else b.waitSince=null}
+  if(r.note)b.notes.push({id:uid(),at:Date.now(),text:r.note.slice(0,500),reason:r.status==='blocked'?'blocker':undefined});
+  t.steps=steps;
+  if(alarm){t.remBefore=+r.rem;if(oldRem!==t.remBefore)t.fired=false}else delete t.remBefore;
+  normTask(t);
+  if(!wasNew){if(r.done&&!t.done)completeTask(t,10,'Business task completed');else if(!r.done&&t.done)uncompleteTask(t)}
+  bzE=null;$('bzSheet').hidden=true;document.body.classList.remove('noscroll');
+  bzSaveAll((wasNew?'Saved: ':'Updated: ')+t.text+(t.time?' · in your calendar '+bzDay(t.date)+' '+timeRange(t)+(t.alarm?', reminder '+(t.remBefore?t.remBefore+' min before':'at the start'):''):''));
+  if(t.alarm&&typeof notifyHint==='function')notifyHint();
+});
+
+// ---------- work hours & reminder settings ----------
+$('bzSet').addEventListener('click',()=>{const c=bzCfg();
+  bzOpenSheet('Work hours & reminders','<form id="bzCfgF" class="bzsbody" novalidate><p class="hint" style="margin:0">Used to find free time and propose slots. Your calendar items are always respected.</p>'+
+    '<div class="fl"><span>Work days</span><div class="daysel" id="bzDays">'+BZ_DOW.map((d,i)=>'<button type="button" data-d="'+i+'" aria-pressed="'+c.days.includes(i)+'">'+d+'</button>').join('')+'</div></div>'+
+    '<div class="fl"><span>Hours</span><div class="two"><label class="sub">From<input id="bzFrom" type="time" value="'+c.from+'"></label><label class="sub">To<input id="bzTo" type="time" value="'+c.to+'"></label></div></div>'+
+    '<label class="fl">Default reminder<select id="bzDefRem">'+[0,5,10,15,30,60].map(m=>'<option value="'+m+'"'+(c.rem===m?' selected':'')+'>'+(m?m+' min before':'At the start time')+'</option>').join('')+'</select></label>'+
+    '<p class="ederr" id="bzCfgErr" role="alert"></p><div class="sbtns"><button class="btn" type="submit">Save</button><button class="btn ghost" type="button" data-bzclose>Cancel</button></div></form>')});
+$('bzSheet').addEventListener('click',e=>{const d=e.target.closest('#bzDays [data-d]');if(d)d.setAttribute('aria-pressed',String(d.getAttribute('aria-pressed')!=='true'))});
+$('bzSheet').addEventListener('submit',e=>{const f=e.target.closest('#bzCfgF');if(!f)return;e.preventDefault();
+  const days=[...document.querySelectorAll('#bzDays [aria-pressed="true"]')].map(x=>+x.dataset.d),from=$('bzFrom').value,to=$('bzTo').value;
+  if(!days.length){$('bzCfgErr').textContent='Pick at least one work day.';return}
+  if(!RE_T.test(from)||!RE_T.test(to)||toMin(to)<=toMin(from)){$('bzCfgErr').textContent='The end must be after the start.';return}
+  S.bizCfg={from,to,days,rem:+$('bzDefRem').value,set:true};bzAI={};bzCloseSheet();bzSaveAll('Work hours saved.')});
+
 if(!S.name||!S.onboarded)showName();else showAff();
 
 // =====================================================================
@@ -3132,7 +3901,7 @@ function icsFor(items){
   const ev=items.filter(t=>t.date&&t.time).map(t=>{const s=toMin(t.time),e=Math.min(s+(t.dur||30),1439);
     return ['BEGIN:VEVENT','UID:'+t.id+'@adhd-winner','DTSTAMP:'+stamp,'DTSTART:'+icsDT(t.date,s),'DTEND:'+icsDT(t.date,e),'SUMMARY:'+icsEsc(t.text),
       t.desc?'DESCRIPTION:'+icsEsc(t.desc):null,
-      ...(t.alarm||isEv(t)?['BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(t.text),'TRIGGER:-PT0M','END:VALARM']:[]),'END:VEVENT'].filter(Boolean).join('\r\n')});
+      ...(t.alarm||isEv(t)?['BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(t.text),'TRIGGER:-PT'+(t.remBefore||0)+'M','END:VALARM']:[]),'END:VEVENT'].filter(Boolean).join('\r\n')});
   return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ADHD Winner//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',...ev,'END:VCALENDAR',''].join('\r\n');
 }
 // hands a file to the person: share sheet on iPhone (→ Save to Files), normal download elsewhere
