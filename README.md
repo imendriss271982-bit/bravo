@@ -51,5 +51,18 @@ A dedicated work workspace: ☰ menu → **Business** (also Pro → Business). N
 - **Work hours** (⚙ Hours): days, hours, default reminder; Gulf time zones default to Sun–Thu.
 - Tests: `tests/business.test.js` (the 14 acceptance scenarios).
 
+## AI Business Brain (Oct 28)
+Top of **Business → Dashboard**, Business plan only. Answers: what first, why, what can wait, what is blocking, the smallest first step.
+- **Engine in `brain.js`** (pure JS, no DOM, no network; tested alone in `tests/brain-engine.test.js`). Weights are in one table (`Brain.W`). Inputs: urgency, deadline (overdue / today / tomorrow / ≤3 / ≤7 days), importance, consequences, free work time before the deadline, subtasks started, **tasks it unblocks**, **project importance**, blockers. A date counts half when the person said low impact *and* minor consequences.
+- **4 levels**: P1 Do first · P2 Do next · P3 Plan · P4 Later (P4 only when everything entered says “later”; urgent stays at least P3). Manual choice always wins; when the app would now recommend something else it says so once (**Use P… / Keep mine**).
+- **All projects compared together**: one #1 (project, level, deadline, time, why, *if it waits* — only from what was entered —, first action, **START THIS TASK**), the **next three** with “#2 because…”, then Overdue / Important / Plan for later / Waiting or blocked (collapsed). Several P1 → one realistic order. Blocked, snoozed and on-hold tasks are never #1.
+- **Missing facts** are never guessed: the task is marked *Provisional* and **Add missing information** asks only the empty fields.
+- **Actions**: Start (Help me start + timer) · Mark completed · Smaller steps (AI proposal or labelled template, edited and saved only on yes, no duplicates on regenerate) · Why this priority · Snooze (kept in lists and calendar) · Change priority (Auto, P1–P4) · View project · Schedule (free slot, asks first) · Reanalyze · “Time I have now” (tie-break inside a level only).
+- **Projects**: importance High / Medium / Low and **On hold** in Goals & projects.
+- **AI**: Noor (Cloudflare worker) only rephrases the #1 reasons, one call per change of #1 (title + reasons + first step are sent, nothing else). Offline → “Rules engine”, everything still works.
+- **Same task objects** as the list, calendar and reminders: nothing is copied. New fields (`biz.snooze`, `biz.overKeep`, `projs[].imp`, `projs[].hold`) are optional; old data loads as is.
+- Plan check: the page and every Business action check `hasPlan('business')`. There is no payment or server yet, so this is a client-side check (see the PR / report).
+- Tests: `tests/brain.test.js` (browser, the 18 acceptance scenarios).
+
 ## Tests
 `npm install && npx playwright install chromium && npm test` runs the end-to-end tests in `tests/` (app, Help me start, phone & backup, Oct 28 features), served over a local http server (`tests/serve.js`).
