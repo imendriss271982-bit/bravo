@@ -278,18 +278,16 @@ test('view project, project on hold, project importance', async () => {
   await p.click('#bzBody [data-bza="projclear"]');
   assert.match(await p.textContent('#bzBody'), /Send a proposal/);
   // put Website launch on hold → its tasks are kept but no longer suggested
-  // the project workspace opens from the dashboard (Projects → Manage)
-  await goBiz(p, 'dash');
-  await p.click('#bzBody [data-bza="projs"]');
-  await p.click('#projs details[data-id="pA"] summary');
-  await p.click('#projs [data-pro="phold"][data-id="pA"]');
+  // the project page is in the Projects tab
+  await goBiz(p, 'projects');
+  await p.click('#bzBody [data-bza="proj"][data-id="pA"]');
+  await p.click('#bzBody [data-pro="phold"][data-id="pA"]');
   await goBiz(p, 'prio');
   assert.equal(await topTitle(p), 'Send a proposal to a potential client');
-  await goBiz(p, 'dash');
-  await p.click('#bzBody [data-bza="projs"]');
   assert.equal((await state(p)).tasks.filter(t => t.biz && t.biz.proj === 'pA').length, 2);
-  await p.click('#projs details[data-id="pC"] summary');
-  await p.click('#projs [data-pro="pimp"][data-id="pC"][data-v="high"]');
+  await goBiz(p, 'projects');
+  await p.click('#bzBody [data-bza="proj"][data-id="pC"]');
+  await p.click('#bzBody [data-pro="pimp"][data-id="pC"][data-v="high"]');
   assert.equal((await state(p)).projs.find(x => x.id === 'pC').imp, 'high');
   assert.deepEqual(p.errors, []);
 });

@@ -127,7 +127,7 @@ test('dashboard: Your Priority first, four real numbers, add (speak / write), pr
   assert.ok(await p.isVisible(`${ROOT} [data-bza="tab"][data-v="coach"]`));
   const tabs = await p.$$eval('#bzTabs [data-bz]', b => b.map(x => x.dataset.bz));
   assert.equal(tabs[tabs.length - 1], 'pend');
-  assert.equal(await p.isVisible('#bzProjWrap'), false, 'project editor stays out of the way until asked');
+  assert.ok(await p.isVisible('#bzTabs [data-bz="projects"]'));
   assert.deepEqual(p.errors, []);
 });
 
@@ -219,42 +219,80 @@ test('speak: several tasks in one recording; low confidence is flagged; nothing 
   assert.deepEqual(p.errors.concat(q.errors), []);
 });
 
-test('project by text: milestones with their own dates (suggested ones marked), calendar entries, progress from real data, Extra Notes kept', async () => {
-  const p = await open({});
+test('New project → AI organizes milestones WITH tasks inside → created in the project; add a task straight into a milestone; progress; Extra Notes', async () => {
+  const plan = { name: 'Launch a new website', milestones: [
+    { title: 'Finalize the design', deliverable: 'Approved mock-ups', date: null, tasks: [{ title: 'Draw the home page', minutes: 60 }, { title: 'Choose the colors', minutes: 30 }] },
+    { title: 'Approve the content', deliverable: 'Final texts', date: null, tasks: [{ title: 'Write the About page' }] },
+    { title: 'Deliver the website', deliverable: 'Live site', date: null, tasks: [] }] };
+  const p = await open({ ai: ok(plan) });
   await goBiz(p, 'dash');
-  await p.click(`${ROOT} [data-bza="cap"][data-v="write"]`);
-  await p.click('#bzSheet [data-bza="capmode"][data-v="project"]');
-  await p.fill('#capTxt', 'Launch a new website in four weeks. First finalize the design, then approve the content, then test everything, and finally deliver the website.');
+  await p.click(`${ROOT} [data-bza="newproj"]`);
+  await p.fill('#capTxt', 'Launch a new website in four weeks.');
   await p.click('#bzSheet [data-bza="caprun"]');
   await p.waitForSelector('#cpName');
-  assert.equal(await p.inputValue('#cpName'), 'Launch a new website');
+  assert.match(p.prompts[0], /project manager[\s\S]*2 to 5 concrete tasks/);
   assert.equal(await p.inputValue('#cpDl'), plus(28));
-  assert.equal((await p.$$('#bzSheet [data-cpm="title"]')).length, 4);
-  assert.match(await p.textContent('#bzSheet'), /suggested/);
-  await p.fill('#bzSheet [data-cpm="deliv"][data-i="0"]', 'Approved mock-ups');
-  await p.fill('#bzSheet [data-cpm="date"][data-i="0"]', plus(5));
+  assert.equal(await p.inputValue('#bzSheet [data-cpm="tasks"][data-i="0"]'), 'Draw the home page\nChoose the colors');
+  assert.match(await p.textContent('#bzSheet'), /suggested[\s\S]*proposed by the AI/);
+  await p.fill('#bzSheet [data-cpm="tasks"][data-i="2"]', 'Test on phones');
   await p.click('#bzSheet [data-bza="cpsave"]');
   await clearPop(p);
   let s = await state(p); const pr = s.projs[0];
-  assert.equal(pr.name, 'Launch a new website'); assert.equal(pr.deadline, plus(28));
-  assert.equal(pr.ms.length, 4); assert.equal(pr.ms[0].date, plus(5)); assert.equal(pr.ms[0].deliv, 'Approved mock-ups');
-  assert.equal(s.tasks.filter(t => t.kind === 'event' && /🏁/.test(t.text)).length, 4, 'one calendar entry per milestone');
-  assert.ok(await p.isVisible('#bzProjWrap'));
-  // a task linked to the first milestone, then progress = units done / units (4 milestones + 1 task)
-  await p.evaluate(([k, id, m]) => { const s = JSON.parse(localStorage.getItem(k)); s.tasks.unshift({ id: 't1', text: 'Draw the home page', done: false, steps: [], date: null, time: null, dur: null, cat: 'work', biz: { proj: id, ms: m, imp: 'med', conseq: 'med', est: 30, status: 'todo', deps: [], notes: [], hist: [], created: Date.now(), ord: 0 } }); localStorage.setItem(k, JSON.stringify(s)); }, [KEY, pr.id, pr.ms[0].id]);
-  await reload(p); await goBiz(p, 'dash'); await p.click(`${ROOT} [data-bza="projs"]`);
-  await p.click(`#projs details[data-id="${pr.id}"] summary`);
-  await p.click(`#projs details[data-id="${pr.id}"] [data-pro="mtog"][data-m="${pr.ms[0].id}"]`);
+  assert.equal(pr.ms.length, 3); assert.equal(pr.ms[2].date, plus(28), 'last milestone = final deadline');
+  const pt = s.tasks.filter(t => t.biz && t.biz.proj === pr.id);
+  assert.equal(pt.length, 4);
+  const draw = pt.find(t => t.text === 'Draw the home page');
+  assert.equal(draw.biz.ms, pr.ms[0].id); assert.equal(draw.biz.deadline, pr.ms[0].date, 'task due by its milestone');
+  assert.equal(pt.find(t => t.text === 'Test on phones').biz.ms, pr.ms[2].id);
+  // the project page is open: milestones with their tasks inside
+  assert.equal(await p.getAttribute('#bzTabs [data-bz="projects"]', 'aria-selected'), 'true');
+  const page = await p.textContent(ROOT);
+  assert.match(page, /1\. Finalize the design[\s\S]*Draw the home page[\s\S]*Choose the colors[\s\S]*2\. Approve the content[\s\S]*Write the About page/);
+  assert.match(page, /Next task: Draw the home page/);
+  // add a task directly into milestone 2, with a day and time said
+  await p.fill(`${ROOT} [data-pjadd="${pr.id}|${pr.ms[1].id}"] input`, 'Call the printer tomorrow at 10:30');
+  await p.press(`${ROOT} [data-pjadd="${pr.id}|${pr.ms[1].id}"] input`, 'Enter');
+  await clearPop(p);
+  s = await state(p); const call = s.tasks.find(t => t.text === 'Call the printer');
+  assert.equal(call.biz.ms, pr.ms[1].id); assert.equal(call.date, TOMORROW); assert.equal(call.time, '10:30'); assert.equal(call.alarm, true);
+  // done in the project → progress from real data (3 milestones + 5 tasks = 8 units)
+  await p.click(`${ROOT} .pjt [data-bza="done"][data-id="${draw.id}"]`);
   await clearPop(p);
   await goBiz(p, 'dash');
-  assert.match(await p.textContent(`${ROOT} .bzproj`), /20%[\s\S]*Next: Approve the content/);
-  // Extra Notes at the bottom of the project, kept after refresh
+  assert.match(await p.textContent(`${ROOT} .bzproj`), /13%[\s\S]*Next: Finalize the design/);
+  // Extra Notes kept after refresh
   await p.click(`${ROOT} .bzproj`);
-  await p.fill(`#projs details[data-id="${pr.id}"] textarea[data-pf="extra"]`, 'Client wants a dark theme');
+  await p.fill(`${ROOT} textarea[data-pf="extra"]`, 'Client wants a dark theme');
   await reload(p);
   s = await state(p); assert.equal(s.projs[0].plan.extra, 'Client wants a dark theme');
-  assert.equal(s.tasks.find(t => t.id === 't1').biz.ms, pr.ms[0].id, 'task stays linked to its milestone');
   assert.deepEqual(p.errors, []);
+});
+
+test('Organize with AI on an existing project adds milestones and tasks without duplicates; offline = steps you said', async () => {
+  const proj = { id: 'pX', name: 'Open a shop', plan: { goal: 'Sell abayas online' }, deadline: plus(30), ms: [{ id: 'mA', title: 'Register the company', date: plus(5), done: false }] };
+  const p = await open({ tasks: [biz('k1', 'Fill the form', { proj: 'pX', ms: 'mA' })], extra: { projs: [proj] }, ai: ok({ milestones: [
+    { title: 'Register the company', tasks: [{ title: 'Fill the form' }, { title: 'Pay the fee' }] }, { title: 'Build the store', tasks: [{ title: 'Choose a platform' }] }] }) });
+  await goBiz(p, 'projects');
+  await p.click(`${ROOT} [data-bza="proj"][data-id="pX"]`);
+  await p.click(`${ROOT} [data-bza="pjorg"]`);
+  assert.match(await p.inputValue('#capTxt'), /Project: Open a shop\. Goal: Sell abayas online/);
+  await p.click('#bzSheet [data-bza="caprun"]'); await p.waitForSelector('#bzSheet [data-cpm="tasks"]');
+  await p.click('#bzSheet [data-bza="cpsave"]');
+  const s = await state(p), pp = s.projs[0];
+  assert.equal(pp.ms.length, 2, 'existing milestone reused, one added');
+  const ts = s.tasks.filter(t => t.biz && t.biz.proj === 'pX').map(t => t.text).sort();
+  assert.deepEqual(ts, ['Choose a platform', 'Fill the form', 'Pay the fee'], 'no duplicate task');
+  assert.equal(s.tasks.find(t => t.text === 'Pay the fee').biz.ms, 'mA');
+  // offline: the steps the person said become milestones, nothing else invented
+  const q = await open({});
+  await goBiz(q, 'projects');
+  await q.click(`${ROOT} [data-bza="newproj"][data-v="write"]`);
+  await q.fill('#capTxt', 'Open the shop. First get the licence by 5 December, then hire staff.');
+  await q.click('#bzSheet [data-bza="caprun"]'); await q.waitForSelector('#cpName');
+  assert.match(await q.textContent('#bzSheet'), /rules engine/);
+  assert.equal((await q.$$('#bzSheet [data-cpm="title"]')).length, 2);
+  assert.equal(await q.inputValue('#bzSheet [data-cpm="tasks"][data-i="0"]'), '');
+  assert.deepEqual(p.errors.concat(q.errors), []);
 });
 
 test('milestone at risk / overdue: a warning only when real dates say so', async () => {
@@ -325,7 +363,7 @@ test('fits phones (320, 360, 390, 430) and desktop: dashboard, add sheet, projec
     assert.ok(await fits(p), 'add sheet fits at ' + w);
     await p.click('#bzSheet [data-bzclose].x');
     await p.click(`${ROOT} .bzproj`);
-    assert.ok(await fits(p), 'projects fit at ' + w);
+    assert.ok(await fits(p), 'project page fits at ' + w);
     await goBiz(p, 'review'); assert.ok(await fits(p), 'review fits at ' + w);
     assert.deepEqual(p.errors, []);
     await p.context().close();
