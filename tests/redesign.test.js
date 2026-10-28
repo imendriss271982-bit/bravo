@@ -369,3 +369,31 @@ test('fits phones (320, 360, 390, 430) and desktop: dashboard, add sheet, projec
     await p.context().close();
   }
 });
+
+test('ADHD self-test (adults) from the ☰ menu: one question at a time, Arabic, result kept on the phone (no answers stored), not a diagnosis', async () => {
+  const p = await open({});
+  await p.click('#menuBtn'); await p.click('.mitem[data-adt="open"]');
+  assert.match(await p.textContent('#bzSheet'), /not a diagnosis/);
+  await p.click('#bzSheet [data-adt="go"]');
+  assert.match(await p.textContent('#bzSheet'), /🏠 At home/);
+  for (let i = 0; i < 30; i++) {
+    assert.match(await p.textContent('#bzSheet .adtprog'), new RegExp('^' + (i + 1) + ' of 30'));
+    if (i === 6) assert.match(await p.textContent('#bzSheet'), /💼 At work/);
+    await p.click(`#bzSheet [data-adt="ans"][data-v="${i < 12 ? 3 : i < 27 ? 1 : 2}"]`);
+  }
+  const t = await p.textContent('#bzSheet');
+  assert.match(t, /12 \/ 12[\s\S]*0 \/ 10[\s\S]*0 \/ 5[\s\S]*talk to a doctor/);
+  const s = await state(p);
+  assert.equal(s.adhdTest.a, 12); assert.equal(s.adhdTest.h, 0); assert.equal(s.adhdTest.imp, 2);
+  assert.ok(!('ans' in s.adhdTest), 'answers are not kept');
+  await p.click('#bzSheet [data-adt="again"]');
+  await p.click('#bzSheet [data-adt="lang"]');
+  assert.equal(await p.getAttribute('#bzSheet .adt', 'dir'), 'rtl');
+  assert.match(await p.textContent('#bzSheet .adtq'), /أعمال البيت/);
+  assert.ok(await fits(p));
+  await p.click('#bzSheet [data-adt="prev"]'); await p.click('#bzSheet [data-bzclose].x');
+  await reload(p);
+  await p.click('#menuBtn'); await p.click('.mitem[data-adt="open"]');
+  assert.match(await p.textContent('#bzSheet'), /آخر نتيجة[\s\S]*12\/12/, 'last result shown, in the chosen language');
+  assert.deepEqual(p.errors, []);
+});
