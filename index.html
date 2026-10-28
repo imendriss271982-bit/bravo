@@ -2228,7 +2228,7 @@ document.querySelectorAll('nav button[data-view],[data-view]:not(nav button)').f
   if(b.dataset.view==='v-today'&&!keepDay&&viewDay!==todayStr()){viewDay=todayStr();render()}
   if(b.dataset.view==='v-coach')greet();
   $('fab').hidden=b.dataset.view==='v-coach';
-  $('ndock').hidden=b.dataset.view==='v-today'; // no Noor and no Noor bubble on the home page (Today)
+  dockSync(); // no Noor on Today; in Business only on the Coach (ask AI) tab
   const pv=$(b.dataset.view);pv.classList.remove('pturn');void pv.offsetWidth;pv.classList.add('pturn');
   nourForView(b.dataset.view);
   nourSay(b.dataset.view); // speak right inside the tap: iPhone blocks delayed speech
@@ -2238,6 +2238,8 @@ $('fab').addEventListener('click',()=>{document.querySelector('nav button[data-v
 
 // ---------- Noor talks when you change page ----------
 const nb=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// Noor's face + bubble: hidden on Today, and in Business except on the Coach tab (where you ask the AI)
+function dockSync(){const v=VIEWS.find(x=>!$(x).hidden);const off=v==='v-today'||(v==='v-biz'&&bzTab!=='coach');$('ndock').hidden=off;if(off){clearTimeout(nHideT);$('nBubble').hidden=true}}
 function goView(v){document.querySelector('[data-view="'+v+'"]').click()}
 const NACT={
   addTask:()=>{goView('v-today');setTimeout(()=>{try{$('newTask').focus()}catch(e){}},400)},
@@ -2279,7 +2281,7 @@ let nHideT=0;
 function nourHush(){clearTimeout(nHideT);$('nBubble').hidden=true;try{speechSynthesis.cancel()}catch(e){};talk(false)}
 function nourSay(v){
   clearTimeout(nHideT);
-  if(v==='v-coach'||v==='v-today'){$('nBubble').hidden=true;return}
+  if(v==='v-coach'||v==='v-today'||(v==='v-biz'&&bzTab!=='coach')){$('nBubble').hidden=true;return}
   const L=nourLine(v);if(!L)return;
   $('nText').innerHTML=L.html;
   $('nChips').innerHTML=L.chips.map(c=>'<button type="button" data-na="'+c[1]+'"'+(c[2]?' class="'+c[2]+'"':'')+'>'+c[0]+'</button>').join('');
@@ -3775,6 +3777,7 @@ function bzReviewTab(){
 // ---------- page ----------
 function bzRender(){
   const v=$('v-biz');if(!v)return;
+  if(!v.hidden)dockSync();
   const ok=hasPlan('business');
   $('bzTabs').hidden=!ok;$('bzSet').hidden=!ok;
   $('bzProjWrap').hidden=!ok||bzTab!=='dash';
