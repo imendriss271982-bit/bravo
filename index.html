@@ -923,11 +923,27 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .capu{display:flex;align-items:center;gap:8px;font-weight:800}
 .btn.live{background:var(--coral);color:#fff;border-color:var(--coral)}
 .xnotes{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:12px}
-.xnotes textarea{width:100%}
+.xnotes textarea{width:100%;font:inherit;background:var(--surface-2);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px}
 .msform{display:flex;flex-direction:column;gap:8px}
 .msform input[type=text]{width:100%}
 .capi .sub,.pbody .sub{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
 .pbody .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.pbody .two input{width:100%;min-width:0}
+.pjhead .pjtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.pjhead h3{overflow-wrap:anywhere}
+.pjdates{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.pjdates input{width:100%;min-width:0}
+.pjdates .sub{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
+.pjms{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--cyan);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.pjms.done{border-left-color:var(--mint);opacity:.75}.pjms.late{border-left-color:var(--coral)}
+.pjmh{display:flex;gap:10px;align-items:flex-start}.pjmh .grow{display:flex;flex-direction:column;gap:2px;min-width:0}.pjmh b{overflow-wrap:anywhere}.pjmh small{color:var(--muted);font-weight:700;font-size:12.5px}
+.pjtl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pjt{display:flex;gap:10px;align-items:center;background:var(--surface-2);border-radius:12px;padding:8px 10px}
+.pjt .grow{display:flex;flex-direction:column;min-width:0;flex:1}.pjt .grow span{overflow-wrap:anywhere;font-weight:700}.pjt small{color:var(--muted);font-size:12px;font-weight:700}
+.pjt .check[aria-pressed="true"]{background:var(--mint);border-color:var(--mint)}.pjt .check svg{opacity:0}.pjt .check[aria-pressed="true"] svg{opacity:1;color:#12082B}
+.pjt.done .grow span{text-decoration:line-through;opacity:.6}
+.pjt .btn.small{flex:none;min-height:36px}
+.pjadd input{flex:1;min-width:0}
+.bzproj.dim{opacity:.6}
+.msn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--cyan);color:#12082B;display:grid;place-items:center;font-weight:900;font-size:13px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (max-width:359px){.bztiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .lnk{background:none;border:0;color:var(--cyan);font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:0}
@@ -1239,6 +1255,7 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
     </div>
     <div class="bztabs" id="bzTabs" role="tablist" aria-label="Business sections">
       <button type="button" role="tab" data-bz="dash">Dashboard</button>
+      <button type="button" role="tab" data-bz="projects">Projects</button>
       <button type="button" role="tab" data-bz="tasks">Tasks</button>
       <button type="button" role="tab" data-bz="prio">Priorities</button>
       <button type="button" role="tab" data-bz="cal">Calendar</button>
@@ -3286,17 +3303,17 @@ document.addEventListener('change',e=>{const t=e.target.closest('[data-pd]');if(
 document.addEventListener('input',e=>{const t=e.target.closest('[data-pf]');if(!t)return;const p=S.projs.find(x=>x.id===t.dataset.id);if(!p)return;p.plan[t.dataset.pf]=t.value;save()});
 document.addEventListener('submit',e=>{const f=e.target.closest('[data-mform]');if(!f)return;e.preventDefault();
   const p=S.projs.find(x=>x.id===f.dataset.mform);const ti=f.querySelector('[data-mf="t"]'),da=f.querySelector('[data-mf="d"]'),dv=f.querySelector('[data-mf="v"]');const t=ti.value.trim(),d=da.value;if(!p||!t||!d)return;
-  addMilestone(p,t,d,dv?dv.value:'');save();renderPro();renderAgenda();tone([659,880],.09,.25)});
+  addMilestone(p,t,d,dv?dv.value:'');save();renderPro();renderAgenda();if(!$('v-biz').hidden)bzRender();tone([659,880],.09,.25)});
 function addMilestone(p,t,d,deliv){const r=createTask({kind:'event',text:'🏁 '+p.name+': '+t,date:d,time:'09:00',alarm:true});
-  const m={id:uid(),title:t,date:d,done:false,ev:r.ok?r.task.id:null};if(deliv&&String(deliv).trim())m.deliv=String(deliv).trim().slice(0,120);p.ms.push(m);p.ms.sort((a,b)=>a.date.localeCompare(b.date))}
+  const m={id:uid(),title:t,date:d,done:false,ev:r.ok?r.task.id:null};if(deliv&&String(deliv).trim())m.deliv=String(deliv).trim().slice(0,120);p.ms.push(m);p.ms.sort((a,b)=>a.date.localeCompare(b.date));return m}
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]');if(!b)return;const a=b.dataset.pro,id=b.dataset.id;
   if(a==='ndel'){S.notes=S.notes.filter(x=>x.id!==id);audDel(id)}
   if(a==='edel')S.exps=S.exps.filter(x=>x.id!==id);
   if(a==='stog'){const x=S.shop.find(y=>y.id===id);if(x)x.done=!x.done}
   if(a==='sdel')S.shop=S.shop.filter(x=>x.id!==id);
-  if(a==='pdel'){const p=S.projs.find(x=>x.id===id);if(p){const evs=new Set(p.ms.map(m=>m.ev));S.tasks=S.tasks.filter(ev=>!evs.has(ev.id))}S.projs=S.projs.filter(x=>x.id!==id)}
+  if(a==='pdel'){if(typeof bzPj!=='undefined'&&bzPj===id&&b.dataset.armed!=='1'&&b.closest('#bzBody')){b.dataset.armed='1';b.textContent='Tap again to delete the project and its milestones';return}if(typeof bzPj!=='undefined'&&bzPj===id)bzPj=null;const p=S.projs.find(x=>x.id===id);if(p){const evs=new Set(p.ms.map(m=>m.ev));S.tasks=S.tasks.filter(ev=>!evs.has(ev.id))}S.projs=S.projs.filter(x=>x.id!==id)}
   const p=S.projs.find(x=>x.id===id);
-  if(a==='mtog'&&p){const m=p.ms.find(x=>x.id===b.dataset.m);if(m){m.done=!m.done;const ev=S.tasks.find(x=>x.id===m.ev);if(ev){ev.alarm=!m.done&&!!ev.time;ev.done=m.done}if(!m.done){unwin(m.rw);m.rw=null}else{save();renderPro();renderAgenda();m.rw=win(25);save();return}}}
+  if(a==='mtog'&&p){const m=p.ms.find(x=>x.id===b.dataset.m);if(m){m.done=!m.done;const ev=S.tasks.find(x=>x.id===m.ev);if(ev){ev.alarm=!m.done&&!!ev.time;ev.done=m.done}if(!m.done){unwin(m.rw);m.rw=null}else{save();renderPro();renderAgenda();m.rw=win(25);save();if(!$('v-biz').hidden)bzRender();return}}}
   if(a==='pimp'&&p)p.imp=p.imp===b.dataset.v?null:b.dataset.v;
   if(a==='phold'&&p)p.hold=!p.hold;
   if(a==='mdel'&&p){const m=p.ms.find(x=>x.id===b.dataset.m);if(m)S.tasks=S.tasks.filter(ev=>ev.id!==m.ev);p.ms=p.ms.filter(x=>x.id!==b.dataset.m)}
@@ -3308,7 +3325,7 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]
       save();renderPro();render();nour('cheer',1800);speak('Here is your plan'+(S.name?', '+S.name:'')+'! Small steps, big win.');
     }catch(err){b.disabled=false;b.textContent="Couldn't reach Noor, try again";nour(null)}
     return}
-  save();renderPro();render();
+  save();renderPro();render();if(!$('v-biz').hidden)bzRender();
 });
 
 // =====================================================================
@@ -3637,7 +3654,7 @@ function bzDash(){
 }
 
 // ---------- Dashboard pieces (Oct 28 redesign): one priority, four numbers, projects, add by voice or text ----------
-let bzShowProj=null,bzCap=null,capRec=null;
+let bzShowProj=null,bzCap=null,capRec=null,bzPj=null;
 const bzExt=t=>t.biz.status==='blocked'&&!!t.biz.ext; // waiting on someone outside (Pending), not blocked by another task
 // the four dashboard lists, from saved tasks only
 function bzLists(){
@@ -3679,8 +3696,8 @@ function bzProjStat(p){
 }
 function bzProjSec(){
   const ps=(S.projs||[]).filter(p=>!p.hold).map(p=>({p,s:bzProjStat(p)})).filter(x=>x.s.units||x.p.deadline);
-  let h='<div class="bzsec"><div class="sechead"><h3>Projects</h3><button class="lnk" type="button" data-bza="projs">'+(ps.length?'Manage':'＋ New project')+'</button></div>';
-  if(!ps.length)return h+bzEmpty('No active project yet. Say “New project…” in Add task, or tap New project.')+'</div>';
+  let h='<div class="bzsec"><div class="sechead"><h3>Projects</h3><span class="bzrow" style="gap:14px"><button class="lnk" type="button" data-bza="newproj" data-v="write">＋ New project</button>'+(ps.length?'<button class="lnk" type="button" data-bza="projs">All ›</button>':'')+'</span></div>';
+  if(!ps.length)return h+bzEmpty('No active project yet. Tap ＋ New project: say or write the goal, the AI organizes milestones and tasks.')+'</div>';
   h+=ps.map(({p,s})=>'<button type="button" class="bzproj'+(s.risk?' risk':'')+'" data-bza="proj" data-id="'+esc(p.id)+'"><span class="pjtop"><b>'+esc(p.name)+'</b><span class="pjpct">'+s.pct+'%</span></span>'+
     '<span class="pbar" aria-hidden="true"><i style="width:'+s.pct+'%"></i></span>'+
     '<small>'+(s.next?'Next: '+esc(s.next.title)+' · '+bzDay(s.next.date):s.ms.length?'All milestones done':'No milestone yet')+(p.deadline?' · Delivery '+bzDay(p.deadline):'')+'</small>'+
@@ -3698,14 +3715,15 @@ function bzRing(){
 }
 
 // ---------- Add task: speak or write → the app splits, dates and sorts; you check, then add ----------
-function capOpen(mode,voice){
-  bzCap={mode:mode||'tasks',text:bzCap&&bzCap.text||'',items:null,src:null,busy:false,low:false,proj:null};
+function capOpen(mode,voice,target){
+  const keep=bzCap&&!bzCap.target&&!target?bzCap.text:'';
+  bzCap={mode:mode||'tasks',text:target?('Project: '+target.name+'.'+(target.plan.goal?' Goal: '+target.plan.goal+'.':'')+(target.deadline?' Deadline: '+new Date(target.deadline+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'long'})+'.':'')+' '):keep||'',items:null,src:null,busy:false,low:false,proj:null,target:target?target.id:null};
   capDraw();if(voice)setTimeout(capListen,60);else setTimeout(()=>{const x=$('capTxt');if(x)x.focus()},80);
 }
 const CAP_FLAG={day:'Check the day',ampm:'AM or PM?','two-dates':'Two dates heard: check','two-times':'Two times heard: check','day-assumed':'No day said: set to today',check:'Not sure this is a task','removed-date':'A date the AI added was removed (you did not say it)','removed-time':'A time the AI added was removed (you did not say it)',heard:'Check what I heard'};
 function capDraw(){
   const c=bzCap;if(!c)return;
-  const head='<div class="seg" role="group" aria-label="What are you adding"><button type="button" data-bza="capmode" data-v="tasks" aria-pressed="'+(c.mode==='tasks')+'">Tasks</button><button type="button" data-bza="capmode" data-v="project" aria-pressed="'+(c.mode==='project')+'">A new project</button></div>';
+  const head=c.target?'<p class="hint" style="margin:0">Add details (steps, dates, what must be delivered). The AI proposes milestones and tasks; you check before anything is saved.</p>':'<div class="seg" role="group" aria-label="What are you adding"><button type="button" data-bza="capmode" data-v="tasks" aria-pressed="'+(c.mode==='tasks')+'">Tasks</button><button type="button" data-bza="capmode" data-v="project" aria-pressed="'+(c.mode==='project')+'">A new project</button></div>';
   let h='<div class="bzsbody capbox">'+head;
   if(!c.items&&!c.proj){
     const sr=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
@@ -3723,13 +3741,14 @@ function capDraw(){
     h+='<p class="srcnote" style="margin:0">'+(c.src==='ai'?'Plan proposed by Noor (AI).':'Plan from the rules engine'+(c.aiDown?' (Noor\'s AI is offline)':'')+'.')+' Dates marked “suggested” were not said by you: check them.</p>'+
       '<label class="fl">Project name<input id="cpName" type="text" maxlength="80" value="'+esc(p.name)+'"></label>'+
       '<label class="fl">Main deadline <span class="opt">'+(p.deadline&&p.dlRaw?'you said “'+esc(p.dlRaw)+'”':'optional')+'</span><input id="cpDl" type="date" value="'+(p.deadline||'')+'"></label>'+
-      '<div class="fl"><span>Milestones, in order</span><ol class="capl">'+p.ms.map((m,i)=>'<li class="capi"><div class="capr"><input type="text" data-cpm="title" data-i="'+i+'" maxlength="80" value="'+esc(m.title)+'" aria-label="Milestone '+(i+1)+'"><button type="button" class="x" data-bza="cpmdel" data-i="'+i+'" aria-label="Remove milestone">×</button></div>'+
-        '<div class="two"><label class="sub">Deliverable <span class="opt">optional</span><input type="text" data-cpm="deliv" data-i="'+i+'" maxlength="120" value="'+esc(m.deliv||'')+'"></label><label class="sub">Due'+(m.suggested?' <span class="opt">suggested</span>':'')+'<input type="date" data-cpm="date" data-i="'+i+'" value="'+(m.date||'')+'"></label></div></li>').join('')+'</ol>'+
+      '<div class="fl"><span>Milestones and their tasks, in order</span><ol class="capl">'+p.ms.map((m,i)=>'<li class="capi"><div class="capr"><span class="msn">'+(i+1)+'</span><input type="text" data-cpm="title" data-i="'+i+'" maxlength="80" value="'+esc(m.title)+'" placeholder="Milestone name" aria-label="Milestone '+(i+1)+'"><button type="button" class="x" data-bza="cpmdel" data-i="'+i+'" aria-label="Remove milestone">×</button></div>'+
+        '<div class="two"><label class="sub">Deliverable <span class="opt">optional</span><input type="text" data-cpm="deliv" data-i="'+i+'" maxlength="120" value="'+esc(m.deliv||'')+'"></label><label class="sub">Due'+(m.suggested?' <span class="opt">suggested</span>':'')+'<input type="date" data-cpm="date" data-i="'+i+'" value="'+(m.date||'')+'"></label></div>'+
+        '<label class="sub">Tasks <span class="opt">one per line'+(m.aiTasks?' · proposed by the AI':'')+'</span><textarea data-cpm="tasks" data-i="'+i+'" rows="'+Math.max(2,Math.min(6,(m.tasks||[]).length+1))+'" maxlength="1500" placeholder="e.g. Draw the home page">'+esc((m.tasks||[]).join('\n'))+'</textarea></label></li>').join('')+'</ol>'+
       '<button class="btn small ghost" type="button" data-bza="cpmadd">＋ Add a milestone</button></div>'+
-      '<p class="ederr" id="capErr" role="alert"></p><div class="sbtns"><button class="btn" type="button" data-bza="cpsave">Create project</button><button class="btn ghost" type="button" data-bza="capback">← Back to my words</button></div>';
+      '<p class="ederr" id="capErr" role="alert"></p><div class="sbtns"><button class="btn" type="button" data-bza="cpsave">'+(c.target?'Add to the project':'Create project')+'</button><button class="btn ghost" type="button" data-bza="capback">← Back to my words</button></div>';
   }
   h+='</div>';
-  bzOpenSheet(c.mode==='tasks'?'Add tasks':'New project',h);
+  bzOpenSheet(c.mode==='tasks'?'Add tasks':c.target?'Organize the project':'New project',h);
 }
 function capItem(x,i){
   const pj=S.projs||[];
@@ -3746,7 +3765,7 @@ function capSync(){const c=bzCap;if(!c)return;
   const tx=$('capTxt');if(tx)c.text=tx.value;
   document.querySelectorAll('#bzSheet [data-cp]').forEach(el=>{const x=c.items&&c.items[+el.dataset.i];if(!x)return;const k=el.dataset.cp;x[k]=k==='urgent'?el.checked:(el.value.trim()||null)});
   if(c.proj){const n=$('cpName');if(n)c.proj.name=n.value.trim();const d=$('cpDl');if(d)c.proj.deadline=d.value||null;
-    document.querySelectorAll('#bzSheet [data-cpm]').forEach(el=>{const m=c.proj.ms[+el.dataset.i];if(!m)return;const k=el.dataset.cpm;const v=el.value.trim();if(k==='date'&&v!==m.date)m.suggested=false;m[k]=v||(k==='deliv'?'':null)})}
+    document.querySelectorAll('#bzSheet [data-cpm]').forEach(el=>{const m=c.proj.ms[+el.dataset.i];if(!m)return;const k=el.dataset.cpm;const v=el.value.trim();if(k==='tasks'){m.tasks=v.split('\n').map(x=>x.trim()).filter(Boolean);return}if(k==='date'&&v!==m.date)m.suggested=false;m[k]=v||(k==='deliv'?'':null)})}
 }
 function capListen(){
   if(capRec){try{capRec.stop()}catch(e){}return}
@@ -3781,14 +3800,21 @@ async function capRun(){
     c.items=items;
   }else{
     let p=Capture.parseProject(text,X)||{name:'',deadline:null,ms:[]};
+    const tp=c.target&&(S.projs||[]).find(x=>x.id===c.target);
+    if(tp){p.name=tp.name;if(tp.deadline&&!p.deadline)p.deadline=tp.deadline}
+    p.ms.forEach(m=>{m.tasks=[];m.deliv=m.deliv||''});
     try{
-      const r=await aiTimeout('Turn this project description into a plan. Today is '+wd+' '+X.today+'. Keep the steps the person said, in their order, as milestones (short title starting with a verb, optional deliverable). Do not add steps they did not say. Use only dates they said, else null. Answer ONLY JSON: {"name":"","milestones":[{"title":"","deliverable":"","date":"YYYY-MM-DD or null"}]}\n\nDescription: '+text.slice(0,2000),9000);
-      const M=Capture.mentions(text,X.today),ms=Array.isArray(r&&r.milestones)?r.milestones.filter(m=>m&&m.title).slice(0,12):[];
-      if(ms.length){p.ms=ms.map(m=>({title:String(m.title).slice(0,80),deliv:String(m.deliverable||'').slice(0,120),date:Capture.okDate(m.date)&&M.dates.has(m.date)?m.date:null,suggested:false}));
-        if(p.deadline){const n=p.ms.length,span=Math.max(n,dayDiff(X.today,p.deadline));p.ms.forEach((m,i)=>{if(!m.date){m.date=i===n-1?p.deadline:ymd(addDays(new Date(),Math.max(1,Math.round(span*(i+1)/n))));m.suggested=true}})}}
-      if(r&&r.name)p.name=String(r.name).slice(0,80);c.src='ai';
+      const have=tp?'\nAlready in the project (do not repeat): '+JSON.stringify((tp.ms||[]).map(m=>m.title).concat(bzTasks().filter(t=>t.biz.proj===tp.id).map(t=>t.text))).slice(0,1500):'';
+      const r=await aiTimeout('You are a project manager. Organize this project into a clear plan. Today is '+wd+' '+X.today+'.'+(p.deadline?' Final deadline: '+p.deadline+'.':'')+'\nRules: keep every step the person said, in their order, as milestones. If they gave few or no steps, propose a realistic plan of 3 to 6 milestones. For each milestone give a short deliverable and 2 to 5 concrete tasks (short, start with a verb, about 15 to 120 minutes each). Use only dates the person said, else null. Do not invent clients, amounts or facts.'+have+'\nAnswer ONLY JSON: {"name":"","milestones":[{"title":"","deliverable":"","date":"YYYY-MM-DD or null","tasks":[{"title":"","minutes":30}]}]}\n\nDescription: '+text.slice(0,2000),15000);
+      const M=Capture.mentions(text,X.today),ms=Array.isArray(r&&r.milestones)?r.milestones.filter(m=>m&&m.title).slice(0,10):[];
+      if(ms.length){p.ms=ms.map(m=>({title:String(m.title).slice(0,80),deliv:String(m.deliverable||'').slice(0,120),date:Capture.okDate(m.date)&&M.dates.has(m.date)?m.date:null,suggested:false,
+        tasks:(Array.isArray(m.tasks)?m.tasks:[]).map(x=>String(x&&x.title||x||'').replace(/\s+/g,' ').trim().slice(0,120)).filter(x=>x.length>1).slice(0,8),aiTasks:true}))}
+      if(r&&r.name&&!tp)p.name=String(r.name).slice(0,80);c.src='ai';
     }catch(e){c.aiDown=true;c.src='rules'}
-    if(!p.ms.length)p.ms=[{title:'',deliv:'',date:p.deadline||null,suggested:false}];
+    // dates the person did not say: spread up to the deadline, or one week apart; always marked "suggested"
+    {const n=p.ms.length,span=p.deadline?Math.max(n,dayDiff(X.today,p.deadline)):n*7;
+      p.ms.forEach((m,i)=>{if(!m.date){m.date=p.deadline&&i===n-1?p.deadline:ymd(addDays(new Date(),Math.max(1,Math.round(span*(i+1)/n))));m.suggested=true}})}
+    if(!p.ms.length)p.ms=[{title:'',deliv:'',date:p.deadline||null,suggested:false,tasks:[]}];
     c.proj=p;
   }
   c.busy=false;capDraw();
@@ -3803,25 +3829,90 @@ function capAdd(){
     if(x.time&&!x.date)return capErr('“'+x.text+'” has a time but no day: add the day or clear the time.');
   }
   c.busy=true;const cfg=bzCfg(),made=[];let cal=0;
-  list.forEach(x=>{
-    const res=createTask({text:x.text,desc:x.ctx||'',date:x.date||null,time:x.time||null,dur:x.time?30:null,cat:'work',alarm:!!x.time});
-    if(!res.task)return;const t=res.task,ords=bzTasks().filter(y=>y!==t).map(y=>y.biz.ord);
-    t.biz={created:Date.now(),ord:ords.length?Math.min(...ords)-1:0,notes:[],hist:[],deps:[],urgent:!!x.urgent,deadline:x.deadline||null,proj:x.proj||null,src:'capture'};
-    if(t.alarm){t.remBefore=cfg.rem;cal++}normTask(t);bzHist(t,'created');if(t.date)bzHist(t,'scheduled',undefined,t.date+(t.time?' '+t.time:''));made.push(t)});
+  list.forEach(x=>{const t=bzNewBiz(x);if(!t)return;if(t.alarm)cal++;made.push(t)});
   bzCap=null;bzCloseSheet();
   bzSaveAll(made.length?'Added '+made.length+' task'+(made.length>1?'s':'')+(cal?' · '+cal+' in your calendar with a reminder':'')+'.':'Nothing new to add.');
   if(cal&&typeof notifyHint==='function')notifyHint();
 }
+// one business task, created the same way everywhere (list, calendar and reminder are the same object)
+function bzNewBiz(x){
+  const res=createTask({text:x.text,desc:x.ctx||'',date:x.date||null,time:x.time||null,dur:x.time?(x.est||30):null,cat:'work',alarm:!!x.time});
+  if(!res.task)return null;const t=res.task,ords=bzTasks().filter(y=>y!==t).map(y=>y.biz.ord);
+  t.biz={created:Date.now(),ord:ords.length?Math.min(...ords)-1:0,notes:[],hist:[],deps:[],urgent:!!x.urgent,deadline:x.deadline||null,proj:x.proj||null,ms:x.ms||null,est:x.est||null,src:x.src||'capture'};
+  if(t.alarm)t.remBefore=bzCfg().rem;normTask(t);bzHist(t,'created');if(t.date)bzHist(t,'scheduled',undefined,t.date+(t.time?' '+t.time:''));return t;
+}
 function capProject(){
-  const c=bzCap;if(!c||!c.proj)return;capSync();const p=c.proj,ms=p.ms.filter(m=>(m.title||'').trim());
+  const c=bzCap;if(!c||!c.proj||c.busy)return;capSync();const p=c.proj,ms=p.ms.filter(m=>(m.title||'').trim());
   if(!p.name)return capErr('Give the project a name.');
   if(p.deadline&&!okDate(p.deadline))return capErr('The deadline date does not exist.');
   for(const m of ms)if(!m.date||!okDate(m.date))return capErr('Add a due date for “'+m.title+'”, or remove it.');
-  const np={id:uid(),name:p.name.slice(0,80),plan:{},ms:[],deadline:p.deadline||null,start:todayStr()};
-  ms.forEach(m=>addMilestone(np,m.title.slice(0,80),m.date,m.deliv));S.projs.push(np);
-  bzCap=null;bzCloseSheet();bzShowProj=np.id;save();renderPro();renderAgenda();
-  bzSaveAll('Project created: '+np.name+(ms.length?' · '+ms.length+' milestone'+(ms.length>1?'s':'')+' in your calendar':'')+'.');
+  c.busy=true;
+  let np=c.target&&(S.projs||[]).find(x=>x.id===c.target);const isNew=!np;
+  if(isNew){np={id:uid(),name:p.name.slice(0,80),plan:{},ms:[],deadline:p.deadline||null,start:todayStr()};S.projs.push(np)}
+  else if(p.deadline&&!np.deadline)np.deadline=p.deadline;
+  const seen=new Set(bzTasks().filter(t=>t.biz.proj===np.id&&!t.done).map(t=>t.text.toLowerCase()));let nt=0,nm=0;
+  ms.forEach(m=>{const ex=(np.ms||[]).find(y=>y.title.toLowerCase()===m.title.trim().toLowerCase());const mm=ex||addMilestone(np,m.title.trim().slice(0,80),m.date,m.deliv);if(!ex)nm++;
+    (m.tasks||[]).forEach(line=>{const k=line.toLowerCase();if(seen.has(k))return;seen.add(k);
+      if(bzNewBiz({text:line.slice(0,120),proj:np.id,ms:mm.id,deadline:mm.date,src:'project'}))nt++})});
+  bzCap=null;bzCloseSheet();bzPj=np.id;bzTab='projects';save();renderPro();renderAgenda();
+  bzSaveAll((isNew?'Project created: ':'Project updated: ')+np.name+' · '+nm+' milestone'+(nm===1?'':'s')+', '+nt+' task'+(nt===1?'':'s')+'.');scrollTo(0,0);
 }
+// ---------- Projects tab: a real project workspace (milestones with their tasks inside) ----------
+function bzProjTab(){
+  const p=bzPj&&(S.projs||[]).find(x=>x.id===bzPj);if(p)return bzProjPage(p);bzPj=null;
+  const ps=S.projs||[];
+  let h='<div class="bzadd"><span class="bzaddl">＋ New project</span><p class="hint" style="margin:0">Say or write the goal and the deadline. The AI organizes milestones and tasks; you check, then create.</p><div class="bzaddb"><button class="btn" type="button" data-bza="newproj" data-v="voice">🎤 Speak</button><button class="btn ghost" type="button" data-bza="newproj" data-v="write">✍️ Write</button></div></div>';
+  if(!ps.length)return h+bzEmpty('No project yet.');
+  h+='<div class="bzsec"><div class="sechead"><h3>Your projects</h3><span class="hint">'+ps.length+'</span></div>'+ps.map(p=>{const s=bzProjStat(p);
+    return '<button type="button" class="bzproj'+(s.risk?' risk':'')+(p.hold?' dim':'')+'" data-bza="proj" data-id="'+esc(p.id)+'"><span class="pjtop"><b>'+esc(p.name)+'</b><span class="pjpct">'+s.pct+'%</span></span><span class="pbar" aria-hidden="true"><i style="width:'+s.pct+'%"></i></span>'+
+      '<small>'+s.ms.length+' milestone'+(s.ms.length===1?'':'s')+' · '+s.ts.filter(t=>!t.done).length+' open task'+(s.ts.filter(t=>!t.done).length===1?'':'s')+(p.deadline?' · Delivery '+bzDay(p.deadline):'')+(p.hold?' · On hold':'')+'</small>'+
+      (s.next?'<small>Next: '+esc(s.next.title)+' · '+bzDay(s.next.date)+'</small>':'')+(s.risk?'<small class="pjrisk">⚠ '+esc(s.risk)+'</small>':'')+'</button>'}).join('')+'</div>';
+  return h;
+}
+function bzPjTask(t){const id=esc(t.id),b=t.biz,today=todayStr();
+  const meta=[t.date?'🕒 '+bzWhen(t):'',b.deadline&&!t.done?(b.deadline<today?'⚠ was due ':'by ')+bzDay(b.deadline):'',bzExt(t)?'⏳ waiting':'',bzBlockers(t).length&&!bzExt(t)?'⛔ blocked':''].filter(Boolean).join(' · ');
+  return '<li class="pjt'+(t.done?' done':'')+'"><button type="button" class="check" data-bza="done" data-id="'+id+'" aria-pressed="'+t.done+'" aria-label="'+(t.done?'Mark as not done: ':'Mark as done: ')+esc(t.text)+'">'+CHECK+'</button><div class="grow"><span>'+esc(t.text)+'</span>'+(meta?'<small>'+meta+'</small>':'')+'</div>'+
+    (t.done?'':'<button type="button" class="btn small ghost" data-bza="start" data-id="'+id+'" aria-label="Start: '+esc(t.text)+'">▶</button>')+'<button type="button" class="btn small ghost" data-bza="edit" data-id="'+id+'">Open</button></li>'}
+const bzPjAdd=(pid,mid,ph)=>'<form class="prow pjadd" data-pjadd="'+esc(pid)+'|'+esc(mid||'')+'" autocomplete="off"><input type="text" maxlength="300" placeholder="'+ph+'" aria-label="'+ph+'"><button class="btn small" type="submit">Add</button></form>';
+function bzProjPage(p){
+  const st=bzProjStat(p),today=todayStr(),ms=[...(p.ms||[])].sort((a,b)=>a.date.localeCompare(b.date)),loose=st.ts.filter(t=>!t.biz.ms||!ms.some(m=>m.id===t.biz.ms));
+  const ix=new Map(S.tasks.map((t,i)=>[t,i])),order=t=>(t.done?1e6:0)-ix.get(t); // open first, then in the order they were added
+  const nextT=ms.filter(m=>!m.done).flatMap(m=>st.ts.filter(t=>t.biz.ms===m.id&&bzActive(t)&&!bzBlockers(t).length).sort((a,b)=>order(a)-order(b))).concat(loose.filter(t=>bzActive(t)&&!bzBlockers(t).length))[0];
+  let h='<button class="lnk" type="button" data-bza="pjback">← All projects</button>';
+  h+='<section class="bzcard bzmain pjhead"><span class="bzkick">Project'+(p.hold?' · on hold':'')+'</span><div class="pjtop"><h3>'+esc(p.name)+'</h3><button class="btn small ghost" type="button" data-bza="pjren" data-id="'+esc(p.id)+'">✎ Edit</button></div>'+
+    (p.plan.goal?'<p class="ypwhy">🎯 '+esc(p.plan.goal)+'</p>':'')+
+    '<div class="bzprog"><span>'+st.pct+'% · '+st.dn+' of '+st.units+' tasks & milestones</span><div class="pbar"><i style="width:'+st.pct+'%"></i></div></div>'+
+    (st.risk?'<p class="pjrisk" style="margin:0">⚠ '+esc(st.risk)+'</p>':'')+
+    '<div class="two pjdates"><label class="sub">Start<input type="date" data-pd="start" data-id="'+esc(p.id)+'" value="'+(p.start||'')+'"></label><label class="sub">Final deadline<input type="date" data-pd="deadline" data-id="'+esc(p.id)+'" value="'+(p.deadline||'')+'"></label></div>'+
+    (nextT?'<button class="btn brgo" type="button" data-bza="start" data-id="'+esc(nextT.id)+'">▶ Next task: '+esc(nextT.text)+'</button>':'')+
+    '<button class="btn ghost" type="button" data-bza="pjorg" data-id="'+esc(p.id)+'">✨ Organize with AI</button></section>';
+  h+='<div class="bzsec"><div class="sechead"><h3>Milestones</h3><span class="hint">'+ms.filter(m=>m.done).length+' / '+ms.length+' done</span></div>';
+  h+=ms.length?ms.map((m,i)=>{const ts=st.ts.filter(t=>t.biz.ms===m.id).sort((a,b)=>order(a)-order(b)),late=!m.done&&m.date<today;
+    return '<section class="pjms'+(m.done?' done':'')+(late?' late':'')+'"><div class="pjmh"><button class="chk" type="button" data-pro="mtog" data-id="'+esc(p.id)+'" data-m="'+esc(m.id)+'" aria-pressed="'+!!m.done+'" aria-label="Milestone done: '+esc(m.title)+'">✓</button><div class="grow"><b>'+(i+1)+'. '+esc(m.title)+'</b><small>'+(late?'⚠ was due ':'Due ')+bzDay(m.date)+(m.deliv?' · 📦 '+esc(m.deliv):'')+(ts.length?' · '+ts.filter(t=>t.done).length+'/'+ts.length+' tasks':'')+'</small></div><button class="x" type="button" data-pro="mdel" data-id="'+esc(p.id)+'" data-m="'+esc(m.id)+'" aria-label="Delete milestone '+esc(m.title)+'">×</button></div>'+
+      (ts.length?'<ul class="pjtl">'+ts.map(bzPjTask).join('')+'</ul>':'<p class="hint" style="margin:0">No task yet in this milestone.</p>')+
+      (m.done?'':bzPjAdd(p.id,m.id,'Add a task to this milestone'))+'</section>'}).join(''):bzEmpty('No milestone yet. Use ✨ Organize with AI, or add one below.');
+  h+='<form class="msform pjms" data-mform="'+esc(p.id)+'" autocomplete="off"><b>＋ Add a milestone</b><input type="text" data-mf="t" placeholder="Milestone (e.g. Design approved)" aria-label="Milestone"><input type="text" data-mf="v" placeholder="Deliverable (optional)" aria-label="Deliverable"><div class="prow"><input type="date" data-mf="d" value="'+ymd(addDays(new Date(),7))+'" aria-label="Due date"><button class="btn" type="submit">Add</button></div></form></div>';
+  h+='<div class="bzsec"><div class="sechead"><h3>Other tasks</h3><span class="hint">Not in a milestone</span></div>'+(loose.length?'<ul class="pjtl">'+loose.sort((a,b)=>order(a)-order(b)).map(bzPjTask).join('')+'</ul>':'')+bzPjAdd(p.id,'','Add a task to this project')+'</div>';
+  h+='<div class="bzcard"><div class="fl"><span>Importance for my business <span class="opt">used for priorities</span></span><div class="seg small" role="group" aria-label="Project importance">'+[['high','High'],['med','Medium'],['low','Low']].map(o=>'<button type="button" data-pro="pimp" data-id="'+esc(p.id)+'" data-v="'+o[0]+'" aria-pressed="'+(p.imp===o[0])+'">'+o[1]+'</button>').join('')+'</div></div>'+
+    '<button class="btn small ghost" type="button" data-pro="phold" data-id="'+esc(p.id)+'" aria-pressed="'+!!p.hold+'">'+(p.hold?'▶ Resume this project':'⏸ Put this project on hold')+'</button></div>';
+  h+='<label class="xnotes bzcard"><b>Extra Notes</b><small class="hint">Client requirements, meeting notes, instructions… Saved with this project.</small><textarea data-pf="extra" data-id="'+esc(p.id)+'" rows="4" maxlength="2000" placeholder="Anything that is not a task">'+esc(p.plan.extra||'')+'</textarea></label>';
+  h+='<button class="btn small ghost danger" type="button" data-pro="pdel" data-id="'+esc(p.id)+'">Delete project</button>';
+  return h;
+}
+// add a task straight into a project / milestone ("Call the printer tomorrow at 10" keeps its day and time)
+document.addEventListener('submit',e=>{const f=e.target.closest('[data-pjadd]');if(!f)return;e.preventDefault();
+  if(!hasPlan('business'))return;
+  const [pid,mid]=f.dataset.pjadd.split('|'),p=(S.projs||[]).find(x=>x.id===pid);if(!p)return;const m=mid&&(p.ms||[]).find(x=>x.id===mid);
+  const v=f.querySelector('input').value.trim();if(!v)return;
+  const items=Capture.parse(v,{today:todayStr(),projects:[]});const list=items.length?items:[{text:v.slice(0,120)}];let n=0;
+  list.forEach(x=>{if(x.time&&!x.date)x.date=todayStr();if(bzNewBiz(Object.assign({},x,{proj:p.id,ms:m?m.id:null,deadline:x.deadline||(m?m.date:null),src:'project'})))n++});
+  bzSaveAll(n?'Added to '+(m?'“'+m.title+'”':p.name)+': '+list.map(x=>x.text).join(', '):'');
+  setTimeout(()=>{const g=document.querySelector('[data-pjadd="'+f.dataset.pjadd+'"] input');if(g)g.focus()},30);
+});
+document.addEventListener('submit',e=>{const f=e.target.closest('[data-pjren]');if(!f)return;e.preventDefault();
+  const p=(S.projs||[]).find(x=>x.id===f.dataset.pjren);if(!p)return bzCloseSheet();const n=$('pjN').value.trim();if(!n){$('pjN').setAttribute('aria-invalid','true');return}
+  p.name=n.slice(0,80);p.plan.goal=$('pjG').value.trim().slice(0,500);bzCloseSheet();save();renderPro();bzSaveAll('Project saved.');
+});
 // extra Business actions (dashboard, add task, projects, pending)
 function bzX(a,b,t){
   if(a==='tile'){const L=bzLists(),v=b.dataset.v,T={today:'To do today',overdue:'Overdue',done:'Done this week',blocked:'Blocked'}[v],list=L[v]||[];
@@ -3835,14 +3926,18 @@ function bzX(a,b,t){
   if(a==='capdel'){capSync();bzCap.items.splice(+b.dataset.i,1);capDraw();return true}
   if(a==='capadd'){capAdd();return true}
   if(a==='cpmdel'){capSync();bzCap.proj.ms.splice(+b.dataset.i,1);capDraw();return true}
-  if(a==='cpmadd'){capSync();bzCap.proj.ms.push({title:'',deliv:'',date:null,suggested:false});capDraw();return true}
+  if(a==='cpmadd'){capSync();bzCap.proj.ms.push({title:'',deliv:'',date:null,suggested:false,tasks:[]});capDraw();return true}
   if(a==='cpsave'){capProject();return true}
   if(a==='pick'){const D=brData(),cur=bzPicked()||(D.top&&D.top.t),c=D.all.filter(x=>!x.pr.blocked&&!brSnoozed(x.t)&&(!cur||x.t.id!==cur.id)).sort((x,y)=>(x.pr.p||5)-(y.pr.p||5)||y.pr.score-x.pr.score).slice(0,8);
     bzOpenSheet('Pick your priority','<div class="bzsbody"><p class="hint" style="margin:0">Your choice wins for today. The AI keeps ranking in the background.</p>'+(cur?'<button class="btn ghost" type="button" data-bza="waitask" data-id="'+esc(cur.id)+'">⏳ I\'m waiting on someone for “'+esc(cur.text)+'”</button>':'')+(c.length?'<ul class="bzlist">'+c.map(x=>'<li class="bzli"><div class="grow"><b>'+esc(x.t.text)+'</b><small>'+(x.pr.p?brLvl(x.pr.p)+' · ':'')+esc(x.pr.reasons[0]||'')+'</small></div><button class="btn small" type="button" data-bza="pickset" data-id="'+esc(x.t.id)+'">Do this</button></li>').join('')+'</ul>':bzEmpty('No other open task right now.'))+'</div>');return true}
   if(a==='pickset'&&t){S.bzPick={id:t.id,day:todayStr()};bzCloseSheet();bzSaveAll('Your priority: '+t.text);return true}
   if(a==='pickclear'){delete S.bzPick;bzSaveAll();return true}
-  if(a==='projs'){bzShowProj=bzShowProj?null:'all';bzTab='dash';bzRender();if(bzShowProj)setTimeout(()=>{const w=$('bzProjWrap');if(w)w.scrollIntoView({block:'start',behavior:'smooth'});const i=$('projName');if(i&&!(S.projs||[]).length)i.focus()},60);return true}
-  if(a==='proj'){const id=b.dataset.id;bzShowProj=id;bzTab='dash';bzRender();setTimeout(()=>{const d=document.querySelector('#projs details[data-id="'+id+'"]');if(d){d.open=true;d.scrollIntoView({block:'start',behavior:'smooth'})}},60);return true}
+  if(a==='projs'){bzPj=null;bzGo('projects');return true}
+  if(a==='proj'){bzPj=b.dataset.id;bzGo('projects');return true}
+  if(a==='pjback'){bzPj=null;bzRender();scrollTo(0,0);return true}
+  if(a==='newproj'){capOpen('project',b.dataset.v==='voice');return true}
+  if(a==='pjorg'){const p=(S.projs||[]).find(x=>x.id===b.dataset.id);if(p)capOpen('project',false,p);return true}
+  if(a==='pjren'){const p=(S.projs||[]).find(x=>x.id===b.dataset.id);if(!p)return true;bzOpenSheet('Project details','<form class="bzsbody" data-pjren="'+esc(p.id)+'" autocomplete="off" novalidate><label class="fl">Name<input id="pjN" type="text" maxlength="80" value="'+esc(p.name)+'"></label><label class="fl">Objective <span class="opt">optional</span><textarea id="pjG" rows="3" maxlength="500">'+esc(p.plan.goal||'')+'</textarea></label><div class="sbtns"><button class="btn" type="submit">Save</button><button class="btn ghost" type="button" data-bzclose>Cancel</button></div></form>');return true}
   if(a==='projtasks'){bzProjF=b.dataset.id;bzFilter='active';bzGo('tasks');return true}
   if(a==='waitask'&&t){bzOpenSheet('Waiting on someone','<form class="bzsbody" data-bzwait="'+esc(t.id)+'" autocomplete="off" novalidate><p style="margin:0">“'+esc(t.text)+'” moves to <b>Pending</b> until the reply comes. It leaves your priorities, nothing is deleted.</p>'+
     '<label class="fl">Waiting for <span class="opt">who or what</span><input id="bzWho" type="text" maxlength="80" placeholder="e.g. Client approval of the quotation"></label>'+
@@ -4081,12 +4176,12 @@ function bzRender(){
   const v=$('v-biz');if(!v)return;
   const ok=hasPlan('business');
   $('bzTabs').hidden=!ok;$('bzSet').hidden=!ok;
-  $('bzProjWrap').hidden=!ok||bzTab!=='dash'||!bzShowProj;
+  $('bzProjWrap').hidden=true; // projects now live in the Projects tab
   if(!ok){$('bzBody').innerHTML='<div class="bzcard bzpitch"><h3>Your work, one clear next step</h3><ul><li>Business tasks with subtasks, deadlines and urgency</li><li>Automatic priority (P1 / P2 / P3) with the reason</li><li>Scheduled in your calendar, with reminders</li><li>A business coach that picks your next action</li><li>Missed-task review and a weekly business review</li></ul><button class="btn" type="button" data-plan="business">Try Business free</button><p class="hint" style="margin:0">Payment is not open yet: during this early version, Business is a free trial.</p></div>';return}
   bzSyncPrio();
   const m=bzMissed().length;$('bzPendCnt').hidden=!m;$('bzPendCnt').textContent=m;
   document.querySelectorAll('#bzTabs [data-bz]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.bz===bzTab)));
-  const f={dash:bzDash,tasks:bzTasksTab,prio:bzPrioTab,cal:bzCalTab,coach:bzCoachTab,pend:bzPendTab,review:bzReviewTab}[bzTab]||bzDash;
+  const f={dash:bzDash,projects:bzProjTab,tasks:bzTasksTab,prio:bzPrioTab,cal:bzCalTab,coach:bzCoachTab,pend:bzPendTab,review:bzReviewTab}[bzTab]||bzDash;
   $('bzBody').innerHTML=f();
 }
 function bzGo(tab){bzTab=tab;if($('v-biz').hidden)goView('v-biz');else bzRender();scrollTo(0,0)}
@@ -4112,7 +4207,7 @@ function bzStep(t,i){const s=t.steps[i];if(!s)return;
   s.rw=win(5,'step','Subtask done');bzSaveAll();
 }
 document.addEventListener('click',e=>{
-  const tb=e.target.closest('#bzTabs [data-bz]');if(tb){bzTab=tb.dataset.bz;bzArm=null;bzShowProj=null;if(bzTab!=='tasks')bzProjF=null;bzRender();return}
+  const tb=e.target.closest('#bzTabs [data-bz]');if(tb){bzTab=tb.dataset.bz;bzArm=null;bzShowProj=null;if(bzTab==='projects')bzPj=null;if(bzTab!=='tasks')bzProjF=null;bzRender();return}
   const b=e.target.closest('[data-bza]');if(!b)return;
   const a=b.dataset.bza,id=b.dataset.id,t=id?S.tasks.find(x=>x.id===id&&x.biz):null;
   if(b.closest('summary')&&a==='done')e.preventDefault();
