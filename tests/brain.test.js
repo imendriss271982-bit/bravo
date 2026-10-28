@@ -101,7 +101,7 @@ const nextTitles = p => p.$$eval('#bzBody .brnext .grow > b', els => els.map(e =
 
 test('1-2, 5-6: three projects compared together; #1 with project, level, why, first action, START; next three in order; conflict explained', async () => {
   const p = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   const txt = await brain(p);
   assert.match(txt, /AI Business Brain[\s\S]*Your priorities/);
   assert.match(txt, /Compared: 7 open tasks across 3 projects/);
@@ -136,7 +136,7 @@ test('1-2, 5-6: three projects compared together; #1 with project, level, why, f
 
 test('7, 14: completing the #1 updates the SAME task everywhere (no duplicate), the Brain moves on', async () => {
   const p = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   const n0 = (await state(p)).tasks.length;
   await p.click('#bzBody .brtop [data-bza="done"]');
   const s = await state(p);
@@ -148,7 +148,7 @@ test('7, 14: completing the #1 updates the SAME task everywhere (no duplicate), 
   await p.click('#bzBody [data-bza="filter"][data-v="done"]');
   assert.match(await p.textContent('#bzBody'), /Fix the payment problem/);
   // completing the dependency unblocks the budget, which now appears in the recommendations
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   await p.click(`#bzBody .brnext:has-text("Confirm the supplier") [data-bza="done"]`);
   assert.ok((await nextTitles(p)).concat([await topTitle(p)]).includes('Finalise the launch budget'));
   assert.deepEqual(p.errors, []);
@@ -156,7 +156,7 @@ test('7, 14: completing the #1 updates the SAME task everywhere (no duplicate), 
 
 test('8: changing a deadline in the editor re-ranks right away', async () => {
   const p = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   assert.equal(await topTitle(p), 'Fix the payment problem');
   await p.click('#bzBody .brtop [data-bza="brp"][data-p="more"]');
   await p.click('#bzBody .brtop [data-bza="edit"]');
@@ -169,12 +169,13 @@ test('8: changing a deadline in the editor re-ranks right away', async () => {
 
 test('9: a manual priority is respected; the app says once when it would recommend another one', async () => {
   const p = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   await p.click('#bzBody .brgrp[data-g="later"] summary');
   // set Research competitors (auto P4) to P1 from the Priorities tab
   await goBiz(p, 'prio');
+  await p.click('#bzBody .bzmore summary');
   await p.click('#bzBody [data-bza="over"][data-id="c1"][data-v="1"]');
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   const all = (await nextTitles(p)).concat([await topTitle(p)]);
   assert.ok(all.includes('Research competitors'), 'P1 by choice → among the recommendations');
   assert.match(await brain(p), /You set P1\. Based on your data the app would now recommend P4\./);
@@ -186,7 +187,7 @@ test('9: a manual priority is respected; the app says once when it would recomme
 
 test('10: missing information → provisional, nothing invented; Add missing information fills only empty fields', async () => {
   const p = await open({ tasks: [biz('m', 'Update the price list', { imp: null, conseq: null, est: null })] });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   const top = await p.textContent('#bzBody .brtop');
   assert.match(top, /Priority: 1 question/);
   assert.match(top, /Provisional: importance, consequences if late, time estimate not set yet/);
@@ -204,11 +205,11 @@ test('10: missing information → provisional, nothing invented; Add missing inf
 
 test('11-12: AI down → rules engine says so and still works; AI up → only the #1 facts are sent, once', async () => {
   const p = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   await p.waitForSelector('#brAiTxt:has-text("Rules engine (Noor\'s AI is offline")');
   assert.equal(await topTitle(p), 'Fix the payment problem');
   const q = await open({ tasks: SIX(), extra: { projs: PROJS }, ai: ok({ say: 'Fixing payments first protects every sale.' }) });
-  await goBiz(q, 'dash');
+  await goBiz(q, 'prio');
   await q.waitForSelector('#brAiTxt:has-text("Fixing payments first")');
   const sent = q.prompts.filter(x => /should be done first/.test(x));
   assert.equal(sent.length, 1, 'one call for the #1, not one per render');
@@ -221,7 +222,7 @@ test('11-12: AI down → rules engine says so and still works; AI up → only th
 
 test('snooze: the task is kept (same date), leaves the recommendations, comes back with Wake up', async () => {
   const p = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   await p.click('#bzBody .brtop [data-bza="brp"][data-p="snooze"]');
   await p.click('#bzBody [data-bza="snooze"][data-v="2h"]');
   let t = (await state(p)).tasks.find(x => x.id === 'a1');
@@ -237,7 +238,7 @@ test('snooze: the task is kept (same date), leaves the recommendations, comes ba
 test('break into smaller steps: proposed, editable, saved only on yes, regenerate adds no duplicates; offline = labelled template', async () => {
   const steps = { etapes: ['Open the payment logs', 'Find the failing request', 'Fix and test checkout'] };
   const p = await open({ tasks: SIX(), extra: { projs: PROJS }, ai: r => (/Break this business task/.test(r.request().postData()) ? ok(steps) : down)(r) });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   await p.click('#bzBody .brtop [data-bza="bd"]');
   await p.waitForSelector('#bdBox [data-bdi]');
   assert.match(await p.textContent('#bdBox'), /Suggested by Noor \(AI\)\. Edit freely: nothing is saved until you say yes\./);
@@ -261,14 +262,14 @@ test('break into smaller steps: proposed, editable, saved only on yes, regenerat
   assert.equal((await state(p)).tasks.find(t => t.id === 'a1').steps.length, 4);
   // offline
   const q = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(q, 'dash'); await q.click('#bzBody .brtop [data-bza="bd"]'); await q.waitForSelector('#bdBox [data-bd="save"]');
+  await goBiz(q, 'prio'); await q.click('#bzBody .brtop [data-bza="bd"]'); await q.waitForSelector('#bdBox [data-bd="save"]');
   assert.match(await q.textContent('#bdBox'), /Simple template: Noor's AI can't be reached right now/);
   assert.deepEqual(p.errors, []); assert.deepEqual(q.errors, []);
 });
 
 test('view project, project on hold, project importance', async () => {
   const p = await open({ tasks: SIX(), extra: { projs: PROJS } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   await p.click('#bzBody .brtop [data-bza="brp"][data-p="more"]');
   await p.click('#bzBody .brtop [data-bza="viewproj"]');
   const tx = await p.textContent('#bzBody');
@@ -277,10 +278,15 @@ test('view project, project on hold, project importance', async () => {
   await p.click('#bzBody [data-bza="projclear"]');
   assert.match(await p.textContent('#bzBody'), /Send a proposal/);
   // put Website launch on hold → its tasks are kept but no longer suggested
+  // the project workspace opens from the dashboard (Projects → Manage)
   await goBiz(p, 'dash');
+  await p.click('#bzBody [data-bza="projs"]');
   await p.click('#projs details[data-id="pA"] summary');
   await p.click('#projs [data-pro="phold"][data-id="pA"]');
+  await goBiz(p, 'prio');
   assert.equal(await topTitle(p), 'Send a proposal to a potential client');
+  await goBiz(p, 'dash');
+  await p.click('#bzBody [data-bza="projs"]');
   assert.equal((await state(p)).tasks.filter(t => t.biz && t.biz.proj === 'pA').length, 2);
   await p.click('#projs details[data-id="pC"] summary');
   await p.click('#projs [data-pro="pimp"][data-id="pC"][data-v="high"]');
@@ -304,7 +310,7 @@ test('15, 17: Brain is Business-only (page and actions); data stays when the pla
 test('16, 18: older saved data loads unchanged (no P4/snooze fields yet) and the Brain fits a phone and a desktop', async () => {
   const old = SIX().map(t => { delete t.biz.over; return t; });
   const p = await open({ tasks: old, extra: { projs: PROJS.map(({ imp, ...x }) => x) } });
-  await goBiz(p, 'dash');
+  await goBiz(p, 'prio');
   assert.equal(await topTitle(p), 'Fix the payment problem');
   assert.ok(await fits(p), 'no sideways scroll at 390 px');
   for (const tab of ['tasks', 'prio', 'cal', 'coach', 'pend', 'review']) { await goBiz(p, tab); assert.ok((await p.textContent('#bzBody')).length > 20, tab); }

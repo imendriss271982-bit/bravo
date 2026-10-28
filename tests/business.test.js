@@ -153,7 +153,8 @@ test('3: urgent is not automatically P1 — deadline, importance and consequence
   assert.match(await p.textContent('#bzBody'), /Update the price list: How important is this for your business\?/);
   await p.click('#bzBody [data-bza="answer"][data-id="c"][data-v="high"]');
   assert.equal((await p.evaluate(() => adhdwBiz.prio('c'))).p, 2);
-  // override
+  // override (the full list by level is one tap away)
+  await p.click('#bzBody .bzmore summary');
   await p.click('#bzBody [data-bza="over"][data-id="b"][data-v="1"]');
   const b2 = await p.evaluate(() => adhdwBiz.prio('b'));
   assert.equal(b2.p, 1); assert.equal(b2.auto, 3); assert.match(b2.reasons[0], /You chose P1 \(recommended: P3\)/);
