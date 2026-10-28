@@ -425,3 +425,22 @@ test('conflicts: saving over another item warns first and never moves it', async
   assert.ok(sl.date !== TOMORROW || sl.time >= '11:00' || sl.time <= '09:00', JSON.stringify(sl));
   assert.deepEqual(p.errors, []);
 });
+
+test('Noor is hidden in Business, except on the Coach tab (ask AI); she is back on other pages', async () => {
+  const p = await open({});
+  await p.click('nav button[data-view="v-biz"]'); await hush(p);
+  assert.ok(await p.isVisible('#v-biz'));
+  assert.equal(await p.isVisible('#fab'), false, 'no Noor on the Business dashboard');
+  assert.equal(await p.isVisible('#nBubble'), false, 'no Noor message in Business');
+  for (const t of ['tasks', 'prio', 'cal', 'pend', 'review']) {
+    await p.click(`#bzTabs [data-bz="${t}"]`); await p.waitForTimeout(50);
+    assert.equal(await p.isVisible('#fab'), false, 'no Noor on ' + t);
+  }
+  await p.click('#bzTabs [data-bz="coach"]'); await p.waitForTimeout(50);
+  assert.ok(await p.isVisible('#fab'), 'Noor is on the Coach tab');
+  await p.click('#bzTabs [data-bz="dash"]'); await p.waitForTimeout(50);
+  assert.equal(await p.isVisible('#fab'), false, 'gone again when leaving Coach');
+  await p.click('#menuBtn'); await p.click('.mitem[data-view="v-agenda"]'); await p.waitForTimeout(50);
+  assert.ok(await p.isVisible('#fab'), 'Noor is back on the calendar');
+  assert.deepEqual(p.errors, []);
+});
