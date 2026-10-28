@@ -3920,48 +3920,71 @@ document.addEventListener('submit',e=>{const f=e.target.closest('[data-pjren]');
   const p=(S.projs||[]).find(x=>x.id===f.dataset.pjren);if(!p)return bzCloseSheet();const n=$('pjN').value.trim();if(!n){$('pjN').setAttribute('aria-invalid','true');return}
   p.name=n.slice(0,80);p.plan.goal=$('pjG').value.trim().slice(0,500);bzCloseSheet();save();renderPro();bzSaveAll('Project saved.');
 });
-// ---------- ADHD self-check for adults (menu ☰). Written for this app, in plain words, from the adult symptom areas doctors look at.
+// ---------- ADHD self-check for adults (menu ☰): 30 questions, at home and at work. Written for this app in plain words, from the adult symptom areas doctors look at.
 // It is NOT a diagnosis and NOT a validated clinical scale. Only the result (counts) is kept, on this phone; answers are not stored.
+// Each question: [area, section]. Areas: a = attention, h = restlessness/impulsivity, o = organisation & feelings, i = impact
+const ADT_K=[['a','home'],['a','home'],['a','home'],['a','home'],['a','home'],['a','home'],
+  ['a','work'],['a','work'],['a','work'],['a','work'],['a','work'],['a','work'],
+  ['h','home'],['h','home'],['h','home'],['h','home'],['h','home'],
+  ['h','work'],['h','work'],['h','work'],['h','work'],['h','work'],
+  ['o','life'],['o','life'],['o','life'],['o','life'],['o','life'],
+  ['i','impact'],['i','impact'],['i','impact']];
 const ADT={
-  en:{title:'ADHD self-check',intro:'18 short questions about the last 6 months, plus one about how much it affects your life. About 3 minutes.',note:'This is not a diagnosis. Only a doctor can diagnose ADHD. Your answers stay on this phone.',start:'Start',back:'Back',of:'of',
+  en:{title:'ADHD self-check',intro:'30 short questions about the last 6 months: at home, at work and in daily life. About 5 minutes.',note:'This is not a diagnosis. Only a doctor can diagnose ADHD. Your answers stay on this phone.',start:'Start',back:'Back',of:'of',
+    sec:{home:'🏠 At home',work:'💼 At work',life:'🌀 Daily life & feelings',impact:'📍 Effect on your life'},
     scale:['Never','Rarely','Sometimes','Often','Very often'],impact:['Not at all','A little','Some','A lot','Very much'],
-    q:['I make careless mistakes at work or in paperwork because I miss details.','I find it hard to stay focused on long tasks, meetings or reading.','People say I seem not to listen, even when they speak to me directly.','I start tasks but leave them unfinished and jump to something else.','I struggle to organize my tasks, my time or my space.','I put off tasks that need a lot of thinking.','I lose things I need, like keys, phone or papers.','Noise or my own thoughts easily pull me away from what I am doing.','I forget appointments, bills or things I promised to do.',
-       'I fidget, tap my hands or feet, or find it hard to sit still.','I get up when I am expected to stay seated.','I feel restless inside.','I find it hard to relax quietly in my free time.','I feel always “on the go”, as if driven by a motor.','I talk more than others expect.','I answer or finish people’s sentences before they are done.','I find it hard to wait my turn.','I interrupt others or take over what they are doing.',
-       'How much do these things cause problems at work, at home or with people?'],
-    res:'Your result',att:'Attention signs',hyp:'Restlessness & impulsivity signs',often:'answered Often or Very often',
-    high:'Many of the signs you described are common in adults with ADHD. It may really help to talk to a doctor or a psychiatrist. You can show them this result.',
+    q:[// attention at home
+       'I start housework (cleaning, laundry, cooking) and leave it unfinished.','I lose things at home: keys, phone, wallet, documents.','I forget to pay bills, reply to messages or call people back.','When someone in the family talks to me, my mind drifts away.','I go into a room and forget why I came.','I find it hard to read a book, a long message or follow a film to the end.',
+       // attention at work
+       'I make careless mistakes in emails, numbers or documents because I miss details.','I find it hard to stay focused in meetings or on long tasks.','I put off tasks that need a lot of thinking, until the last minute.','I jump between tasks and finish few of them.','I forget deadlines, appointments or things I promised to colleagues.','Noise, messages or my own thoughts easily pull me away from my work.',
+       // restlessness / impulsivity at home
+       'I find it hard to relax quietly at home, even when I have time.','I feel always “on the go”, as if driven by a motor.','I interrupt family members or finish their sentences.','I buy things on impulse and regret it later.','I get impatient fast when I have to wait (queue, traffic, loading).',
+       // restlessness / impulsivity at work
+       'I fidget, tap my hands or feet, or move a lot in my chair.','I get up and walk around when I am expected to stay seated.','I talk more than others expect, in meetings or with colleagues.','I answer before the question is finished.','I make quick decisions without thinking them through.',
+       // daily life & feelings
+       'I am late, even when I try to be on time.','I underestimate how long things will take.','I get frustrated or angry quickly, then it passes.','I feel overwhelmed when I have many things to do.','I need a deadline or pressure to finally start.',
+       // impact
+       'How much do these things cause problems at work or in your studies?','How much do they cause problems at home or with your family?','How much do they affect your mood, your confidence or your friendships?'],
+    res:'Your result',ar:{a:'Attention',h:'Restlessness & impulsivity',o:'Organisation & feelings'},often:'Often or Very often',
+    high:'Many of the signs you described are common in adults with ADHD, and you said they affect your life. It may really help to talk to a doctor or a psychiatrist. You can show them this result.',
     mid:'You described several signs, but you said they don’t affect your life much. If that changes, talk to a doctor.',
     low:'You described few of the usual signs. If you still feel you struggle every day, a doctor can help you understand why.',
     again:'Take it again',close:'Close',last:'Last result',lang:'عربي'},
-  ar:{title:'اختبار ذاتي لفرط الحركة وتشتت الانتباه',intro:'١٨ سؤالًا قصيرًا عن آخر ٦ أشهر، وسؤال عن مدى تأثير ذلك على حياتك. حوالي ٣ دقائق.',note:'هذا ليس تشخيصًا. الطبيب وحده يستطيع تشخيص فرط الحركة وتشتت الانتباه. إجاباتك تبقى على هذا الهاتف.',start:'ابدأ',back:'رجوع',of:'من',
+  ar:{title:'اختبار ذاتي لفرط الحركة وتشتت الانتباه',intro:'٣٠ سؤالًا قصيرًا عن آخر ٦ أشهر: في البيت وفي العمل وفي الحياة اليومية. حوالي ٥ دقائق.',note:'هذا ليس تشخيصًا. الطبيب وحده يستطيع تشخيص فرط الحركة وتشتت الانتباه. إجاباتك تبقى على هذا الهاتف.',start:'ابدأ',back:'رجوع',of:'من',
+    sec:{home:'🏠 في البيت',work:'💼 في العمل',life:'🌀 الحياة اليومية والمشاعر',impact:'📍 التأثير على حياتك'},
     scale:['أبدًا','نادرًا','أحيانًا','غالبًا','دائمًا تقريبًا'],impact:['إطلاقًا','قليلًا','إلى حد ما','كثيرًا','كثيرًا جدًا'],
-    q:['أرتكب أخطاء في العمل أو في الأوراق لأنني لا أنتبه للتفاصيل.','يصعب عليّ الحفاظ على تركيزي في المهام الطويلة أو الاجتماعات أو القراءة.','يقول لي الناس إنني لا أبدو منصتًا حتى عندما يتحدثون معي مباشرة.','أبدأ المهام ثم أتركها دون إكمال وأنتقل إلى شيء آخر.','أجد صعوبة في تنظيم مهامي أو وقتي أو مكاني.','أؤجل المهام التي تحتاج إلى تفكير كثير.','أُضيّع أشياء أحتاجها مثل المفاتيح أو الهاتف أو الأوراق.','يشتتني الضجيج أو أفكاري بسهولة عمّا أفعله.','أنسى المواعيد أو الفواتير أو أشياء وعدت بفعلها.',
-       'أتململ أو أحرّك يديّ أو قدميّ، ويصعب عليّ الجلوس بهدوء.','أقوم من مكاني عندما يُتوقع مني أن أبقى جالسًا.','أشعر بعدم استقرار في داخلي.','يصعب عليّ الاسترخاء بهدوء في وقت فراغي.','أشعر أنني في حركة دائمة وكأن بداخلي محرّكًا.','أتكلم أكثر مما يتوقع الآخرون.','أجيب أو أُكمل كلام الآخرين قبل أن ينتهوا.','يصعب عليّ انتظار دوري.','أقاطع الآخرين أو أتدخل فيما يفعلونه.',
-       'إلى أي حد تسبب لك هذه الأمور مشاكل في العمل أو في البيت أو مع الناس؟'],
-    res:'نتيجتك',att:'علامات تشتت الانتباه',hyp:'علامات فرط الحركة والاندفاع',often:'أجبت غالبًا أو دائمًا تقريبًا',
-    high:'كثير من العلامات التي وصفتها شائعة لدى البالغين المصابين بفرط الحركة وتشتت الانتباه. قد يفيدك حقًا التحدث مع طبيب أو طبيب نفسي، ويمكنك أن تريه هذه النتيجة.',
+    q:['أبدأ أعمال البيت (التنظيف، الغسيل، الطبخ) ثم أتركها دون إكمال.','أُضيّع أشياء في البيت: المفاتيح، الهاتف، المحفظة، الأوراق.','أنسى دفع الفواتير أو الرد على الرسائل أو معاودة الاتصال بالناس.','عندما يكلمني أحد من العائلة، يشرد ذهني.','أدخل غرفة وأنسى لماذا دخلتها.','يصعب عليّ قراءة كتاب أو رسالة طويلة أو متابعة فيلم حتى النهاية.',
+       'أرتكب أخطاء في الإيميلات أو الأرقام أو المستندات لأنني لا أنتبه للتفاصيل.','يصعب عليّ التركيز في الاجتماعات أو في المهام الطويلة.','أؤجل المهام التي تحتاج إلى تفكير كثير حتى آخر لحظة.','أتنقل بين المهام وأُنهي القليل منها.','أنسى المواعيد النهائية أو الاجتماعات أو ما وعدت به زملائي.','يشتتني الضجيج أو الرسائل أو أفكاري بسهولة عن عملي.',
+       'يصعب عليّ الاسترخاء بهدوء في البيت حتى عندما يكون لديّ وقت.','أشعر أنني في حركة دائمة وكأن بداخلي محرّكًا.','أقاطع أفراد العائلة أو أُكمل كلامهم.','أشتري أشياء باندفاع ثم أندم.','أفقد صبري بسرعة عندما يجب أن أنتظر (طابور، زحمة، تحميل).',
+       'أتململ أو أحرّك يديّ أو قدميّ أو أتحرك كثيرًا على كرسيّ.','أقوم وأتمشى عندما يُتوقع مني أن أبقى جالسًا.','أتكلم أكثر مما يتوقع الآخرون في الاجتماعات أو مع الزملاء.','أجيب قبل أن ينتهي السؤال.','أتخذ قرارات سريعة دون تفكير كافٍ.',
+       'أتأخر حتى عندما أحاول أن أكون في الموعد.','أُقلل من تقدير الوقت الذي تحتاجه الأمور.','أنزعج أو أغضب بسرعة ثم يزول ذلك.','أشعر بالإرهاق عندما يكون لديّ أشياء كثيرة لأفعلها.','أحتاج إلى موعد نهائي أو ضغط حتى أبدأ أخيرًا.',
+       'إلى أي حد تسبب لك هذه الأمور مشاكل في العمل أو الدراسة؟','إلى أي حد تسبب لك مشاكل في البيت أو مع عائلتك؟','إلى أي حد تؤثر على مزاجك أو ثقتك بنفسك أو صداقاتك؟'],
+    res:'نتيجتك',ar:{a:'تشتت الانتباه',h:'فرط الحركة والاندفاع',o:'التنظيم والمشاعر'},often:'غالبًا أو دائمًا تقريبًا',
+    high:'كثير من العلامات التي وصفتها شائعة لدى البالغين المصابين بفرط الحركة وتشتت الانتباه، وقلت إنها تؤثر على حياتك. قد يفيدك حقًا التحدث مع طبيب أو طبيب نفسي، ويمكنك أن تريه هذه النتيجة.',
     mid:'وصفت عدة علامات، لكنك قلت إنها لا تؤثر كثيرًا على حياتك. إذا تغيّر ذلك، تحدّث مع طبيب.',
     low:'وصفت قليلًا من العلامات المعتادة. إذا كنت لا تزال تشعر بصعوبة كل يوم، يمكن للطبيب أن يساعدك على فهم السبب.',
     again:'أعد الاختبار',close:'إغلاق',last:'آخر نتيجة',lang:'English'}
 };
+const ADT_N={a:12,h:10,o:5};
 let adt=null;
 function adtOpen(){openMenu(false);adt={i:-1,ans:[],lang:(S.adtLang==='ar'?'ar':'en')};adtDraw()}
-function adtResult(ans){const a=ans.slice(0,9).filter(v=>v>=3).length,h=ans.slice(9,18).filter(v=>v>=3).length,imp=ans[18]||0;return{a,h,imp,lvl:(a>=5||h>=5)?(imp>=2?'high':'mid'):'low'}}
+function adtResult(ans){const c={a:0,h:0,o:0};let imp=0;ADT_K.forEach((k,i)=>{const v=ans[i]||0;if(k[0]==='i')imp=Math.max(imp,v);else if(v>=3)c[k[0]]++});
+  return{a:c.a,h:c.h,o:c.o,imp,lvl:(c.a>=6||c.h>=5)?(imp>=2?'high':'mid'):'low'}}
 function adtDraw(){
   const L=ADT[adt.lang],n=L.q.length,rtl=adt.lang==='ar',btn=(v,t)=>'<button type="button" class="btn ghost adtopt" data-adt="ans" data-v="'+v+'" aria-pressed="'+(adt.ans[adt.i]===v)+'">'+t+'</button>';
   let h='<div class="bzsbody adt" dir="'+(rtl?'rtl':'ltr')+'" lang="'+adt.lang+'"><button type="button" class="lnk" data-adt="lang" style="align-self:flex-end">'+L.lang+'</button>';
   if(adt.i<0){const r=S.adhdTest;
     h+='<p style="margin:0">'+L.intro+'</p><p class="hint" style="margin:0">'+L.note+'</p>'+
-      (r&&r.at?'<p class="hint" style="margin:0">'+L.last+': '+new Date(r.at).toLocaleDateString(rtl?'ar':'en-GB',{day:'numeric',month:'short',year:'numeric'})+' · '+r.a+'/9 · '+r.h+'/9</p>':'')+
+      (r&&r.at?'<p class="hint" style="margin:0">'+L.last+': '+new Date(r.at).toLocaleDateString(rtl?'ar':'en-GB',{day:'numeric',month:'short',year:'numeric'})+' · '+r.a+'/'+(r.na||ADT_N.a)+' · '+r.h+'/'+(r.nh||ADT_N.h)+'</p>':'')+
       '<button class="btn brgo" type="button" data-adt="go">'+L.start+'</button>';
   }else if(adt.i<n){
-    const last=adt.i===n-1;
+    const k=ADT_K[adt.i],isImp=k[0]==='i';
     h+='<div class="adtprog"><span>'+(adt.i+1)+' '+L.of+' '+n+'</span><div class="pbar"><i style="width:'+Math.round(adt.i/n*100)+'%"></i></div></div>'+
-      '<p class="adtq" id="adtQ">'+esc(L.q[adt.i])+'</p><div class="adtopts" role="group" aria-labelledby="adtQ">'+(last?L.impact:L.scale).map((t,v)=>btn(v,t)).join('')+'</div>'+
+      '<span class="bzkick">'+L.sec[k[1]]+'</span><p class="adtq" id="adtQ">'+esc(L.q[adt.i])+'</p><div class="adtopts" role="group" aria-labelledby="adtQ">'+(isImp?L.impact:L.scale).map((t,v)=>btn(v,t)).join('')+'</div>'+
       '<button class="lnk" type="button" data-adt="prev">'+(rtl?'→ ':'← ')+L.back+'</button>';
   }else{
-    const r=adtResult(adt.ans),bar=(lab,v)=>'<div class="adtbar"><b>'+lab+'</b><div class="bzprog"><span>'+v+' / 9 '+L.often+'</span><div class="pbar"><i style="width:'+Math.round(v/9*100)+'%"></i></div></div></div>';
-    h+='<h3 style="margin:0">'+L.res+'</h3>'+bar(L.att,r.a)+bar(L.hyp,r.h)+'<div class="bzask"><p style="margin:0">'+L[r.lvl]+'</p></div><p class="hint" style="margin:0">'+L.note+'</p>'+
+    const r=adtResult(adt.ans),bar=(k,v)=>'<div class="adtbar"><b>'+L.ar[k]+'</b><div class="bzprog"><span>'+v+' / '+ADT_N[k]+' · '+L.often+'</span><div class="pbar"><i style="width:'+Math.round(v/ADT_N[k]*100)+'%"></i></div></div></div>';
+    h+='<h3 style="margin:0">'+L.res+'</h3>'+bar('a',r.a)+bar('h',r.h)+bar('o',r.o)+'<div class="bzask"><p style="margin:0">'+L[r.lvl]+'</p></div><p class="hint" style="margin:0">'+L.note+'</p>'+
       '<div class="sbtns"><button class="btn ghost" type="button" data-adt="again">'+L.again+'</button><button class="btn" type="button" data-adt="close">'+L.close+'</button></div>';
   }
   h+='</div>';bzOpenSheet(L.title,h);
@@ -3973,7 +3996,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-adt]');if(
   if(a==='prev'){adt.i=Math.max(-1,adt.i-1);return adtDraw()}
   if(a==='close'){adt=null;return bzCloseSheet()}
   if(a==='ans'){adt.ans[adt.i]=+b.dataset.v;adt.i++;
-    if(adt.i>=ADT.en.q.length){const r=adtResult(adt.ans);S.adhdTest={at:Date.now(),a:r.a,h:r.h,imp:r.imp};save()}
+    if(adt.i>=ADT_K.length){const r=adtResult(adt.ans);S.adhdTest={at:Date.now(),a:r.a,h:r.h,o:r.o,imp:r.imp,na:ADT_N.a,nh:ADT_N.h};save()}
     return adtDraw()}
 });
 // extra Business actions (dashboard, add task, projects, pending)

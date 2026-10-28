@@ -375,21 +375,25 @@ test('ADHD self-test (adults) from the ☰ menu: one question at a time, Arabic,
   await p.click('#menuBtn'); await p.click('.mitem[data-adt="open"]');
   assert.match(await p.textContent('#bzSheet'), /not a diagnosis/);
   await p.click('#bzSheet [data-adt="go"]');
-  for (let i = 0; i < 18; i++) { assert.match(await p.textContent('#bzSheet .adtprog'), new RegExp('^' + (i + 1) + ' of 19')); await p.click(`#bzSheet [data-adt="ans"][data-v="${i < 9 ? 3 : 1}"]`); }
-  await p.click('#bzSheet [data-adt="ans"][data-v="3"]');
+  assert.match(await p.textContent('#bzSheet'), /🏠 At home/);
+  for (let i = 0; i < 30; i++) {
+    assert.match(await p.textContent('#bzSheet .adtprog'), new RegExp('^' + (i + 1) + ' of 30'));
+    if (i === 6) assert.match(await p.textContent('#bzSheet'), /💼 At work/);
+    await p.click(`#bzSheet [data-adt="ans"][data-v="${i < 12 ? 3 : i < 27 ? 1 : 2}"]`);
+  }
   const t = await p.textContent('#bzSheet');
-  assert.match(t, /9 \/ 9[\s\S]*0 \/ 9[\s\S]*talk to a doctor/);
+  assert.match(t, /12 \/ 12[\s\S]*0 \/ 10[\s\S]*0 \/ 5[\s\S]*talk to a doctor/);
   const s = await state(p);
-  assert.equal(s.adhdTest.a, 9); assert.equal(s.adhdTest.h, 0); assert.equal(s.adhdTest.imp, 3);
+  assert.equal(s.adhdTest.a, 12); assert.equal(s.adhdTest.h, 0); assert.equal(s.adhdTest.imp, 2);
   assert.ok(!('ans' in s.adhdTest), 'answers are not kept');
   await p.click('#bzSheet [data-adt="again"]');
   await p.click('#bzSheet [data-adt="lang"]');
   assert.equal(await p.getAttribute('#bzSheet .adt', 'dir'), 'rtl');
-  assert.match(await p.textContent('#bzSheet .adtq'), /أرتكب أخطاء/);
+  assert.match(await p.textContent('#bzSheet .adtq'), /أعمال البيت/);
   assert.ok(await fits(p));
   await p.click('#bzSheet [data-adt="prev"]'); await p.click('#bzSheet [data-bzclose].x');
   await reload(p);
   await p.click('#menuBtn'); await p.click('.mitem[data-adt="open"]');
-  assert.match(await p.textContent('#bzSheet'), /آخر نتيجة[\s\S]*9\/9/, 'last result shown, in the chosen language');
+  assert.match(await p.textContent('#bzSheet'), /آخر نتيجة[\s\S]*12\/12/, 'last result shown, in the chosen language');
   assert.deepEqual(p.errors, []);
 });
