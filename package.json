@@ -2,6 +2,10 @@
   "name": "adhd-winner",
   "private": true,
   "description": "ADHD Winner web app (static site). Only used to run the tests.",
-  "scripts": { "test": "node --test --test-concurrency=1 tests/app.test.js tests/help-start.test.js tests/phone.test.js tests/v2.test.js tests/business.test.js" },
-  "devDependencies": { "playwright": "^1.50.0" }
+  "scripts": {
+    "test": "node --test --test-concurrency=1 tests/app.test.js tests/help-start.test.js tests/phone.test.js tests/v2.test.js tests/business.test.js tests/brain-engine.test.js tests/brain.test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.0"
+  }
 }

@@ -843,7 +843,7 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .bzli.dim{opacity:.6}
 .bzli.done b{text-decoration:line-through;opacity:.7}
 .pchip{font-size:11px;font-weight:900;padding:3px 8px;border-radius:7px;white-space:nowrap;background:var(--surface-2);color:var(--muted)}
-.pchip.p1{background:var(--coral);color:#fff}.pchip.p2{background:var(--gold);color:#12082B}.pchip.p3{background:var(--surface-2);color:var(--ink)}
+.pchip.p1{background:var(--coral);color:#fff}.pchip.p2{background:var(--gold);color:#12082B}.pchip.p3{background:var(--surface-2);color:var(--ink)}.pchip.p4{background:transparent;border:1.5px dashed var(--muted);color:var(--muted)}
 .pchip.urg{background:transparent;border:1.5px solid var(--coral);color:var(--coral)}
 .pchip.stc{background:transparent;border:1.5px solid var(--muted);color:var(--muted)}
 .pchip.dl{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
@@ -852,6 +852,34 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .chips2{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .bzt{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:16px;overflow:hidden}
 .bzt.p1{border-left-color:var(--coral)}.bzt.p2{border-left-color:var(--gold)}
+.bzt.p4{border-left-color:var(--muted)}
+.brain{display:flex;flex-direction:column;gap:16px;border:1px solid var(--line);border-radius:22px;padding:16px;background:linear-gradient(180deg,rgba(34,229,255,.07),transparent 60%)}
+.brhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.brhead h3{font-size:20px;margin:2px 0 0}
+.bracts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bracts.three{grid-template-columns:repeat(3,1fr)}
+.bracts .btn{min-height:44px;padding:8px 10px;font-size:14px;width:100%}
+.bracts>.btn:last-child:nth-child(odd):not(.three *){grid-column:1/-1}
+.btn.brgo{width:100%;font-size:17px;letter-spacing:.04em;padding:16px}
+.brpanel{border:1px dashed var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;background:var(--surface-2)}
+.brpanel input[type=date]{min-height:40px;font-size:16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 10px}
+.brlist{counter-reset:none}
+.brnext{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.brnext .grow{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.brnext .grow>b{overflow-wrap:anywhere}
+.brn{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:var(--surface-2);color:var(--cyan)}
+.brwhy{color:var(--muted);font-size:13px;font-weight:600}
+.brgrp{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 14px}
+.brgrp summary{display:flex;align-items:center;gap:10px;min-height:48px;cursor:pointer;list-style:none}
+.brgrp summary::-webkit-details-marker{display:none}
+.brgrp summary b{flex:1}
+.brgrp[open] .chev{transform:rotate(180deg)}
+.brgrp .bzlist{padding-bottom:12px}
+.brgrp .bzli{background:var(--surface-2);align-items:flex-start}
+.brside{display:flex;flex-direction:column;gap:6px}
+.brcnt{background:var(--surface-2);color:var(--ink);border-radius:99px;font-size:12px;font-weight:800;min-width:24px;height:24px;display:inline-grid;place-items:center;padding:0 8px}
+.lnk{background:none;border:0;color:var(--cyan);font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:0}
+
 .bzt.isdone{opacity:.65}
 .bzt>summary{list-style:none;display:flex;align-items:flex-start;gap:12px;padding:14px;cursor:pointer}
 .bzt>summary::-webkit-details-marker{display:none}
@@ -1311,6 +1339,7 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
   </div>
 </div>
 
+<script src="brain.js"></script>
 <script>
 (function(){
 const KEY='bravo-v1';
@@ -1405,7 +1434,7 @@ function normBiz(t){
   b.deadline=okDate(b.deadline)?b.deadline:null;
   b.est=+b.est>=5&&+b.est<=1440?Math.round(+b.est):null;
   b.status=BZ_ST.includes(b.status)?b.status:'todo';
-  b.over=[1,2,3].includes(+b.over)?+b.over:null;
+  b.over=[1,2,3,4].includes(+b.over)?+b.over:null;b.overKeep=[1,2,3,4].includes(+b.overKeep)?+b.overKeep:null;b.snooze=+b.snooze>0?+b.snooze:null;
   b.deps=Array.isArray(b.deps)?[...new Set(b.deps.filter(x=>typeof x==='string'&&x!==t.id))].slice(0,20):[];
   b.notes=(Array.isArray(b.notes)?b.notes:[]).filter(n=>n&&typeof n==='object').slice(-100).map(n=>({id:s(n.id||Math.random().toString(36).slice(2,9),40),at:+n.at||Date.now(),text:s(n.text,500),reason:n.reason?s(n.reason,40):undefined,date:okDate(n.date)?n.date:undefined}));
   b.hist=(Array.isArray(b.hist)?b.hist:[]).filter(h=>h&&typeof h==='object'&&h.ev).slice(-100).map(h=>({at:+h.at||Date.now(),ev:s(h.ev,20),from:h.from?s(h.from,20):undefined,to:h.to?s(h.to,20):undefined}));
@@ -3146,7 +3175,9 @@ function renderPro(){
   const open=new Set([...document.querySelectorAll('#projs details[open]')].map(d=>d.dataset.id));
   $('projs').innerHTML=S.projs.map(p=>{const ms=p.ms||[],dn=ms.filter(x=>x.done).length,pct=ms.length?Math.round(dn/ms.length*100):0;
     const f=(k,lab,ph)=>'<label>'+lab+'<textarea data-pf="'+k+'" data-id="'+p.id+'" placeholder="'+ph+'">'+esc(p.plan[k]||'')+'</textarea></label>';
-    return '<details class="proj" data-id="'+p.id+'"'+(open.has(p.id)?' open':'')+'><summary><div class="grow"><h4>'+esc(p.name)+'</h4><small>'+dn+' / '+ms.length+' milestones</small><div class="pbar"><i style="width:'+pct+'%"></i></div></div><span aria-hidden="true">▾</span></summary><div class="pbody">'+
+    return '<details class="proj" data-id="'+p.id+'"'+(open.has(p.id)?' open':'')+'><summary><div class="grow"><h4>'+esc(p.name)+'</h4><small>'+dn+' / '+ms.length+' milestones'+(p.imp?' · '+({high:'High',med:'Medium',low:'Low'})[p.imp]+' importance':'')+(p.hold?' · On hold':'')+'</small><div class="pbar"><i style="width:'+pct+'%"></i></div></div><span aria-hidden="true">▾</span></summary><div class="pbody">'+
+      '<div class="fl"><span>Importance for my business <span class="opt">used by the AI Business Brain</span></span><div class="seg small" role="group" aria-label="Project importance">'+[['high','High'],['med','Medium'],['low','Low']].map(o=>'<button type="button" data-pro="pimp" data-id="'+p.id+'" data-v="'+o[0]+'" aria-pressed="'+(p.imp===o[0])+'">'+o[1]+'</button>').join('')+'</div></div>'+
+      '<button class="btn small ghost" type="button" data-pro="phold" data-id="'+p.id+'" aria-pressed="'+!!p.hold+'">'+(p.hold?'▶ Resume this project':'⏸ Put this project on hold')+'</button>'+(p.hold?'<p class="hint" style="margin:0">On hold: its tasks are kept but the Brain won\'t suggest them.</p>':'')+
       '<button class="btn ghost" data-pro="draft" data-id="'+p.id+'" type="button">✨ Draft my business plan with Noor</button>'+
       f('goal','Goal','What do you want to achieve?')+f('problem','Problem','What problem does it solve?')+f('customers','Customers','Who will buy?')+f('offer','Offer & price','What do you sell, at what price?')+f('money','Budget','What does it cost to start?')+f('market','Marketing','How will people find you?')+
       '<div class="sechead" style="margin:4px 0 0"><h3 style="font-size:17px">Milestones</h3><span class="hint">Alarm on the day</span></div>'+
@@ -3205,6 +3236,8 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]
   if(a==='pdel'){const p=S.projs.find(x=>x.id===id);if(p){const evs=new Set(p.ms.map(m=>m.ev));S.tasks=S.tasks.filter(ev=>!evs.has(ev.id))}S.projs=S.projs.filter(x=>x.id!==id)}
   const p=S.projs.find(x=>x.id===id);
   if(a==='mtog'&&p){const m=p.ms.find(x=>x.id===b.dataset.m);if(m){m.done=!m.done;const ev=S.tasks.find(x=>x.id===m.ev);if(ev){ev.alarm=!m.done&&!!ev.time;ev.done=m.done}if(!m.done){unwin(m.rw);m.rw=null}else{save();renderPro();renderAgenda();m.rw=win(25);save();return}}}
+  if(a==='pimp'&&p)p.imp=p.imp===b.dataset.v?null:b.dataset.v;
+  if(a==='phold'&&p)p.hold=!p.hold;
   if(a==='mdel'&&p){const m=p.ms.find(x=>x.id===b.dataset.m);if(m)S.tasks=S.tasks.filter(ev=>ev.id!==m.ev);p.ms=p.ms.filter(x=>x.id!==b.dataset.m)}
   if(a==='draft'&&p){b.disabled=true;b.textContent='Noor is writing your plan…';nour('think');
     try{const today=todayStr();
@@ -3227,7 +3260,7 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]
 const BZ_STATUS={todo:'Not started',doing:'In progress',blocked:'Blocked',resched:'Rescheduled',paused:'Paused',delegated:'Delegated'};
 const BZ_REASONS=[['time','Not enough time'],['unexpected','Unexpected work'],['hard','Task was too difficult to start'],['waiting','Waiting for someone else'],['longer','Task took longer than expected'],['nolonger','No longer a priority'],['other','Other']];
 const BZ_RNAME=Object.fromEntries(BZ_REASONS);
-const BZ_PNAME={1:'Critical',2:'Important',3:'Can be scheduled later'};
+const BZ_PNAME={1:'Do first',2:'Do next',3:'Plan',4:'Later'};
 const BZ_LVN={high:'High',med:'Medium',low:'Low'};
 const BZ_DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 let bzTab='dash',bzWeekStart=monday(new Date()),bzFilter='active',bzE=null,bzRv=null,bzProp={},bzAI={},bzArm=null;
@@ -3268,36 +3301,14 @@ function bzFindSlot(mins,o){o=o||{};mins=Math.max(5,Math.round(mins||30));
   return null}
 
 // ---------- priority: urgency is only one input; deadline, importance, consequences, time and blockers count too ----------
-function bzPrio(t){const b=t.biz;if(!b)return{p:null,reasons:[],score:0};
-  const r=[],today=todayStr();let s=0,dl=null;
-  const add=(w,txt)=>{s+=w;r.push([w,txt])};
-  const ask=b.imp==null?{k:'imp',q:'How important is this for your business?'}:(b.conseq==null&&(b.urgent||b.deadline))?{k:'conseq',q:'What happens if it is late?'}:null;
-  if(b.urgent)add(2,'You marked it urgent');
-  if(b.imp==='high')add(3.5,'High importance for the business');else if(b.imp==='med')add(1.5,'Medium importance for the business');else if(b.imp==='low')add(0,'Low importance for the business');
-  if(b.conseq==='high')add(3,'Serious consequences if it is late');else if(b.conseq==='med')add(1,'Some consequences if it is late');else if(b.conseq==='low')add(0,'Few consequences if it is late');
-  if(b.deadline){dl=dayDiff(today,b.deadline);
-    if(dl<0)add(5,'Deadline passed '+(-dl)+' day'+(dl===-1?'':'s')+' ago');
-    else if(dl===0)add(4.5,'Due today');else if(dl===1)add(4,'Due tomorrow');
-    else if(dl<=3)add(2.5,'Due in '+dl+' days');else if(dl<=7)add(1,'Due in '+dl+' days');else add(0,'Deadline in '+dl+' days: there is time');
-    const left=bzLeft(t);
-    if(left&&dl>=0){const free=bzFreeUntil(b.deadline,t.id);
-      if(free<left)add(2,'Only '+bzDur(free)+' of free work time before the deadline, for about '+bzDur(left)+' of work');
-      else if(free<left*2)add(1,'Tight: '+bzDur(free)+' free before the deadline for about '+bzDur(left)+' of work')}}
-  const n=t.steps.length,d=t.steps.filter(x=>x.done).length;
-  if(d&&d<n)add(.5,'Already started ('+d+' of '+n+' subtasks)');
-  if(b.urgent&&b.imp==='low'&&b.conseq!=='high'&&(dl==null||dl>3))r.push([9,'Urgent, but low impact and no close deadline: it can wait']);
-  r.sort((x,y)=>y[0]-x[0]);for(let i=0;i<r.length;i++)r[i]=r[i][1]; // strongest reasons first
-  let auto=s>=7?1:s>=3.5?2:3;
-  const blk=bzBlockers(t);
-  if(blk.length){const cap=dl!=null&&dl<=3?2:3;if(auto<cap)auto=cap;r.unshift('Blocked: '+blk[0]+'. It cannot move forward yet')}
-  if(ask&&!b.over)return{p:null,auto:null,reasons:r,ask,blocked:!!blk.length,score:s};
-  const p=b.over||auto;
-  if(b.over&&b.over!==auto)r.unshift('You chose P'+b.over+' (recommended: P'+auto+')');
-  return{p,auto,reasons:r,ask,blocked:!!blk.length,score:s};
-}
+// The scoring itself lives in brain.js (pure, tested on its own). This adapter gives it the facts from this phone.
+const bzProjOf=id=>{const p=id&&(S.projs||[]).find(x=>x.id===id);return p?{name:p.name,imp:p.imp||null,hold:!!p.hold}:null};
+const bzDependents=t=>t.id?S.tasks.filter(x=>x.biz&&!x.done&&x.id!==t.id&&x.biz.deps.includes(t.id)&&!['paused','delegated'].includes(x.biz.status)).map(x=>({text:x.text,imp:x.biz.imp})):[];
+function bzCtx(t){return{today:todayStr(),left:bzLeft(t),freeUntil:dl=>bzFreeUntil(dl,t.id),blockers:bzBlockers(t),dependents:bzDependents(t),project:bzProjOf(t.biz.proj),dur:bzDur}}
+function bzPrio(t){if(!t||!t.biz)return{p:null,reasons:[],score:0,missing:[]};return Brain.prio(t,bzCtx(t))}
 function bzRank(list){return list.map(t=>({t,pr:bzPrio(t)})).sort((a,b)=>(a.pr.p||2.5)-(b.pr.p||2.5)||b.pr.score-a.pr.score||(a.t.biz.deadline||'9999').localeCompare(b.t.biz.deadline||'9999')||a.t.biz.ord-b.t.biz.ord)}
 // keep the normal lists' 🔥 in line with the business priority
-function bzSyncPrio(){let ch=false;bzTasks().forEach(t=>{if(t.done)return;const p=bzPrio(t).p,w=p===1?'high':p===3?'low':undefined;if(t.prio!==w){if(w)t.prio=w;else delete t.prio;ch=true}});if(ch)save()}
+function bzSyncPrio(){let ch=false;bzTasks().forEach(t=>{if(t.done)return;const p=bzPrio(t).p,w=p===1?'high':p>=3?'low':undefined;if(t.prio!==w){if(w)t.prio=w;else delete t.prio;ch=true}});if(ch)save()}
 const bzMissed=()=>bzTasks().filter(t=>!t.done&&t.date&&t.date<todayStr()&&t.biz.rev!==t.date&&!['paused','delegated'].includes(t.biz.status)).sort((a,b)=>a.date.localeCompare(b.date));
 
 // ---------- the planner behind the coach and the dashboard (facts only, rules written down) ----------
@@ -3330,7 +3341,7 @@ function bzPlan(){
 }
 
 // ---------- small renderers ----------
-const BZ_PSHORT={1:'Critical',2:'Important',3:'Later'};
+const BZ_PSHORT={1:'Do first',2:'Do next',3:'Plan',4:'Later'};
 const pchip=(p,pr)=>p?'<span class="pchip p'+p+'">P'+p+' · '+BZ_PSHORT[p]+'</span>':pr&&pr.ask?'<span class="pchip">Priority: 1 question</span>':'';
 function bzChips(t,pr){pr=pr||bzPrio(t);const b=t.biz,today=todayStr();
   let h=t.done?'<span class="pchip">Completed</span>':pchip(pr.p,pr);
@@ -3361,6 +3372,194 @@ function bzMainCard(P,coach){
     '<div class="bzrow"><button class="btn" type="button" data-bza="start" data-id="'+esc(t.id)+'">▶ Start now</button>'+(coach?'':'<button class="btn ghost" type="button" data-bza="tab" data-v="coach">💬 Speak with Coach</button>')+'</div></div>';
 }
 
+// =====================================================================
+// AI BUSINESS BRAIN (Business plan): ONE next task across ALL projects, the next three, the rest grouped.
+// Uses the same task objects (no copies). Scoring = brain.js (rules written down). Noor's AI only rephrases the #1 reasons.
+// =====================================================================
+let brUI={id:null,panel:null},brAt=0,brAI={},bzBD=null,bzProjF=null;
+const brLvl=p=>p?'P'+p+' — '+Brain.LEVELS[p].short:'Priority not set yet';
+const brSnoozed=t=>t.biz.snooze&&t.biz.snooze>Date.now();
+function brAvail(){const a=S.bizAvail;return a&&a.day===todayStr()&&+a.m>0?+a.m:0} // "time I have now" only counts for today
+function brData(){
+  const today=todayStr(),act=bzTasks().filter(bzActive);
+  const E=act.map(t=>({t,pr:bzPrio(t),left:bzLeft(t)}));
+  return Object.assign(Brain.select(E,{today,now:Date.now(),avail:brAvail()}),{all:E,projects:new Set(act.map(t=>t.biz.proj).filter(Boolean)).size});
+}
+function bzSlotInfo(t){const today=todayStr(),n=new Date(),nowK=today+' '+pad(n.getHours())+':'+pad(n.getMinutes());
+  if(t.date&&t.time&&(t.date+' '+fromMin(Math.min(1439,toMin(t.time)+(t.dur||30))))>nowK)return{planned:true,slot:null};
+  const block=Math.min(bzLeft(t)||30,90),dl=t.biz.deadline&&t.biz.deadline>=today?t.biz.deadline:null;
+  const slot=bzFindSlot(block,{exclude:t.id,before:dl})||bzFindSlot(block,{exclude:t.id});
+  if(slot&&t.biz.deadline&&slot.date>t.biz.deadline)slot.late=true;return{planned:false,slot}}
+// the calendar proposal: always asks before anything is scheduled
+function bzPlanLine(t,I){const sl=I.slot,pk=sl?sl.date+'|'+sl.time+'|'+sl.dur:'';
+  if(I.planned)return '<p class="hint" style="margin:0">Already in your calendar: '+bzWhen(t)+'.</p>';
+  if(sl)return bzProp.main===t.id+'@'+pk?
+      '<div class="bzask"><p>Put “'+esc(t.text)+'” in your calendar on '+bzDay(sl.date)+', '+sl.time+'–'+fromMin(toMin(sl.time)+sl.dur)+', with a reminder?</p><div class="bzrow"><button class="btn" type="button" data-bza="place" data-id="'+esc(t.id)+'" data-slot="'+pk+'">Yes, schedule it</button><button class="btn ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Choose another time</button></div></div>'
+      :'<button class="btn ghost" type="button" data-bza="propose" data-id="'+esc(t.id)+'" data-slot="'+pk+'">📅 Free slot: '+bzDay(sl.date)+' '+sl.time+'–'+fromMin(toMin(sl.time)+sl.dur)+(sl.late?' (after the deadline)':'')+'</button>'+(sl.late?'<p class="hint" style="margin:0">There is not enough free work time before the deadline. Options: move a P3 task, shorten the work, or ask to move the deadline.</p>':'');
+  return '<p class="hint" style="margin:0">No free slot in your work hours in the next 4 weeks for this length. Split it into smaller steps, or widen your hours (⚙ Hours).</p>'}
+const BR_MISS={imp:'importance',conseq:'consequences if late',est:'time estimate'};
+function brMeta(t,pr){const b=t.biz,pn=b.proj&&projName(b.proj);
+  return '<div class="chips2">'+(pr.p?'<span class="pchip p'+pr.p+'">'+brLvl(pr.p)+'</span>':'<span class="pchip">Priority: 1 question</span>')+
+    (pn?'<span class="pchip dl">📁 '+esc(pn)+'</span>':'')+
+    (b.deadline?'<span class="pchip dl'+(b.deadline<todayStr()?' late':'')+'">⚑ '+bzDay(b.deadline)+'</span>':'')+
+    '<span class="pchip dl">⏱ '+(b.est?bzDur(bzLeft(t)):'Time not set')+'</span>'+
+    (brSnoozed(t)?'<span class="pchip stc">Snoozed until '+brWhen(b.snooze)+'</span>':'')+'</div>'}
+const brWhen=ms=>{const d=new Date(ms),k=ymd(d);return bzDay(k)+' '+pad(d.getHours())+':'+pad(d.getMinutes())};
+// small panels that open under a card (one at a time, so the screen stays calm)
+function brPanel(t,pr){if(brUI.id!==t.id||!brUI.panel)return '';const id=esc(t.id),b=t.biz;
+  if(brUI.panel==='why')return '<div class="brpanel" role="region" aria-label="Why this priority"><b>Why '+(pr.p?'P'+pr.p:'this place')+'?</b><ul class="reason">'+(pr.reasons.length?pr.reasons.map(r=>'<li>'+esc(r)+'</li>').join(''):'<li>No urgency, importance or deadline entered yet</li>')+'</ul>'+
+    (pr.missing.length?'<p class="hint" style="margin:0">Not known, so not counted (nothing is guessed): '+pr.missing.map(k=>BR_MISS[k]).join(', ')+'.</p>':'')+
+    '<p class="hint" style="margin:0">How it is ranked: urgency, deadline, importance, consequences, free time before the deadline, tasks it unblocks, project importance and blockers. Tasks from all your projects are compared together.</p></div>';
+  if(brUI.panel==='prio'){const o=b.over||0;return '<div class="brpanel"><b>Change priority</b><div class="seg small" role="group" aria-label="Priority of '+esc(t.text)+'">'+[0,1,2,3,4].map(v=>'<button type="button" data-bza="over" data-id="'+id+'" data-v="'+v+'" aria-pressed="'+(o===v)+'">'+(v?'P'+v:'Auto'+(pr.auto?' (P'+pr.auto+')':''))+'</button>').join('')+'</div><p class="hint" style="margin:0">Your choice always wins. The app only shows when it would recommend something else.</p></div>'}
+  if(brUI.panel==='snooze'){const c=bzCfg(),tm=ymd(addDays(new Date(),1));
+    return '<div class="brpanel"><b>Snooze “'+esc(t.text)+'”</b><p class="hint" style="margin:0">It stays in your lists and calendar; the Brain just stops suggesting it until then.</p><div class="bzrow">'+
+      [['2h','In 2 hours'],[tm+'|'+c.from,'Tomorrow '+c.from],[ymd(addDays(new Date(),3))+'|'+c.from,'In 3 days'],[ymd(addDays(new Date(),7))+'|'+c.from,'Next week']].map(o=>'<button class="btn small ghost" type="button" data-bza="snooze" data-id="'+id+'" data-v="'+o[0]+'">'+o[1]+'</button>').join('')+
+      '</div><div class="bzrow"><input type="date" id="brSnD" aria-label="Snooze until (day)" min="'+todayStr()+'" value="'+tm+'"><button class="btn small" type="button" data-bza="snooze" data-id="'+id+'" data-v="pick">Snooze to this day</button></div></div>'}
+  if(brUI.panel==='more')return '<div class="brpanel"><div class="bzrow">'+
+    '<button class="btn small ghost" type="button" data-bza="brp" data-p="prio" data-id="'+id+'">Change priority</button>'+
+    (b.proj&&projName(b.proj)?'<button class="btn small ghost" type="button" data-bza="viewproj" data-id="'+id+'">📁 View project</button>':'')+
+    '<button class="btn small ghost" type="button" data-bza="missing" data-id="'+id+'">✎ Add missing information</button>'+
+    '<button class="btn small ghost" type="button" data-bza="sched" data-id="'+id+'">📅 Schedule</button>'+
+    '<button class="btn small ghost" type="button" data-bza="edit" data-id="'+id+'">Edit all details</button></div></div>';
+  return ''}
+// when the person's own priority differs from the recommendation: say so once, let them choose
+function brDiff(t,pr){const b=t.biz;if(!b.over||!pr.auto||b.over===pr.auto||b.overKeep===pr.auto)return '';
+  return '<div class="bzask"><p>You set P'+b.over+'. Based on your data the app would now recommend P'+pr.auto+'.</p><div class="bzrow"><button class="btn small" type="button" data-bza="recok" data-id="'+esc(t.id)+'">Use P'+pr.auto+'</button><button class="btn small ghost" type="button" data-bza="reckeep" data-id="'+esc(t.id)+'">Keep P'+b.over+'</button></div></div>'}
+function brTop(x){const t=x.t,pr=x.pr,b=t.biz,id=esc(t.id),st=t.steps.find(s=>!s.done),big=(bzLeft(t)||0)>=60&&!t.steps.length;
+  const sig=t.id+'#'+pr.p+'#'+pr.reasons.slice(0,3).join('|'),a=brAI[sig];
+  if(!a)setTimeout(()=>brAsk(sig,x),0);
+  return '<div class="bzcard bzmain brtop"><span class="bzkick">Your number one priority</span><h3>'+esc(t.text)+'</h3>'+brMeta(t,pr)+bzProg(t)+
+    (pr.provisional?'<p class="hint" style="margin:0">Provisional: '+(pr.missing.length?pr.missing.map(k=>BR_MISS[k]).join(', ')+' not set yet':'one detail is missing')+'. <button class="lnk" type="button" data-bza="missing" data-id="'+id+'">Add it</button></p>':'')+
+    '<p style="margin:0"><b>Why it matters:</b> '+esc(pr.reasons.slice(0,2).join('; ')||'It is the highest-ranked open task, but you gave no importance, urgency or deadline yet.')+'</p>'+
+    (pr.delay?'<p style="margin:0"><b>If it waits:</b> '+esc(pr.delay)+'</p>':'')+
+    '<p style="margin:0"><b>Your first action:</b> '+esc(st?st.t:'Open it and write the very first small action (2 minutes)')+(st?'':' <span class="hint">(suggestion: no steps written yet)</span>')+'</p>'+
+    (big?'<div class="bzask"><p>This looks big ('+bzDur(bzLeft(t))+'). Smaller steps make it easier to start.</p><div class="bzrow"><button class="btn small" type="button" data-bza="bd" data-id="'+id+'">🧩 Break into smaller steps</button></div></div>':'')+
+    brDiff(t,pr)+
+    '<p class="srcnote" style="margin:0" id="brAiTxt">'+(!a||a.state==='wait'?'Rules engine · Noor (AI) is checking the wording…':a.state==='ok'?'Noor (AI), from the reasons above: '+esc(a.text):'Rules engine (Noor\'s AI is offline: nothing was invented)')+'</p>'+
+    '<div class="bzrow"><button class="btn brgo" type="button" data-bza="start" data-id="'+id+'">▶ START THIS TASK</button></div>'+
+    '<div class="bracts">'+
+      '<button class="btn small ghost" type="button" data-bza="done" data-id="'+id+'">✓ Mark completed</button>'+
+      '<button class="btn small ghost" type="button" data-bza="bd" data-id="'+id+'">🧩 Smaller steps</button>'+
+      '<button class="btn small ghost" type="button" data-bza="brp" data-p="why" data-id="'+id+'" aria-expanded="'+(brUI.id===t.id&&brUI.panel==='why')+'">? Why this priority</button>'+
+      '<button class="btn small ghost" type="button" data-bza="brp" data-p="snooze" data-id="'+id+'" aria-expanded="'+(brUI.id===t.id&&brUI.panel==='snooze')+'">💤 Snooze</button>'+
+      '<button class="btn small ghost" type="button" data-bza="brp" data-p="more" data-id="'+id+'" aria-expanded="'+(brUI.id===t.id&&['more','prio'].includes(brUI.panel))+'">More…</button>'+
+    '</div>'+brPanel(t,pr)+bzPlanLine(t,bzSlotInfo(t))+
+    '<div class="bzrow"><button class="btn small ghost" type="button" data-bza="tab" data-v="coach">💬 Speak with Coach</button></div></div>'}
+function brNext(x,i,top){const t=x.t,pr=x.pr,id=esc(t.id);
+  const why=pr.reasons[0]||'No urgency, importance or deadline entered yet';
+  const vs=top&&top.pr.p&&pr.p&&pr.p>top.pr.p?'lower level (P'+pr.p+') than #1':top&&pr.p===top.pr.p?'same level as #1, slightly less pressing':'';
+  return '<li class="brnext"><span class="brn" aria-hidden="true">'+(i+2)+'</span><div class="grow"><b>'+esc(t.text)+'</b>'+brMeta(t,pr)+
+    '<small class="brwhy">#'+(i+2)+' because: '+esc(why)+(vs?' · '+vs:'')+'</small>'+brDiff(t,pr)+
+    '<div class="bracts three"><button class="btn small ghost" type="button" data-bza="start" data-id="'+id+'">▶ Start</button><button class="btn small ghost" type="button" data-bza="done" data-id="'+id+'" aria-label="Mark completed: '+esc(t.text)+'">✓ Done</button><button class="btn small ghost" type="button" data-bza="brp" data-p="why" data-id="'+id+'" aria-expanded="'+(brUI.id===t.id&&brUI.panel==='why')+'">? Why</button></div>'+brPanel(t,pr)+'</div></li>'}
+function brGroup(key,title,L,note){if(!L.length)return '';
+  return '<details class="brgrp" data-g="'+key+'"'+(brOpen.has(key)?' open':'')+'><summary><b>'+title+'</b><span class="brcnt">'+L.length+'</span><span class="chev" aria-hidden="true">▾</span></summary><ul class="bzlist">'+
+    L.map(x=>{const t=x.t,pr=x.pr,b=t.biz;const line=note(x);
+      return '<li class="bzli"><div class="grow"><b>'+esc(t.text)+'</b><small>'+esc(line)+'</small>'+brMeta(t,pr)+'</div><div class="brside">'+
+        (brSnoozed(t)?'<button class="btn small ghost" type="button" data-bza="unsnooze" data-id="'+esc(t.id)+'">Wake up</button>':'')+
+        '<button class="btn small ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Open</button></div></li>'}).join('')+'</ul></details>'}
+let brOpen=new Set();
+function bzBrain(){
+  const D=brData();brAt=brAt||Date.now();
+  let h='<section class="brain" aria-labelledby="brH"><div class="brhead"><div><span class="bzkick">AI Business Brain</span><h3 id="brH">Your priorities</h3></div><button class="btn small ghost" type="button" data-bza="reanalyze">↻ Reanalyze my tasks</button></div>'+
+    '<p class="hint" style="margin:0">Compared: '+D.all.length+' open task'+(D.all.length===1?'':'s')+(D.projects?' across '+D.projects+' project'+(D.projects===1?'':'s'):'')+' · analysed '+pad(new Date(brAt).getHours())+':'+pad(new Date(brAt).getMinutes())+'</p>';
+  const av=brAvail();
+  h+='<div class="fl"><span class="hint">Time I have now</span><div class="seg small" role="group" aria-label="Time I have now">'+[[15,'15 min'],[30,'30 min'],[60,'1 h'],[120,'2 h+'],[0,'Not sure']].map(o=>'<button type="button" data-bza="avail" data-v="'+o[0]+'" aria-pressed="'+(av===o[0])+'">'+o[1]+'</button>').join('')+'</div></div>';
+  if(!D.top){h+='<div class="bzcard bzmain"><span class="bzkick">Your number one priority</span><h3>'+(D.all.length?'Everything open is blocked, snoozed or on hold.':'No business tasks yet.')+'</h3><p class="hint" style="margin:0">'+(D.all.length?'Look at “Waiting or blocked” below, or wake up a snoozed task.':'Add your first task: one small, clear action. A title is enough.')+'</p><div class="bzrow"><button class="btn" type="button" data-bza="new">＋ New business task</button>'+(D.all.length?'<button class="btn ghost" type="button" data-bza="tab" data-v="pend">Pending</button>':'')+'</div></div>'}
+  else{
+    h+=brTop(D.top);
+    if(D.conflict){const o=D.conflict.order;h+='<div class="bzask brconf" role="note"><p><b>'+D.conflict.n+' tasks are P1 right now.</b> Not everything can be first. Start with “'+esc(o[0].t.text)+'” ('+esc((o[0].pr.reasons[0]||'').toLowerCase())+'). Then “'+esc(o[1].t.text)+'”'+(o[2]?', then “'+esc(o[2].t.text)+'”':'')+'.'+(D.conflict.n>3?' Plan the others after.':'')+'</p></div>'}
+    if(D.next.length)h+='<div class="bzsec"><div class="sechead"><h3>Your next three</h3><span class="hint">In this order</span></div><ol class="bzlist brlist">'+D.next.map((x,i)=>brNext(x,i,D.top)).join('')+'</ol></div>';
+  }
+  const G=D.groups,any=G.overdue.length+G.important.length+G.later.length+G.waiting.length;
+  if(any)h+='<div class="bzsec"><div class="sechead"><h3>Other tasks</h3><span class="hint">Tap to open</span></div>'+
+    brGroup('overdue','Overdue',G.overdue,x=>'Deadline was '+bzDay(x.t.biz.deadline)+(x.pr.blocked?' · '+bzBlockers(x.t)[0]:''))+
+    brGroup('important','Important',G.important,x=>x.pr.reasons[0]||(x.pr.ask?x.pr.ask.q:''))+
+    brGroup('later','Plan for later',G.later,x=>brSnoozed(x.t)?'Snoozed: the Brain will suggest it again '+brWhen(x.t.biz.snooze):x.pr.hold?'Its project is on hold':x.pr.reasons[0]||'No urgency or deadline')+
+    brGroup('waiting','Waiting or blocked',G.waiting,x=>bzBlockers(x.t)[0]||'Blocked')+'</div>';
+  h+='</section>';
+  return h}
+async function brAsk(sig,x){if(brAI[sig])return;brAI[sig]={state:'wait'};
+  const t=x.t,pr=x.pr,st=t.steps.find(s=>!s.done);
+  // only the title, the engine's reasons and the first step are sent: no other task, note or personal data
+  const prompt='You are Noor, a calm business coach for people with ADHD. Using ONLY the facts below, write ONE short sentence in English explaining why this task should be done first. Do not invent deadlines, clients, money, numbers or consequences that are not in the facts. No emoji. Answer ONLY in JSON: {"say":"..."}\n\nTask: '+t.text+'\nPriority: '+(pr.p?'P'+pr.p:'not set')+'\nReasons: '+pr.reasons.slice(0,4).join('; ')+(pr.delay?'\nIf delayed: '+pr.delay:'')+(st?'\nFirst step: '+st.t:'');
+  try{const r=await askAI(prompt);const say=r&&typeof r.say==='string'?r.say.trim().slice(0,300):'';if(!say)throw new Error('empty');brAI[sig]={state:'ok',text:say}}
+  catch(e){brAI[sig]={state:'err'}}
+  if(!$('v-biz').hidden&&bzTab==='dash'){const el=$('brAiTxt'),a=brAI[sig];if(el)el.textContent=a.state==='ok'?'Noor (AI), from the reasons above: '+a.text:'Rules engine (Noor\'s AI is offline: nothing was invented)'}}
+document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.classList&&d.classList.contains('brgrp')){if(d.open)brOpen.add(d.dataset.g);else brOpen.delete(d.dataset.g)}},true);
+
+// ---------- break into smaller steps: proposed first, saved only on yes ----------
+function bdTemplate(t){return['Open what you need for “'+t.text.slice(0,60)+'”','Do the first small part (10 minutes)','Check what is left and write the next step']}
+async function bdGen(){if(!bzBD)return;const t=S.tasks.find(x=>x.id===bzBD.id);if(!t)return;bzBD.state='wait';bdRender();const run=bzBD.run=(bzBD.run||0)+1;
+  const have=t.steps.map(s=>s.t);
+  try{const r=await askAI('You help a busy professional with ADHD start work. Break this business task into 3 to 6 concrete, physical next actions, in order, short (8 words max each), in English. The first one must take under 5 minutes. Do not repeat steps that already exist. Do not invent names, numbers or dates. Answer only in JSON: {"etapes":["..."]}\n\nTask: '+t.text+(t.desc?'\nDetails: '+t.desc.slice(0,300):'')+(have.length?'\nAlready written: '+have.join('; '):''));
+    const arr=Array.isArray(r)?r:r&&r.etapes;if(!Array.isArray(arr)||!arr.length)throw new Error('empty');
+    if(!bzBD||bzBD.run!==run)return;bzBD.steps=arr.slice(0,6).map(x=>String(x).trim().slice(0,120)).filter(Boolean);bzBD.state='ai'}
+  catch(e){if(!bzBD||bzBD.run!==run)return;bzBD.steps=bdTemplate(t);bzBD.state='tpl'}
+  bdRender()}
+function bdRender(){if(!bzBD||$('bzSheet').hidden)return;const t=S.tasks.find(x=>x.id===bzBD.id);if(!t)return;const small=t.biz.est&&t.biz.est<=20;
+  $('bzSBody').innerHTML='<div class="bzsbody" id="bdBox"><p style="margin:0"><b>'+esc(t.text)+'</b></p>'+
+    (small?'<p class="hint" style="margin:0">This task is short ('+bzDur(t.biz.est)+'): you may not need steps. Just start it.</p>':'')+
+    (t.steps.length?'<p class="hint" style="margin:0">Already in this task: '+t.steps.map(s=>esc(s.t)).join(' · ')+'</p>':'')+
+    (bzBD.state==='wait'?'<p class="srcnote">Noor is thinking…</p>':
+     '<span class="srcnote">'+(bzBD.state==='ai'?'Suggested by Noor (AI). Edit freely: nothing is saved until you say yes.':'Simple template: Noor\'s AI can\'t be reached right now. Edit the steps so they fit.')+'</span>'+
+     '<div class="subed">'+bzBD.steps.map((s,i)=>'<div class="srow"><input type="text" maxlength="120" data-bdi="'+i+'" value="'+esc(s)+'" aria-label="Step '+(i+1)+'"><button type="button" data-bd="del" data-i="'+i+'" aria-label="Remove step">×</button></div>').join('')+'</div>'+
+     '<button type="button" class="btn small ghost" data-bd="add">＋ Add a step</button>'+
+     '<p class="hint" style="margin:0">Start with step 1. It is the smallest one.</p>'+
+     '<div class="sbtns"><button class="btn" type="button" data-bd="save">Save these steps</button><button class="btn ghost" type="button" data-bd="regen">↻ Try again</button><button class="btn ghost" type="button" data-bd="no">No thanks</button></div>')+'</div>'}
+function bdOpen(id){const t=S.tasks.find(x=>x.id===id&&x.biz);if(!t)return;bzE=null;bzBD={id,steps:[],state:'wait'};bzOpenSheet('Break into smaller steps','');bdGen()}
+$('bzSheet').addEventListener('input',e=>{const i=e.target.closest('[data-bdi]');if(i&&bzBD)bzBD.steps[+i.dataset.bdi]=i.value});
+$('bzSheet').addEventListener('click',e=>{const b=e.target.closest('[data-bd]');if(!b||!bzBD)return;const a=b.dataset.bd;
+  if(a==='del'){bzBD.steps.splice(+b.dataset.i,1);return bdRender()}
+  if(a==='add'){bzBD.steps.push('');bdRender();const ins=document.querySelectorAll('#bdBox [data-bdi]');const l=ins[ins.length-1];if(l)try{l.focus()}catch(x){}return}
+  if(a==='regen')return bdGen();
+  if(a==='no'){bzBD=null;bzCloseSheet();return}
+  if(a==='save'){const t=S.tasks.find(x=>x.id===bzBD.id);if(!t){bzBD=null;bzCloseSheet();return}
+    const seen=new Set(t.steps.map(s=>s.t.trim().toLowerCase()));let n=0;
+    bzBD.steps.map(s=>s.trim()).filter(Boolean).forEach(s=>{const k=s.toLowerCase();if(seen.has(k))return;seen.add(k);t.steps.push({id:uid(),t:s.slice(0,120),done:false});n++});
+    if(n)bzHist(t,'split');bzBD=null;bzCloseSheet();const first=t.steps.find(s=>!s.done);
+    bzSaveAll(n?'Added '+n+' step'+(n>1?'s':'')+'. First: '+(first?first.t:''):'Nothing new to add: those steps were already there.')}});
+
+// ---------- add missing information (only the fields that are empty) ----------
+function missOpen(id){const t=S.tasks.find(x=>x.id===id&&x.biz);if(!t)return;const b=t.biz;bzBD=null;
+  bzE={id:t.id,miss:true,imp:b.imp,conseq:b.conseq,est:b.est,steps:t.steps.map(s=>Object.assign({},s)),urgent:b.urgent,over:b.over||0,status:b.status};
+  const f=[];
+  if(b.imp==null)f.push('<div class="fl"><span>How important is it for your business?</span>'+segH('imp',[['high','High'],['med','Medium'],['low','Low']],null,'Importance')+'</div>');
+  if(b.conseq==null)f.push('<div class="fl"><span>If it is late, the consequences are…</span>'+segH('conseq',[['high','Serious'],['med','Some'],['low','Minor']],null,'Consequences')+'</div>');
+  if(b.est==null)f.push('<div class="fl"><span>About how long will it take?</span>'+segH('est',[[15,'15 min'],[30,'30 min'],[60,'1 h'],[120,'2 h'],[180,'3 h']],null,'Estimated duration')+'</div>');
+  if(!b.deadline)f.push('<label class="fl">Deadline <span class="opt">only if there is one</span><input id="msDl" type="date"></label>');
+  if(!b.proj&&(S.projs||[]).length)f.push('<label class="fl">Project <span class="opt">optional</span><select id="msProj"><option value="">No project</option>'+S.projs.map(p=>'<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>').join('')+'</select></label>');
+  bzOpenSheet('Add missing information','<form id="msForm" class="bzsbody" novalidate><p style="margin:0"><b>'+esc(t.text)+'</b></p>'+
+    (f.length?'<p class="hint" style="margin:0">Answer what you know. Skip the rest: the app will not guess it.</p>'+f.join(''):'<p class="hint" style="margin:0">Nothing important is missing for this task.</p>')+
+    '<div class="sbtns">'+(f.length?'<button class="btn" type="submit">Save</button>':'')+'<button class="btn ghost" type="button" data-bzclose>Close</button></div></form>')}
+$('bzSheet').addEventListener('click',e=>{const sb=e.target.closest('#msForm .seg [data-v]');if(!sb||!bzE||!bzE.miss)return;
+  sb.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===sb)));const f=sb.parentElement.dataset.f;bzE[f]=f==='est'?+sb.dataset.v:sb.dataset.v});
+$('bzSheet').addEventListener('submit',e=>{const f=e.target.closest('#msForm');if(!f||!bzE||!bzE.miss)return;e.preventDefault();
+  const t=S.tasks.find(x=>x.id===bzE.id);if(!t){bzCloseSheet();return}const b=t.biz,ch=[];
+  ['imp','conseq','est'].forEach(k=>{if(b[k]==null&&bzE[k]!=null){b[k]=bzE[k];ch.push(BR_MISS[k])}});
+  const dl=($('msDl')||{}).value;if(dl&&okDate(dl)&&!b.deadline){b.deadline=dl;ch.push('deadline')}
+  const pj=($('msProj')||{}).value;if(pj&&!b.proj){b.proj=pj;ch.push('project')}
+  normTask(t);bzCloseSheet();bzSaveAll(ch.length?'Saved: '+ch.join(', ')+'. Priorities updated.':'Nothing changed.')});
+
+// ---------- Brain actions (added to the Business click handler below) ----------
+function brAction(a,b,t){
+  if(a==='reanalyze'){brAI={};brAt=Date.now();bzSaveAll('Re-analysed '+bzTasks().filter(bzActive).length+' open tasks across all projects.');return true}
+  if(a==='avail'){const v=+b.dataset.v;S.bizAvail=v?{m:v,day:todayStr()}:null;bzSaveAll(v?'Got it: about '+bzDur(v)+' now. Tasks that fit come first within the same priority.':'');return true}
+  if(!t)return false;
+  if(a==='brp'){const p=b.dataset.p;brUI=brUI.id===t.id&&brUI.panel===p?{id:null,panel:null}:{id:t.id,panel:p};bzRender();return true}
+  if(a==='bd'){bdOpen(t.id);return true}
+  if(a==='missing'){missOpen(t.id);return true}
+  if(a==='snooze'){const v=b.dataset.v;let at;
+    if(v==='2h')at=Date.now()+2*3600e3;
+    else if(v==='pick'){const d=($('brSnD')||{}).value;if(!okDate(d)||d<todayStr()){toast('Pick a day from today on.');return true}at=new Date(d+'T'+bzCfg().from).getTime()}
+    else{const [d,tm]=v.split('|');at=new Date(d+'T'+tm).getTime()}
+    if(!(at>Date.now())){toast('Pick a later time.');return true}
+    t.biz.snooze=at;bzHist(t,'snoozed');brUI={id:null,panel:null};bzSaveAll('Snoozed until '+brWhen(at)+'. Nothing was deleted or moved.');return true}
+  if(a==='unsnooze'){t.biz.snooze=null;bzHist(t,'woken');bzSaveAll('Back in your priorities: '+t.text);return true}
+  if(a==='recok'){const was=t.biz.over;t.biz.over=null;t.biz.overKeep=null;bzHist(t,'priority','P'+was,'auto');bzSaveAll('Priority back to automatic');return true}
+  if(a==='reckeep'){t.biz.overKeep=bzPrio(t).auto;save();bzSaveAll('Kept your P'+t.biz.over+'.');return true}
+  if(a==='viewproj'){bzProjF=t.biz.proj;bzFilter='active';brUI={id:null,panel:null};bzGo('tasks');return true}
+  return false}
+
 // ---------- Dashboard ----------
 function bzDash(){
   const P=bzPlan(),today=todayStr(),all=bzTasks(),wk=monday(new Date()).getTime();
@@ -3371,7 +3570,7 @@ function bzDash(){
   const doneWk=all.filter(t=>t.done&&t.doneAt>=wk).length;
   let h='';
   if(P.missed.length)h+='<div class="bzask"><p>'+(P.missed.length===1?'1 task wasn\'t finished on its day.':P.missed.length+' tasks weren\'t finished on their day.')+' Take 1 minute to review '+(P.missed.length===1?'it':'them')+'.</p><button class="btn" type="button" data-bza="tab" data-v="pend">Review now</button></div>';
-  h+=bzMainCard(P);
+  h+=bzBrain();
   h+='<div class="bzq"><div class="bzstat"><b>'+todays.filter(t=>!t.done).length+'</b><small>to do today</small></div><div class="bzstat'+(overdue.length?' warn':'')+'"><b>'+overdue.length+'</b><small>overdue</small></div><div class="bzstat'+(blocked.length?' warn':'')+'"><b>'+blocked.length+'</b><small>blocked</small></div><div class="bzstat"><b>'+doneWk+'</b><small>done this week</small></div></div>';
   h+='<div class="bzsec"><div class="sechead"><h3>Today</h3><span class="hint">'+bzDay(today)+'</span></div>'+(todays.length?'<ul class="bzlist">'+todays.map(t=>bzLi(t,t.time?timeRange(t):'Any time today')).join('')+'</ul>':bzEmpty('Nothing scheduled today. The coach can find a slot for your priority.'))+'</div>';
   h+='<div class="bzsec"><div class="sechead"><h3>Upcoming deadlines</h3><span class="hint">Next 7 days</span></div>'+(soon.length?'<ul class="bzlist">'+soon.slice(0,5).map(t=>bzLi(t)).join('')+'</ul>':bzEmpty('No deadline in the next 7 days.'))+'</div>';
@@ -3402,25 +3601,27 @@ function bzTaskCard(t,i,n,open){
     '<button class="btn small ghost danger'+(bzArm==='del'+t.id?' armed':'')+'" type="button" data-bza="del" data-id="'+id+'">'+(bzArm==='del'+t.id?'Tap again to delete':'Delete')+'</button></div>'+
     (bzProp[t.id]?bzPropBox(t):'')+'</div></details>';
 }
-function bzOrdered(){const all=bzTasks();return bzFilter==='done'?all.filter(t=>t.done).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0)):all.filter(t=>!t.done).sort((a,b)=>a.biz.ord-b.biz.ord||a.biz.created-b.biz.created)}
+function bzOrdered(){const all=bzTasks().filter(t=>!bzProjF||t.biz.proj===bzProjF);return bzFilter==='done'?all.filter(t=>t.done).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0)):all.filter(t=>!t.done).sort((a,b)=>a.biz.ord-b.biz.ord||a.biz.created-b.biz.created)}
 function bzTasksTab(){
   const open=new Set([...document.querySelectorAll('#bzBody details.bzt[open]')].map(d=>d.dataset.tid)),L=bzOrdered();
+  if(bzProjF&&!projName(bzProjF))bzProjF=null;
   return '<div class="bzrow"><button class="btn" type="button" data-bza="new">＋ New business task</button></div>'+
+    (bzProjF?'<div class="bzask"><p style="margin:0">📁 Project: <b>'+esc(projName(bzProjF))+'</b> · '+bzTasks().filter(t=>t.biz.proj===bzProjF&&!t.done).length+' open, '+bzTasks().filter(t=>t.biz.proj===bzProjF&&t.done).length+' done</p><div class="bzrow"><button class="btn small ghost" type="button" data-bza="projclear">Show all projects</button></div></div>':'')+
     '<div class="seg" role="group" aria-label="Show"><button type="button" data-bza="filter" data-v="active" aria-pressed="'+(bzFilter==='active')+'">Active ('+bzTasks().filter(t=>!t.done).length+')</button><button type="button" data-bza="filter" data-v="done" aria-pressed="'+(bzFilter==='done')+'">Completed ('+bzTasks().filter(t=>t.done).length+')</button></div>'+
     (L.length?'<div class="bzlist">'+L.map((t,i)=>bzTaskCard(t,i,L.length,open.has(t.id))).join('')+'</div>':bzEmpty(bzFilter==='done'?'No completed business tasks yet.':'No business tasks yet. Add one: a title is enough to start, you can add details later.'));
 }
 
 // ---------- Priority manager ----------
 function bzPrioTab(){
-  const R=bzRank(bzTasks().filter(bzActive)),ask=R.filter(x=>x.pr.ask&&!x.t.biz.over&&x.pr.p==null),groups={1:[],2:[],3:[]};
+  const R=bzRank(bzTasks().filter(bzActive)),ask=R.filter(x=>x.pr.ask&&!x.t.biz.over&&x.pr.p==null),groups={1:[],2:[],3:[],4:[]};
   R.filter(x=>x.pr.p).forEach(x=>groups[x.pr.p].push(x));
   const row=x=>{const t=x.t,o=t.biz.over||0;
     return '<div class="bzcard" style="gap:8px"><div class="ph" style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><b style="overflow-wrap:anywhere">'+esc(t.text)+'</b>'+pchip(x.pr.p)+'</div>'+
       '<ul class="reason">'+x.pr.reasons.slice(0,4).map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul>'+
-      '<div class="seg small" role="group" aria-label="Priority of '+esc(t.text)+'">'+[0,1,2,3].map(v=>'<button type="button" data-bza="over" data-id="'+esc(t.id)+'" data-v="'+v+'" aria-pressed="'+(o===v)+'">'+(v?'P'+v:'Auto (P'+x.pr.auto+')')+'</button>').join('')+'</div></div>'};
-  let h='<p class="hint" style="margin:0">P1 = critical, needs attention now · P2 = important · P3 = can be scheduled later. The app explains each one; you can always override it.</p>';
+      '<div class="seg small" role="group" aria-label="Priority of '+esc(t.text)+'">'+[0,1,2,3,4].map(v=>'<button type="button" data-bza="over" data-id="'+esc(t.id)+'" data-v="'+v+'" aria-pressed="'+(o===v)+'">'+(v?'P'+v:'Auto (P'+x.pr.auto+')')+'</button>').join('')+'</div></div>'};
+  let h='<p class="hint" style="margin:0">P1 = do first (critical, commitment or blocker) · P2 = do next · P3 = plan it · P4 = later (low impact). The app explains each one; you can always override it.</p>';
   if(ask.length)h+='<div class="bzsec"><div class="sechead"><h3>One quick question</h3><span class="hint">Needed to rank</span></div>'+ask.map(x=>'<div class="bzask"><p>'+esc(x.t.text)+': '+esc(x.pr.ask.q)+'</p><div class="seg">'+(x.pr.ask.k==='imp'?[['high','High'],['med','Medium'],['low','Low']]:[['high','Serious'],['med','Some'],['low','Minor']]).map(o=>'<button type="button" data-bza="answer" data-k="'+x.pr.ask.k+'" data-id="'+esc(x.t.id)+'" data-v="'+o[0]+'">'+o[1]+'</button>').join('')+'</div></div>').join('')+'</div>';
-  [1,2,3].forEach(p=>{h+='<div class="bzsec"><div class="sechead"><h3>P'+p+' · '+BZ_PNAME[p]+'</h3><span class="hint">'+groups[p].length+'</span></div>'+(groups[p].length?groups[p].map(row).join(''):bzEmpty('None.'))+'</div>'});
+  [1,2,3,4].forEach(p=>{h+='<div class="bzsec"><div class="sechead"><h3>P'+p+' · '+BZ_PNAME[p]+'</h3><span class="hint">'+groups[p].length+'</span></div>'+(groups[p].length?groups[p].map(row).join(''):bzEmpty('None.'))+'</div>'});
   return h;
 }
 
@@ -3607,12 +3808,15 @@ function bzStep(t,i){const s=t.steps[i];if(!s)return;
   s.rw=win(5,'step','Subtask done');bzSaveAll();
 }
 document.addEventListener('click',e=>{
-  const tb=e.target.closest('#bzTabs [data-bz]');if(tb){bzTab=tb.dataset.bz;bzArm=null;bzRender();return}
+  const tb=e.target.closest('#bzTabs [data-bz]');if(tb){bzTab=tb.dataset.bz;bzArm=null;if(bzTab!=='tasks')bzProjF=null;bzRender();return}
   const b=e.target.closest('[data-bza]');if(!b)return;
   const a=b.dataset.bza,id=b.dataset.id,t=id?S.tasks.find(x=>x.id===id&&x.biz):null;
   if(b.closest('summary')&&a==='done')e.preventDefault();
   if(a!=='del'&&a!=='rvdo')bzArm=null;
   if(a==='tab')return bzGo(b.dataset.v);
+  if(!hasPlan('business')){bzGo('dash');return} // Business actions need the Business plan (the page itself is gated too)
+  if(a==='projclear'){bzProjF=null;return bzRender()}
+  if(brAction(a,b,t))return;
   if(a==='new')return bzEdit(null);
   if(a==='edit'){if(t)bzEdit(id);return}
   if(a==='filter'){bzFilter=b.dataset.v;return bzRender()}
@@ -3665,7 +3869,7 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-plan="business"
 
 // ---------- business task editor (create + edit) ----------
 function bzOpenSheet(title,html){$('bzSTitle').textContent=title;$('bzSBody').innerHTML=html;$('bzSheet').hidden=false;document.body.classList.add('noscroll');setTimeout(()=>{try{$('bzSTitle').focus()}catch(e){}},50)}
-function bzCloseSheet(){$('bzSheet').hidden=true;document.body.classList.remove('noscroll');bzE=null}
+function bzCloseSheet(){$('bzSheet').hidden=true;document.body.classList.remove('noscroll');bzE=null;bzBD=null}
 document.querySelectorAll('[data-bzclose]').forEach(x=>x.addEventListener('click',bzCloseSheet));
 $('bzSheet').addEventListener('click',e=>{if(e.target.closest('[data-bzclose]'))bzCloseSheet()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('bzSheet').hidden)bzCloseSheet()});
@@ -3689,7 +3893,7 @@ function bzEdit(id){
   '<div class="fl"><span>When will you do it? <span class="opt">optional</span></span><div class="two"><label class="sub">Day<input id="bzD" type="date" value="'+(t&&t.date||'')+'"></label><label class="sub">Start<input id="bzS" type="time" value="'+(t&&t.time||'')+'"></label></div><button type="button" class="btn small ghost" data-be="suggest">✨ Suggest a free time</button><small class="hint" id="bzSugTxt" aria-live="polite"></small></div>'+
   '<label class="fl">Reminder<select id="bzRem"><option value="off">No reminder</option>'+[0,5,10,15,30,60].map(m=>'<option value="'+m+'"'+(rem===String(m)?' selected':'')+'>'+(m?m+' min before':'At the start time')+'</option>').join('')+'</select></label>'+
   '<div class="prbox" id="bzPr" aria-live="polite"></div>'+
-  '<div class="fl"><span>Priority</span>'+segH('over',[[0,'Auto'],[1,'P1'],[2,'P2'],[3,'P3']],b.over||0,'Priority')+'</div>'+
+  '<div class="fl"><span>Priority</span>'+segH('over',[[0,'Auto'],[1,'P1'],[2,'P2'],[3,'P3'],[4,'P4']],b.over||0,'Priority')+'</div>'+
   '<details'+(t&&(t.desc||b.notes.length||b.deps.length||b.status!=='todo')?' open':'')+'><summary>More details</summary>'+
     '<label class="fl">Description<textarea id="bzDesc" rows="3" maxlength="500" placeholder="Context, links, who is involved…">'+esc(t&&t.desc||'')+'</textarea></label>'+
     '<label class="fl">Business goal or project<select id="bzProj"><option value="">No project</option>'+(S.projs||[]).map(p=>'<option value="'+esc(p.id)+'"'+(b.proj===p.id?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'<option value="__new">＋ New project…</option></select></label>'+
@@ -3721,7 +3925,7 @@ function bzPrUpdate(){const box=$('bzPr');if(!box||!bzE)return;const r=bzRead();
   const fake={id:bzE.id||'_new',text:r.text,steps:bzE.steps.filter(s=>s.t.trim()),date:r.date,time:r.time,biz:{urgent:r.urgent,imp:r.imp,conseq:r.conseq,deadline:okDate(r.deadline)?r.deadline:null,est:r.est>0?r.est:null,status:r.status,over:+r.over||null,deps:r.deps,notes:[]}};
   const pr=bzPrio(fake);
   box.innerHTML=pr.p?'<div class="ph">'+(r.over?'Your choice':'Recommended')+': '+pchip(pr.p)+(r.over&&pr.auto!==+r.over?'<span class="hint">(app suggests P'+pr.auto+')</span>':'')+'</div><ul class="reason">'+pr.reasons.slice(0,4).map(x=>'<li>'+esc(x)+'</li>').join('')+(pr.reasons.length?'':'<li>No urgency, importance or deadline yet</li>')+'</ul>'
-    :'<div class="ph">Priority: one question first</div><p class="hint" style="margin:0">'+esc(pr.ask.q)+' Answer above'+(pr.ask.k==='conseq'?' (More details → consequences)':'')+', or pick P1/P2/P3 yourself.</p>';
+    :'<div class="ph">Priority: one question first</div><p class="hint" style="margin:0">'+esc(pr.ask.q)+' Answer above'+(pr.ask.k==='conseq'?' (More details → consequences)':'')+', or pick P1–P4 yourself.</p>';
 }
 function bzEdErr(m,f){$('bzErr').textContent=m||'';if(m&&f){const el=$(f);if(el){el.setAttribute('aria-invalid','true');try{el.focus()}catch(e){}}}}
 $('bzSheet').addEventListener('input',e=>{if(!bzE)return;
@@ -3974,7 +4178,7 @@ function sanitize(s){
   s.notes=arr(s.notes).filter(n=>n.id).map(n=>({id:str(n.id,40),text:str(n.text,2000),audio:!!n.audio,dur:n.dur?Math.round(num(n.dur,0)):undefined,at:num(n.at,Date.now())}));
   s.exps=arr(s.exps).filter(x=>x.id&&x.what&&okDate(x.date)&&num(x.amt,0)>0).map(x=>({id:str(x.id,40),what:str(x.what,80),amt:+x.amt,date:x.date}));
   s.shop=arr(s.shop).filter(x=>x.id&&x.text).map(x=>({id:str(x.id,40),text:str(x.text,80),done:!!x.done}));
-  s.projs=arr(s.projs).filter(p=>p.id&&p.name).map(p=>({id:str(p.id,40),name:str(p.name,80),plan:p.plan&&typeof p.plan==='object'?Object.fromEntries(Object.entries(p.plan).map(([k,v])=>[k,str(v,2000)])):{},
+  s.projs=arr(s.projs).filter(p=>p.id&&p.name).map(p=>({id:str(p.id,40),name:str(p.name,80),imp:['high','med','low'].includes(p.imp)?p.imp:null,hold:!!p.hold,plan:p.plan&&typeof p.plan==='object'?Object.fromEntries(Object.entries(p.plan).map(([k,v])=>[k,str(v,2000)])):{},
     ms:arr(p.ms).filter(m=>m.id&&m.title&&okDate(m.date)).map(m=>({id:str(m.id,40),title:str(m.title,80),date:m.date,done:!!m.done,ev:m.ev||null,rw:m.rw||null}))}));
   s.tasks.forEach(t=>{t.text=str(t.text,120);if(t.desc!=null)t.desc=str(t.desc,500)});
   s.tasks=s.tasks.filter(t=>t.text.trim());
