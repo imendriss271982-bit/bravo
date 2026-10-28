@@ -878,6 +878,58 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .brgrp .bzli{background:var(--surface-2);align-items:flex-start}
 .brside{display:flex;flex-direction:column;gap:6px}
 .brcnt{background:var(--surface-2);color:var(--ink);border-radius:99px;font-size:12px;font-weight:800;min-width:24px;height:24px;display:inline-grid;place-items:center;padding:0 8px}
+/* Business dashboard redesign (Oct 28): one priority, four numbers, projects, add by voice or text */
+.yp .ypwhy{margin:0;color:var(--ink);opacity:.9;font-weight:600}
+.pchip.warn{background:transparent;border:1.5px solid var(--coral);color:var(--coral)}
+.bztiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.bztile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:68px;text-align:center}
+.bztile b{font-family:var(--f-display);font-size:24px;font-variant-numeric:tabular-nums;line-height:1.1}
+.bztile small{color:var(--muted);font-weight:800;font-size:11.5px;line-height:1.2}
+.bztile.warn b{color:var(--coral)}
+.bzadd{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.bzaddl{font-family:var(--f-display);font-weight:700;font-size:17px}
+.bzaddb{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bzaddb .btn{min-height:52px;font-size:16px}
+.bzproj{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;width:100%}
+.bzproj:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bzproj.risk{border-color:var(--coral)}
+.bzproj .pjtop{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.bzproj .pjtop b{overflow-wrap:anywhere}
+.bzproj .pjpct{font-weight:900;color:var(--mint);font-variant-numeric:tabular-nums}
+.bzproj .pbar{margin-top:0}
+.bzproj small{color:var(--muted);font-weight:700;font-size:12.5px}
+.pjrisk,.bzproj small.pjrisk{color:var(--coral);font-weight:800}
+.bzring{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;width:100%}
+.bzring:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bzring span{display:flex;flex-direction:column;gap:2px}
+.bzring small{color:var(--muted);font-weight:700;font-size:12.5px}
+.bzring svg{flex:none}
+.rvring{flex-direction:row;align-items:center;gap:14px}
+.rvring svg{flex:none}
+.bzmore>summary{cursor:pointer;font-weight:800;color:var(--cyan);padding:8px 0;list-style:none}
+.bzmore>summary::-webkit-details-marker{display:none}
+.bzmore>summary::before{content:"▸ "}
+.bzmore[open]>summary::before{content:"▾ "}
+.capbox textarea{width:100%;min-height:120px;resize:vertical}
+.capl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.capi{background:var(--surface-2);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.capi.dim{opacity:.6}
+.capr{display:flex;gap:8px;align-items:center}
+.capr input{flex:1;min-width:0;font-weight:800}
+.capi .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.capi .two input,.capi .two select{width:100%;min-width:0}
+.capi small{color:var(--muted);font-weight:600}
+.capi small.capf{color:var(--gold);font-weight:800}
+.capu{display:flex;align-items:center;gap:8px;font-weight:800}
+.btn.live{background:var(--coral);color:#fff;border-color:var(--coral)}
+.xnotes{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:12px}
+.xnotes textarea{width:100%}
+.msform{display:flex;flex-direction:column;gap:8px}
+.msform input[type=text]{width:100%}
+.capi .sub,.pbody .sub{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}
+.pbody .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.pbody .two input{width:100%;min-width:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:359px){.bztiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .lnk{background:none;border:0;color:var(--cyan);font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:0}
 
 .bzt.isdone{opacity:.65}
@@ -1191,8 +1243,8 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
       <button type="button" role="tab" data-bz="prio">Priorities</button>
       <button type="button" role="tab" data-bz="cal">Calendar</button>
       <button type="button" role="tab" data-bz="coach">Coach</button>
-      <button type="button" role="tab" data-bz="pend">Pending<span class="bzcnt" id="bzPendCnt" hidden></span></button>
       <button type="button" role="tab" data-bz="review">Review</button>
+      <button type="button" role="tab" data-bz="pend">Pending<span class="bzcnt" id="bzPendCnt" hidden></span></button>
     </div>
     <div id="bzBody" class="bzbody" role="tabpanel" aria-live="polite"></div>
     <div class="sec" id="bzProjWrap" hidden>
@@ -1340,6 +1392,7 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 </div>
 
 <script src="brain.js"></script>
+<script src="capture.js"></script>
 <script>
 (function(){
 const KEY='bravo-v1';
@@ -1438,6 +1491,7 @@ function normBiz(t){
   b.deps=Array.isArray(b.deps)?[...new Set(b.deps.filter(x=>typeof x==='string'&&x!==t.id))].slice(0,20):[];
   b.notes=(Array.isArray(b.notes)?b.notes:[]).filter(n=>n&&typeof n==='object').slice(-100).map(n=>({id:s(n.id||Math.random().toString(36).slice(2,9),40),at:+n.at||Date.now(),text:s(n.text,500),reason:n.reason?s(n.reason,40):undefined,date:okDate(n.date)?n.date:undefined}));
   b.hist=(Array.isArray(b.hist)?b.hist:[]).filter(h=>h&&typeof h==='object'&&h.ev).slice(-100).map(h=>({at:+h.at||Date.now(),ev:s(h.ev,20),from:h.from?s(h.from,20):undefined,to:h.to?s(h.to,20):undefined}));
+  b.ms=b.ms?s(b.ms,40):null;b.ext=b.ext&&b.status==='blocked'?s(b.ext,80):null;b.fup=okDate(b.fup)&&b.ext?b.fup:null;if(b.src)b.src=s(b.src,20);
   b.rev=okDate(b.rev)?b.rev:null;b.created=+b.created||Date.now();b.ord=Number.isFinite(+b.ord)?+b.ord:0;
   b.startAt=+b.startAt||null;b.actual=+b.actual>0?Math.round(+b.actual):null;b.waitSince=+b.waitSince||null;
   b.who=b.who?s(b.who,60):undefined;
@@ -3173,17 +3227,23 @@ function renderPro(){
   $('shopClear').hidden=!S.shop.some(x=>x.done);
   // projects
   const open=new Set([...document.querySelectorAll('#projs details[open]')].map(d=>d.dataset.id));
-  $('projs').innerHTML=S.projs.map(p=>{const ms=p.ms||[],dn=ms.filter(x=>x.done).length,pct=ms.length?Math.round(dn/ms.length*100):0;
+  $('projs').innerHTML=S.projs.map(p=>{const ms=p.ms||[],st=typeof bzProjStat==='function'?bzProjStat(p):{units:ms.length,dn:ms.filter(x=>x.done).length,pct:0,ts:[],risk:null},pct=st.units?Math.round(st.dn/st.units*100):0;
     const f=(k,lab,ph)=>'<label>'+lab+'<textarea data-pf="'+k+'" data-id="'+p.id+'" placeholder="'+ph+'">'+esc(p.plan[k]||'')+'</textarea></label>';
-    return '<details class="proj" data-id="'+p.id+'"'+(open.has(p.id)?' open':'')+'><summary><div class="grow"><h4>'+esc(p.name)+'</h4><small>'+dn+' / '+ms.length+' milestones'+(p.imp?' · '+({high:'High',med:'Medium',low:'Low'})[p.imp]+' importance':'')+(p.hold?' · On hold':'')+'</small><div class="pbar"><i style="width:'+pct+'%"></i></div></div><span aria-hidden="true">▾</span></summary><div class="pbody">'+
+    const lk=m=>st.ts.filter(t=>t.biz.ms===m.id),today=todayStr();
+    return '<details class="proj" data-id="'+p.id+'"'+(open.has(p.id)?' open':'')+'><summary><div class="grow"><h4>'+esc(p.name)+'</h4><small>'+pct+'% · '+ms.filter(x=>x.done).length+' / '+ms.length+' milestones'+(st.ts.length?' · '+st.ts.filter(t=>t.done).length+' / '+st.ts.length+' tasks':'')+(p.deadline?' · Delivery '+p.deadline:'')+(p.imp?' · '+({high:'High',med:'Medium',low:'Low'})[p.imp]+' importance':'')+(p.hold?' · On hold':'')+'</small><div class="pbar"><i style="width:'+pct+'%"></i></div></div><span aria-hidden="true">▾</span></summary><div class="pbody">'+
+      (st.risk?'<p class="pjrisk" style="margin:0">⚠ '+esc(st.risk)+'</p>':'')+
+      '<div class="two"><label class="sub">Start<input type="date" data-pd="start" data-id="'+p.id+'" value="'+(p.start||'')+'"></label><label class="sub">Main deadline<input type="date" data-pd="deadline" data-id="'+p.id+'" value="'+(p.deadline||'')+'"></label></div>'+
+      '<div class="sechead" style="margin:4px 0 0"><h3 style="font-size:17px">Milestones</h3><span class="hint">Each has its own date</span></div>'+
+      (ms.map(x=>{const L=lk(x),late=!x.done&&x.date<today;return '<div class="item'+(x.done?' done':'')+'"><button class="chk" data-pro="mtog" data-id="'+p.id+'" data-m="'+x.id+'" aria-pressed="'+!!x.done+'" aria-label="Done">✓</button><div class="grow">'+esc(x.title)+'<small>'+(late?'⚠ was due ':'Due ')+x.date+(x.deliv?' · Deliverable: '+esc(x.deliv):'')+(L.length?' · '+L.filter(t=>t.done).length+'/'+L.length+' tasks':'')+'</small></div><button class="x" data-pro="mdel" data-id="'+p.id+'" data-m="'+x.id+'" aria-label="Delete">×</button></div>'}).join('')||'<p class="hint" style="margin:0">Add your first milestone.</p>')+
+      '<form class="msform" data-mform="'+p.id+'" autocomplete="off"><input type="text" data-mf="t" placeholder="Milestone (e.g. Design approved)" aria-label="Milestone"><input type="text" data-mf="v" placeholder="Deliverable (optional)" aria-label="Deliverable"><div class="prow"><input type="date" data-mf="d" value="'+ymd(addDays(new Date(),7))+'" aria-label="Due date"><button class="btn" type="submit">Add</button></div></form>'+
+      '<div class="bzrow"><button class="btn small ghost" type="button" data-bza="projtasks" data-id="'+p.id+'">📋 Tasks of this project ('+st.ts.filter(t=>!t.done).length+' open)</button></div>'+
       '<div class="fl"><span>Importance for my business <span class="opt">used by the AI Business Brain</span></span><div class="seg small" role="group" aria-label="Project importance">'+[['high','High'],['med','Medium'],['low','Low']].map(o=>'<button type="button" data-pro="pimp" data-id="'+p.id+'" data-v="'+o[0]+'" aria-pressed="'+(p.imp===o[0])+'">'+o[1]+'</button>').join('')+'</div></div>'+
       '<button class="btn small ghost" type="button" data-pro="phold" data-id="'+p.id+'" aria-pressed="'+!!p.hold+'">'+(p.hold?'▶ Resume this project':'⏸ Put this project on hold')+'</button>'+(p.hold?'<p class="hint" style="margin:0">On hold: its tasks are kept but the Brain won\'t suggest them.</p>':'')+
+      '<details class="bzmore"><summary>Business plan</summary><div class="pbody" style="padding:0">'+
       '<button class="btn ghost" data-pro="draft" data-id="'+p.id+'" type="button">✨ Draft my business plan with Noor</button>'+
-      f('goal','Goal','What do you want to achieve?')+f('problem','Problem','What problem does it solve?')+f('customers','Customers','Who will buy?')+f('offer','Offer & price','What do you sell, at what price?')+f('money','Budget','What does it cost to start?')+f('market','Marketing','How will people find you?')+
-      '<div class="sechead" style="margin:4px 0 0"><h3 style="font-size:17px">Milestones</h3><span class="hint">Alarm on the day</span></div>'+
-      (ms.map(x=>'<div class="item'+(x.done?' done':'')+'"><button class="chk" data-pro="mtog" data-id="'+p.id+'" data-m="'+x.id+'" aria-pressed="'+!!x.done+'" aria-label="Done">✓</button><div class="grow">'+esc(x.title)+'<small>'+x.date+'</small></div><button class="x" data-pro="mdel" data-id="'+p.id+'" data-m="'+x.id+'" aria-label="Delete">×</button></div>').join('')||'<p class="hint" style="margin:0">Add your first milestone.</p>')+
-      '<form class="prow" data-mform="'+p.id+'" autocomplete="off"><input type="text" placeholder="Milestone (e.g. Logo ready)" aria-label="Milestone"><input type="date" value="'+ymd(addDays(new Date(),7))+'" aria-label="Date" style="flex:0 1 150px"><button class="btn" type="submit">Add</button></form>'+
-      '<button class="btn small ghost" data-pro="pdel" data-id="'+p.id+'" type="button">Delete project</button></div></details>'}).join('')||'<p class="hint" style="margin:0">Create your first project: Noor helps you write the plan.</p>';
+      f('goal','Goal','What do you want to achieve?')+f('problem','Problem','What problem does it solve?')+f('customers','Customers','Who will buy?')+f('offer','Offer & price','What do you sell, at what price?')+f('money','Budget','What does it cost to start?')+f('market','Marketing','How will people find you?')+'</div></details>'+
+      '<label class="xnotes"><b>Extra Notes</b><small class="hint">Client requirements, meeting notes, instructions… Saved with this project.</small><textarea data-pf="extra" data-id="'+p.id+'" rows="4" maxlength="2000" placeholder="Anything that is not a task">'+esc(p.plan.extra||'')+'</textarea></label>'+
+      '<button class="btn small ghost" data-pro="pdel" data-id="'+p.id+'" type="button">Delete project</button></div></details>'}).join('')||'<p class="hint" style="margin:0">Create your first project: say it in Add task (“A new project”), or type a name here.</p>';
 }
 // voice notes: audio kept on this phone (IndexedDB)
 let idb=null;
@@ -3222,12 +3282,13 @@ $('shopClear').addEventListener('click',()=>{S.shop=S.shop.filter(x=>!x.done);sa
 $('projForm').addEventListener('submit',e=>{e.preventDefault();const v=$('projName').value.trim();if(!v)return;
   const p={id:uid(),name:v,plan:{},ms:[]};S.projs.push(p);$('projName').value='';save();renderPro();
   setTimeout(()=>{const d=document.querySelector('#projs details[data-id="'+p.id+'"]');if(d){d.open=true;d.scrollIntoView({block:'start',behavior:'smooth'})}},50)});
+document.addEventListener('change',e=>{const t=e.target.closest('[data-pd]');if(!t)return;const p=S.projs.find(x=>x.id===t.dataset.id);if(!p)return;const v=t.value;p[t.dataset.pd]=okDate(v)?v:null;save();renderPro();if(!$('v-biz').hidden)bzRender()});
 document.addEventListener('input',e=>{const t=e.target.closest('[data-pf]');if(!t)return;const p=S.projs.find(x=>x.id===t.dataset.id);if(!p)return;p.plan[t.dataset.pf]=t.value;save()});
 document.addEventListener('submit',e=>{const f=e.target.closest('[data-mform]');if(!f)return;e.preventDefault();
-  const p=S.projs.find(x=>x.id===f.dataset.mform);const [ti,da]=f.querySelectorAll('input');const t=ti.value.trim(),d=da.value;if(!p||!t||!d)return;
-  addMilestone(p,t,d);save();renderPro();renderAgenda();tone([659,880],.09,.25)});
-function addMilestone(p,t,d){const r=createTask({kind:'event',text:'🏁 '+p.name+': '+t,date:d,time:'09:00',alarm:true});
-  p.ms.push({id:uid(),title:t,date:d,done:false,ev:r.ok?r.task.id:null});p.ms.sort((a,b)=>a.date.localeCompare(b.date))}
+  const p=S.projs.find(x=>x.id===f.dataset.mform);const ti=f.querySelector('[data-mf="t"]'),da=f.querySelector('[data-mf="d"]'),dv=f.querySelector('[data-mf="v"]');const t=ti.value.trim(),d=da.value;if(!p||!t||!d)return;
+  addMilestone(p,t,d,dv?dv.value:'');save();renderPro();renderAgenda();tone([659,880],.09,.25)});
+function addMilestone(p,t,d,deliv){const r=createTask({kind:'event',text:'🏁 '+p.name+': '+t,date:d,time:'09:00',alarm:true});
+  const m={id:uid(),title:t,date:d,done:false,ev:r.ok?r.task.id:null};if(deliv&&String(deliv).trim())m.deliv=String(deliv).trim().slice(0,120);p.ms.push(m);p.ms.sort((a,b)=>a.date.localeCompare(b.date))}
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-pro]');if(!b)return;const a=b.dataset.pro,id=b.dataset.id;
   if(a==='ndel'){S.notes=S.notes.filter(x=>x.id!==id);audDel(id)}
   if(a==='edel')S.exps=S.exps.filter(x=>x.id!==id);
@@ -3309,7 +3370,7 @@ function bzPrio(t){if(!t||!t.biz)return{p:null,reasons:[],score:0,missing:[]};re
 function bzRank(list){return list.map(t=>({t,pr:bzPrio(t)})).sort((a,b)=>(a.pr.p||2.5)-(b.pr.p||2.5)||b.pr.score-a.pr.score||(a.t.biz.deadline||'9999').localeCompare(b.t.biz.deadline||'9999')||a.t.biz.ord-b.t.biz.ord)}
 // keep the normal lists' 🔥 in line with the business priority
 function bzSyncPrio(){let ch=false;bzTasks().forEach(t=>{if(t.done)return;const p=bzPrio(t).p,w=p===1?'high':p>=3?'low':undefined;if(t.prio!==w){if(w)t.prio=w;else delete t.prio;ch=true}});if(ch)save()}
-const bzMissed=()=>bzTasks().filter(t=>!t.done&&t.date&&t.date<todayStr()&&t.biz.rev!==t.date&&!['paused','delegated'].includes(t.biz.status)).sort((a,b)=>a.date.localeCompare(b.date));
+const bzMissed=()=>bzTasks().filter(t=>!t.done&&t.date&&t.date<todayStr()&&t.biz.rev!==t.date&&!t.biz.ext&&!['paused','delegated'].includes(t.biz.status)).sort((a,b)=>a.date.localeCompare(b.date));
 
 // ---------- the planner behind the coach and the dashboard (facts only, rules written down) ----------
 function bzPlan(){
@@ -3484,7 +3545,7 @@ async function brAsk(sig,x){if(brAI[sig])return;brAI[sig]={state:'wait'};
   const prompt='You are Noor, a calm business coach for people with ADHD. Using ONLY the facts below, write ONE short sentence in English explaining why this task should be done first. Do not invent deadlines, clients, money, numbers or consequences that are not in the facts. No emoji. Answer ONLY in JSON: {"say":"..."}\n\nTask: '+t.text+'\nPriority: '+(pr.p?'P'+pr.p:'not set')+'\nReasons: '+pr.reasons.slice(0,4).join('; ')+(pr.delay?'\nIf delayed: '+pr.delay:'')+(st?'\nFirst step: '+st.t:'');
   try{const r=await askAI(prompt);const say=r&&typeof r.say==='string'?r.say.trim().slice(0,300):'';if(!say)throw new Error('empty');brAI[sig]={state:'ok',text:say}}
   catch(e){brAI[sig]={state:'err'}}
-  if(!$('v-biz').hidden&&bzTab==='dash'){const el=$('brAiTxt'),a=brAI[sig];if(el)el.textContent=a.state==='ok'?'Noor (AI), from the reasons above: '+a.text:'Rules engine (Noor\'s AI is offline: nothing was invented)'}}
+  if(!$('v-biz').hidden&&bzTab==='prio'){const el=$('brAiTxt'),a=brAI[sig];if(el)el.textContent=a.state==='ok'?'Noor (AI), from the reasons above: '+a.text:'Rules engine (Noor\'s AI is offline: nothing was invented)'}}
 document.addEventListener('toggle',e=>{const d=e.target;if(d&&d.classList&&d.classList.contains('brgrp')){if(d.open)brOpen.add(d.dataset.g);else brOpen.delete(d.dataset.g)}},true);
 
 // ---------- break into smaller steps: proposed first, saved only on yes ----------
@@ -3562,23 +3623,250 @@ function brAction(a,b,t){
 
 // ---------- Dashboard ----------
 function bzDash(){
-  const P=bzPlan(),today=todayStr(),all=bzTasks(),wk=monday(new Date()).getTime();
-  const todays=all.filter(t=>t.date===today).sort((a,b)=>a.done-b.done||byTime(a,b));
-  const overdue=all.filter(t=>!t.done&&t.biz.deadline&&t.biz.deadline<today);
-  const blocked=P.ranked.filter(x=>x.pr.blocked).map(x=>x.t);
-  const soon=all.filter(t=>!t.done&&t.biz.deadline&&t.biz.deadline>=today&&dayDiff(today,t.biz.deadline)<=7).sort((a,b)=>a.biz.deadline.localeCompare(b.biz.deadline));
-  const doneWk=all.filter(t=>t.done&&t.doneAt>=wk).length;
+  const L=bzLists(),P=bzPlan();
   let h='';
   if(P.missed.length)h+='<div class="bzask"><p>'+(P.missed.length===1?'1 task wasn\'t finished on its day.':P.missed.length+' tasks weren\'t finished on their day.')+' Take 1 minute to review '+(P.missed.length===1?'it':'them')+'.</p><button class="btn" type="button" data-bza="tab" data-v="pend">Review now</button></div>';
-  h+=bzBrain();
-  h+='<div class="bzq"><div class="bzstat"><b>'+todays.filter(t=>!t.done).length+'</b><small>to do today</small></div><div class="bzstat'+(overdue.length?' warn':'')+'"><b>'+overdue.length+'</b><small>overdue</small></div><div class="bzstat'+(blocked.length?' warn':'')+'"><b>'+blocked.length+'</b><small>blocked</small></div><div class="bzstat"><b>'+doneWk+'</b><small>done this week</small></div></div>';
-  h+='<div class="bzsec"><div class="sechead"><h3>Today</h3><span class="hint">'+bzDay(today)+'</span></div>'+(todays.length?'<ul class="bzlist">'+todays.map(t=>bzLi(t,t.time?timeRange(t):'Any time today')).join('')+'</ul>':bzEmpty('Nothing scheduled today. The coach can find a slot for your priority.'))+'</div>';
-  h+='<div class="bzsec"><div class="sechead"><h3>Upcoming deadlines</h3><span class="hint">Next 7 days</span></div>'+(soon.length?'<ul class="bzlist">'+soon.slice(0,5).map(t=>bzLi(t)).join('')+'</ul>':bzEmpty('No deadline in the next 7 days.'))+'</div>';
-  if(overdue.length||blocked.length)h+='<div class="bzsec"><div class="sechead"><h3>Overdue or blocked</h3></div><ul class="bzlist">'+[...new Set([...overdue,...blocked])].slice(0,6).map(t=>bzLi(t,bzBlockers(t)[0]?esc('Blocked: '+bzBlockers(t)[0]):'')).join('')+'</ul></div>';
-  const pj=(S.projs||[]).map(p=>{const ts=all.filter(t=>t.biz.proj===p.id),d=ts.filter(t=>t.done).length;return{p,ts,d}}).filter(x=>x.ts.length);
-  if(pj.length)h+='<div class="bzsec"><div class="sechead"><h3>Progress on projects</h3><span class="hint">Business tasks done</span></div>'+pj.map(x=>'<div class="bzcard" style="gap:6px"><b>'+esc(x.p.name)+'</b><div class="bzprog"><span>'+x.d+' of '+x.ts.length+' tasks</span><div class="pbar"><i style="width:'+Math.round(x.d/x.ts.length*100)+'%"></i></div></div></div>').join('')+'</div>';
+  h+=bzYour();
+  h+='<div class="bztiles" role="group" aria-label="Today at a glance">'+[['today','To do today',L.today.length,0],['overdue','Overdue',L.overdue.length,1],['done','Done this week',L.done.length,0],['blocked','Blocked',L.blocked.length,1]]
+    .map(x=>'<button type="button" class="bztile'+(x[3]&&x[2]?' warn':'')+'" data-bza="tile" data-v="'+x[0]+'"><b>'+x[2]+'</b><small>'+x[1]+'</small></button>').join('')+'</div>';
+  h+='<div class="bzadd"><span class="bzaddl">＋ Add task</span><div class="bzaddb"><button class="btn" type="button" data-bza="cap" data-v="voice">🎤 Speak</button><button class="btn ghost" type="button" data-bza="cap" data-v="write">✍️ Write</button></div></div>';
+  h+=bzProjSec();
+  h+=bzRing();
+  h+='<div class="bzrow"><button class="btn ghost" type="button" data-bza="tab" data-v="coach">💬 Talk to your AI Coach</button></div>';
   return h;
 }
+
+// ---------- Dashboard pieces (Oct 28 redesign): one priority, four numbers, projects, add by voice or text ----------
+let bzShowProj=null,bzCap=null,capRec=null;
+const bzExt=t=>t.biz.status==='blocked'&&!!t.biz.ext; // waiting on someone outside (Pending), not blocked by another task
+// the four dashboard lists, from saved tasks only
+function bzLists(){
+  const today=todayStr(),wk=monday(new Date()).getTime(),all=bzTasks(),act=all.filter(t=>!t.done&&!['paused','delegated'].includes(t.biz.status));
+  return{
+    today:act.filter(t=>!bzExt(t)&&(t.date===today||(!t.date&&t.biz.deadline===today))).sort(byTime),
+    overdue:act.filter(t=>!bzExt(t)&&((t.biz.deadline&&t.biz.deadline<today)||(t.date&&t.date<today&&t.biz.rev!==t.date))),
+    done:all.filter(t=>t.done&&(t.doneAt||0)>=wk).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0)),
+    blocked:act.filter(t=>!bzExt(t)&&bzBlockers(t).length),
+    pending:act.filter(bzExt)};
+}
+// the person can replace the AI's pick for today; it is never changed for them
+function bzPicked(){const k=S.bzPick;if(!k||k.day!==todayStr())return null;const t=S.tasks.find(x=>x.id===k.id&&x.biz);return t&&bzActive(t)&&!bzExt(t)?t:null}
+function bzYour(){
+  const D=brData(),pk=bzPicked(),x=pk?{t:pk,pr:bzPrio(pk)}:D.top;
+  if(!x)return '<div class="bzcard bzmain yp"><span class="bzkick">Your priority</span><h3>'+(D.all.length?'Everything open is waiting or on hold.':'Nothing to do yet.')+'</h3><p class="hint" style="margin:0">'+(D.all.length?'See Blocked or Pending.':'Say or type what you need to do. The app sorts it for you.')+'</p></div>';
+  const t=x.t,pr=x.pr,b=t.biz,id=esc(t.id),pn=b.proj&&projName(b.proj),dl=b.deadline;
+  const why=pk?'You chose this one.'+(D.top&&D.top.t.id!==t.id?' The AI would pick “'+D.top.t.text+'”.':''):((dl?pr.reasons.find(r=>!/^(Due |Deadline )/.test(r)):null)||pr.reasons[0]||'The best fit for now.');
+  const meta=[pr.p?'<span class="pchip p'+pr.p+'">'+brLvl(pr.p)+'</span>':'',pn?'<span class="pchip dl">📁 '+esc(pn)+'</span>':'',
+    dl?'<span class="pchip'+(dl<=todayStr()?' warn':'')+'">⏳ '+(dl<todayStr()?'Was due ':'Due ')+bzDay(dl)+'</span>':'',t.date&&t.time?'<span class="pchip">🕒 '+bzDay(t.date)+' '+t.time+'</span>':''].join('');
+  return '<section class="bzcard bzmain yp" aria-labelledby="ypH"><span class="bzkick">'+(pk?'Your priority · your choice':'Your priority')+'</span><h3 id="ypH">'+esc(t.text)+'</h3>'+
+    (meta?'<div class="chips2">'+meta+'</div>':'')+'<p class="ypwhy">'+esc(why)+'</p>'+
+    '<div class="bzrow"><button class="btn brgo" type="button" data-bza="start" data-id="'+id+'">▶ Help Me Start</button></div>'+
+    '<div class="bracts three"><button class="btn small ghost" type="button" data-bza="done" data-id="'+id+'">✓ Done</button><button class="btn small ghost" type="button" data-bza="pick">⇄ Not this one</button><button class="btn small ghost" type="button" data-bza="tab" data-v="prio">Why & more</button></div>'+
+    (pk?'<button class="lnk" type="button" data-bza="pickclear">Back to the AI pick</button>':'')+'</section>';
+}
+// project progress: every linked business task and every milestone counts as one unit; % = units done ÷ all units
+function bzProjStat(p){
+  const today=todayStr(),ts=bzTasks().filter(t=>t.biz.proj===p.id),ms=p.ms||[];
+  const units=ts.length+ms.length,dn=ts.filter(t=>t.done).length+ms.filter(m=>m.done).length,pct=units?Math.round(dn/units*100):0;
+  const next=ms.filter(m=>!m.done).sort((a,b)=>a.date.localeCompare(b.date))[0]||null;
+  let risk=null;
+  if(next&&next.date<today)risk='Milestone “'+next.title+'” was due '+bzDay(next.date)+'.';
+  else if(p.deadline&&p.deadline<today&&dn<units)risk='The project deadline ('+bzDay(p.deadline)+') has passed.';
+  else if(next){const open=ts.filter(t=>!t.done&&t.biz.ms===next.id),left=open.reduce((s,t)=>s+(bzLeft(t)||0),0),dd=dayDiff(today,next.date);
+    if(left&&dd<=14){const free=bzFreeUntil(next.date);if(free<left)risk='At risk: about '+bzDur(left)+' of work left for “'+next.title+'”, '+bzDur(free)+' free before '+bzDay(next.date)+'.'}
+    if(!risk&&open.length&&dd<=2)risk='“'+next.title+'” is due '+bzDay(next.date)+' and '+open.length+' linked task'+(open.length>1?'s are':' is')+' still open.'}
+  return{ts,ms,units,dn,pct,next,risk};
+}
+function bzProjSec(){
+  const ps=(S.projs||[]).filter(p=>!p.hold).map(p=>({p,s:bzProjStat(p)})).filter(x=>x.s.units||x.p.deadline);
+  let h='<div class="bzsec"><div class="sechead"><h3>Projects</h3><button class="lnk" type="button" data-bza="projs">'+(ps.length?'Manage':'＋ New project')+'</button></div>';
+  if(!ps.length)return h+bzEmpty('No active project yet. Say “New project…” in Add task, or tap New project.')+'</div>';
+  h+=ps.map(({p,s})=>'<button type="button" class="bzproj'+(s.risk?' risk':'')+'" data-bza="proj" data-id="'+esc(p.id)+'"><span class="pjtop"><b>'+esc(p.name)+'</b><span class="pjpct">'+s.pct+'%</span></span>'+
+    '<span class="pbar" aria-hidden="true"><i style="width:'+s.pct+'%"></i></span>'+
+    '<small>'+(s.next?'Next: '+esc(s.next.title)+' · '+bzDay(s.next.date):s.ms.length?'All milestones done':'No milestone yet')+(p.deadline?' · Delivery '+bzDay(p.deadline):'')+'</small>'+
+    (s.risk?'<small class="pjrisk">⚠ '+esc(s.risk)+'</small>':'')+'<span class="sr-only">'+s.dn+' of '+s.units+' tasks and milestones done</span></button>').join('');
+  return h+'</div>';
+}
+// weekly ring: business tasks planned for this week (a date or a deadline this week) that are done
+function bzRing(){
+  const W=bzWeekData(monday(new Date())),wk=monday(new Date()).getTime(),pl=W.active.length,dn=W.active.filter(t=>t.done&&(t.doneAt||0)>=wk).length;
+  const enough=pl>=3,pct=pl?Math.round(dn/pl*100):0,C=2*Math.PI*26;
+  return '<button type="button" class="bzring" data-bza="tab" data-v="review"><svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--surface-2)" stroke-width="8"/>'+
+    (enough?'<circle cx="32" cy="32" r="26" fill="none" stroke="var(--mint)" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+(C*pct/100).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 32 32)"/>':'')+
+    '<text x="32" y="37" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ink)">'+(enough?pct+'%':'—')+'</text></svg>'+
+    '<span><b>This week</b><small>'+(enough?dn+' of '+pl+' planned tasks done':'Not enough data yet ('+pl+' planned task'+(pl===1?'':'s')+')')+'</small><small class="lnk">See weekly review ›</small></span></button>';
+}
+
+// ---------- Add task: speak or write → the app splits, dates and sorts; you check, then add ----------
+function capOpen(mode,voice){
+  bzCap={mode:mode||'tasks',text:bzCap&&bzCap.text||'',items:null,src:null,busy:false,low:false,proj:null};
+  capDraw();if(voice)setTimeout(capListen,60);else setTimeout(()=>{const x=$('capTxt');if(x)x.focus()},80);
+}
+const CAP_FLAG={day:'Check the day',ampm:'AM or PM?','two-dates':'Two dates heard: check','two-times':'Two times heard: check','day-assumed':'No day said: set to today',check:'Not sure this is a task','removed-date':'A date the AI added was removed (you did not say it)','removed-time':'A time the AI added was removed (you did not say it)',heard:'Check what I heard'};
+function capDraw(){
+  const c=bzCap;if(!c)return;
+  const head='<div class="seg" role="group" aria-label="What are you adding"><button type="button" data-bza="capmode" data-v="tasks" aria-pressed="'+(c.mode==='tasks')+'">Tasks</button><button type="button" data-bza="capmode" data-v="project" aria-pressed="'+(c.mode==='project')+'">A new project</button></div>';
+  let h='<div class="bzsbody capbox">'+head;
+  if(!c.items&&!c.proj){
+    const sr=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
+    h+='<label class="fl"><span>'+(c.mode==='tasks'?'Say or write everything on your mind. Several tasks at once is fine.':'Describe the project: the goal, the deadline and the steps.')+'</span>'+
+      '<textarea id="capTxt" rows="5" maxlength="2000" placeholder="'+(c.mode==='tasks'?'e.g. Email the client at 5 PM today, call the supplier tomorrow morning and finish the quotation before Friday.':'e.g. Launch a new website in four weeks. First finalize the design, then approve the content, then test everything, and finally deliver.')+'">'+esc(c.text)+'</textarea></label>'+
+      '<div class="bzrow"><button class="btn'+(capRec?' live':' ghost')+'" type="button" data-bza="capmic" aria-pressed="'+!!capRec+'">'+(capRec?'■ Stop listening':'🎤 '+(sr?'Speak':'Speak (not available here)'))+'</button><button class="btn" type="button" data-bza="caprun"'+(c.busy?' disabled':'')+'>'+(c.busy?'Organizing…':'✨ Organize')+'</button></div>'+
+      '<p class="hint" id="capSt" aria-live="polite" style="margin:0">'+(c.st||(sr?'Nothing is saved until you check it.':'Voice input is not available in this browser: use the 🎤 key of your keyboard, or type.'))+'</p>';
+  }else if(c.mode==='tasks'){
+    h+='<p class="srcnote" style="margin:0">'+(c.src==='ai'?'Organized by Noor (AI). Dates and times were checked against what you said.':'Organized by the rules engine'+(c.aiDown?' (Noor\'s AI is offline)':'')+'.')+' Check, then add.</p>';
+    h+=c.items.length?'<ol class="capl">'+c.items.map((x,i)=>capItem(x,i)).join('')+'</ol>':'<p class="hint">I could not find a task in that. Try again with a verb, e.g. “Call the supplier”.</p>';
+    const n=c.items.filter(x=>!x.dup).length;
+    h+='<p class="ederr" id="capErr" role="alert"></p><div class="sbtns">'+(n?'<button class="btn" type="button" data-bza="capadd"'+(c.busy?' disabled':'')+'>Add '+n+' task'+(n>1?'s':'')+'</button>':'')+'<button class="btn ghost" type="button" data-bza="capback">← Back to my words</button></div>';
+  }else{
+    const p=c.proj;
+    h+='<p class="srcnote" style="margin:0">'+(c.src==='ai'?'Plan proposed by Noor (AI).':'Plan from the rules engine'+(c.aiDown?' (Noor\'s AI is offline)':'')+'.')+' Dates marked “suggested” were not said by you: check them.</p>'+
+      '<label class="fl">Project name<input id="cpName" type="text" maxlength="80" value="'+esc(p.name)+'"></label>'+
+      '<label class="fl">Main deadline <span class="opt">'+(p.deadline&&p.dlRaw?'you said “'+esc(p.dlRaw)+'”':'optional')+'</span><input id="cpDl" type="date" value="'+(p.deadline||'')+'"></label>'+
+      '<div class="fl"><span>Milestones, in order</span><ol class="capl">'+p.ms.map((m,i)=>'<li class="capi"><div class="capr"><input type="text" data-cpm="title" data-i="'+i+'" maxlength="80" value="'+esc(m.title)+'" aria-label="Milestone '+(i+1)+'"><button type="button" class="x" data-bza="cpmdel" data-i="'+i+'" aria-label="Remove milestone">×</button></div>'+
+        '<div class="two"><label class="sub">Deliverable <span class="opt">optional</span><input type="text" data-cpm="deliv" data-i="'+i+'" maxlength="120" value="'+esc(m.deliv||'')+'"></label><label class="sub">Due'+(m.suggested?' <span class="opt">suggested</span>':'')+'<input type="date" data-cpm="date" data-i="'+i+'" value="'+(m.date||'')+'"></label></div></li>').join('')+'</ol>'+
+      '<button class="btn small ghost" type="button" data-bza="cpmadd">＋ Add a milestone</button></div>'+
+      '<p class="ederr" id="capErr" role="alert"></p><div class="sbtns"><button class="btn" type="button" data-bza="cpsave">Create project</button><button class="btn ghost" type="button" data-bza="capback">← Back to my words</button></div>';
+  }
+  h+='</div>';
+  bzOpenSheet(c.mode==='tasks'?'Add tasks':'New project',h);
+}
+function capItem(x,i){
+  const pj=S.projs||[];
+  return '<li class="capi'+(x.dup?' dim':'')+'"><div class="capr"><input type="text" data-cp="text" data-i="'+i+'" maxlength="120" value="'+esc(x.text)+'" aria-label="Task '+(i+1)+'"><button type="button" class="x" data-bza="capdel" data-i="'+i+'" aria-label="Remove this task">×</button></div>'+
+    (x.dup?'<small class="capf">Already in your list: it will not be added twice.</small>':'')+
+    '<div class="two"><label class="sub">Day<input type="date" data-cp="date" data-i="'+i+'" value="'+(x.date||'')+'"></label><label class="sub">Time<input type="time" data-cp="time" data-i="'+i+'" value="'+(x.time||'')+'"></label></div>'+
+    '<div class="two"><label class="sub">Deadline<input type="date" data-cp="deadline" data-i="'+i+'" value="'+(x.deadline||'')+'"></label><label class="sub">Project<select data-cp="proj" data-i="'+i+'"><option value="">None</option>'+pj.map(p=>'<option value="'+esc(p.id)+'"'+(x.proj===p.id?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'</select></label></div>'+
+    '<label class="capu"><input type="checkbox" data-cp="urgent" data-i="'+i+'"'+(x.urgent?' checked':'')+'> ⚡ Urgent</label>'+
+    (x.ctx?'<small>'+esc(x.ctx)+'</small>':'')+
+    (x.flags.length?'<small class="capf">'+[...new Set(x.flags)].map(f=>esc(CAP_FLAG[f]||f)).join(' · ')+'</small>':'')+
+    (x.clash?'<small class="capf">Overlaps with '+esc(x.clash)+'. Both will be kept; nothing is moved.</small>':'')+'</li>';
+}
+function capSync(){const c=bzCap;if(!c)return;
+  const tx=$('capTxt');if(tx)c.text=tx.value;
+  document.querySelectorAll('#bzSheet [data-cp]').forEach(el=>{const x=c.items&&c.items[+el.dataset.i];if(!x)return;const k=el.dataset.cp;x[k]=k==='urgent'?el.checked:(el.value.trim()||null)});
+  if(c.proj){const n=$('cpName');if(n)c.proj.name=n.value.trim();const d=$('cpDl');if(d)c.proj.deadline=d.value||null;
+    document.querySelectorAll('#bzSheet [data-cpm]').forEach(el=>{const m=c.proj.ms[+el.dataset.i];if(!m)return;const k=el.dataset.cpm;const v=el.value.trim();if(k==='date'&&v!==m.date)m.suggested=false;m[k]=v||(k==='deliv'?'':null)})}
+}
+function capListen(){
+  if(capRec){try{capRec.stop()}catch(e){}return}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition,st=m=>{bzCap.st=m;const e=$('capSt');if(e)e.textContent=m};
+  if(!SR){st('Voice input is not available in this browser: use the 🎤 key of your keyboard, or type.');const x=$('capTxt');if(x)x.focus();return}
+  capSync();const base=bzCap.text?bzCap.text.replace(/\s+$/,'')+' ':'';let fin='',minC=1;
+  const r=new SR();r.lang='en-US';r.interimResults=true;r.continuous=true;
+  r.onresult=e=>{let int='';for(let i=e.resultIndex;i<e.results.length;i++){const a=e.results[i][0];if(e.results[i].isFinal){fin+=a.transcript+' ';if(a.confidence>0)minC=Math.min(minC,a.confidence)}else int+=a.transcript}
+    const x=$('capTxt');if(x)x.value=base+fin+int;bzCap.text=base+fin;if(minC<.6)bzCap.low=true};
+  r.onerror=e=>{st(e.error==='not-allowed'||e.error==='service-not-allowed'?'Allow the microphone for this site in your settings, or type instead.':e.error==='no-speech'?'I didn\'t hear anything. Try again or type.':'Voice stopped ('+e.error+'). What I heard is kept: you can edit it.')};
+  r.onend=()=>{capRec=null;if(bzCap&&!bzCap.items&&!bzCap.proj){capSync();bzCap.st=bzCap.st&&/Allow|didn't hear|stopped/.test(bzCap.st)?bzCap.st:(bzCap.text.trim()?'Check the text, then tap Organize.':'Nothing heard yet.');capDraw()}};
+  try{r.start();capRec=r;bzCap.st='Listening… speak naturally. Tap Stop when you are done.';capDraw()}catch(e){capRec=null;st('Voice could not start here. Type instead.')}
+}
+const capCtx=()=>({today:todayStr(),projects:(S.projs||[]).map(p=>({id:p.id,name:p.name}))});
+function aiTimeout(prompt,ms){const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),ms);return askAI(prompt,ac.signal).finally(()=>clearTimeout(tm))}
+async function capRun(){
+  const c=bzCap;if(!c||c.busy)return;capSync();const text=(c.text||'').trim();
+  if(!text){c.st='Say or type something first.';return capDraw()}
+  if(capRec)try{capRec.stop()}catch(e){}
+  c.busy=true;c.aiDown=false;capDraw();
+  const X=capCtx(),wd=new Date().toLocaleDateString('en-GB',{weekday:'long'});
+  if(c.mode==='tasks'){
+    let items=null;
+    try{
+      const r=await aiTimeout('You turn a person\'s spoken or written to-do message into separate business tasks. Today is '+wd+' '+X.today+'. Projects: '+JSON.stringify(X.projects)+'.\nRules: one task per action; short title starting with a verb; keep numbers as said ("three client emails" stays one task). Use ONLY dates and times the person said; if a day or time was not said use null. "by/before/due" = deadline; a time = time. urgent only if they said urgent/asap. Sentences that only give context go in "context" of the task they describe. Never invent clients, amounts or dates. Answer ONLY JSON: {"tasks":[{"title":"","date":"YYYY-MM-DD or null","time":"HH:MM or null","deadline":"YYYY-MM-DD or null","urgent":false,"project":"project id or null","context":"","uncertain":false}]}\n\nMessage: '+text.slice(0,2000),9000);
+      items=Capture.verify(r,text,X);if(items&&!items.length)items=null;
+    }catch(e){c.aiDown=true}
+    c.src=items?'ai':'rules';if(!items)items=Capture.parse(text,X);
+    const open=bzTasks().filter(t=>!t.done).map(t=>t.text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim());
+    items.forEach(x=>{if(c.low)x.flags.push('heard');if(open.includes(x.text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()))x.dup=true;
+      if(x.date&&x.time){const ov=overlapsWith({date:x.date,time:x.time,dur:30},null);if(ov.length)x.clash=ov[0].text+' ('+timeRange(ov[0])+')'}});
+    c.items=items;
+  }else{
+    let p=Capture.parseProject(text,X)||{name:'',deadline:null,ms:[]};
+    try{
+      const r=await aiTimeout('Turn this project description into a plan. Today is '+wd+' '+X.today+'. Keep the steps the person said, in their order, as milestones (short title starting with a verb, optional deliverable). Do not add steps they did not say. Use only dates they said, else null. Answer ONLY JSON: {"name":"","milestones":[{"title":"","deliverable":"","date":"YYYY-MM-DD or null"}]}\n\nDescription: '+text.slice(0,2000),9000);
+      const M=Capture.mentions(text,X.today),ms=Array.isArray(r&&r.milestones)?r.milestones.filter(m=>m&&m.title).slice(0,12):[];
+      if(ms.length){p.ms=ms.map(m=>({title:String(m.title).slice(0,80),deliv:String(m.deliverable||'').slice(0,120),date:Capture.okDate(m.date)&&M.dates.has(m.date)?m.date:null,suggested:false}));
+        if(p.deadline){const n=p.ms.length,span=Math.max(n,dayDiff(X.today,p.deadline));p.ms.forEach((m,i)=>{if(!m.date){m.date=i===n-1?p.deadline:ymd(addDays(new Date(),Math.max(1,Math.round(span*(i+1)/n))));m.suggested=true}})}}
+      if(r&&r.name)p.name=String(r.name).slice(0,80);c.src='ai';
+    }catch(e){c.aiDown=true;c.src='rules'}
+    if(!p.ms.length)p.ms=[{title:'',deliv:'',date:p.deadline||null,suggested:false}];
+    c.proj=p;
+  }
+  c.busy=false;capDraw();
+}
+function capErr(m){const e=$('capErr');if(e)e.textContent=m}
+function capAdd(){
+  const c=bzCap;if(!c||c.busy||!c.items)return;capSync();
+  const list=c.items.filter(x=>!x.dup);
+  for(const x of list){
+    if(!x.text||x.text.length<2)return capErr('Each task needs a name.');
+    if(x.date&&!okDate(x.date)||x.deadline&&!okDate(x.deadline))return capErr('One of the dates does not exist.');
+    if(x.time&&!x.date)return capErr('“'+x.text+'” has a time but no day: add the day or clear the time.');
+  }
+  c.busy=true;const cfg=bzCfg(),made=[];let cal=0;
+  list.forEach(x=>{
+    const res=createTask({text:x.text,desc:x.ctx||'',date:x.date||null,time:x.time||null,dur:x.time?30:null,cat:'work',alarm:!!x.time});
+    if(!res.task)return;const t=res.task,ords=bzTasks().filter(y=>y!==t).map(y=>y.biz.ord);
+    t.biz={created:Date.now(),ord:ords.length?Math.min(...ords)-1:0,notes:[],hist:[],deps:[],urgent:!!x.urgent,deadline:x.deadline||null,proj:x.proj||null,src:'capture'};
+    if(t.alarm){t.remBefore=cfg.rem;cal++}normTask(t);bzHist(t,'created');if(t.date)bzHist(t,'scheduled',undefined,t.date+(t.time?' '+t.time:''));made.push(t)});
+  bzCap=null;bzCloseSheet();
+  bzSaveAll(made.length?'Added '+made.length+' task'+(made.length>1?'s':'')+(cal?' · '+cal+' in your calendar with a reminder':'')+'.':'Nothing new to add.');
+  if(cal&&typeof notifyHint==='function')notifyHint();
+}
+function capProject(){
+  const c=bzCap;if(!c||!c.proj)return;capSync();const p=c.proj,ms=p.ms.filter(m=>(m.title||'').trim());
+  if(!p.name)return capErr('Give the project a name.');
+  if(p.deadline&&!okDate(p.deadline))return capErr('The deadline date does not exist.');
+  for(const m of ms)if(!m.date||!okDate(m.date))return capErr('Add a due date for “'+m.title+'”, or remove it.');
+  const np={id:uid(),name:p.name.slice(0,80),plan:{},ms:[],deadline:p.deadline||null,start:todayStr()};
+  ms.forEach(m=>addMilestone(np,m.title.slice(0,80),m.date,m.deliv));S.projs.push(np);
+  bzCap=null;bzCloseSheet();bzShowProj=np.id;save();renderPro();renderAgenda();
+  bzSaveAll('Project created: '+np.name+(ms.length?' · '+ms.length+' milestone'+(ms.length>1?'s':'')+' in your calendar':'')+'.');
+}
+// extra Business actions (dashboard, add task, projects, pending)
+function bzX(a,b,t){
+  if(a==='tile'){const L=bzLists(),v=b.dataset.v,T={today:'To do today',overdue:'Overdue',done:'Done this week',blocked:'Blocked'}[v],list=L[v]||[];
+    const ex=x=>v==='blocked'?esc(bzBlockers(x)[0]||''):v==='overdue'?(x.biz.deadline&&x.biz.deadline<todayStr()?'Deadline was '+bzDay(x.biz.deadline):'Planned '+bzWhen(x)):v==='done'?'Done '+new Date(x.doneAt||Date.now()).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}):(x.time?timeRange(x):'Any time today');
+    bzOpenSheet(T+' ('+list.length+')','<div class="bzsbody">'+(list.length?'<ul class="bzlist">'+list.map(x=>bzLi(x,ex(x))).join('')+'</ul>':bzEmpty(v==='done'?'Nothing completed yet this week.':'Nothing here. 👍'))+(v==='overdue'&&list.length?'<button class="btn ghost" type="button" data-bza="tab" data-v="pend">Review missed tasks</button>':'')+'</div>');return true}
+  if(a==='cap'){capOpen('tasks',b.dataset.v==='voice');return true}
+  if(a==='capmode'){capSync();bzCap.mode=b.dataset.v;bzCap.items=null;bzCap.proj=null;bzCap.st='';capDraw();return true}
+  if(a==='capmic'){capListen();return true}
+  if(a==='caprun'){capRun();return true}
+  if(a==='capback'){capSync();bzCap.items=null;bzCap.proj=null;capDraw();return true}
+  if(a==='capdel'){capSync();bzCap.items.splice(+b.dataset.i,1);capDraw();return true}
+  if(a==='capadd'){capAdd();return true}
+  if(a==='cpmdel'){capSync();bzCap.proj.ms.splice(+b.dataset.i,1);capDraw();return true}
+  if(a==='cpmadd'){capSync();bzCap.proj.ms.push({title:'',deliv:'',date:null,suggested:false});capDraw();return true}
+  if(a==='cpsave'){capProject();return true}
+  if(a==='pick'){const D=brData(),cur=bzPicked()||(D.top&&D.top.t),c=D.all.filter(x=>!x.pr.blocked&&!brSnoozed(x.t)&&(!cur||x.t.id!==cur.id)).sort((x,y)=>(x.pr.p||5)-(y.pr.p||5)||y.pr.score-x.pr.score).slice(0,8);
+    bzOpenSheet('Pick your priority','<div class="bzsbody"><p class="hint" style="margin:0">Your choice wins for today. The AI keeps ranking in the background.</p>'+(cur?'<button class="btn ghost" type="button" data-bza="waitask" data-id="'+esc(cur.id)+'">⏳ I\'m waiting on someone for “'+esc(cur.text)+'”</button>':'')+(c.length?'<ul class="bzlist">'+c.map(x=>'<li class="bzli"><div class="grow"><b>'+esc(x.t.text)+'</b><small>'+(x.pr.p?brLvl(x.pr.p)+' · ':'')+esc(x.pr.reasons[0]||'')+'</small></div><button class="btn small" type="button" data-bza="pickset" data-id="'+esc(x.t.id)+'">Do this</button></li>').join('')+'</ul>':bzEmpty('No other open task right now.'))+'</div>');return true}
+  if(a==='pickset'&&t){S.bzPick={id:t.id,day:todayStr()};bzCloseSheet();bzSaveAll('Your priority: '+t.text);return true}
+  if(a==='pickclear'){delete S.bzPick;bzSaveAll();return true}
+  if(a==='projs'){bzShowProj=bzShowProj?null:'all';bzTab='dash';bzRender();if(bzShowProj)setTimeout(()=>{const w=$('bzProjWrap');if(w)w.scrollIntoView({block:'start',behavior:'smooth'});const i=$('projName');if(i&&!(S.projs||[]).length)i.focus()},60);return true}
+  if(a==='proj'){const id=b.dataset.id;bzShowProj=id;bzTab='dash';bzRender();setTimeout(()=>{const d=document.querySelector('#projs details[data-id="'+id+'"]');if(d){d.open=true;d.scrollIntoView({block:'start',behavior:'smooth'})}},60);return true}
+  if(a==='projtasks'){bzProjF=b.dataset.id;bzFilter='active';bzGo('tasks');return true}
+  if(a==='waitask'&&t){bzOpenSheet('Waiting on someone','<form class="bzsbody" data-bzwait="'+esc(t.id)+'" autocomplete="off" novalidate><p style="margin:0">“'+esc(t.text)+'” moves to <b>Pending</b> until the reply comes. It leaves your priorities, nothing is deleted.</p>'+
+    '<label class="fl">Waiting for <span class="opt">who or what</span><input id="bzWho" type="text" maxlength="80" placeholder="e.g. Client approval of the quotation"></label>'+
+    '<label class="fl">Follow up on <span class="opt">optional reminder</span><input id="bzFup" type="date" min="'+todayStr()+'"></label>'+
+    '<div class="sbtns"><button class="btn" type="submit">Move to Pending</button><button class="btn ghost" type="button" data-bzclose>Cancel</button></div></form>');return true}
+  if(a==='reply'&&t){const b2=t.biz;b2.status='todo';b2.waitSince=null;b2.ext=null;b2.fup=null;if(t.fup)delete t.fup;bzHist(t,'unblocked');brAt=Date.now();bzSaveAll('Back in your list: '+t.text+'. Priorities were updated.');return true}
+  if(a==='bzstuck'&&t){bzStart(t.id);return true}
+  if(a==='fublock'){const k=BZ_KIND.find(x=>x[0]===b.dataset.v);if(!k)return true;const c=bzCfg(),tm=ymd(addDays(new Date(),1)),txt='Daily block: '+k[1].toLowerCase();
+    if(bzTasks().some(x=>!x.done&&x.text===txt&&x.date===tm)){toast('Already planned for tomorrow.');return true}
+    const sl=bzFindSlot(15,{after:tm})||{date:tm,time:c.from};const r=createTask({text:txt,date:sl.date,time:sl.time,dur:15,cat:'work',alarm:true});if(!r.task){toast(r.err||"Couldn't add it.");return true}
+    const t2=r.task;t2.biz={created:Date.now(),ord:0,notes:[],hist:[],deps:[],imp:'med',conseq:'med',est:15,src:'review'};t2.remBefore=c.rem;normTask(t2);bzSaveAll('Added: '+txt+' · '+bzDay(t2.date)+' '+t2.time+', with a reminder.');return true}
+  return false;
+}
+// "Waiting on someone": Pending, with an optional follow-up reminder (a calendar entry at the start of your work day)
+document.addEventListener('submit',e=>{const f=e.target.closest('[data-bzwait]');if(!f)return;e.preventDefault();
+  const t=S.tasks.find(x=>x.id===f.dataset.bzwait&&x.biz);if(!t)return bzCloseSheet();
+  const who=($('bzWho').value||'').trim().slice(0,80),fup=$('bzFup').value||null;
+  if(fup&&(!okDate(fup)||fup<todayStr())){$('bzFup').setAttribute('aria-invalid','true');return}
+  const b=t.biz;b.status='blocked';b.waitSince=b.waitSince||Date.now();b.ext=who||'someone';b.fup=fup;
+  if(who)b.notes.push({id:uid(),at:Date.now(),text:'Waiting for '+who,reason:'waiting'});
+  const r=updateTask(t.id,fup?{date:fup,time:bzCfg().from,dur:15,alarm:true}:{date:null,time:null,dur:null,alarm:false});
+  if(fup&&r.ok){t.remBefore=0;t.fired=false}
+  bzHist(t,'waiting');bzCloseSheet();bzSaveAll('In Pending: '+t.text+(fup?' · follow-up reminder '+bzDay(fup)+' '+bzCfg().from:''));
+});
 
 // ---------- Tasks ----------
 function bzTaskCard(t,i,n,open){
@@ -3596,7 +3884,7 @@ function bzTaskCard(t,i,n,open){
     (t.done?'':'<form class="prow" data-bzsub="'+id+'" autocomplete="off"><input type="text" maxlength="120" placeholder="Add a subtask" aria-label="New subtask for '+esc(t.text)+'"><button class="btn small" type="submit">Add</button></form>')+
     '<div class="bzacts">'+(t.done?'':'<button class="btn small" type="button" data-bza="start" data-id="'+id+'">▶ Start</button>')+
     '<button class="btn small ghost" type="button" data-bza="edit" data-id="'+id+'">Edit</button>'+
-    (t.done?'':'<button class="btn small ghost" type="button" data-bza="sched" data-id="'+id+'">'+(t.time?'Reschedule':'Schedule')+'</button>')+
+    (t.done?'':'<button class="btn small ghost" type="button" data-bza="sched" data-id="'+id+'">'+(t.time?'Reschedule':'Schedule')+'</button>')+(t.done||bzExt(t)?'':'<button class="btn small ghost" type="button" data-bza="waitask" data-id="'+id+'">⏳ Waiting on someone</button>')+
     (t.done||bzFilter!=='active'?'':'<button class="btn small ghost" type="button" data-bza="up" data-id="'+id+'" aria-label="Move task up"'+(i?'':' disabled')+'>↑</button><button class="btn small ghost" type="button" data-bza="down" data-id="'+id+'" aria-label="Move task down"'+(i<n-1?'':' disabled')+'>↓</button>')+
     '<button class="btn small ghost danger'+(bzArm==='del'+t.id?' armed':'')+'" type="button" data-bza="del" data-id="'+id+'">'+(bzArm==='del'+t.id?'Tap again to delete':'Delete')+'</button></div>'+
     (bzProp[t.id]?bzPropBox(t):'')+'</div></details>';
@@ -3619,9 +3907,9 @@ function bzPrioTab(){
     return '<div class="bzcard" style="gap:8px"><div class="ph" style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><b style="overflow-wrap:anywhere">'+esc(t.text)+'</b>'+pchip(x.pr.p)+'</div>'+
       '<ul class="reason">'+x.pr.reasons.slice(0,4).map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul>'+
       '<div class="seg small" role="group" aria-label="Priority of '+esc(t.text)+'">'+[0,1,2,3,4].map(v=>'<button type="button" data-bza="over" data-id="'+esc(t.id)+'" data-v="'+v+'" aria-pressed="'+(o===v)+'">'+(v?'P'+v:'Auto (P'+x.pr.auto+')')+'</button>').join('')+'</div></div>'};
-  let h='<p class="hint" style="margin:0">P1 = do first (critical, commitment or blocker) · P2 = do next · P3 = plan it · P4 = later (low impact). The app explains each one; you can always override it.</p>';
+  let h=bzBrain()+'<p class="hint" style="margin:0">P1 = do first (critical, commitment or blocker) · P2 = do next · P3 = plan it · P4 = later (low impact). The app explains each one; you can always override it.</p>';
   if(ask.length)h+='<div class="bzsec"><div class="sechead"><h3>One quick question</h3><span class="hint">Needed to rank</span></div>'+ask.map(x=>'<div class="bzask"><p>'+esc(x.t.text)+': '+esc(x.pr.ask.q)+'</p><div class="seg">'+(x.pr.ask.k==='imp'?[['high','High'],['med','Medium'],['low','Low']]:[['high','Serious'],['med','Some'],['low','Minor']]).map(o=>'<button type="button" data-bza="answer" data-k="'+x.pr.ask.k+'" data-id="'+esc(x.t.id)+'" data-v="'+o[0]+'">'+o[1]+'</button>').join('')+'</div></div>').join('')+'</div>';
-  [1,2,3,4].forEach(p=>{h+='<div class="bzsec"><div class="sechead"><h3>P'+p+' · '+BZ_PNAME[p]+'</h3><span class="hint">'+groups[p].length+'</span></div>'+(groups[p].length?groups[p].map(row).join(''):bzEmpty('None.'))+'</div>'});
+  h+='<details class="bzmore"><summary>All tasks by level</summary><div class="bzbody">';[1,2,3,4].forEach(p=>{h+='<div class="bzsec"><div class="sechead"><h3>P'+p+' · '+BZ_PNAME[p]+'</h3><span class="hint">'+groups[p].length+'</span></div>'+(groups[p].length?groups[p].map(row).join(''):bzEmpty('None.'))+'</div>'});h+='</div></details>';
   return h;
 }
 
@@ -3660,6 +3948,7 @@ function bzCoachTab(){
   let h='<div class="bzcard" style="flex-direction:row;align-items:center;gap:12px"><img src="nour-face.jpg" alt="" width="48" height="48" style="border-radius:50%;flex:none"><div class="grow" style="flex:1"><b>Noor · business coach</b><div class="hint">I look at your tasks, deadlines and calendar, then pick ONE next action.</div></div><button class="btn small ghost" type="button" data-bza="say">🔊 Listen</button></div>';
   if(P.missed.length)h+='<div class="bzask"><p>Before planning: '+P.missed.length+' unfinished task'+(P.missed.length>1?'s need':' needs')+' a quick review, so I don\'t schedule something that can\'t move.</p><button class="btn small" type="button" data-bza="tab" data-v="pend">Review now</button></div>';
   h+=bzMainCard(P,true);
+  if(P.main)h+='<div class="bzrow"><button class="btn ghost" type="button" data-bza="bzstuck" data-id="'+esc(P.main.t.id)+'">😣 I\'m stuck on this</button><button class="btn ghost" type="button" data-bza="reanalyze">↻ My day changed: re-plan</button></div>';
   if(P.sec.length)h+='<div class="bzsec"><div class="sechead"><h3>If you have more time</h3><span class="hint">Max 2</span></div><ul class="bzlist">'+P.sec.map(x=>bzLi(x.t,esc(x.pr.reasons[0]||''))).join('')+'</ul></div>';
   if(P.follow.length){const t=P.follow[0],d=Math.floor((Date.now()-t.biz.waitSince)/864e5);
     h+='<div class="bzask"><p>You have been waiting '+d+' days on “'+esc(t.text)+'”. A short follow-up message could unblock it.</p><button class="btn small" type="button" data-bza="follow" data-id="'+esc(t.id)+'">Add “Send a follow-up” as a subtask</button></div>'}
@@ -3707,7 +3996,9 @@ function bzPendTab(){
     }
     h+='</div>';
   }else h+='<div class="bzcard"><h3>Nothing to review</h3><p class="hint" style="margin:0">Every past business task is done or reviewed.</p></div>';
-  const blocked=bzTasks().filter(t=>!t.done&&bzBlockers(t).length&&!['paused','delegated'].includes(t.biz.status));
+  const ext=bzTasks().filter(t=>!t.done&&bzExt(t)&&!['paused','delegated'].includes(t.biz.status));
+  h+='<div class="bzsec"><div class="sechead"><h3>Waiting for a reply</h3><span class="hint">'+ext.length+'</span></div>'+(ext.length?'<ul class="bzlist">'+ext.map(t=>{const d=t.biz.waitSince?Math.floor((Date.now()-t.biz.waitSince)/864e5):0;return '<li class="bzli"><div class="grow"><b>'+esc(t.text)+'</b><small>Waiting for '+esc(t.biz.ext)+(d?' · '+d+' day'+(d>1?'s':''):' · since today')+(t.biz.fup?' · follow up '+bzDay(t.biz.fup):'')+'</small></div><button class="btn small" type="button" data-bza="reply" data-id="'+esc(t.id)+'">Reply came</button></li>'}).join('')+'</ul>':bzEmpty('Nothing is waiting on someone else. Use “Waiting on someone” on a task when you need a reply, approval or document.'))+'</div>';
+  const blocked=bzTasks().filter(t=>!t.done&&!bzExt(t)&&bzBlockers(t).length&&!['paused','delegated'].includes(t.biz.status));
   h+='<div class="bzsec"><div class="sechead"><h3>Blocked or waiting</h3><span class="hint">'+blocked.length+'</span></div>'+(blocked.length?'<ul class="bzlist">'+blocked.map(t=>'<li class="bzli"><div class="grow"><b>'+esc(t.text)+'</b><small>'+esc(bzBlockers(t).join('; '))+(t.biz.waitSince?' · since '+bzDay(ymd(new Date(t.biz.waitSince))):'')+'</small></div>'+(t.biz.status==='blocked'?'<button class="btn small" type="button" data-bza="unblock" data-id="'+esc(t.id)+'">Unblocked</button>':'<button class="btn small ghost" type="button" data-bza="edit" data-id="'+esc(t.id)+'">Open</button>')+'</li>').join('')+'</ul>':bzEmpty('Nothing is blocked.'))+'</div>';
   const pz=bzTasks().filter(t=>!t.done&&['paused','delegated'].includes(t.biz.status));
   if(pz.length)h+='<div class="bzsec"><div class="sechead"><h3>Paused or delegated</h3><span class="hint">'+pz.length+'</span></div><ul class="bzlist">'+pz.map(t=>'<li class="bzli dim"><div class="grow"><b>'+esc(t.text)+'</b><small>'+BZ_STATUS[t.biz.status]+(t.biz.who?' to '+esc(t.biz.who):'')+'</small></div><button class="btn small ghost" type="button" data-bza="resume" data-id="'+esc(t.id)+'">Resume</button></li>').join('')+'</ul></div>';
@@ -3747,28 +4038,41 @@ function bzAdvice(W){
   if(W.missedD.length)tips.push(W.missedD.length+' deadline'+(W.missedD.length>1?'s were':' was')+' missed: plan tasks with a deadline at least one work day before it.');
   return tips;
 }
+// recurring delays by kind of task, from recorded moves and missed-task notes only (never guessed)
+const BZ_KIND=[['follow','Client follow-ups',/follow[\s-]?up|chase|remind (the )?client/i],['email','Emails',/\be-?mails?\b|\breply\b|\bmail\b/i],['call','Calls',/\bcall|phone|ring\b/i],['quote','Quotes and proposals',/quot|proposal|offer/i],['meet','Meetings',/\bmeet/i]];
+function bzDelays(W,a,z){const inW=ms=>ms>=a&&ms<z,by={};
+  bzTasks().forEach(t=>{const n=t.biz.hist.filter(h=>h.ev==='moved'&&inW(h.at)).length+t.biz.notes.filter(x=>x.reason&&x.reason!=='blocker'&&inW(x.at)).length;if(!n)return;
+    const k=BZ_KIND.find(x=>x[2].test(t.text));if(!k)return;(by[k[0]]=by[k[0]]||{name:k[1],n:0,tasks:0}).n+=n;by[k[0]].tasks++});
+  return Object.entries(by).map(([k,v])=>Object.assign({k},v)).filter(x=>x.n>=3&&x.tasks>=2).sort((x,y)=>y.n-x.n)[0]||null}
 function bzReviewTab(){
-  const W=bzWeekData(bzWeekStart),tips=bzAdvice(W),evts=W.done.length+W.open.length;
+  const W=bzWeekData(bzWeekStart),tips=bzAdvice(W),evts=W.done.length+W.open.length,a=bzWeekStart.getTime(),z=addDays(bzWeekStart,7).getTime(),inW=ms=>ms>=a&&ms<z;
   const lab=new Date(W.k0+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' – '+new Date(W.k6+'T12:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'});
   let h='<div class="wkbar"><button class="btn small ghost" type="button" data-bza="wk" data-v="-1" aria-label="Previous week">‹</button><h3>'+(W.cur?'This week · ':'')+lab+'</h3><button class="btn small ghost" type="button" data-bza="wk" data-v="1" aria-label="Next week"'+(W.cur?' disabled':'')+'>›</button></div>';
+  // the ring: planned tasks of the week (a date or a deadline in it) that are done
+  const pl=W.active.length,dp=W.active.filter(t=>t.done&&inW(t.doneAt||0)).length,C=2*Math.PI*26,enough=pl>=3,pct=pl?Math.round(dp/pl*100):0;
+  h+='<div class="bzcard rvring"><svg viewBox="0 0 64 64" width="72" height="72" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--surface-2)" stroke-width="8"/>'+(enough?'<circle cx="32" cy="32" r="26" fill="none" stroke="var(--mint)" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+(C*pct/100).toFixed(1)+' '+C.toFixed(1)+'" transform="rotate(-90 32 32)"/>':'')+'<text x="32" y="37" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ink)">'+(enough?pct+'%':'—')+'</text></svg><div><b>'+(enough?dp+' of '+pl+' planned tasks done':'Not enough data yet')+'</b><p class="hint" style="margin:0">'+(enough?'Planned = a date or a deadline this week.':pl+' planned task'+(pl===1?'':'s')+' this week: patterns need at least 3.')+'</p></div></div>';
+  const rs=Object.entries(W.reasons).sort((a,b)=>b[1]-a[1]),dly=bzDelays(W,a,z);
+  const hs=bzTasks().filter(t=>t.biz.hist.some(x=>x.ev==='started'&&inW(x.at))),hsd=hs.filter(t=>t.done&&inW(t.doneAt||0)).length;
+  // coach assessment: built from the figures above, never from guesses
+  const well=(W.done.length?'You completed '+W.done.length+' task'+(W.done.length>1?'s':'')+': '+W.done.slice(0,3).map(t=>t.text).join(', ')+(W.done.length>3?'…':'')+'.'+(W.met.length?' Done on time: '+W.met.length+' deadline'+(W.met.length>1?'s':'')+' met.':''):'No business task was marked completed this week. That is information, not failure: next week starts with one small step.')+(hs.length?' You used Help Me Start on '+hs.length+' task'+(hs.length>1?'s':'')+(hsd?' and finished '+hsd:'')+'.':'');
+  const att=[];if(W.missedD.length)att.push(W.missedD.length+' deadline'+(W.missedD.length>1?'s':'')+' missed');if(W.overdue.length)att.push(W.overdue.length+' task'+(W.overdue.length>1?'s are':' is')+' overdue');if(W.post.length)att.push('“'+W.post[0].t.text+'” was moved '+W.post[0].n+' times');
+  const obst=dly?dly.name+' were delayed '+dly.n+' times this week ('+dly.tasks+' tasks).':rs.length&&rs[0][1]>=2?'Most noted: '+(BZ_RNAME[rs[0][0]]||rs[0][0]).toLowerCase()+' ('+rs[0][1]+' times).':null;
+  const rec=dly?dly.name+' are frequently delayed. Would you like a short daily '+dly.name.toLowerCase()+' block?':tips[0]||(evts<3?'Not enough data yet to suggest a change.':'Keep the same rhythm: it is working.');
+  h+='<div class="bzcard bzmain"><span class="bzkick">Coach review</span>'+(evts<2&&!rs.length?'<p class="hint" style="margin:0">Not much data this week yet, so this review is short.</p>':'')+
+    '<div class="rvblock"><b>What went well</b><p>'+esc(well)+'</p></div>'+
+    '<div class="rvblock"><b>What needs attention</b><p>'+esc(att.length?att.join(' · ')+'.':'Nothing urgent to fix.')+'</p></div>'+
+    '<div class="rvblock"><b>Recurring obstacle</b><p>'+esc(obst||'No clear pattern yet: there is not enough recorded data to say.')+'</p></div>'+
+    '<div class="rvblock"><b>One thing for next week</b><p>'+esc(rec)+'</p>'+(dly&&W.cur?'<button class="btn small" type="button" data-bza="fublock" data-v="'+dly.k+'">Add a 15-min block tomorrow</button>':'')+'</div>'+
+    '<p class="srcnote" style="margin:0">Based only on your saved tasks, notes and times.</p></div>';
+  h+='<details class="bzmore"><summary>Numbers & details</summary><div class="bzbody">';
   h+='<div class="bzq"><div class="bzstat"><b>'+W.done.length+'</b><small>tasks completed</small></div><div class="bzstat"><b>'+W.open.length+'</b><small>still open</small></div><div class="bzstat'+(W.overdue.length?' warn':'')+'"><b>'+W.overdue.length+'</b><small>overdue</small></div><div class="bzstat"><b>'+(W.sT?Math.round(W.sD/W.sT*100)+'%':'—')+'</b><small>subtasks done'+(W.sT?' ('+W.sD+'/'+W.sT+')':'')+'</small></div></div>';
   h+='<div class="bzcard"><h3>Deadlines this week</h3>'+(W.dls.length?'<p style="margin:0">'+W.met.length+' met · '+W.missedD.length+' missed'+(W.dls.length-W.met.length-W.missedD.length?' · '+(W.dls.length-W.met.length-W.missedD.length)+' still coming':'')+'</p>'+(W.missedD.length?'<ul class="rvlist">'+W.missedD.map(t=>'<li>Missed: '+esc(t.text)+' ('+bzDay(t.biz.deadline)+')</li>').join('')+'</ul>':''):'<p class="hint" style="margin:0">No deadline this week.</p>')+'</div>';
   if(W.proj.length)h+='<div class="bzcard"><h3>Progress toward goals</h3>'+W.proj.map(x=>'<div><b>'+esc(x.p.name)+'</b><div class="bzprog"><span>'+x.d+' of '+x.n+' tasks done'+(x.dw?' (+'+x.dw+' this week)':'')+'</span><div class="pbar"><i style="width:'+Math.round(x.d/x.n*100)+'%"></i></div></div></div>').join('')+'</div>';
-  const rs=Object.entries(W.reasons).sort((a,b)=>b[1]-a[1]);
   h+='<div class="bzcard"><h3>Blockers you noted</h3>'+(rs.length?'<ul class="rvlist">'+rs.map(r=>'<li>'+esc(BZ_RNAME[r[0]]||r[0])+': '+r[1]+'</li>').join('')+'</ul>':'<p class="hint" style="margin:0">None recorded this week.</p>')+
     (W.post.length?'<p style="margin:0"><b>Moved several times:</b> '+W.post.map(x=>esc(x.t.text)+' ('+x.n+'×)').join(', ')+'</p>':'')+'</div>';
   h+='<div class="bzcard"><h3>Estimated vs actual time</h3>'+(W.timed.length?'<p style="margin:0">'+W.timed.length+' task'+(W.timed.length>1?'s':'')+': estimated '+bzDur(W.sumE)+', actual '+bzDur(W.sumA)+'.</p><p class="hint" style="margin:0">Actual time is measured from ▶ Start to Completed.</p>':'<p class="hint" style="margin:0">Not tracked yet: use ▶ Start on a task with an estimate, then mark it completed.</p>')+'</div>';
-  // coach assessment: built from the figures above, never from guesses
-  const well=W.done.length?'You completed '+W.done.length+' task'+(W.done.length>1?'s':'')+': '+W.done.slice(0,3).map(t=>t.text).join(', ')+(W.done.length>3?'…':'')+'.'+(W.met.length?' '+W.met.length+' deadline'+(W.met.length>1?'s':'')+' met.':''):'No business task was marked completed this week. That is information, not failure: next week starts with one small step.';
-  const slow=rs.length?'Most noted: '+rs.slice(0,2).map(r=>(BZ_RNAME[r[0]]||r[0]).toLowerCase()+' ('+r[1]+')').join(', ')+'.':W.post.length?'Some tasks were moved several times.':'No blockers were recorded, so I can\'t say what slowed you down.';
-  const nextP=bzRank(bzTasks().filter(bzActive)).filter(x=>x.pr.p&&x.pr.p<=2).slice(0,2).map(x=>x.t.text);
-  h+='<div class="bzcard bzmain"><span class="bzkick">Coach review</span>'+(evts<2&&!rs.length?'<p class="hint" style="margin:0">Not much data this week yet, so this review is short.</p>':'')+
-    '<div class="rvblock"><b>What went well</b><p>'+esc(well)+'</p></div>'+
-    '<div class="rvblock"><b>What slowed you down</b><p>'+esc(slow)+'</p></div>'+
-    '<div class="rvblock"><b>What to improve</b><p>'+esc(tips[0]||(evts<3?'Not enough data yet to suggest a change.':'Keep the same rhythm: it is working.'))+'</p></div>'+
-    '<div class="rvblock"><b>Next week\'s focus</b><p>'+esc(nextP.length?'Finish '+nextP.map(x=>'“'+x+'”').join(' and ')+' before lower-priority work.':'Pick one priority on Monday with the coach.')+'</p></div>'+
-    (tips.length>1?'<div class="rvblock"><b>More suggestions</b><ul class="rvlist">'+tips.slice(1).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>':'')+
-    '<p class="srcnote" style="margin:0">Based only on your saved tasks, notes and times.</p></div>';
+  if(tips.length>1)h+='<div class="bzcard"><h3>More suggestions</h3><ul class="rvlist">'+tips.slice(1).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>';
+  h+='</div></details>';
   return h;
 }
 
@@ -3777,7 +4081,7 @@ function bzRender(){
   const v=$('v-biz');if(!v)return;
   const ok=hasPlan('business');
   $('bzTabs').hidden=!ok;$('bzSet').hidden=!ok;
-  $('bzProjWrap').hidden=!ok||bzTab!=='dash';
+  $('bzProjWrap').hidden=!ok||bzTab!=='dash'||!bzShowProj;
   if(!ok){$('bzBody').innerHTML='<div class="bzcard bzpitch"><h3>Your work, one clear next step</h3><ul><li>Business tasks with subtasks, deadlines and urgency</li><li>Automatic priority (P1 / P2 / P3) with the reason</li><li>Scheduled in your calendar, with reminders</li><li>A business coach that picks your next action</li><li>Missed-task review and a weekly business review</li></ul><button class="btn" type="button" data-plan="business">Try Business free</button><p class="hint" style="margin:0">Payment is not open yet: during this early version, Business is a free trial.</p></div>';return}
   bzSyncPrio();
   const m=bzMissed().length;$('bzPendCnt').hidden=!m;$('bzPendCnt').textContent=m;
@@ -3808,7 +4112,7 @@ function bzStep(t,i){const s=t.steps[i];if(!s)return;
   s.rw=win(5,'step','Subtask done');bzSaveAll();
 }
 document.addEventListener('click',e=>{
-  const tb=e.target.closest('#bzTabs [data-bz]');if(tb){bzTab=tb.dataset.bz;bzArm=null;if(bzTab!=='tasks')bzProjF=null;bzRender();return}
+  const tb=e.target.closest('#bzTabs [data-bz]');if(tb){bzTab=tb.dataset.bz;bzArm=null;bzShowProj=null;if(bzTab!=='tasks')bzProjF=null;bzRender();return}
   const b=e.target.closest('[data-bza]');if(!b)return;
   const a=b.dataset.bza,id=b.dataset.id,t=id?S.tasks.find(x=>x.id===id&&x.biz):null;
   if(b.closest('summary')&&a==='done')e.preventDefault();
@@ -3817,6 +4121,7 @@ document.addEventListener('click',e=>{
   if(!hasPlan('business')){bzGo('dash');return} // Business actions need the Business plan (the page itself is gated too)
   if(a==='projclear'){bzProjF=null;return bzRender()}
   if(brAction(a,b,t))return;
+  if(bzX(a,b,t))return;
   if(a==='new')return bzEdit(null);
   if(a==='edit'){if(t)bzEdit(id);return}
   if(a==='filter'){bzFilter=b.dataset.v;return bzRender()}
@@ -3869,7 +4174,7 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-plan="business"
 
 // ---------- business task editor (create + edit) ----------
 function bzOpenSheet(title,html){$('bzSTitle').textContent=title;$('bzSBody').innerHTML=html;$('bzSheet').hidden=false;document.body.classList.add('noscroll');setTimeout(()=>{try{$('bzSTitle').focus()}catch(e){}},50)}
-function bzCloseSheet(){$('bzSheet').hidden=true;document.body.classList.remove('noscroll');bzE=null;bzBD=null}
+function bzCloseSheet(){if(typeof capRec!=='undefined'&&capRec)try{capRec.stop()}catch(e){}$('bzSheet').hidden=true;document.body.classList.remove('noscroll');bzE=null;bzBD=null}
 document.querySelectorAll('[data-bzclose]').forEach(x=>x.addEventListener('click',bzCloseSheet));
 $('bzSheet').addEventListener('click',e=>{if(e.target.closest('[data-bzclose]'))bzCloseSheet()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('bzSheet').hidden)bzCloseSheet()});
@@ -3898,6 +4203,7 @@ function bzEdit(id){
     '<label class="fl">Description<textarea id="bzDesc" rows="3" maxlength="500" placeholder="Context, links, who is involved…">'+esc(t&&t.desc||'')+'</textarea></label>'+
     '<label class="fl">Business goal or project<select id="bzProj"><option value="">No project</option>'+(S.projs||[]).map(p=>'<option value="'+esc(p.id)+'"'+(b.proj===p.id?' selected':'')+'>'+esc(p.name)+'</option>').join('')+'<option value="__new">＋ New project…</option></select></label>'+
     '<label class="fl" id="bzNewProjRow" hidden>New project name<input id="bzNewProj" type="text" maxlength="80" placeholder="e.g. Open an online shop"></label>'+
+    bzMsSel(b.proj,b.ms)+
     '<div class="fl"><span>If it is late, the consequences are…</span>'+segH('conseq',[['high','Serious'],['med','Some'],['low','Minor']],b.conseq,'Consequences')+'</div>'+
     '<label class="fl">Status<select id="bzSt">'+Object.entries(BZ_STATUS).map(([k,v])=>'<option value="'+k+'"'+(b.status===k?' selected':'')+'>'+v+'</option>').join('')+'</select></label>'+
     '<div class="fl"><span>Depends on <span class="opt">optional</span></span>'+(others.length?'<div class="deplist">'+others.map(x=>'<label><input type="checkbox" value="'+esc(x.id)+'"'+(b.deps.includes(x.id)?' checked':'')+'>'+esc(x.text)+'</label>').join('')+'</div>':'<small class="hint">No other open business task.</small>')+'</div>'+
@@ -3912,13 +4218,16 @@ function bzEdit(id){
 }
 function bzSubsRender(){const box=$('bzSubs');if(!box)return;
   box.innerHTML=bzE.steps.map((s,i)=>'<div class="srow"><input type="text" maxlength="120" data-si="'+i+'" value="'+esc(s.t)+'" aria-label="Subtask '+(i+1)+'" placeholder="Subtask '+(i+1)+'"><button type="button" data-be="sup" data-i="'+i+'" aria-label="Move up"'+(i?'':' disabled')+'>↑</button><button type="button" data-be="sdel" data-i="'+i+'" aria-label="Remove subtask">×</button></div>').join('')}
+// milestone of the chosen project (optional): links the task to a step of the project
+function bzMsSel(pid,cur){const p=pid&&(S.projs||[]).find(x=>x.id===pid),ms=p?(p.ms||[]).filter(m=>!m.done||m.id===cur):[];
+  return '<label class="fl" id="bzMsRow"'+(ms.length?'':' hidden')+'>Milestone <span class="opt">optional</span><select id="bzMs"><option value="">No milestone</option>'+ms.map(m=>'<option value="'+esc(m.id)+'"'+(m.id===cur?' selected':'')+'>'+esc(m.title)+' · '+m.date+'</option>').join('')+'</select></label>'}
 function bzRead(){
   const v=id=>($(id)||{}).value||'';
   const estIn=v('bzEst').trim(),est=estIn?Math.round(+estIn):bzE.est;
   const st=$('bzSt')?$('bzSt').value:bzE.status;
   const deps=[...document.querySelectorAll('#bzForm .deplist input:checked')].map(x=>x.value);
   return{text:v('bzT').trim().replace(/\s+/g,' '),desc:v('bzDesc').trim(),deadline:v('bzDl')||null,est:estIn&&!(est>=5&&est<=1440)?NaN:est||null,
-    date:v('bzD')||null,time:v('bzS')||null,rem:v('bzRem'),proj:v('bzProj'),newProj:v('bzNewProj').trim(),status:st,deps,note:v('bzNote').trim(),done:$('bzDone')?$('bzDone').checked:false,
+    date:v('bzD')||null,time:v('bzS')||null,rem:v('bzRem'),proj:v('bzProj'),ms:v('bzMs')||null,newProj:v('bzNewProj').trim(),status:st,deps,note:v('bzNote').trim(),done:$('bzDone')?$('bzDone').checked:false,
     urgent:bzE.urgent,imp:bzE.imp,conseq:bzE.conseq,over:bzE.over};
 }
 function bzPrUpdate(){const box=$('bzPr');if(!box||!bzE)return;const r=bzRead();
@@ -3933,7 +4242,7 @@ $('bzSheet').addEventListener('input',e=>{if(!bzE)return;
   if(e.target.id==='bzEst'&&e.target.value)document.querySelectorAll('#bzForm [data-f="est"] button').forEach(x=>x.setAttribute('aria-pressed','false'));
   if(['bzD','bzS','bzEst','bzDl'].includes(e.target.id)){bzE.ok=null;$('bzWarn').hidden=true;$('bzSave').textContent='Save'}
   e.target.removeAttribute('aria-invalid');bzPrUpdate()});
-$('bzSheet').addEventListener('change',e=>{if(!bzE)return;if(e.target.id==='bzProj'){$('bzNewProjRow').hidden=e.target.value!=='__new'}bzPrUpdate()});
+$('bzSheet').addEventListener('change',e=>{if(!bzE)return;if(e.target.id==='bzProj'){$('bzNewProjRow').hidden=e.target.value!=='__new';const r=$('bzMsRow');if(r)r.outerHTML=bzMsSel(e.target.value,null)}bzPrUpdate()});
 $('bzSheet').addEventListener('click',async e=>{if(!bzE)return;
   const sb=e.target.closest('#bzForm .seg [data-v]');
   if(sb){const f=sb.parentElement.dataset.f,v=sb.dataset.v;sb.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===sb)));
@@ -3988,6 +4297,7 @@ $('bzSheet').addEventListener('submit',e=>{const f=e.target.closest('#bzForm');i
   else{t=S.tasks.find(x=>x.id===bzE.id);if(!t){bzCloseSheet();return}
     const res=updateTask(t.id,base);if(!res.ok)return bzEdErr(res.err||"Couldn't save.")}
   const b=t.biz,oldSt=b.status,oldRem=t.remBefore;
+  const pm=proj&&(S.projs||[]).find(x=>x.id===proj);b.ms=pm&&r.ms&&(pm.ms||[]).some(m=>m.id===r.ms)?r.ms:null;
   Object.assign(b,{proj,urgent:r.urgent,imp:r.imp,conseq:r.conseq,deadline:r.deadline,est:r.est,over:+r.over||null,deps:r.deps});
   if(r.status!==oldSt){b.status=r.status;if(!wasNew)bzHist(t,'status',oldSt,r.status);if(r.status==='blocked')b.waitSince=b.waitSince||Date.now();else b.waitSince=null}
   if(r.note)b.notes.push({id:uid(),at:Date.now(),text:r.note.slice(0,500),reason:r.status==='blocked'?'blocker':undefined});
@@ -4178,8 +4488,8 @@ function sanitize(s){
   s.notes=arr(s.notes).filter(n=>n.id).map(n=>({id:str(n.id,40),text:str(n.text,2000),audio:!!n.audio,dur:n.dur?Math.round(num(n.dur,0)):undefined,at:num(n.at,Date.now())}));
   s.exps=arr(s.exps).filter(x=>x.id&&x.what&&okDate(x.date)&&num(x.amt,0)>0).map(x=>({id:str(x.id,40),what:str(x.what,80),amt:+x.amt,date:x.date}));
   s.shop=arr(s.shop).filter(x=>x.id&&x.text).map(x=>({id:str(x.id,40),text:str(x.text,80),done:!!x.done}));
-  s.projs=arr(s.projs).filter(p=>p.id&&p.name).map(p=>({id:str(p.id,40),name:str(p.name,80),imp:['high','med','low'].includes(p.imp)?p.imp:null,hold:!!p.hold,plan:p.plan&&typeof p.plan==='object'?Object.fromEntries(Object.entries(p.plan).map(([k,v])=>[k,str(v,2000)])):{},
-    ms:arr(p.ms).filter(m=>m.id&&m.title&&okDate(m.date)).map(m=>({id:str(m.id,40),title:str(m.title,80),date:m.date,done:!!m.done,ev:m.ev||null,rw:m.rw||null}))}));
+  s.projs=arr(s.projs).filter(p=>p.id&&p.name).map(p=>({id:str(p.id,40),name:str(p.name,80),deadline:okDate(p.deadline)?p.deadline:null,start:okDate(p.start)?p.start:null,imp:['high','med','low'].includes(p.imp)?p.imp:null,hold:!!p.hold,plan:p.plan&&typeof p.plan==='object'?Object.fromEntries(Object.entries(p.plan).map(([k,v])=>[k,str(v,2000)])):{},
+    ms:arr(p.ms).filter(m=>m.id&&m.title&&okDate(m.date)).map(m=>({id:str(m.id,40),title:str(m.title,80),deliv:m.deliv?str(m.deliv,120):undefined,date:m.date,done:!!m.done,ev:m.ev||null,rw:m.rw||null}))}));
   s.tasks.forEach(t=>{t.text=str(t.text,120);if(t.desc!=null)t.desc=str(t.desc,500)});
   s.tasks=s.tasks.filter(t=>t.text.trim());
   return s;
