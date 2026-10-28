@@ -944,6 +944,12 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .pjadd input{flex:1;min-width:0}
 .bzproj.dim{opacity:.6}
 .msn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--cyan);color:#12082B;display:grid;place-items:center;font-weight:900;font-size:13px}
+.adtq{font-family:var(--f-display);font-size:20px;font-weight:700;margin:0;line-height:1.35}
+.adtopts{display:flex;flex-direction:column;gap:10px}
+.adtopts .btn{min-height:52px;font-size:16px;justify-content:center}
+.adtopts .btn[aria-pressed="true"]{background:var(--cyan);color:#12082B;border-color:var(--cyan)}
+.adtprog{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:800;color:var(--muted)}
+.adtbar{display:flex;flex-direction:column;gap:2px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (max-width:359px){.bztiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .lnk{background:none;border:0;color:var(--cyan);font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:0}
@@ -1305,6 +1311,7 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
     <button class="mitem" type="button" data-view="v-profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button>
     <button class="mitem" type="button" data-view="v-agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
     <button class="mitem" type="button" data-view="v-focus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>Focus</button>
+    <button class="mitem" type="button" data-adt="open"><span class="mbz" aria-hidden="true">🧠</span>ADHD self-test</button>
     <button class="mitem mbiz" type="button" data-view="v-biz"><span class="mbz" aria-hidden="true">💼</span>Business</button>
     <button class="mitem" type="button" id="mPro" aria-expanded="false" aria-controls="mProSub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg>Pro<span class="chev" aria-hidden="true">▾</span></button>
     <div class="msub" id="mProSub" hidden>
@@ -3912,6 +3919,62 @@ document.addEventListener('submit',e=>{const f=e.target.closest('[data-pjadd]');
 document.addEventListener('submit',e=>{const f=e.target.closest('[data-pjren]');if(!f)return;e.preventDefault();
   const p=(S.projs||[]).find(x=>x.id===f.dataset.pjren);if(!p)return bzCloseSheet();const n=$('pjN').value.trim();if(!n){$('pjN').setAttribute('aria-invalid','true');return}
   p.name=n.slice(0,80);p.plan.goal=$('pjG').value.trim().slice(0,500);bzCloseSheet();save();renderPro();bzSaveAll('Project saved.');
+});
+// ---------- ADHD self-check for adults (menu ☰). Written for this app, in plain words, from the adult symptom areas doctors look at.
+// It is NOT a diagnosis and NOT a validated clinical scale. Only the result (counts) is kept, on this phone; answers are not stored.
+const ADT={
+  en:{title:'ADHD self-check',intro:'18 short questions about the last 6 months, plus one about how much it affects your life. About 3 minutes.',note:'This is not a diagnosis. Only a doctor can diagnose ADHD. Your answers stay on this phone.',start:'Start',back:'Back',of:'of',
+    scale:['Never','Rarely','Sometimes','Often','Very often'],impact:['Not at all','A little','Some','A lot','Very much'],
+    q:['I make careless mistakes at work or in paperwork because I miss details.','I find it hard to stay focused on long tasks, meetings or reading.','People say I seem not to listen, even when they speak to me directly.','I start tasks but leave them unfinished and jump to something else.','I struggle to organize my tasks, my time or my space.','I put off tasks that need a lot of thinking.','I lose things I need, like keys, phone or papers.','Noise or my own thoughts easily pull me away from what I am doing.','I forget appointments, bills or things I promised to do.',
+       'I fidget, tap my hands or feet, or find it hard to sit still.','I get up when I am expected to stay seated.','I feel restless inside.','I find it hard to relax quietly in my free time.','I feel always “on the go”, as if driven by a motor.','I talk more than others expect.','I answer or finish people’s sentences before they are done.','I find it hard to wait my turn.','I interrupt others or take over what they are doing.',
+       'How much do these things cause problems at work, at home or with people?'],
+    res:'Your result',att:'Attention signs',hyp:'Restlessness & impulsivity signs',often:'answered Often or Very often',
+    high:'Many of the signs you described are common in adults with ADHD. It may really help to talk to a doctor or a psychiatrist. You can show them this result.',
+    mid:'You described several signs, but you said they don’t affect your life much. If that changes, talk to a doctor.',
+    low:'You described few of the usual signs. If you still feel you struggle every day, a doctor can help you understand why.',
+    again:'Take it again',close:'Close',last:'Last result',lang:'عربي'},
+  ar:{title:'اختبار ذاتي لفرط الحركة وتشتت الانتباه',intro:'١٨ سؤالًا قصيرًا عن آخر ٦ أشهر، وسؤال عن مدى تأثير ذلك على حياتك. حوالي ٣ دقائق.',note:'هذا ليس تشخيصًا. الطبيب وحده يستطيع تشخيص فرط الحركة وتشتت الانتباه. إجاباتك تبقى على هذا الهاتف.',start:'ابدأ',back:'رجوع',of:'من',
+    scale:['أبدًا','نادرًا','أحيانًا','غالبًا','دائمًا تقريبًا'],impact:['إطلاقًا','قليلًا','إلى حد ما','كثيرًا','كثيرًا جدًا'],
+    q:['أرتكب أخطاء في العمل أو في الأوراق لأنني لا أنتبه للتفاصيل.','يصعب عليّ الحفاظ على تركيزي في المهام الطويلة أو الاجتماعات أو القراءة.','يقول لي الناس إنني لا أبدو منصتًا حتى عندما يتحدثون معي مباشرة.','أبدأ المهام ثم أتركها دون إكمال وأنتقل إلى شيء آخر.','أجد صعوبة في تنظيم مهامي أو وقتي أو مكاني.','أؤجل المهام التي تحتاج إلى تفكير كثير.','أُضيّع أشياء أحتاجها مثل المفاتيح أو الهاتف أو الأوراق.','يشتتني الضجيج أو أفكاري بسهولة عمّا أفعله.','أنسى المواعيد أو الفواتير أو أشياء وعدت بفعلها.',
+       'أتململ أو أحرّك يديّ أو قدميّ، ويصعب عليّ الجلوس بهدوء.','أقوم من مكاني عندما يُتوقع مني أن أبقى جالسًا.','أشعر بعدم استقرار في داخلي.','يصعب عليّ الاسترخاء بهدوء في وقت فراغي.','أشعر أنني في حركة دائمة وكأن بداخلي محرّكًا.','أتكلم أكثر مما يتوقع الآخرون.','أجيب أو أُكمل كلام الآخرين قبل أن ينتهوا.','يصعب عليّ انتظار دوري.','أقاطع الآخرين أو أتدخل فيما يفعلونه.',
+       'إلى أي حد تسبب لك هذه الأمور مشاكل في العمل أو في البيت أو مع الناس؟'],
+    res:'نتيجتك',att:'علامات تشتت الانتباه',hyp:'علامات فرط الحركة والاندفاع',often:'أجبت غالبًا أو دائمًا تقريبًا',
+    high:'كثير من العلامات التي وصفتها شائعة لدى البالغين المصابين بفرط الحركة وتشتت الانتباه. قد يفيدك حقًا التحدث مع طبيب أو طبيب نفسي، ويمكنك أن تريه هذه النتيجة.',
+    mid:'وصفت عدة علامات، لكنك قلت إنها لا تؤثر كثيرًا على حياتك. إذا تغيّر ذلك، تحدّث مع طبيب.',
+    low:'وصفت قليلًا من العلامات المعتادة. إذا كنت لا تزال تشعر بصعوبة كل يوم، يمكن للطبيب أن يساعدك على فهم السبب.',
+    again:'أعد الاختبار',close:'إغلاق',last:'آخر نتيجة',lang:'English'}
+};
+let adt=null;
+function adtOpen(){openMenu(false);adt={i:-1,ans:[],lang:(S.adtLang==='ar'?'ar':'en')};adtDraw()}
+function adtResult(ans){const a=ans.slice(0,9).filter(v=>v>=3).length,h=ans.slice(9,18).filter(v=>v>=3).length,imp=ans[18]||0;return{a,h,imp,lvl:(a>=5||h>=5)?(imp>=2?'high':'mid'):'low'}}
+function adtDraw(){
+  const L=ADT[adt.lang],n=L.q.length,rtl=adt.lang==='ar',btn=(v,t)=>'<button type="button" class="btn ghost adtopt" data-adt="ans" data-v="'+v+'" aria-pressed="'+(adt.ans[adt.i]===v)+'">'+t+'</button>';
+  let h='<div class="bzsbody adt" dir="'+(rtl?'rtl':'ltr')+'" lang="'+adt.lang+'"><button type="button" class="lnk" data-adt="lang" style="align-self:flex-end">'+L.lang+'</button>';
+  if(adt.i<0){const r=S.adhdTest;
+    h+='<p style="margin:0">'+L.intro+'</p><p class="hint" style="margin:0">'+L.note+'</p>'+
+      (r&&r.at?'<p class="hint" style="margin:0">'+L.last+': '+new Date(r.at).toLocaleDateString(rtl?'ar':'en-GB',{day:'numeric',month:'short',year:'numeric'})+' · '+r.a+'/9 · '+r.h+'/9</p>':'')+
+      '<button class="btn brgo" type="button" data-adt="go">'+L.start+'</button>';
+  }else if(adt.i<n){
+    const last=adt.i===n-1;
+    h+='<div class="adtprog"><span>'+(adt.i+1)+' '+L.of+' '+n+'</span><div class="pbar"><i style="width:'+Math.round(adt.i/n*100)+'%"></i></div></div>'+
+      '<p class="adtq" id="adtQ">'+esc(L.q[adt.i])+'</p><div class="adtopts" role="group" aria-labelledby="adtQ">'+(last?L.impact:L.scale).map((t,v)=>btn(v,t)).join('')+'</div>'+
+      '<button class="lnk" type="button" data-adt="prev">'+(rtl?'→ ':'← ')+L.back+'</button>';
+  }else{
+    const r=adtResult(adt.ans),bar=(lab,v)=>'<div class="adtbar"><b>'+lab+'</b><div class="bzprog"><span>'+v+' / 9 '+L.often+'</span><div class="pbar"><i style="width:'+Math.round(v/9*100)+'%"></i></div></div></div>';
+    h+='<h3 style="margin:0">'+L.res+'</h3>'+bar(L.att,r.a)+bar(L.hyp,r.h)+'<div class="bzask"><p style="margin:0">'+L[r.lvl]+'</p></div><p class="hint" style="margin:0">'+L.note+'</p>'+
+      '<div class="sbtns"><button class="btn ghost" type="button" data-adt="again">'+L.again+'</button><button class="btn" type="button" data-adt="close">'+L.close+'</button></div>';
+  }
+  h+='</div>';bzOpenSheet(L.title,h);
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-adt]');if(!b||!adt&&b.dataset.adt!=='open')return;const a=b.dataset.adt;
+  if(a==='open')return adtOpen();
+  if(a==='lang'){adt.lang=adt.lang==='ar'?'en':'ar';S.adtLang=adt.lang;save();return adtDraw()}
+  if(a==='go'||a==='again'){adt.i=0;adt.ans=[];return adtDraw()}
+  if(a==='prev'){adt.i=Math.max(-1,adt.i-1);return adtDraw()}
+  if(a==='close'){adt=null;return bzCloseSheet()}
+  if(a==='ans'){adt.ans[adt.i]=+b.dataset.v;adt.i++;
+    if(adt.i>=ADT.en.q.length){const r=adtResult(adt.ans);S.adhdTest={at:Date.now(),a:r.a,h:r.h,imp:r.imp};save()}
+    return adtDraw()}
 });
 // extra Business actions (dashboard, add task, projects, pending)
 function bzX(a,b,t){
