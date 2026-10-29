@@ -817,6 +817,10 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .ttbl td.tlate{color:var(--coral);font-weight:800}
 .ttbl .check[aria-pressed="true"]{background:var(--mint);border-color:var(--mint);box-shadow:0 0 12px rgba(79,240,210,.55)}
 .ttbl .check[aria-pressed="true"] svg{opacity:1;color:#030A26}
+/* Oct 29: only Task · Type · Start, so the table fits the phone screen without scrolling sideways */
+.ttbl{min-width:0!important}
+.ttbl tbody th,.ttbl thead th:first-child{min-width:0!important;max-width:none!important;width:100%}
+.ttbl th:not(:first-child),.ttbl td{padding-left:8px;padding-right:12px}
 /* ===== ADHD Winner Business: calm professional workspace (cyan = business, coral = P1, gold = P2) ===== */
 .mitem .mbz{width:24px;text-align:center;font-size:20px;flex:none}
 .bzhead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
@@ -1893,7 +1897,7 @@ function renderDay(){
 }
 // ---------- table view: every task and appointment, sortable, filtered by Work / Personal ----------
 let listView='list';try{listView=localStorage.getItem('adhdwListView')==='table'?'table':'list'}catch(e){}
-let tSort={k:'date',dir:1};try{const o=JSON.parse(localStorage.getItem('adhdwTblSort'));if(o&&['date','time','type'].includes(o.k))tSort={k:o.k,dir:o.dir===-1?-1:1}}catch(e){}
+let tSort={k:'date',dir:1};try{const o=JSON.parse(localStorage.getItem('adhdwTblSort'));if(o&&['time','type'].includes(o.k))tSort={k:o.k,dir:o.dir===-1?-1:1}}catch(e){}
 function setListView(v){listView=v==='table'?'table':'list';try{localStorage.setItem('adhdwListView',listView)}catch(e){}if(listView==='table'&&viewDay!==todayStr())viewDay=todayStr();render()}
 const tStatus=t=>t.done?'done':!t.date?'someday':t.date<todayStr()?'late':'todo';
 const T_ST={todo:['To do',1],late:['Late',0],someday:['Someday',2],done:['Done',3]};
@@ -1913,14 +1917,12 @@ function renderTable(){
   const items=tblItems().sort(tCmp),th=(k,l)=>k?'<th scope="col" aria-sort="'+(tSort.k===k?(tSort.dir>0?'ascending':'descending'):'none')+'"><button type="button" data-ts="'+k+'">'+l+(tSort.k===k?(tSort.dir>0?' ▲':' ▼'):'')+'</button></th>':'<th scope="col">'+l+'</th>';
   if(!items.length){$('tblBox').innerHTML='<p class="empty tempty">'+(catF==='all'?'No tasks yet. Add one above: it shows here, in your list and in your calendar.':'No '+(catF==='work'?'work':'personal')+' tasks. Add one above, or tap “All”.')+'</p>';return}
   const late=t=>!t.done&&t.date&&t.date<todayStr();
-  $('tblBox').innerHTML='<div class="tscroll" tabindex="0" role="region" aria-label="My tasks table"><table class="ttbl"><thead><tr>'+th(null,'Task')+th('type','Type')+th('date','Date')+th('time','Start')+th(null,'Duration')+'</tr></thead><tbody>'+
+  $('tblBox').innerHTML='<div class="tscroll" tabindex="0" role="region" aria-label="My tasks table"><table class="ttbl"><thead><tr>'+th(null,'Task')+th('type','Type')+th('time','Start')+'</tr></thead><tbody>'+
     items.map(t=>'<tr class="'+(t.done?'st-done':late(t)?'st-late':'')+'" data-tid="'+t.id+'"><th scope="row"><div class="tcell">'+
         '<button type="button" class="check" data-act="toggle" data-id="'+t.id+'" aria-pressed="'+t.done+'" aria-label="'+(t.done?'Mark '+esc(t.text)+' as not done':'Mark '+esc(t.text)+' as done')+'">'+CHECK+'</button>'+
         '<button type="button" class="tname" data-act="edit" data-id="'+t.id+'">'+(isEv(t)?'<span aria-hidden="true">📅 </span>':'')+(t.prio==='high'?'<span aria-hidden="true">🔥 </span>':'')+esc(t.text)+'</button></div></th>'+
         '<td><button type="button" class="catb '+(t.cat||'')+'" data-act="tcat" data-id="'+t.id+'" aria-label="Type: '+(t.cat||'none')+'. Tap to change">'+(t.cat==='work'?'Work':t.cat==='personal'?'Personal':'+ Tag')+'</button></td>'+
-        '<td class="'+(late(t)?'tlate':'')+'">'+(t.date?tShortDate(t.date):'<span class="muted">Someday</span>')+'</td>'+
-        '<td>'+(t.time||'<span class="muted">—</span>')+'</td>'+
-        '<td>'+(t.dur?(t.dur>=60?Math.floor(t.dur/60)+' h'+(t.dur%60?' '+t.dur%60:''):t.dur+' min'):'<span class="muted">—</span>')+'</td></tr>').join('')+
+        '<td>'+(t.time||'<span class="muted">—</span>')+'</td></tr>').join('')+
     '</tbody></table></div><p class="hint">Tick the box when it\'s done. Tap a task to change its time, type, or to delete it. Done tasks stay here for 7 days.</p>';
 }
 $('vTog').addEventListener('click',e=>{const b=e.target.closest('[data-lv]');if(b)setListView(b.dataset.lv)});

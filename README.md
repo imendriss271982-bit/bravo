@@ -79,3 +79,6 @@ Main buttons, active tabs/day, Help me start, chat send, record and the Note mic
 
 ## Domed crystal on every button (Oct 29, 2nd pass)
 The crystal is now convex ("bombé"): curved white reflection on top, cyan light through the bottom, darker inner rim for volume. It now also covers the filter chips (All / Work / Personal), Talk to Noor (with a glass bubble mic), Yesterday/Today/Tomorrow, Business tabs, segmented choices, arrows and icon buttons. The chosen filter/tab gets a cyan rim + glow so it stands out.
+
+## Table view: Task · Type · Start (Oct 29)
+The Date and Duration columns are removed from the table view. The table is still ordered by date (oldest first, Someday last) and can be sorted by Type or Start. With 3 columns it fits the phone screen, so there is no sideways scrolling any more (checked down to 320 px).

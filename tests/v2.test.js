@@ -128,12 +128,11 @@ test('table view: toggle is remembered, tick box on the left, type/date/start/du
   assert.ok(await p.isVisible('#tblBox')); assert.equal(await p.isVisible('#tasks'), false);
   let rows = await tableRows(p);
   assert.equal(rows.length, 5, 'tasks from every day, plus someday');
-  assert.equal(await p.$$eval('#tblBox thead th', ths => ths.map(t => t.textContent.trim().replace(/[▲▼ ]+$/, '')).join('|')), 'Task|Type|Date|Start|Duration', 'no Status column');
+  assert.equal(await p.$$eval('#tblBox thead th', ths => ths.map(t => t.textContent.trim().replace(/[▲▼ ]+$/, '')).join('|')), 'Task|Type|Start', 'no Status, Date or Duration column');
   const email = rows.find(r => r[0].includes('Send an email'));
-  assert.deepEqual(email.slice(1), ['Work', email[2], '09:00', '15 min']);
-  assert.equal(rows.find(r => r[0].includes('Prepare a report'))[4], '1 h');
+  assert.deepEqual(email.slice(1), ['Work', '09:00']);
   assert.match(rows[0][0], /Old bill/, 'sorted by date: oldest first');
-  assert.match(rows[rows.length - 1][0], /Learn Spanish/); assert.equal(rows[rows.length - 1][2], 'Someday');
+  assert.match(rows[rows.length - 1][0], /Learn Spanish/, 'someday tasks last');
   assert.equal(await p.$$eval('#tblBox [data-act="later"]', b => b.length), 0, 'no "Later" button');
   // the tick box sits on the left of the task name
   const pos = await p.$eval('#tblBox tr[data-tid="a"]', tr => [tr.querySelector('.check').getBoundingClientRect().right, tr.querySelector('.tname').getBoundingClientRect().left]);
@@ -175,12 +174,12 @@ test('table view: toggle is remembered, tick box on the left, type/date/start/du
   assert.deepEqual(p.errors, []);
 });
 
-test('table view stays readable on a 320 px phone (the table scrolls inside its box, the page does not)', async () => {
+test('table view stays readable on a 320 px phone (Task · Type · Start fit: no sideways scroll at all)', async () => {
   const p = await open({ width: 320, tasks: [task('a', 'A rather long task name that should wrap', { cat: 'work', date: TODAY, time: '08:00', dur: 90 })] });
   await goToday(p); await p.click('#vTog [data-lv="table"]');
   assert.ok(await fits(p), 'no sideways page scroll');
   const box = await p.$eval('.tscroll', e => ({ sw: e.scrollWidth, cw: e.clientWidth }));
-  assert.ok(box.sw > box.cw, 'the table itself can be swiped');
+  assert.ok(box.sw <= box.cw + 1, 'the 3 columns fit, nothing hidden on the side');
   const name = await p.$eval('#tblBox tbody th', e => getComputedStyle(e).position);
   assert.equal(name, 'sticky', 'task names stay visible while swiping');
 });
@@ -209,7 +208,7 @@ test('calendar: a scheduled task shows at its time, editing from the calendar up
   await p.waitForTimeout(1300); if (await p.isVisible('[data-nask="no"]')) await p.click('[data-nask="no"]'); // the alarm's one-time "lock screen?" question
   await p.click('#vTog [data-lv="table"]');
   const dent = (await tableRows(p)).find(r => r[0].includes('Dentist'));
-  assert.equal(dent[3], '12:00');
+  assert.equal(dent[2], '12:00');
   // "Keep both" hides the note for that exact overlap
   await p.click('#tblBox tr[data-tid="r"] .tname'); await p.fill('#teStart', '12:00'); await p.fill('#teEnd', '13:00'); await p.click('#teSave');
   if (await p.isVisible('#teWarn')) await p.click('#teSave');
