@@ -1035,21 +1035,42 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .daysel button[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#030A26}
 @media (min-width:640px){.bzq{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
-/* ===== Crystal buttons (Oct 29): clear glass, bright edge, top reflection, strong white text ===== */
-:root{--glass:linear-gradient(180deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.10) 46%,rgba(106,92,255,.10) 54%,rgba(106,92,255,.34) 100%);
-  --glass-edge:rgba(200,214,255,.85);
-  --glass-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -10px 20px rgba(63,200,255,.22),0 0 18px rgba(106,92,255,.55),0 8px 20px rgba(0,0,0,.4)}
+/* ===== Crystal buttons, domed (Oct 29): convex glass with volume =====
+   top: curved white reflection (dome) · bottom: cyan light passing through the glass + darker inner rim
+   = the button looks rounded/bombé, not flat. Text stays white with a shadow for contrast. */
+:root{
+  --dome:radial-gradient(120% 62% at 50% -6%,rgba(255,255,255,.92) 0%,rgba(255,255,255,.55) 26%,rgba(255,255,255,.16) 50%,rgba(255,255,255,0) 58%);
+  --dome-soft:radial-gradient(120% 62% at 50% -6%,rgba(255,255,255,.55) 0%,rgba(255,255,255,.22) 30%,rgba(255,255,255,0) 56%);
+  --refract:radial-gradient(85% 55% at 50% 118%,rgba(63,200,255,.65) 0%,rgba(63,200,255,.18) 45%,rgba(63,200,255,0) 70%);
+  --glass-body:linear-gradient(180deg,rgba(125,135,255,.55) 0%,rgba(70,78,230,.50) 50%,rgba(30,40,170,.62) 100%);
+  --glass-vol:inset 0 2px 1px rgba(255,255,255,.95),inset 0 -2px 1px rgba(160,225,255,.7),inset 0 -14px 20px rgba(4,10,60,.65),inset 0 8px 14px rgba(255,255,255,.18),0 10px 22px rgba(0,0,0,.5),0 0 22px rgba(106,92,255,.55);
+  --glass-vol-soft:inset 0 1.5px 1px rgba(255,255,255,.6),inset 0 -8px 14px rgba(2,6,40,.55),0 6px 14px rgba(0,0,0,.4)}
 .btn:not(.ghost):not(.coral):not(.armed):not(.live):not(.danger),
 .dtabs button[aria-pressed="true"],.cvtabs button[aria-pressed="true"],.day[aria-pressed="true"],
-.cbtn,.recbtn,.hmsgo,.navnote .nn{
-  background:var(--glass),rgba(70,80,220,.30)!important;
-  border:1.5px solid var(--glass-edge)!important;
-  color:#fff!important;text-shadow:0 1px 3px rgba(3,10,38,.75);
-  box-shadow:var(--glass-shadow)!important;
-  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%)}
-.btn.ghost{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.04))!important;border:1.5px solid rgba(147,164,224,.55)!important;color:#fff!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.45)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-.btn:not(.ghost):not(.coral):not(.armed):not(.live):not(.danger):active,.cbtn:active,.recbtn:active,.hmsgo:active{transform:scale(.97);filter:brightness(1.15)}
+.cats button[aria-pressed="true"],.durs button[aria-pressed="true"],.seg button[aria-pressed="true"],.daysel button[aria-pressed="true"],
+.bztabs button[aria-selected="true"],.adtopts .btn[aria-pressed="true"],.bzopts .btn[aria-pressed="true"],
+.cbtn,.recbtn,.hmsgo,.navnote .nn,.call:not(.live){
+  background:var(--dome),var(--refract),var(--glass-body)!important;
+  border:1.5px solid rgba(214,226,255,.95)!important;
+  color:#fff!important;text-shadow:0 1px 3px rgba(3,10,38,.85);
+  box-shadow:var(--glass-vol)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%)}
+.day[aria-pressed="true"] small{color:#fff!important}
+/* the chosen filter / tab must stand out from the others: cyan rim + glow */
+.cats button[aria-pressed="true"],.dtabs button[aria-pressed="true"],.cvtabs button[aria-pressed="true"],.bztabs button[aria-selected="true"],.seg button[aria-pressed="true"],.durs button[aria-pressed="true"],.daysel button[aria-pressed="true"]{
+  border-color:#8FE6FF!important;box-shadow:var(--glass-vol),0 0 16px rgba(63,200,255,.75)!important}
+.cats button[aria-pressed="false"]{color:#B7C3EE!important;opacity:.9}
+.cats{padding:12px 14px!important;margin:-6px -14px -4px!important}
+.btn.ghost,.cats button[aria-pressed="false"],.durs button:not([aria-pressed="true"]),.seg button:not([aria-pressed="true"]),
+.daysel button:not([aria-pressed="true"]),.bztabs button:not([aria-selected="true"]),.hlang,.iconbtn,.dnarrow{
+  background:var(--dome-soft),linear-gradient(180deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.03) 55%,rgba(20,30,120,.35) 100%)!important;
+  border:1.5px solid rgba(160,178,240,.55)!important;color:#E6ECFF!important;
+  box-shadow:var(--glass-vol-soft)!important;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+/* the round mic inside "Talk to Noor": a small glass bubble */
+.call:not(.live) .callorb{background:radial-gradient(70% 55% at 40% 22%,rgba(255,255,255,.75),rgba(255,255,255,.12) 55%,rgba(255,255,255,0) 70%),radial-gradient(80% 60% at 50% 110%,rgba(63,200,255,.55),transparent 70%),rgba(255,255,255,.10);
+  border:1.5px solid rgba(214,226,255,.8);box-shadow:inset 0 -6px 10px rgba(4,10,60,.5),0 4px 10px rgba(0,0,0,.35)}
+.btn:not(.ghost):not(.coral):not(.armed):not(.live):not(.danger):active,.cbtn:active,.recbtn:active,.hmsgo:active,.call:active,.cats button:active{transform:scale(.97);filter:brightness(1.15)}
 </style>
 </head>
 <body>

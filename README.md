@@ -76,3 +76,6 @@ The daily opening screen shows only "Hi [name]!", the affirmation and **Let's go
 
 ## Crystal buttons (Oct 29)
 Main buttons, active tabs/day, Help me start, chat send, record and the Note mic use a clear-glass look: translucent blue-violet glass with a blur behind (`backdrop-filter`), a bright edge, a white top reflection, a cyan glow at the bottom and white text with a shadow for contrast. Ghost buttons get a lighter glass. Coral (delete / warnings) stays solid so it is never missed. All in one block at the end of the main stylesheet (`--glass`, `--glass-edge`, `--glass-shadow`).
+
+## Domed crystal on every button (Oct 29, 2nd pass)
+The crystal is now convex ("bombé"): curved white reflection on top, cyan light through the bottom, darker inner rim for volume. It now also covers the filter chips (All / Work / Personal), Talk to Noor (with a glass bubble mic), Yesterday/Today/Tomorrow, Business tabs, segmented choices, arrows and icon buttons. The chosen filter/tab gets a cyan rim + glow so it stands out.
