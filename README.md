@@ -73,3 +73,6 @@ The whole app palette now comes from that video: midnight navy background `#030A
 
 ## Simpler opening screen (Oct 29)
 The daily opening screen shows only "Hi [name]!", the affirmation and **Let's go!** on the video background: no Noor avatar, no date, no "Hear it" button. Noor's voice still greets the person (a tap anywhere replays it if the phone blocked the sound). The first-open screen (Noor asks the first name) is unchanged.
+
+## Crystal buttons (Oct 29)
+Main buttons, active tabs/day, Help me start, chat send, record and the Note mic use a clear-glass look: translucent blue-violet glass with a blur behind (`backdrop-filter`), a bright edge, a white top reflection, a cyan glow at the bottom and white text with a shadow for contrast. Ghost buttons get a lighter glass. Coral (delete / warnings) stays solid so it is never missed. All in one block at the end of the main stylesheet (`--glass`, `--glass-edge`, `--glass-shadow`).
