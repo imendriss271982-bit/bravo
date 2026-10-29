@@ -1034,6 +1034,22 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 .daysel button{min-width:44px;min-height:44px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:12px;font-weight:800}
 .daysel button[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#030A26}
 @media (min-width:640px){.bzq{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* ===== Crystal buttons (Oct 29): clear glass, bright edge, top reflection, strong white text ===== */
+:root{--glass:linear-gradient(180deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.10) 46%,rgba(106,92,255,.10) 54%,rgba(106,92,255,.34) 100%);
+  --glass-edge:rgba(200,214,255,.85);
+  --glass-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 -10px 20px rgba(63,200,255,.22),0 0 18px rgba(106,92,255,.55),0 8px 20px rgba(0,0,0,.4)}
+.btn:not(.ghost):not(.coral):not(.armed):not(.live):not(.danger),
+.dtabs button[aria-pressed="true"],.cvtabs button[aria-pressed="true"],.day[aria-pressed="true"],
+.cbtn,.recbtn,.hmsgo,.navnote .nn{
+  background:var(--glass),rgba(70,80,220,.30)!important;
+  border:1.5px solid var(--glass-edge)!important;
+  color:#fff!important;text-shadow:0 1px 3px rgba(3,10,38,.75);
+  box-shadow:var(--glass-shadow)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%)}
+.btn.ghost{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.04))!important;border:1.5px solid rgba(147,164,224,.55)!important;color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45)!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn:not(.ghost):not(.coral):not(.armed):not(.live):not(.danger):active,.cbtn:active,.recbtn:active,.hmsgo:active{transform:scale(.97);filter:brightness(1.15)}
 </style>
 </head>
 <body>
