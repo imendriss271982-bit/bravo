@@ -67,5 +67,6 @@ Top of **Business → Dashboard**, Business plan only. Answers: what first, why,
 ## Tests
 `npm install && npx playwright install chromium && npm test` runs the end-to-end tests in `tests/` (app, Help me start, phone & backup, Oct 28 features), served over a local http server (`tests/serve.js`).
 
-## Intro video (Oct 29)
-The opening screens (first-open name + daily affirmation) play `splash/intro.mp4` behind the content: a 12 s neon particle loop, recoloured to the app palette (violet, neon pink, cyan) and blended into the night-violet gradient (`mix-blend-mode: screen`, so its black becomes the app background). Silent, plays only while the opening screen is visible, hidden with "reduce motion". Not cached by the service worker (iPhone needs byte-range answers for video).
+## Intro video & video palette (Oct 29)
+The opening screens (first-open name + daily affirmation) play `splash/intro.mp4` behind the content: a 12 s neon particle loop in its original colours, blended into the background (`mix-blend-mode: screen`). Silent, plays only while the opening screen is visible, hidden with "reduce motion". Not cached by the service worker (iPhone needs byte-range answers for video).
+The whole app palette now comes from that video: midnight navy background `#030A26`, surfaces `#0B1640` / `#142364`, royal blue `#2F3FD6`, electric blue-violet buttons `#6A5CFF`, cyan `#3FC8FF`, lavender highlights `#C8B6FF` (was gold), aqua success `#4FF0D2` (was lime green). Coral stays for warnings.
