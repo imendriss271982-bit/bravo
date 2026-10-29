@@ -1,7 +1,7 @@
 // ADHD Winner service worker: makes the app installable, lets it open offline,
 // and brings the app to the front when a notification is tapped.
 // It cannot ring by itself at a set time: a web app has no scheduled alarms (see docs/MOBILE-PLAN.md).
-const C = 'adhdw-v29';
+const C = 'adhdw-v30';
 const SHELL = ['./', 'index.html', 'brain.js', 'capture.js', 'manifest.json', 'icon-192.png', 'icon-512.png', 'icon-maskable-192.png', 'icon-maskable-512.png',
   'favicon-32.png', 'apple-touch-icon.png', 'logo.jpg', 'nour.jpg', 'nour-face.jpg', 'nour-m0.jpg', 'nour-m1.jpg', 'nour-m2.jpg', 'nour-m3.jpg',
   'sons/win.mp3', 'sons/noor-hello.mp3', 'sons/noor-short1.mp3', 'sons/noor-short2.mp3'];
@@ -19,6 +19,8 @@ self.addEventListener('activate', e => e.waitUntil(
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  // videos (intro) go straight to the network: iPhone needs byte-range answers the cache can't give
+  if (req.headers.has('range') || req.destination === 'video') return;
   e.respondWith(fetch(req, { cache: 'no-store' }).then(r => {
     if (r.ok) { const cp = r.clone(); caches.open(C).then(c => c.put(req, cp)); }
     return r;

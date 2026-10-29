@@ -415,6 +415,10 @@ nav button[aria-current="page"] svg{color:var(--sun);filter:drop-shadow(0 0 6px 
 .splash .listen svg{width:16px;height:16px}
 .splash .err{color:var(--coral);font-weight:700;font-size:13px;min-height:1em;margin:0}
 @media (prefers-reduced-motion:reduce){.splash .sun,.splash .aff{animation:none}}
+/* animated neon intro behind the opening screens (splash/intro.mp4, recoloured to the app palette) */
+.splash .sp-bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;mix-blend-mode:screen;opacity:.9;z-index:0}
+.splash>*:not(.sp-bg){position:relative;z-index:1}
+@media (prefers-reduced-motion:reduce){.splash .sp-bg{display:none}}
 
 /* mascot Noor (arcade pixel style) */
 .mascot{shape-rendering:crispEdges;overflow:visible}
@@ -1387,6 +1391,7 @@ input,select,textarea,.fl input,.fl textarea,.hta,select,input[type=text],input[
 <canvas id="confetti" hidden></canvas>
 
 <div class="splash" id="splash" hidden role="dialog" aria-modal="true" aria-labelledby="spTitle">
+  <video class="sp-bg" id="spVid" src="splash/intro.mp4" muted playsinline loop preload="auto" aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
   <div id="spName" hidden class="ob-wrap">
     <div class="stage ob-noor" id="obNoor"><button class="tapnoor" type="button" hidden>🔊 Tap to hear me</button><div class="nwrap nour" style="--u:2.3px;width:150px;height:150px"><div class="mbox"><span class="mouth"><img src="nour-m0.jpg" alt="" width="240" height="240"><img src="nour-m1.jpg" alt="" width="240" height="240"><img src="nour-m2.jpg" alt="" width="240" height="240"><img class="on" src="nour-m3.jpg" alt="" width="240" height="240"></span><span class="wave"><i></i><i></i><i></i><i></i><i></i></span></div><span class="nfx" aria-hidden="true"><svg class="nh n-open" viewBox="0 0 40 52"><use href="#nHandOpen"/></svg><svg class="nh n-point" viewBox="0 0 40 52"><use href="#nHandPoint"/></svg><span class="nbub"><i></i><i></i><i></i></span><span class="nsheet"></span><span class="nstar s1">✦</span><span class="nstar s2">✦</span><span class="nstar s3">✦</span></span></div></div>
     <div class="ob-bub" id="obBub" role="status" aria-live="polite"><span id="spTitle"></span></div>
@@ -4514,6 +4519,10 @@ const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==
 const isStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}};
 const notifState=()=>!('Notification' in window)?'unsupported':Notification.permission;
 const splashOn=()=>!$('splash').hidden;
+// intro video: plays only while the opening screen is visible (saves battery), never with reduced motion
+(function(){const v=$('spVid');if(!v)return;const rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sync=()=>{try{if(splashOn()&&!rm){v.muted=true;const p=v.play();if(p&&p.catch)p.catch(()=>{})}else v.pause()}catch(e){}};
+  new MutationObserver(sync).observe($('splash'),{attributes:true,attributeFilter:['hidden']});sync()})();
 // run fn once the morning affirmation screen is closed (or now if it is not showing)
 function afterSplash(fn){if(!splashOn())return fn();const mo=new MutationObserver(()=>{if(!splashOn()){mo.disconnect();setTimeout(fn,350)}});mo.observe($('splash'),{attributes:true,attributeFilter:['hidden']})}
 

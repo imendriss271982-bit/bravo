@@ -66,3 +66,6 @@ Top of **Business → Dashboard**, Business plan only. Answers: what first, why,
 
 ## Tests
 `npm install && npx playwright install chromium && npm test` runs the end-to-end tests in `tests/` (app, Help me start, phone & backup, Oct 28 features), served over a local http server (`tests/serve.js`).
+
+## Intro video (Oct 29)
+The opening screens (first-open name + daily affirmation) play `splash/intro.mp4` behind the content: a 12 s neon particle loop, recoloured to the app palette (violet, neon pink, cyan) and blended into the night-violet gradient (`mix-blend-mode: screen`, so its black becomes the app background). Silent, plays only while the opening screen is visible, hidden with "reduce motion". Not cached by the service worker (iPhone needs byte-range answers for video).
